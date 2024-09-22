@@ -13,6 +13,12 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Mulish-Italic-VariableFont.ttf", "MulishItalicVariableFont");
+                fonts.AddFont("Mulish-VariableFont.ttf", "MulishVariableFont");
+                fonts.AddFont("Century-Gothic-Italic.otf", "CenturyGothicItalic");
+                fonts.AddFont("Century-Gothic-Bold-Italic.otf", "CenturyGothicBoldItalic");
+                fonts.AddFont("Century-Gothic-Bold.otf", "CenturyGothicBold");
+                fonts.AddFont("Century-Gothic.otf", "CenturyGothic");
             });
 
 #if DEBUG
