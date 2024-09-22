@@ -1,0 +1,40 @@
+# Build Folders
+bin/
+obj/
+
+# Rider project files
+.idea/
+*.sln.iml
+*.sln.DotSettings
+*.sln.DotSettings.user
+/.idea/
+/_ReSharper.Caches/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Logs
+*.log
+
+# Visual Studio Code
+.vscode/
+
+# Packages
+/packages/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# JetBrains Rider
+riderModule.iml
