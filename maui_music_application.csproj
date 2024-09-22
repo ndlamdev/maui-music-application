@@ -75,7 +75,16 @@
         <MauiXaml Update="Views\Buttons\ButtonBorder.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Buttons\ButtonAdd.xaml">
+        <MauiXaml Update="Views\Buttons\CircleButton.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Categories\CategoryKindMusic.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Categories\PlayListMusic.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Categories\PlayListMusicLarge.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
@@ -101,10 +110,19 @@
           <DependentUpon>ButtonBorder.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Buttons\ButtonAdd.xaml.cs">
-          <DependentUpon>ButtonAdd.xaml</DependentUpon>
+        <Compile Update="Views\Categories\KindMusic.xaml.cs">
+          <DependentUpon>CategoryMusic.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Categories\PlayListMusic.xaml.cs">
+          <DependentUpon>PlayListMusic.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Categories\PlayListMusicLarge.xaml.cs">
+          <DependentUpon>PlayListMusicLarge.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Remove="Views\Buttons\ButtonIconCircle.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -112,6 +130,7 @@
         <AdditionalFiles Include="Pages\LibraryPage.xaml" />
         <AdditionalFiles Include="Views\Buttons\ButtonAdd.xaml" />
         <AdditionalFiles Include="Views\Buttons\ButtonBorder.xaml" />
+        <AdditionalFiles Include="Views\Categories\CategoryMusic.xaml" />
     </ItemGroup>
 
 </Project>
