@@ -46,8 +46,8 @@
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
 
         <!-- Images -->
+        <MauiImage Include="Resources\Images\*" Resize="True" BaseSize="500,500"/>
         <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185"/>
-        <MauiImage Include="Resources\Images\*.svg" Resize="True" BaseSize="500,500"/>
 
         <!-- Custom Fonts -->
         <MauiFont Include="Resources\Fonts\*"/>
@@ -72,6 +72,12 @@
         <MauiXaml Update="Pages\ExplorePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Buttons\ButtonBorder.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Buttons\ButtonAdd.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -91,12 +97,21 @@
           <DependentUpon>ExplorePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Buttons\ButtonBorder.xaml.cs">
+          <DependentUpon>ButtonBorder.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Buttons\ButtonAdd.xaml.cs">
+          <DependentUpon>ButtonAdd.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="BottomBar.xaml" />
         <AdditionalFiles Include="Pages\HomePage.xaml" />
         <AdditionalFiles Include="Pages\LibraryPage.xaml" />
+        <AdditionalFiles Include="Views\Buttons\ButtonAdd.xaml" />
+        <AdditionalFiles Include="Views\Buttons\ButtonBorder.xaml" />
     </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace maui_music_application.Views;
+namespace maui_music_application.Views.Buttons;
 
 public partial class ButtonAdd : ContentView, INotifyPropertyChanged
 {

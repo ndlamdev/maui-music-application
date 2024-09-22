@@ -2,19 +2,18 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.ButtonAdd"
+             x:Class="maui_music_application.Views.Buttons.ButtonAdd"
              HorizontalOptions="Center"
              VerticalOptions="Center" Padding="0">
-    <Frame CornerRadius="9999" Padding="0">
-        <Frame.Background>
+    <ImageButton Source="add.svg" CornerRadius="9999" Padding="{Binding PaddingButton}"
+                 WidthRequest="{Binding SizeButton}"
+                 HeightRequest="{Binding SizeButton}"
+                 Clicked="Button_Clicked">
+        <ImageButton.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="#A6F3FF" Offset="0.0"></GradientStop>
                 <GradientStop Color="#00C2CB" Offset="1.0"></GradientStop>
             </LinearGradientBrush>
-        </Frame.Background>
-        <ImageButton Source="add.svg" CornerRadius="9999" Padding="{Binding PaddingButton}"
-                     WidthRequest="{Binding SizeButton}"
-                     HeightRequest="{Binding SizeButton}"
-                     Clicked="Button_Clicked" />
-    </Frame>
+        </ImageButton.Background>
+    </ImageButton>
 </ContentView>
