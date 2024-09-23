@@ -7,7 +7,7 @@
 namespace maui_music_application.Model;
 
 public class PlayListMusicLarge(string id, string title, string subTitle, ImageSource image)
-    : KindMusic(id, title, image)
+    : PlayListMusic(id, title, image)
 {
     public string SubTitle { get; set; } = subTitle;
 }
