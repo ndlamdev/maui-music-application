@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using maui_music_application.Model;
+using Microsoft.Extensions.Logging;
 
 namespace maui_music_application;
 

@@ -9,9 +9,9 @@ using maui_music_application.Model;
 
 namespace maui_music_application.Pages;
 
-public partial class HomePage : ContentPage
+public partial class HomePage
 {
-    int count = 0;
+    int _count;
 
     private readonly KindMusic[] _categories =
     [
@@ -71,12 +71,12 @@ public partial class HomePage : ContentPage
 
     private void OnClick()
     {
-        count++;
+        _count++;
 
-        if (count == 1)
-            CountClick.Text = $"Action {count} time";
+        if (_count == 1)
+            CountClick.Text = $"Action {_count} time";
         else
-            CountClick.Text = $"Action {count} times";
+            CountClick.Text = $"Action {_count} times";
 
         SemanticScreenReader.Announce(CountClick.Text);
     }
@@ -97,5 +97,20 @@ public partial class HomePage : ContentPage
 
         TopMixes.Columns = _topMixes.Length;
         TopMixes.LayoutAdapter(new TopMixesAdapter(_topMixes));
+
+        Process.TimeEndProgress = 60 * 5;
+        RunProcess();
+    }
+
+    private void RunProcess()
+    {
+        var timeEnd = 60 * 5;
+        var timer = new System.Timers.Timer(1000);
+        timer.Elapsed += (_, _) =>
+        {
+            Process.TimeProgress += 1;
+            if (Process.TimeProgress > timeEnd) timer.Stop();
+        };
+        timer.Enabled = true;
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace maui_music_application.Pages;
 
-public partial class MainPage : ContentPage
+public partial class MainPage
 {
-    int count = 0;
+    int _count;
 
     public MainPage()
     {
@@ -11,12 +11,12 @@ public partial class MainPage : ContentPage
 
     private void OnCounterClicked(object sender, EventArgs e)
     {
-        count++;
+        _count++;
 
-        if (count == 1)
-            CounterBtn.Text = $"Action {count} time";
+        if (_count == 1)
+            CounterBtn.Text = $"Action {_count} time";
         else
-            CounterBtn.Text = $"Action {count} times";
+            CounterBtn.Text = $"Action {_count} times";
 
         SemanticScreenReader.Announce(CounterBtn.Text);
     }

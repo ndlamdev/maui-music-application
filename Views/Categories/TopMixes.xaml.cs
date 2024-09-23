@@ -4,7 +4,7 @@
 // Create at: 07:09:47 - 23/09/2024
 // User: Lam Nguyen
 
-using maui_music_application.Model;
+using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Categories;
 
@@ -31,7 +31,11 @@ public partial class TopMixes
         set
         {
             var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += (s, e) => value?.Invoke();
+            tapGestureRecognizer.Tapped += async (_, _) =>
+            {
+                value.Invoke();
+                await OpacityEffect.RunOpacity(this, 100);
+            };
             Frame1.GestureRecognizers.Add(tapGestureRecognizer);
             Frame2.GestureRecognizers.Add(tapGestureRecognizer);
             RootView.GestureRecognizers.Add(tapGestureRecognizer);

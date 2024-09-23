@@ -4,17 +4,11 @@
 // Create at: 14:09:39 - 22/09/2024
 // User: Lam Nguyen
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.Util;
-using maui_music_application.Model;
+using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Categories;
 
-public partial class PlayListMusicLarge : ContentView
+public partial class PlayListMusicLarge
 {
     public PlayListMusicLarge()
     {
@@ -41,7 +35,11 @@ public partial class PlayListMusicLarge : ContentView
         set
         {
             var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += (s, e) => value?.Invoke();
+            tapGestureRecognizer.Tapped += async (_, _) =>
+            {
+                value.Invoke();         
+                await OpacityEffect.RunOpacity(this, 100);
+            };                           
             Frame.GestureRecognizers.Add(tapGestureRecognizer);
             FrameImage.GestureRecognizers.Add(tapGestureRecognizer);
         }

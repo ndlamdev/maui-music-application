@@ -4,12 +4,14 @@
 // Create at: 08:09:10 - 23/09/2024
 // User: Lam Nguyen
 
+using maui_music_application.Utils;
+
 namespace maui_music_application.Views.Buttons;
 
 public partial class ButtonSign
 {
     public event EventHandler? Clicked;
-    
+
     public ButtonSign()
     {
         InitializeComponent();
@@ -20,14 +22,19 @@ public partial class ButtonSign
         set
         {
             var action = new TapGestureRecognizer();
-            action.Tapped += (sender, args) => value?.Invoke();
+            action.Tapped += async (sender, args) =>
+            {
+                value?.Invoke();
+                await OpacityEffect.RunOpacity(this, 100);
+            };
             Frame.GestureRecognizers.Add(action);
         }
     }
 
-    private void Tapped(object? o, EventArgs e)
+    private async void Tapped(object? o, EventArgs e)
     {
         Clicked?.Invoke(this, e);
+        await OpacityEffect.RunOpacity(this, 100);
     }
 
     public ImageSource Icon

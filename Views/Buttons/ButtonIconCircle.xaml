@@ -5,7 +5,7 @@
              x:Class="maui_music_application.Views.Buttons.ButtonIconCircle"
              Padding="0">
     <ContentView.GestureRecognizers>
-        <TapGestureRecognizer Tapped="Button_Clicked"/>
+        <TapGestureRecognizer Tapped="Button_Clicked" />
     </ContentView.GestureRecognizers>
     <HorizontalStackLayout
         Spacing="25"
@@ -18,7 +18,7 @@
             BackgroundColor="#00000000"
             Padding="16">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="Button_Clicked"/>
+                <TapGestureRecognizer Tapped="Button_Clicked" />
             </Frame.GestureRecognizers>
             <Frame.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

@@ -6,7 +6,7 @@
 
 using Java.Security;
 
-namespace maui_music_application.Model;
+namespace maui_music_application.Utils;
 
 public class RandomColorGenerator
 {

@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Buttons"
              xmlns:customComponents="clr-namespace:maui_music_application.Views.Custom_Components"
-             xmlns:musics="clr-namespace:maui_music_application.Views.musics"
+             xmlns:musics="clr-namespace:maui_music_application.Views.Musics"
              x:Class="maui_music_application.Pages.HomePage">
     <ScrollView>
         <VerticalStackLayout
@@ -15,11 +15,18 @@
                 Text="Click me"
                 SemanticProperties.Hint="Counts the number of times you click"
                 HorizontalOptions="Fill" />
+            <musics:Process
+                x:Name="Process" />
             <buttons:ButtonIconCircle
                 Clicked="OnCounterClicked"
                 SizeIcon="24"
                 Icon="add.svg"
                 Title="Add New Playlist"
+                PaddingButton="16" />
+            <buttons:ButtonIconCircle
+                Clicked="OnCounterClicked"
+                SizeIcon="24"
+                Icon="play.svg"
                 PaddingButton="16" />
             <buttons:ButtonIconCircle
                 Clicked="OnCounterClicked"
@@ -67,16 +74,13 @@
                 ColumnSpacing="30" />
             <buttons:ButtonSign Icon="dotnet_bot.png"
                                 Title="Continue with Google"
-                                Clicked="OnCounterClicked"
-                                />
+                                Clicked="OnCounterClicked" />
             <buttons:ButtonSign Icon="dotnet_bot.png"
                                 Title="Continue with Facebook"
-                                Clicked="OnCounterClicked"
-                                />
+                                Clicked="OnCounterClicked" />
             <buttons:ButtonSign Icon="dotnet_bot.png"
                                 Title="Continue with Apple"
-                                Clicked="OnCounterClicked"
-                                />
+                                Clicked="OnCounterClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
