@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Buttons.ButtonSign">
+    <Frame x:Name="Frame" CornerRadius="16" BorderColor="#DBE7E8" BackgroundColor="#1E1E1E" Padding="13">
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="Tapped"></TapGestureRecognizer>
+        </Frame.GestureRecognizers>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Image
+                x:Name="Image"
+                Source="dotnet_bot.png"
+                WidthRequest="35"
+                HeightRequest="35" />
+            <Label
+                x:Name="Label"
+                Text="Continue with Google"
+                VerticalOptions="Center"
+                TextColor="White"
+                FontSize="16"
+                FontFamily="CenturyGothic" />
+        </HorizontalStackLayout>
+    </Frame>
+</ContentView>
