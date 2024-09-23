@@ -5,9 +5,6 @@
 // User: Lam Nguyen
 
 
-using Android.Util;
-using Java.Lang;
-
 namespace maui_music_application.Views.Custom_Components;
 
 public partial class GridLayout
@@ -83,6 +80,11 @@ public partial class GridLayout
     public int ColumnSpacing
     {
         set => Grid.ColumnSpacing = value;
+    }
+
+    public ScrollOrientation Orientation
+    {
+        set => ScrollView.Orientation = value;
     }
 }
 
