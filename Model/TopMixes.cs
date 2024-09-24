@@ -6,7 +6,6 @@
 
 namespace maui_music_application.Model;
 
-public class TopMixes(string id, string title, ImageSource image): PlayListMusic(id, title, image)
+public class TopMixes(string id, string title, string image) : PlayListMusic(id, title, image)
 {
-    
 }
