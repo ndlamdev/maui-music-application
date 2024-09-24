@@ -6,11 +6,11 @@
 
 namespace maui_music_application.Model;
 
-public class KindMusic(string id, string title, ImageSource image)
+public class KindMusic(string id, string title, string image)
 {
     public string Id { get; set; } = id;
 
     public string Title { get; set; } = title;
 
-    public ImageSource Image { get; set; } = image;
+    public string Image { get; set; } = image;
 }

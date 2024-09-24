@@ -5,8 +5,9 @@
              xmlns:buttons="clr-namespace:maui_music_application.Views.Buttons"
              xmlns:customComponents="clr-namespace:maui_music_application.Views.Custom_Components"
              xmlns:musics="clr-namespace:maui_music_application.Views.Musics"
-             x:Class="maui_music_application.Pages.HomePage">
-    <ScrollView>
+             x:Class="maui_music_application.Pages.HomePage"
+             BackgroundColor="{DynamicResource BackgroundDark}">
+    <ScrollView VerticalScrollBarVisibility="Never">
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
@@ -24,9 +25,10 @@
                 Title="Add New Playlist"
                 PaddingButton="16" />
             <buttons:ButtonIconCircle
-                Clicked="OnCounterClicked"
+                x:Name="ButtonControlMusic"
+                Clicked="StartMusic"
                 SizeIcon="24"
-                Icon="play.svg"
+                Icon="pause_white.svg"
                 PaddingButton="16" />
             <buttons:ButtonIconCircle
                 Clicked="OnCounterClicked"
@@ -81,6 +83,10 @@
             <buttons:ButtonSign Icon="dotnet_bot.png"
                                 Title="Continue with Apple"
                                 Clicked="OnCounterClicked" />
+            <customComponents:GridLayout
+                x:Name="MusicInTop"
+                Columns="1"
+                RowSpacing="30" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

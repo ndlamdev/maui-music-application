@@ -12,56 +12,26 @@ namespace maui_music_application.Pages;
 public partial class HomePage
 {
     int _count;
+    private System.Timers.Timer? _timer;
 
-    private readonly KindMusic[] _categories =
-    [
-        new("Kpop", "Kpop", "music_kpop.png"),
-        new("Indie", "Indie", "music_kpop.png"),
-        new("R&B", "R&B", "music_kpop.png"),
-        new("Pop", "Pop", "music_kpop.png"),
-    ];
-
-    private readonly PlayListMusic[] _playLists =
-    [
-        new("Coffee & Jazz", "Coffee & Jazz", "music_kpop.png"),
-        new("RELEASED", "RELEASED", "music_kpop.png"),
-        new("Anything Goes", "Anything Goes", "music_kpop.png"),
-        new("Anime OSTs", "Anime OSTs", "music_kpop.png"),
-        new("Harry’s House", "Harry’s House", "music_kpop.png"),
-        new("Lo-Fi Beats", "Lo-Fi Beats", "music_kpop.png"),
-    ];
-
-    private readonly PlayListMusicLarge[] _playListLarges =
-    [
-        new("current favorites", "current favorites", "20 songs", "music_kpop.png"),
-        new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
-        new("Lofi Loft", "Lofi Loft", "63 songs", "music_kpop.png"),
-        new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
-        new("Anime OSTs", "Anime OSTs", "20 songs", "music_kpop.png"),
-        new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
-        new("Lofi Loft", "Lofi Loft", "18 songs", "music_kpop.png"),
-        new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
-    ];
-
-    private readonly FolderPlayListMusic[] _folderPlayList =
-    [
-        new("moods", "moods", "11 playlists"),
-        new("blends", "blends", "8 playlists"),
-        new("favs", "favs", "14 playlists"),
-        new("random?", "random?", "10 playlists"),
-    ];
-
-    private readonly TopMixes[] _topMixes =
-    [
-        new("Pop Mix", "Pop Mix", "music_kpop.png"),
-        new("Chill Mix", "Chill Mix", "music_kpop.png"),
-        new("Pop", "Pop", "music_kpop.png"),
-    ];
 
     public HomePage()
     {
         InitializeComponent();
+        BindingContext = this;
+        Init();
         CallApi();
+    }
+
+    private void Init()
+    {
+        _timer = new System.Timers.Timer(1000);
+        _timer.Elapsed += (_, _) =>
+        {
+            Process.TimeProgress += 1;
+            if (Process.TimeProgress > 60 * 5) _timer.Stop();
+        };
+        Process.TimeEndProgress = 60 * 5;
     }
 
     private void OnCounterClicked(object sender, EventArgs e)
@@ -83,34 +53,98 @@ public partial class HomePage
 
     private void CallApi()
     {
-        KindMusic.Rows = _categories.Length / 2;
-        KindMusic.LayoutAdapter(new KindMusicAdapter(_categories));
+        KindMusic.Rows = DataDemo.Categories.Length / 2;
+        KindMusic.LayoutAdapter(new KindMusicAdapter(DataDemo.Categories));
 
-        PlayList.Rows = _playLists.Length / 2;
-        PlayList.LayoutAdapter(new PlayListMusicAdapter(_playLists));
+        PlayList.Rows = DataDemo.PlayLists.Length / 2;
+        PlayList.LayoutAdapter(new PlayListMusicAdapter(DataDemo.PlayLists));
 
-        PlayListLarge.Rows = _playListLarges.Length;
-        PlayListLarge.LayoutAdapter(new PlayListMusicLargeAdapter(_playListLarges));
+        PlayListLarge.Rows = DataDemo.PlayListLarges.Length;
+        PlayListLarge.LayoutAdapter(new PlayListMusicLargeAdapter(DataDemo.PlayListLarges));
 
-        FolderPlayList.Rows = _folderPlayList.Length;
-        FolderPlayList.LayoutAdapter(new FolderPlayListMusicAdapter(_folderPlayList));
+        FolderPlayList.Rows = DataDemo.FolderPlayList.Length;
+        FolderPlayList.LayoutAdapter(new FolderPlayListMusicAdapter(DataDemo.FolderPlayList));
 
-        TopMixes.Columns = _topMixes.Length;
-        TopMixes.LayoutAdapter(new TopMixesAdapter(_topMixes));
+        TopMixes.Columns = DataDemo.TopMixes.Length;
+        TopMixes.LayoutAdapter(new TopMixesAdapter(DataDemo.TopMixes));
 
-        Process.TimeEndProgress = 60 * 5;
-        RunProcess();
+        MusicInTop.Rows = DataDemo.MusicInTops.Length;
+        MusicInTop.LayoutAdapter(new MusicInTopAdapter(DataDemo.MusicInTops));
     }
 
-    private void RunProcess()
+    private void StartMusic(object? sender, EventArgs e)
     {
-        var timeEnd = 60 * 5;
-        var timer = new System.Timers.Timer(1000);
-        timer.Elapsed += (_, _) =>
-        {
-            Process.TimeProgress += 1;
-            if (Process.TimeProgress > timeEnd) timer.Stop();
-        };
-        timer.Enabled = true;
+        _timer!.Enabled = true;
+        ButtonControlMusic.Icon = "play_white.svg";
+        ButtonControlMusic.Clicked -= StartMusic;
+        ButtonControlMusic.Clicked += PauseMusic;
     }
+
+    private void PauseMusic(object? sender, EventArgs e)
+    {
+        _timer!.Enabled = false;
+        ButtonControlMusic.Icon = "pause_white.svg";
+        ButtonControlMusic.Clicked -= PauseMusic;
+        ButtonControlMusic.Clicked += StartMusic;
+    }
+}
+
+class DataDemo
+{
+    public static readonly KindMusic[] Categories =
+    [
+        new("Kpop", "Kpop", "music_kpop.png"),
+        new("Indie", "Indie", "music_kpop.png"),
+        new("R&B", "R&B", "music_kpop.png"),
+        new("Pop", "Pop", "music_kpop.png"),
+    ];
+
+    public static readonly PlayListMusic[] PlayLists =
+    [
+        new("Coffee & Jazz", "Coffee & Jazz", "music_kpop.png"),
+        new("RELEASED", "RELEASED", "music_kpop.png"),
+        new("Anything Goes", "Anything Goes", "music_kpop.png"),
+        new("Anime OSTs", "Anime OSTs", "music_kpop.png"),
+        new("Harry’s House", "Harry’s House", "music_kpop.png"),
+        new("Lo-Fi Beats", "Lo-Fi Beats", "music_kpop.png"),
+    ];
+
+    public static readonly PlayListMusicLarge[] PlayListLarges =
+    [
+        new("current favorites", "current favorites", "20 songs", "music_kpop.png"),
+        new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
+        new("Lofi Loft", "Lofi Loft", "63 songs", "music_kpop.png"),
+        new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
+        new("Anime OSTs", "Anime OSTs", "20 songs", "music_kpop.png"),
+        new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
+        new("Lofi Loft", "Lofi Loft", "18 songs", "music_kpop.png"),
+        new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
+    ];
+
+    public static readonly FolderPlayListMusic[] FolderPlayList =
+    [
+        new("moods", "moods", "11 playlists"),
+        new("blends", "blends", "8 playlists"),
+        new("favs", "favs", "14 playlists"),
+        new("random?", "random?", "10 playlists"),
+    ];
+
+    public static readonly TopMixes[] TopMixes =
+    [
+        new("Pop Mix", "Pop Mix", "music_kpop.png"),
+        new("Chill Mix", "Chill Mix", "music_kpop.png"),
+        new("Pop", "Pop", "music_kpop.png"),
+    ];
+
+    public static readonly MusicInTop[] MusicInTops =
+    [
+        new("1", "Dance Monkey 1", "Tones and I", "music_kpop.png", 1),
+        new("2", "Dance Monkey 2", "Tones and I", "music_kpop.png", 2),
+        new("3", "Dance Monkey 3", "Tones and I", "music_kpop.png", 3),
+        new("4", "Dance Monkey 4", "Tones and I", "music_kpop.png", 4),
+        new("5", "Dance Monkey 5", "Tones and I", "music_kpop.png", 5),
+        new("6", "Dance Monkey 6", "Tones and I", "music_kpop.png", 6),
+        new("7", "Dance Monkey 7", "Tones and I", "music_kpop.png", 7),
+        new("8", "Dance Monkey 8", "Tones and I", "music_kpop.png", 8),
+    ];
 }

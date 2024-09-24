@@ -32,6 +32,8 @@
     <Color x:Key="Text1">#FFF</Color>
     <Color x:Key="Text2">#8A9A9D</Color>
     <Color x:Key="NullBackground">#00000000</Color>
+    <Color x:Key="BackgroundDark">#1D1D1D</Color>
+    <Color x:Key="BackgroundWhite">#FFF</Color>
 
     <Color x:Key="Blue100">#446266</Color>
     <Color x:Key="Blue200">#A6F3FF</Color>
