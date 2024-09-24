@@ -8,13 +8,13 @@ using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Navigation;
 
-public partial class ButtonNavigationItem : ContentView
+public partial class BottomNavigationItem : ContentView
 {
     private string _icon = "";
     private bool _selected;
     private Color _colorSelected = Colors.White, _colorUnselected = Colors.White;
 
-    public ButtonNavigationItem()
+    public BottomNavigationItem()
     {
         InitializeComponent();
     }
@@ -24,11 +24,6 @@ public partial class ButtonNavigationItem : ContentView
         set
         {
             _icon = value;
-            /*
-            if (!File.Exists(GetIconSelected()))
-                throw new Exception(
-                    "Icon selected not found. Please check again and add it to the Resources folder with the end of '_selected'. Example: home_selected.png");
-                    */
             ImageIcon.Source = value;
         }
     }

@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace maui_music_application.Views.Navigation;
 
-public partial class ButtonNavigation : ContentView
+public partial class BottomNavigation : ContentView
 {
     private readonly bool[] _selected = [true, false, false];
     private readonly string[] _nameItems = ["ItemHome", "ItemExplore", "ItemLibrary"];
 
-    public ButtonNavigation()
+    public BottomNavigation()
     {
         InitializeComponent();
         Event();
@@ -25,25 +25,32 @@ public partial class ButtonNavigation : ContentView
 
     public int IconSelected
     {
-        get => Array.IndexOf(_selected, true);
         set => SelectItem(value);
     }
 
     private void SelectItem(int index)
     {
+        OnClickItem?.Invoke(index);
         for (var i = 0; i < _selected.Length; i++)
         {
             var selected = i == index;
             var item = FindButtonNavigationItemByIndex(i);
             _selected[i] = selected;
-            // item.Selected = selected;
-            // item.TranslateTo(0, selected ? -10 : 0, 200, Easing.SinInOut);
+            item.Selected = selected;
+            try
+            {
+                item.TranslateTo(0, selected ? -10 : 0, 200, Easing.SinInOut);
+            }
+            catch (Exception e)
+            {
+                item.TranslationY = selected ? -10 : 0;
+            }
         }
     }
 
-    private ButtonNavigationItem FindButtonNavigationItemByIndex(int index)
+    private BottomNavigationItem FindButtonNavigationItemByIndex(int index)
     {
-        return (ButtonNavigationItem)FindByName(_nameItems[index]);
+        return (BottomNavigationItem)FindByName(_nameItems[index]);
     }
 
 
@@ -53,4 +60,6 @@ public partial class ButtonNavigation : ContentView
         ItemExplore.Action = () => { SelectItem(1); };
         ItemLibrary.Action = () => { SelectItem(2); };
     }
+
+    public Action<int> OnClickItem { get; set; }
 }

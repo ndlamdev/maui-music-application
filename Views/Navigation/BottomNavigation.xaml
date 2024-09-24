@@ -2,7 +2,7 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Navigation.ButtonNavigation"
+             x:Class="maui_music_application.Views.Navigation.BottomNavigation"
              xmlns:local="clr-namespace:maui_music_application.Views.Navigation"
              AbsoluteLayout.LayoutFlags="YProportional, WidthProportional"
              AbsoluteLayout.LayoutBounds="0, 1, 1, 200"
@@ -17,24 +17,23 @@
     <FlexLayout
         AlignItems="End"
         JustifyContent="SpaceAround">
-        <local:ButtonNavigationItem
+        <local:BottomNavigationItem
             x:Name="ItemHome"
             x:Uid="ItemHome"
             Icon="home.svg"
             Title="Home"
             ColorSelected="#00C2CB" />
-        <local:ButtonNavigationItem
+        <local:BottomNavigationItem
             x:Name="ItemExplore"
             x:Uid="ItemExplore"
             Icon="search.svg"
             Title="Explore"
             ColorSelected="#00C2CB" />
-        <local:ButtonNavigationItem
+        <local:BottomNavigationItem
             x:Name="ItemLibrary"
             x:Uid="ItemLibrary"
             Icon="folder.svg"
             Title="Library"
-            TranslationY="-10"
             ColorSelected="#00C2CB" />
     </FlexLayout>
 </ContentView>

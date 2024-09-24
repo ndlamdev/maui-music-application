@@ -1,23 +1,35 @@
-﻿namespace maui_music_application.Pages;
+﻿using Android.Util;
+
+namespace maui_music_application.Pages;
 
 public partial class MainPage
 {
-    int _count;
+    private View? _currentView;
+    private readonly View[] _views = [new HomePage(), new ExplorePage(), new LibraryPage()];
 
     public MainPage()
     {
         InitializeComponent();
+        Init();
+        Event();
     }
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    private void Init()
     {
-        _count++;
+        Container.Content = _views[0];
+    }
 
-        if (_count == 1)
-            CounterBtn.Text = $"Action {_count} time";
-        else
-            CounterBtn.Text = $"Action {_count} times";
+    private void Event()
+    {
+        BottomNavigation.OnClickItem = index => { ChangePage(_views[index]); };
+    }
 
-        SemanticScreenReader.Announce(CounterBtn.Text);
+    private async void ChangePage(View view)
+    {
+        if (view == _currentView) return;
+        _currentView = view;
+        Container.Content = view;
+        await _currentView.TranslateTo(200, 0, 0);
+        await _currentView.TranslateTo(0, 0, 200, Easing.SinOut);
     }
 }

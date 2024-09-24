@@ -1,99 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Buttons"
              xmlns:customComponents="clr-namespace:maui_music_application.Views.Custom_Components"
              xmlns:musics="clr-namespace:maui_music_application.Views.Musics"
-             xmlns:navigation="clr-namespace:maui_music_application.Views.Navigation"
              x:Class="maui_music_application.Pages.HomePage"
              BackgroundColor="{DynamicResource BackgroundDark}">
-    <AbsoluteLayout>
-        <ScrollView
-            VerticalScrollBarVisibility="Never"
-            AbsoluteLayout.LayoutFlags="All"
-            AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <VerticalStackLayout
-                Padding="30,0"
-                Spacing="25">
-                <Label
-                    x:Name="CountClick"
-                    Text="Click me"
-                    SemanticProperties.Hint="Counts the number of times you click"
-                    HorizontalOptions="Fill" />
-                <musics:Process
-                    x:Name="Process" />
-                <buttons:ButtonIconCircle
-                    Clicked="OnCounterClicked"
-                    SizeIcon="24"
-                    Icon="add.svg"
-                    Title="Add New Playlist"
-                    PaddingButton="16" />
-                <buttons:ButtonIconCircle
-                    x:Name="ButtonControlMusic"
-                    Clicked="StartMusic"
-                    SizeIcon="24"
-                    Icon="pause_white.svg"
-                    PaddingButton="16" />
-                <buttons:ButtonIconCircle
-                    Clicked="OnCounterClicked"
-                    SizeIcon="24"
-                    Icon="heart.svg"
-                    Title="Your Liked Songs"
-                    PaddingButton="16" />
-                <buttons:ButtonBorder
-                    Clicked="OnCounterClicked"
-                    Text="CLEAR QUEUE"
-                    ColorButton="Aqua"
-                    FontSize="12" />
-                <buttons:ButtonPaddingBottom
-                    Clicked="OnCounterClicked"
-                    Text="Folders"
-                    FontSize="12"
-                    TextColor="White"
-                    PaddingBottom="10" />
-                <buttons:ButtonBorderShadow
-                    Clicked="OnCounterClicked"
-                    Text="Create"
-                    FontSize="16" />
-                <customComponents:GridLayout
-                    x:Name="KindMusic"
-                    Columns="2"
-                    ColumnSpacing="15"
-                    RowSpacing="15" />
-                <customComponents:GridLayout
-                    x:Name="PlayList"
-                    Columns="2"
-                    ColumnSpacing="15"
-                    RowSpacing="15" />
-                <customComponents:GridLayout
-                    x:Name="PlayListLarge"
-                    Columns="1"
-                    RowSpacing="15" />
-                <customComponents:GridLayout
-                    x:Name="FolderPlayList"
-                    Columns="1"
-                    RowSpacing="15" />
-                <customComponents:GridLayout
-                    x:Name="TopMixes"
-                    Rows="1"
-                    Orientation="Horizontal"
-                    ColumnSpacing="30" />
-                <buttons:ButtonSign Icon="dotnet_bot.png"
-                                    Title="Continue with Google"
-                                    Clicked="OnCounterClicked" />
-                <buttons:ButtonSign Icon="dotnet_bot.png"
-                                    Title="Continue with Facebook"
-                                    Clicked="OnCounterClicked" />
-                <buttons:ButtonSign Icon="dotnet_bot.png"
-                                    Title="Continue with Apple"
-                                    Clicked="OnCounterClicked" />
-                <customComponents:GridLayout
-                    x:Name="MusicInTop"
-                    Columns="1"
-                    RowSpacing="30" />
-            </VerticalStackLayout>
-        </ScrollView>
-        <navigation:ButtonNavigation IconSelected="2" />
-    </AbsoluteLayout>
-</ContentPage>
+    <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25">
+        <Label
+            x:Name="CountClick"
+            Text="Click me"
+            SemanticProperties.Hint="Counts the number of times you click"
+            HorizontalOptions="Fill" />
+        <musics:Process
+            x:Name="Process" />
+        <buttons:ButtonIconCircle
+            Clicked="OnCounterClicked"
+            SizeIcon="24"
+            Icon="add.svg"
+            Title="Add New Playlist"
+            PaddingButton="16" />
+        <buttons:ButtonIconCircle
+            x:Name="ButtonControlMusic"
+            Clicked="StartMusic"
+            SizeIcon="24"
+            Icon="pause_white.svg"
+            PaddingButton="16" />
+        <buttons:ButtonIconCircle
+            Clicked="OnCounterClicked"
+            SizeIcon="24"
+            Icon="heart.svg"
+            Title="Your Liked Songs"
+            PaddingButton="16" />
+        <buttons:ButtonBorder
+            Clicked="OnCounterClicked"
+            Text="CLEAR QUEUE"
+            ColorButton="Aqua"
+            FontSize="12" />
+        <buttons:ButtonPaddingBottom
+            Clicked="OnCounterClicked"
+            Text="Folders"
+            FontSize="12"
+            TextColor="White"
+            PaddingBottom="10" />
+        <buttons:ButtonBorderShadow
+            Clicked="OnCounterClicked"
+            Text="Create"
+            FontSize="16" />
+        <customComponents:GridLayout
+            x:Name="KindMusic"
+            Columns="2"
+            ColumnSpacing="15"
+            RowSpacing="15" />
+        <customComponents:GridLayout
+            x:Name="PlayList"
+            Columns="2"
+            ColumnSpacing="15"
+            RowSpacing="15" />
+        <customComponents:GridLayout
+            x:Name="PlayListLarge"
+            Columns="1"
+            RowSpacing="15" />
+        <customComponents:GridLayout
+            x:Name="FolderPlayList"
+            Columns="1"
+            RowSpacing="15" />
+        <customComponents:GridLayout
+            x:Name="TopMixes"
+            Rows="1"
+            Orientation="Horizontal"
+            ColumnSpacing="30" />
+        <buttons:ButtonSign Icon="dotnet_bot.png"
+                            Title="Continue with Google"
+                            Clicked="OnCounterClicked" />
+        <buttons:ButtonSign Icon="dotnet_bot.png"
+                            Title="Continue with Facebook"
+                            Clicked="OnCounterClicked" />
+        <buttons:ButtonSign Icon="dotnet_bot.png"
+                            Title="Continue with Apple"
+                            Clicked="OnCounterClicked" />
+        <customComponents:GridLayout
+            x:Name="MusicInTop"
+            Columns="1"
+            RowSpacing="30" />
+    </VerticalStackLayout>
+</ContentView>
