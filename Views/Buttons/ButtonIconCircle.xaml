@@ -3,7 +3,9 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Buttons.ButtonIconCircle"
-             Padding="0">
+             xmlns:local="clr-namespace:maui_music_application.Views.Buttons"
+             Padding="0"
+             x:DataType="local:ButtonIconCircle">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="Button_Clicked" />
     </ContentView.GestureRecognizers>
@@ -12,11 +14,10 @@
         HorizontalOptions="Start"
         VerticalOptions="Center">
         <Frame
-            x:Name="FrameImage"
             CornerRadius="9999"
             BorderColor="{DynamicResource NullBackground}"
             BackgroundColor="{DynamicResource NullBackground}"
-            Padding="{Binding Padding}">
+            Padding="{Binding PaddingButton}">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="Button_Clicked" />
             </Frame.GestureRecognizers>
@@ -28,8 +29,8 @@
             </Frame.Background>
             <Image x:Name="Image"
                    Source="add.svg"
-                   WidthRequest="50"
-                   HeightRequest="50" />
+                   WidthRequest="{Binding SizeIcon}"
+                   HeightRequest="{Binding SizeIcon}" />
         </Frame>
         <Label
             x:Name="Label"

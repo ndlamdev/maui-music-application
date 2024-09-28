@@ -1,42 +1,28 @@
 // Author: Nguyen Dinh Lam
 // Email: kiminonawa1305@gmail.com
 // Phone number: +84 855354919
-// Create at: 08:09:43 - 22/09/2024
+// Create at: 17:09:27 - 28/09/2024
 // User: Lam Nguyen
 
 using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Buttons;
 
-public partial class ButtonIconCircle
+public partial class ButtonIcon
 {
     public event EventHandler? Clicked;
-    private double _sizeIcon = 24;
-    private double _paddingButton = 16;
 
-    public ButtonIconCircle()
+    public ButtonIcon()
     {
         InitializeComponent();
-        BindingContext = this;
     }
 
     public double SizeIcon
     {
-        get => _sizeIcon;
         set
         {
-            _sizeIcon = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double PaddingButton
-    {
-        get => _paddingButton;
-        set
-        {
-            _paddingButton = value;
-            OnPropertyChanged();
+            Image.WidthRequest = value;
+            Image.HeightRequest = value;
         }
     }
 

@@ -23,22 +23,20 @@
             x:Name="Process" />
         <buttons:ButtonIconCircle
             Clicked="OnCounterClicked"
-            SizeIcon="24"
             Icon="add.svg"
-            Title="Add New Playlist"
-            PaddingButton="16" />
+            Title="Add New Playlist" />
+        <buttons:ButtonIcon
+            Clicked="OnCounterClicked"
+            Icon="add.svg"
+            Title="Add New Playlist" />
         <buttons:ButtonIconCircle
             x:Name="ButtonControlMusic"
             Clicked="StartMusic"
-            SizeIcon="24"
-            Icon="pause_white.svg"
-            PaddingButton="16" />
+            Icon="pause_white.svg" />
         <buttons:ButtonIconCircle
             Clicked="OnCounterClicked"
-            SizeIcon="24"
             Icon="heart.svg"
-            Title="Your Liked Songs"
-            PaddingButton="16" />
+            Title="Your Liked Songs" />
         <buttons:ButtonBorder
             Clicked="OnCounterClicked"
             Text="CLEAR QUEUE"
