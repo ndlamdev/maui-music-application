@@ -8,7 +8,7 @@ using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Navigation;
 
-public partial class BottomNavigationItem : ContentView
+public partial class BottomNavigationItem
 {
     private string _icon = "";
     private bool _selected;

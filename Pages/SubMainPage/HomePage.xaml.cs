@@ -6,8 +6,9 @@
 
 using maui_music_application.Adapters;
 using maui_music_application.Model;
+using MusicInTop = maui_music_application.Model.MusicInTop;
 
-namespace maui_music_application.Pages;
+namespace maui_music_application.Pages.SubMainPage;
 
 public partial class HomePage
 {
@@ -54,22 +55,24 @@ public partial class HomePage
     private void CallApi()
     {
         KindMusic.Rows = DataDemo.Categories.Length / 2;
-        KindMusic.LayoutAdapter(new KindMusicAdapter(DataDemo.Categories));
+        KindMusic.Adapter(new KindMusicAdapter(DataDemo.Categories));
 
         PlayList.Rows = DataDemo.PlayLists.Length / 2;
-        PlayList.LayoutAdapter(new PlayListMusicAdapter(DataDemo.PlayLists));
+        PlayList.Adapter(new PlayListMusicAdapter(DataDemo.PlayLists));
 
-        PlayListLarge.Rows = DataDemo.PlayListLarges.Length;
-        PlayListLarge.LayoutAdapter(new PlayListMusicLargeAdapter(DataDemo.PlayListLarges));
+        PlayListLarge.Adapter(new PlayListMusicLargeAdapter(DataDemo.PlayListLarges));
 
         FolderPlayList.Rows = DataDemo.FolderPlayList.Length;
-        FolderPlayList.LayoutAdapter(new FolderPlayListMusicAdapter(DataDemo.FolderPlayList));
+        FolderPlayList.Adapter(new FolderPlayListMusicAdapter(DataDemo.FolderPlayList));
 
         TopMixes.Columns = DataDemo.TopMixes.Length;
-        TopMixes.LayoutAdapter(new TopMixesAdapter(DataDemo.TopMixes));
+        TopMixes.Adapter(new TopMixesAdapter(DataDemo.TopMixes));
 
         MusicInTop.Rows = DataDemo.MusicInTops.Length;
-        MusicInTop.LayoutAdapter(new MusicInTopAdapter(DataDemo.MusicInTops));
+        MusicInTop.Adapter(new MusicInTopAdapter(DataDemo.MusicInTops));
+
+        MusicInPlayList.Rows = DataDemo.MusicInPlayLists.Length;
+        MusicInPlayList.Adapter(new MusicInPlayListAdapter(DataDemo.MusicInPlayLists));
     }
 
     private void StartMusic(object? sender, EventArgs e)
@@ -87,9 +90,18 @@ public partial class HomePage
         ButtonControlMusic.Clicked -= PauseMusic;
         ButtonControlMusic.Clicked += StartMusic;
     }
+
+    private void MusicInPlayList_OnOnScroll(object? sender, ScrolledEventArgs e)
+    {
+        var scrollView = sender as ScrollView;
+        if (e.ScrollY >= (scrollView.ContentSize.Height - 50 - scrollView.Height))
+        {
+            MusicInPlayList.AddElement(DataDemo.MusicInPlayLists);
+        }
+    }
 }
 
-class DataDemo
+internal static class DataDemo
 {
     public static readonly KindMusic[] Categories =
     [
@@ -146,5 +158,17 @@ class DataDemo
         new("6", "Dance Monkey 6", "Tones and I", "music_kpop.png", 6),
         new("7", "Dance Monkey 7", "Tones and I", "music_kpop.png", 7),
         new("8", "Dance Monkey 8", "Tones and I", "music_kpop.png", 8),
+    ];
+
+    public static readonly Music[] MusicInPlayLists =
+    [
+        new("1", "Dance Monkey 1", "Tones and I", "music_kpop.png"),
+        new("2", "Dance Monkey 2", "Tones and II", "music_kpop.png"),
+        new("3", "Dance Monkey 3", "Tones and III", "music_kpop.png"),
+        new("4", "Dance Monkey 4", "Tones and IV", "music_kpop.png"),
+        new("5", "Dance Monkey 5", "Tones and V", "music_kpop.png"),
+        new("6", "Dance Monkey 6", "Tones and VI", "music_kpop.png"),
+        new("7", "Dance Monkey 7", "Tones and VII", "music_kpop.png"),
+        new("8", "Dance Monkey 8", "Tones and VIII", "music_kpop.png"),
     ];
 }

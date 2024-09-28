@@ -15,7 +15,7 @@ using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Buttons;
 
-public partial class ButtonBorder : ContentView, INotifyPropertyChanged
+public partial class ButtonBorder
 {
     private string _text = "";
     public event EventHandler? Clicked;

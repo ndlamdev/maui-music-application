@@ -13,7 +13,7 @@ using PlayListMusicModel = Model.PlayListMusic;
 using PlayListMusicView = Views.Categories.PlayListMusic;
 public class PlayListMusicAdapter(PlayListMusicModel[] listData) : GridLayoutAdapter<PlayListMusicModel>(listData)
 {
-    public override IView LoadContentView(PlayListMusicModel data)
+    public override IView LoadContentView(int _,PlayListMusicModel data)
     {
         var view = new PlayListMusicView
         {

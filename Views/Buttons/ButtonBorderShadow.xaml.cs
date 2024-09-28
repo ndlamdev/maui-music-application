@@ -13,7 +13,7 @@ using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Buttons;
 
-public partial class ButtonBorderShadow : ContentView
+public partial class ButtonBorderShadow
 {
     private string _text = "";
     public event EventHandler? Clicked;

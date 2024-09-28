@@ -4,15 +4,9 @@
 // Create at: 13:09:02 - 24/09/2024
 // User: Lam Nguyen
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace maui_music_application.Views.Navigation;
 
-public partial class BottomNavigation : ContentView
+public partial class BottomNavigation
 {
     private readonly bool[] _selected = [true, false, false];
     private readonly string[] _nameItems = ["ItemHome", "ItemExplore", "ItemLibrary"];
@@ -61,5 +55,5 @@ public partial class BottomNavigation : ContentView
         ItemLibrary.Action = () => { SelectItem(2); };
     }
 
-    public Action<int> OnClickItem { get; set; }
+    public Action<int>? OnClickItem { get; set; }
 }

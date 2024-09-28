@@ -8,13 +8,13 @@
         CornerRadius="12"
         BackgroundColor="#20436369"
         HeightRequest="55"
-        BorderColor="#00000000"
+        BorderColor="{DynamicResource NullBackground}"
         Padding="0">
         <HorizontalStackLayout VerticalOptions="Center">
             <Frame
                 x:Name="FrameImage"
-                BackgroundColor="#00000000"
-                BorderColor="#00000000"
+                BackgroundColor="{DynamicResource NullBackground}"
+                BorderColor="{DynamicResource NullBackground}"
                 Padding="0"
                 Margin="0, 0, 10, 0"
                 TranslationX="-2"

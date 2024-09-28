@@ -5,15 +5,15 @@
              x:Class="maui_music_application.Views.Categories.PlayListMusicLarge">
     <Frame
         x:Name="Frame"
-        BackgroundColor="#00000000"
+        BackgroundColor="{DynamicResource NullBackground}"
         HeightRequest="85"
-        BorderColor="#00000000"
+        BorderColor="{DynamicResource NullBackground}"
         Padding="0">
         <HorizontalStackLayout VerticalOptions="Center">
             <Frame
                 x:Name="FrameImage"
-                BackgroundColor="#00000000"
-                BorderColor="#00000000"
+                BackgroundColor="{DynamicResource NullBackground}"
+                BorderColor="{DynamicResource NullBackground}"
                 Padding="0"
                 Margin="0, 0, 10, 0"
                 CornerRadius="15">
@@ -33,7 +33,7 @@
                     x:Name="SubLabel"
                     FontAttributes="Bold"
                     Text="18 songs"
-                    TextColor="#8A9A9D"
+                    TextColor="{DynamicResource Text2}"
                     FontSize="15" />
             </VerticalStackLayout>
         </HorizontalStackLayout>

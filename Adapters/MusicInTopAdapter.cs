@@ -16,7 +16,7 @@ using MusicInTopView = Views.Musics.MusicInTop;
 
 public class MusicInTopAdapter(MusicInTopModel[] listData) : GridLayoutAdapter<MusicInTopModel>(listData)
 {
-    public override IView LoadContentView(MusicInTopModel data)
+    public override IView LoadContentView(int _,MusicInTopModel data)
     {
         return new MusicInTopView
         {

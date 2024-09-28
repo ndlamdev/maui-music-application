@@ -4,8 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Navigation.BottomNavigation"
              xmlns:local="clr-namespace:maui_music_application.Views.Navigation"
-             AbsoluteLayout.LayoutFlags="YProportional, WidthProportional"
-             AbsoluteLayout.LayoutBounds="0, 1, 1, 200"
              Padding="0, 0, 0, 20">
     <ContentView.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0, 1">

@@ -15,7 +15,7 @@ using FolderPlayListMusicView = Views.Categories.PlayListMusicLarge;
 public class FolderPlayListMusicAdapter(FolderPlayListMusicModel[] listData)
     : GridLayoutAdapter<FolderPlayListMusicModel>(listData)
 {
-    public override IView LoadContentView(FolderPlayListMusicModel data)
+    public override IView LoadContentView(int _,FolderPlayListMusicModel data)
     {
         var view = new FolderPlayListMusicView
         {

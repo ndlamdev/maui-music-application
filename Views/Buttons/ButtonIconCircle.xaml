@@ -14,9 +14,9 @@
         <Frame
             x:Name="FrameImage"
             CornerRadius="9999"
-            BorderColor="#00000000"
-            BackgroundColor="#00000000"
-            Padding="16">
+            BorderColor="{DynamicResource NullBackground}"
+            BackgroundColor="{DynamicResource NullBackground}"
+            Padding="{Binding Padding}">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="Button_Clicked" />
             </Frame.GestureRecognizers>
@@ -26,7 +26,8 @@
                     <GradientStop Color="#00C2CB" Offset="1.0"></GradientStop>
                 </LinearGradientBrush>
             </Frame.Background>
-            <Image x:Name="Image" Source="add.svg"
+            <Image x:Name="Image"
+                   Source="add.svg"
                    WidthRequest="50"
                    HeightRequest="50" />
         </Frame>

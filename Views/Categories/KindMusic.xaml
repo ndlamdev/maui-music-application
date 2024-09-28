@@ -18,8 +18,8 @@
                 FontSize="16" />
             <Frame
                 x:Name="FrameImage"
-                BackgroundColor="#00000000"
-                BorderColor="#00000000"
+                BackgroundColor="{DynamicResource NullBackground}"
+                BorderColor="{DynamicResource NullBackground}"
                 Padding="0"
                 TranslationY="-22"
                 TranslationX="10"

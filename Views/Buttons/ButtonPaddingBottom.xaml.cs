@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace maui_music_application.Views.Buttons;
 
-public partial class ButtonPaddingBottom : ContentView, INotifyPropertyChanged
+public partial class ButtonPaddingBottom
 {
     private string _text = "";
     public event EventHandler? Clicked;

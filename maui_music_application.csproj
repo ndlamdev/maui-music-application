@@ -63,13 +63,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <MauiXaml Update="Pages\HomePage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
         <MauiXaml Update="Pages\MainPage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Pages\ExplorePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Buttons\ButtonBorder.xaml">
@@ -87,23 +81,20 @@
         <MauiXaml Update="Views\Categories\PlayListMusicLarge.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Pages\SubMainPage\ExplorePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\SubMainPage\HomePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\SubMainPage\LibraryPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Pages\HomePage.xaml.cs">
-          <DependentUpon>HomePage.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
         <Compile Update="Pages\MainPage.xaml.cs">
           <DependentUpon>MainPage.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Pages\ExplorePage.xaml.cs">
-          <DependentUpon>ExplorePage.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Pages\LibraryPage.xaml.cs">
-          <DependentUpon>ExplorePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
         <Compile Update="Views\Buttons\ButtonBorder.xaml.cs">
@@ -123,14 +114,26 @@
           <SubType>Code</SubType>
         </Compile>
         <Compile Remove="Views\Buttons\ButtonIconCircle.cs" />
+        <Compile Update="Pages\SubMainPage\ExplorePage.xaml.cs">
+          <DependentUpon>ExplorePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\SubMainPage\HomePage.xaml.cs">
+          <DependentUpon>HomePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\SubMainPage\LibraryPage.xaml.cs">
+          <DependentUpon>LibraryPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Pages\HomePage.xaml" />
-        <AdditionalFiles Include="Pages\LibraryPage.xaml" />
-        <AdditionalFiles Include="Views\Buttons\ButtonAdd.xaml" />
+        <AdditionalFiles Include="Pages\SubMainPage\ExplorePage.xaml" />
         <AdditionalFiles Include="Views\Buttons\ButtonBorder.xaml" />
-        <AdditionalFiles Include="Views\Categories\CategoryMusic.xaml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ViewModels\" />
+    </ItemGroup>
 </Project>

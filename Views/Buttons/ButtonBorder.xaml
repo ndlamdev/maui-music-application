@@ -2,7 +2,9 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Buttons.ButtonBorder">
+             x:Class="maui_music_application.Views.Buttons.ButtonBorder"
+             xmlns:local ="clr-namespace:maui_music_application.Views.Buttons"
+             x:DataType="local:ButtonBorder">
     <Button
         x:Name="Button"
         Text="{Binding Text}"
@@ -10,7 +12,7 @@
         TextColor="{Binding ColorButton}"
         FontSize="{Binding FontSize}"
         FontFamily="CenturyGothic"
-        BackgroundColor="#00000000"
+        BackgroundColor="{DynamicResource NullBackground}"
         CornerRadius="9999"
         BorderColor="{Binding ColorButton}"
         BorderWidth="1"

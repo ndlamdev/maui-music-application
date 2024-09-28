@@ -36,7 +36,7 @@
                     FontFamily="CenturyGothic" />
                 <Label
                     x:Name="NameSinger"
-                    TextColor="#8A9A9D"
+                    TextColor="{DynamicResource Text2}"
                     FontAttributes="Bold"
                     FontSize="14"
                     FontFamily="CenturyGothic" />

@@ -4,20 +4,17 @@
 // Create at: 08:09:43 - 22/09/2024
 // User: Lam Nguyen
 
-using Android.Util;
-using maui_music_application.Model;
 using maui_music_application.Utils;
 
 namespace maui_music_application.Views.Buttons;
 
-public partial class ButtonIconCircle : ContentView
+public partial class ButtonIconCircle
 {
     public event EventHandler? Clicked;
 
     public ButtonIconCircle()
     {
         InitializeComponent();
-        BindingContext = this;
     }
 
     public double SizeIcon

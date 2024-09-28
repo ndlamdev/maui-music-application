@@ -19,7 +19,7 @@
             TranslationX="-12"
             TranslationY="10"
             BackgroundColor="White"
-            BorderColor="#00000000" />
+            BorderColor="{DynamicResource NullBackground}" />
         <Label
             x:Name="Label"
             Text="Pop Mix"
@@ -34,6 +34,6 @@
             CornerRadius="9999"
             Background="{DynamicResource White}"
             AbsoluteLayout.LayoutBounds="115, 50, 70, 70" />
-        <Frame BorderColor="#00000000" x:Name="FrameColor" AbsoluteLayout.LayoutBounds="-10, 140, 99999, 10" />
+        <Frame BorderColor="{DynamicResource NullBackground}" x:Name="FrameColor" AbsoluteLayout.LayoutBounds="-10, 140, 99999, 10" />
     </AbsoluteLayout>
 </ContentView>

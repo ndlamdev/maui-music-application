@@ -15,7 +15,7 @@ using PlayListMusicLargeView = Views.Categories.PlayListMusicLarge;
 public class PlayListMusicLargeAdapter(PlayListMusicLargeModel[] listData)
     : GridLayoutAdapter<PlayListMusicLargeModel>(listData)
 {
-    public override IView LoadContentView(PlayListMusicLargeModel data)
+    public override IView LoadContentView(int _,PlayListMusicLargeModel data)
     {
         var view = new PlayListMusicLargeView
         {
