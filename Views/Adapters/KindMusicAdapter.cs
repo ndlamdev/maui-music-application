@@ -5,11 +5,12 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Views.Layouts;
+using maui_music_application.Components.Categories;
+using maui_music_application.Layouts;
 
-namespace maui_music_application.Views.Adapters;
+namespace maui_music_application.Adapters;
 
-using KindMusicView = Views.Components.Categories.KindMusic;
+using KindMusicView = KindMusic;
 using KindMusicModel = Models.KindMusic;
 
 public class KindMusicAdapter(KindMusicModel[] listData) : GridLayoutAdapter<KindMusicModel>(listData)

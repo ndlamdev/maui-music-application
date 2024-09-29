@@ -4,9 +4,7 @@
 // Create at: 13:09:40 - 22/09/2024
 // User: Lam Nguyen
 
-using System.ComponentModel;
-
-namespace maui_music_application.Views.Components.Buttons;
+namespace maui_music_application.Components.Buttons;
 
 public partial class ButtonPaddingBottom
 {

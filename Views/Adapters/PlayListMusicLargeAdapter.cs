@@ -5,12 +5,13 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Views.Layouts;
+using maui_music_application.Components.Categories;
+using maui_music_application.Layouts;
 
-namespace maui_music_application.Views.Adapters;
+namespace maui_music_application.Adapters;
 
 using PlayListMusicLargeModel = Models.PlayListMusicLarge;
-using PlayListMusicLargeView = Views.Components.Categories.PlayListMusicLarge;
+using PlayListMusicLargeView = PlayListMusicLarge;
 
 public class PlayListMusicLargeAdapter(PlayListMusicLargeModel[] listData)
     : GridLayoutAdapter<PlayListMusicLargeModel>(listData)

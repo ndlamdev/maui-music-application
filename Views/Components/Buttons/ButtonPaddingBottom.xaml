@@ -2,8 +2,8 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Components.Buttons.ButtonPaddingBottom"
-             xmlns:local="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:local="clr-namespace:maui_music_application.Components.Buttons"
+             x:Class="maui_music_application.Components.Buttons.ButtonPaddingBottom"
              x:DataType="local:ButtonPaddingBottom">
     <Button CornerRadius="9999"
             x:Name="Button"
@@ -13,12 +13,7 @@
             FontFamily="CenturyGothic"
             HorizontalOptions="CenterAndExpand"
             Padding="20, 0"
-            Clicked="Button_OnClicked">
-        <Button.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="#1797A8" Offset="0.0" />
-                <GradientStop Color="#00C2CB" Offset="1.0" />
-            </LinearGradientBrush>
-        </Button.Background>
+            Clicked="Button_OnClicked"
+            Background="{StaticResource ButtonActive}">
     </Button>
 </ContentView>

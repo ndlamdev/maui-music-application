@@ -5,11 +5,11 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Views.Layouts;
+using maui_music_application.Layouts;
 using TopMixesModel = maui_music_application.Models.TopMixes;
-using TopMixesView = maui_music_application.Views.Components.Categories.TopMixes;
+using TopMixesView = maui_music_application.Components.Categories.TopMixes;
 
-namespace maui_music_application.Views.Adapters;
+namespace maui_music_application.Adapters;
 
 public class TopMixesAdapter(TopMixesModel[] listData) : GridLayoutAdapter<TopMixesModel>(listData)
 {

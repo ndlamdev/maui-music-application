@@ -50,7 +50,7 @@
     <Color x:Key="CardBackground1">#436369</Color>
     <Color x:Key="CardBackground2">#1E1E1E</Color>
     <Color x:Key="CardSubtitle">#8A9A9D</Color>
-    <Color x:Key="HighLight">#39C0D4</Color>
+    <Color x:Key="Highlight">#39C0D4</Color>
     <Color x:Key="Outline">#00C2CB</Color>
 
     <LinearGradientBrush x:Key="BackgroundHeader" StartPoint="0,0" EndPoint="1,1">
@@ -81,6 +81,20 @@
             Opacity="0.5"
             Brush="#06A0B5"
             Offset="5,5" />
+    
+    <Color x:Key="ButtonShadowColor">#06A0B5</Color>
+
+    <!-- Define the shadow with its properties -->
+    <Shadow x:Key="ButtonShadow"
+            Opacity="0.8"
+            Radius="99999">
+        <Shadow.Offset>
+            <Point X="0" Y="0" />
+        </Shadow.Offset>
+        <Shadow.Brush>
+            <SolidColorBrush Color="{StaticResource ButtonShadowColor}" />
+        </Shadow.Brush>
+    </Shadow>
 
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}" />

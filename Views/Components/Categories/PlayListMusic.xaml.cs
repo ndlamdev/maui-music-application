@@ -6,7 +6,7 @@
 
 using maui_music_application.Helpers;
 
-namespace maui_music_application.Views.Components.Categories;
+namespace maui_music_application.Components.Categories;
 
 public partial class PlayListMusic
 {

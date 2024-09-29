@@ -4,7 +4,7 @@
 // Create at: 20:09:11 - 22/09/2024
 // User: Lam Nguyen
 
-namespace maui_music_application.Views.Components.Musics;
+namespace maui_music_application.Components.Musics;
 
 public partial class Process
 {

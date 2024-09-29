@@ -2,7 +2,7 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Components.Buttons.ButtonIcon">
+             x:Class="maui_music_application.Components.Buttons.ButtonIcon">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="Button_Clicked" />
     </ContentView.GestureRecognizers>
@@ -16,7 +16,7 @@
                HeightRequest="25" />
         <Label
             x:Name="Label"
-            TextColor="White"
+            TextColor="{StaticResource White}"
             FontFamily="CenturyGothic"
             FontAttributes="Bold"
             FontSize="16"

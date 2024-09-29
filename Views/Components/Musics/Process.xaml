@@ -2,8 +2,8 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Components.Musics.Process"
-             xmlns:local="clr-namespace:maui_music_application.Views.Components.Musics"
+             xmlns:local="clr-namespace:maui_music_application.Components.Musics"
+             x:Class="maui_music_application.Components.Musics.Process"
              x:DataType="local:Process">
     <VerticalStackLayout
         SizeChanged="Layout_OnSizeChanged"

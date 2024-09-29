@@ -5,13 +5,13 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Views.Layouts;
+using maui_music_application.Layouts;
 using MusicInTop = maui_music_application.Models.MusicInTop;
 
-namespace maui_music_application.Views.Adapters;
+namespace maui_music_application.Adapters;
 
 using MusicInTopModel = MusicInTop;
-using MusicInTopView = Views.Components.Musics.MusicInTop;
+using MusicInTopView = Components.Musics.MusicInTop;
 
 public class MusicInTopAdapter(MusicInTopModel[] listData) : GridLayoutAdapter<MusicInTopModel>(listData)
 {

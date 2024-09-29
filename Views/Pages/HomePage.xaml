@@ -2,15 +2,15 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
-             xmlns:layout="clr-namespace:maui_music_application.Views.Layouts"
-             xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
+             xmlns:buttons1="clr-namespace:maui_music_application.Components.Buttons"
+             xmlns:layouts="clr-namespace:maui_music_application.Layouts"
+             xmlns:musics="clr-namespace:maui_music_application.Components.Musics"
              x:Class="maui_music_application.Pages.HomePage"
              BackgroundColor="{DynamicResource BackgroundDark}">
     <VerticalStackLayout
         Padding="30,0"
         Spacing="25">
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="MusicInPlayList"
             Columns="1"
             OnScroll="MusicInPlayList_OnOnScroll" />
@@ -21,71 +21,71 @@
             HorizontalOptions="Fill" />
         <musics:Process
             x:Name="Process" />
-        <buttons:ButtonIconCircle
+        <buttons1:ButtonIconCircle
             Clicked="OnCounterClicked"
             Icon="add.svg"
             Title="Add New Playlist" />
-        <buttons:ButtonIcon
+        <buttons1:ButtonIcon
             Clicked="OnCounterClicked"
             Icon="add.svg"
             Title="Add New Playlist" />
-        <buttons:ButtonIconCircle
+        <buttons1:ButtonIconCircle
             x:Name="ButtonControlMusic"
             Clicked="StartMusic"
             Icon="pause_white.svg" />
-        <buttons:ButtonIconCircle
+        <buttons1:ButtonIconCircle
             Clicked="OnCounterClicked"
             Icon="heart.svg"
             Title="Your Liked Songs" />
-        <buttons:ButtonBorder
+        <buttons1:ButtonBorder
             Clicked="OnCounterClicked"
             Text="CLEAR QUEUE"
             ColorButton="Aqua"
             FontSize="12" />
-        <buttons:ButtonPaddingBottom
+        <buttons1:ButtonPaddingBottom
             Clicked="OnCounterClicked"
             Text="Folders"
             FontSize="12"
             TextColor="White"
             PaddingBottom="10" />
-        <buttons:ButtonBorderShadow
+        <buttons1:ButtonBorderShadow
             Clicked="OnCounterClicked"
             Text="Create"
             FontSize="16" />
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="KindMusic"
             Columns="2"
             ColumnSpacing="15"
             RowSpacing="15" />
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="PlayList"
             Columns="2"
             ColumnSpacing="15"
             RowSpacing="15" />
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="PlayListLarge"
             Columns="1"
             RowSpacing="15" />
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="FolderPlayList"
             Columns="1"
             RowSpacing="15" />
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="TopMixes"
             Rows="1"
             Orientation="Horizontal"
             ColumnSpacing="30" />
-        <buttons:ButtonSign Icon="dotnet_bot.png"
+        <buttons1:ButtonSign Icon="dotnet_bot.png"
                             Title="Continue with Google"
                             Clicked="OnCounterClicked" />
-        <buttons:ButtonSign Icon="dotnet_bot.png"
+        <buttons1:ButtonSign Icon="dotnet_bot.png"
                             Title="Continue with Facebook"
                             Clicked="OnCounterClicked" />
-        <buttons:ButtonSign Icon="dotnet_bot.png"
+        <buttons1:ButtonSign Icon="dotnet_bot.png"
                             Title="Continue with Apple"
                             Clicked="OnCounterClicked" />
         <musics:MusicInPlayList />
-        <layout:GridLayout
+        <layouts:GridLayout
             x:Name="MusicInTop"
             Columns="1"
             RowSpacing="30" />

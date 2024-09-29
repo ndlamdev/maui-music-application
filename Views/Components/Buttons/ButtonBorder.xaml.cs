@@ -4,16 +4,7 @@
 // Create at: 12:09:21 - 22/09/2024
 // User: Lam Nguyen
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.Util;
-using maui_music_application.Helpers;
-
-namespace maui_music_application.Views.Components.Buttons;
+namespace maui_music_application.Components.Buttons;
 
 public partial class ButtonBorder
 {

@@ -7,7 +7,7 @@
 using Android.Util;
 using maui_music_application.Helpers;
 
-namespace maui_music_application.Views.Components.Musics;
+namespace maui_music_application.Components.Musics;
 
 public partial class MusicInPlayList
 {
