@@ -41,6 +41,48 @@
     <Color x:Key="Blue400">#44D7DD</Color>
     <Color x:Key="Blue500">#1DB1B7</Color>
 
+    <Color x:Key="Background">#121111</Color>
+    <Color x:Key="Text">#fff</Color>
+    <Color x:Key="Icon1">#121111</Color>
+    <Color x:Key="Icon2">#979797</Color>
+    <Color x:Key="Icon3">#FFFFFF</Color>
+
+    <Color x:Key="CardBackground1">#436369</Color>
+    <Color x:Key="CardBackground2">#1E1E1E</Color>
+    <Color x:Key="CardSubtitle">#8A9A9D</Color>
+    <Color x:Key="HighLight">#39C0D4</Color>
+    <Color x:Key="Outline">#00C2CB</Color>
+
+    <LinearGradientBrush x:Key="BackgroundHeader" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#0E0E0E" Offset="0.0" /> <!-- Start Color -->
+        <GradientStop Color="#102B2D" Offset="0.36" /> <!-- Start Color -->
+        <GradientStop Color="#06A0B5" Offset="1.0" /> <!-- End Color -->
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BackgroundFooter" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#00000000" />
+        <GradientStop Color="Black" Offset="0.7" />
+        <GradientStop Color="Black" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Button" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#A6F3FF" Offset="0.0" /> <!-- Start Color -->
+        <GradientStop Color="#00C2CB" Offset="1.0" /> <!-- End Color -->
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ButtonActive" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#1797A8" Offset="0.0" /> <!-- Start Color -->
+        <GradientStop Color="#00C2CB" Offset="1.0" /> <!-- End Color -->
+    </LinearGradientBrush>
+
+
+    <Shadow x:Key="DefaultDropShadow"
+            Radius="10"
+            Opacity="0.5"
+            Brush="#06A0B5"
+            Offset="5,5" />
+
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}" />
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}" />
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}" />
