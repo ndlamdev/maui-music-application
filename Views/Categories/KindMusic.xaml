@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Categories.KindMusic">
+    <Frame
+        x:Name="Frame"
+        CornerRadius="10"
+        BackgroundColor="LawnGreen"
+        HeightRequest="100"
+        Padding="0">
+        <VerticalStackLayout>
+            <Label
+                x:Name="Label"
+                Text="Kpop"
+                Padding="10"
+                FontAttributes="Bold"
+                FontSize="16" />
+            <Frame
+                x:Name="FrameImage"
+                BackgroundColor="{DynamicResource NullBackground}"
+                BorderColor="{DynamicResource NullBackground}"
+                Padding="0"
+                TranslationY="-22"
+                TranslationX="10"
+                Rotation="18"
+                HorizontalOptions="End"
+                CornerRadius="12">
+                <Image
+                    x:Name="Image"
+                    Source="music_kpop.png"
+                    HeightRequest="85"
+                    WidthRequest="85" />
+            </Frame>
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

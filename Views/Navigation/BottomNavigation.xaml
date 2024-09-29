@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Navigation.BottomNavigation"
+             xmlns:local="clr-namespace:maui_music_application.Views.Navigation"
+             Padding="0, 0, 0, 20">
+    <ContentView.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0, 1">
+            <GradientStop Color="{DynamicResource NullBackground}" />
+            <GradientStop Color="Black" Offset="0.7" />
+            <GradientStop Color="Black" Offset="1" />
+        </LinearGradientBrush>
+    </ContentView.Background>
+    <FlexLayout
+        AlignItems="End"
+        JustifyContent="SpaceAround">
+        <local:BottomNavigationItem
+            x:Name="ItemHome"
+            x:Uid="ItemHome"
+            Icon="home.svg"
+            Title="Home"
+            ColorSelected="#00C2CB" />
+        <local:BottomNavigationItem
+            x:Name="ItemExplore"
+            x:Uid="ItemExplore"
+            Icon="search.svg"
+            Title="Explore"
+            ColorSelected="#00C2CB" />
+        <local:BottomNavigationItem
+            x:Name="ItemLibrary"
+            x:Uid="ItemLibrary"
+            Icon="folder.svg"
+            Title="Library"
+            ColorSelected="#00C2CB" />
+    </FlexLayout>
+</ContentView>

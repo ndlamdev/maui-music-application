@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Musics.MusicInTop">
+    <Frame
+        BorderColor="{DynamicResource NullBackground}"
+        CornerRadius="10"
+        BackgroundColor="#1B1B1B"
+        Padding="24, 15"
+        x:Name="RootView">
+        <HorizontalStackLayout Spacing="20">
+            <Label
+                x:Name="TopMusic"
+                TextColor="White"
+                FontAttributes="Bold"
+                FontSize="20"
+                FontFamily="CenturyGothic"
+                VerticalOptions="Center" />
+            <Frame BorderColor="{DynamicResource NullBackground}"
+                   BackgroundColor="{DynamicResource NullBackground}"
+                   CornerRadius="5" 
+                   Padding="0"
+                   x:Name="ImageView">
+                <Image
+                    x:Name="Image"
+                    WidthRequest="50"
+                    HeightRequest="50" />
+            </Frame>
+            <FlexLayout Direction="Column" JustifyContent="SpaceBetween">
+                <Label
+                    x:Name="NameMusic"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="17"
+                    FontFamily="CenturyGothic" />
+                <Label
+                    x:Name="NameSinger"
+                    TextColor="{DynamicResource Text2}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    FontFamily="CenturyGothic" />
+            </FlexLayout>
+        </HorizontalStackLayout>
+    </Frame>
+</ContentView>
