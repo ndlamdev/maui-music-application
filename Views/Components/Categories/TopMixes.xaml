@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Components.Categories.TopMixes"
+             x:Name="RootView"
+             WidthRequest="150"
+             HeightRequest="150">
+    <AbsoluteLayout IsClippedToBounds="True">
+        <Image
+            x:Name="Image"
+            WidthRequest="150"
+            HeightRequest="140" />
+        <Frame
+            x:Name="Frame1"
+            CornerRadius="9999"
+            WidthRequest="24"
+            HeightRequest="24"
+            TranslationX="-12"
+            TranslationY="10"
+            BackgroundColor="White"
+            BorderColor="{DynamicResource NullBackground}" />
+        <Label
+            x:Name="Label"
+            Text="Pop Mix"
+            TextColor="White"
+            TranslationX="20"
+            TranslationY="12"
+            FontAttributes="Bold"
+            FontSize="15"
+            CharacterSpacing="1.4" />
+        <Frame
+            x:Name="Frame2"
+            CornerRadius="9999"
+            Background="{DynamicResource White}"
+            AbsoluteLayout.LayoutBounds="115, 50, 70, 70" />
+        <Frame BorderColor="{DynamicResource NullBackground}" x:Name="FrameColor" AbsoluteLayout.LayoutBounds="-10, 140, 99999, 10" />
+    </AbsoluteLayout>
+</ContentView>

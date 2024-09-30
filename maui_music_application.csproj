@@ -63,77 +63,66 @@
     </ItemGroup>
 
     <ItemGroup>
-        <MauiXaml Update="Pages\MainPage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Views\Buttons\ButtonBorder.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
         <MauiXaml Update="Views\Buttons\CircleButton.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Categories\CategoryKindMusic.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Categories\PlayListMusic.xaml">
+        <MauiXaml Update="Views\Pages\ExplorePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Categories\PlayListMusicLarge.xaml">
+        <MauiXaml Update="Views\Pages\HomePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Pages\SubMainPage\ExplorePage.xaml">
+        <MauiXaml Update="Views\Pages\LibraryPage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Pages\SubMainPage\HomePage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Pages\SubMainPage\LibraryPage.xaml">
+        <MauiXaml Update="Views\Layouts\GridLayout.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Pages\MainPage.xaml.cs">
-          <DependentUpon>MainPage.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Buttons\ButtonBorder.xaml.cs">
-          <DependentUpon>ButtonBorder.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Categories\KindMusic.xaml.cs">
-          <DependentUpon>CategoryMusic.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Categories\PlayListMusic.xaml.cs">
-          <DependentUpon>PlayListMusic.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Categories\PlayListMusicLarge.xaml.cs">
-          <DependentUpon>PlayListMusicLarge.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
         <Compile Remove="Views\Buttons\ButtonIconCircle.cs" />
-        <Compile Update="Pages\SubMainPage\ExplorePage.xaml.cs">
+        <Compile Update="Views\Pages\ExplorePage.xaml.cs">
           <DependentUpon>ExplorePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Pages\SubMainPage\HomePage.xaml.cs">
+        <Compile Update="Views\Pages\HomePage.xaml.cs">
           <DependentUpon>HomePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Pages\SubMainPage\LibraryPage.xaml.cs">
+        <Compile Update="Views\Pages\LibraryPage.xaml.cs">
           <DependentUpon>LibraryPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Layouts\GridLayout.xaml.cs">
+          <DependentUpon>GridLayout.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Pages\SubMainPage\ExplorePage.xaml" />
-        <AdditionalFiles Include="Views\Buttons\ButtonBorder.xaml" />
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonBorderShadow.xaml" />
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonIcon.xaml" />
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonIconCircle.xaml" />
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonPaddingBottom.xaml" />
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\PlayListMusic.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\PlayListMusicLarge.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml" />
+        <AdditionalFiles Include="Views\Components\Musics\MusicInPlayList.xaml" />
+        <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
+        <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
+        <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
+        <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Data\" />
       <Folder Include="ViewModels\" />
+      <Folder Include="Views\Components\" />
     </ItemGroup>
 </Project>
