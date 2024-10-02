@@ -5,11 +5,13 @@
              xmlns:buttons1="clr-namespace:maui_music_application.Components.Buttons"
              xmlns:layouts="clr-namespace:maui_music_application.Layouts"
              xmlns:musics="clr-namespace:maui_music_application.Components.Musics"
+             xmlns:header="clr-namespace:maui_music_application.Components.Header"
              x:Class="maui_music_application.Pages.HomePage"
              BackgroundColor="{DynamicResource BackgroundDark}">
     <VerticalStackLayout
         Padding="30,0"
         Spacing="25">
+        <header:Header />
         <layouts:GridLayout
             x:Name="MusicInPlayList"
             Columns="1"
@@ -76,14 +78,14 @@
             Orientation="Horizontal"
             ColumnSpacing="30" />
         <buttons1:ButtonSign Icon="dotnet_bot.png"
-                            Title="Continue with Google"
-                            Clicked="OnCounterClicked" />
+                             Title="Continue with Google"
+                             Clicked="OnCounterClicked" />
         <buttons1:ButtonSign Icon="dotnet_bot.png"
-                            Title="Continue with Facebook"
-                            Clicked="OnCounterClicked" />
+                             Title="Continue with Facebook"
+                             Clicked="OnCounterClicked" />
         <buttons1:ButtonSign Icon="dotnet_bot.png"
-                            Title="Continue with Apple"
-                            Clicked="OnCounterClicked" />
+                             Title="Continue with Apple"
+                             Clicked="OnCounterClicked" />
         <musics:MusicInPlayList />
         <layouts:GridLayout
             x:Name="MusicInTop"

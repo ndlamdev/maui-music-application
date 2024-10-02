@@ -75,6 +75,10 @@
         <GradientStop Color="#00C2CB" Offset="1.0" /> <!-- End Color -->
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="BorderAvatar" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#158085" Offset="0.0" /> <!-- Start Color -->
+        <GradientStop Color="#00DBFC" Offset="1.0" /> <!-- End Color -->
+    </LinearGradientBrush>
 
     <Shadow x:Key="DefaultDropShadow"
             Radius="10"

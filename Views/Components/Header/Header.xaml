@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Components.Header.Header"
+             xmlns:avatar="clr-namespace:maui_music_application.Components.Avatar"
+             xmlns:buttons="clr-namespace:maui_music_application.Components.Buttons"
+             xmlns:vm="clr-namespace:maui_music_application.ViewModels"
+             xmlns:convert="clr-namespace:maui_music_application.Helpers.Converter"
+             xmlns:logo="clr-namespace:maui_music_application.Components.Logo">
+
+    <!-- Binding with view models -->
+    <ContentPage.BindingContext>
+        <vm:HeaderViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <convert:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <!-- Header if has user -->
+    <StackLayout Padding="10"
+                 BackgroundColor="Transparent">
+        <FlexLayout Direction="Row" IsVisible="{Binding HasUser}"
+                    JustifyContent="SpaceBetween">
+            <HorizontalStackLayout Spacing="20">
+                <avatar:Avatar
+                    ImageUrl="{Binding User.Avatar}"
+                    Size="34"
+                    Radius="999" />
+                <StackLayout>
+                    <Label Text="Welcome back!" FontSize="15" TextColor="White" />
+                    <Label Text="{Binding User.Email}" FontSize="12" TextColor="LightGray" />
+                </StackLayout>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <buttons:ButtonIcon
+                    Icon="status.svg"
+                    Spacing="0"
+                    SizeIcon="20" />
+                <buttons:ButtonIcon
+                    Icon="bell.svg"
+                    Spacing="0"
+                    SizeIcon="20" />
+                <buttons:ButtonIcon
+                    Icon="settings.svg"
+                    Spacing="0"
+                    SizeIcon="20" />
+            </HorizontalStackLayout>
+        </FlexLayout>
+
+        <!-- Header if has user -->
+        <FlexLayout Direction="Row"
+                    IsVisible="{Binding HasUser, Converter={StaticResource InverseBooleanConverter}}"
+                    JustifyContent="SpaceBetween">
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <logo:Logo />
+                <Label Text="Home" TextColor="White" FontSize="16" />
+            </HorizontalStackLayout>
+        </FlexLayout>
+    </StackLayout>
+
+</ContentView>
