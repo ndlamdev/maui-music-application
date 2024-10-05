@@ -14,18 +14,18 @@
             x:Uid="ItemHome"
             Icon="home.svg"
             Title="Home"
-            ColorSelected="{StaticResource Outline}" />
+            ColorSelected="{StaticResource Blue500}" />
         <navigation:BottomNavigationItem
             x:Name="ItemExplore"
             x:Uid="ItemExplore"
             Icon="search.svg"
             Title="Explore"
-            ColorSelected="{StaticResource Outline}" />
+            ColorSelected="{StaticResource Blue500}" />
         <navigation:BottomNavigationItem
             x:Name="ItemLibrary"
             x:Uid="ItemLibrary"
             Icon="folder.svg"
             Title="Library"
-            ColorSelected="{StaticResource Outline}" />
+            ColorSelected="{StaticResource Blue500}" />
     </FlexLayout>
 </ContentView>

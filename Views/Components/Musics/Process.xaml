@@ -13,7 +13,7 @@
             Progress="0"
             BackgroundColor="{DynamicResource NullBackground}"
             HeightRequest="4"
-            ProgressColor="#7CEEFF" />
+            ProgressColor="{StaticResource Blue300}" />
         <Frame
             x:Name="DotProgressBard"
             CornerRadius="9999"
@@ -21,7 +21,7 @@
             WidthRequest="4"
             HeightRequest="4"
             HorizontalOptions="Start"
-            BackgroundColor="#7CEEFF"
+            BackgroundColor="{StaticResource Blue300}"
             BorderColor="{DynamicResource NullBackground}" />
         <FlexLayout
             TranslationY="-5">

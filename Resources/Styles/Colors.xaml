@@ -37,9 +37,13 @@
 
     <Color x:Key="Blue100">#446266</Color>
     <Color x:Key="Blue200">#A6F3FF</Color>
-    <Color x:Key="Blue300">#00C2CB</Color>
+    <Color x:Key="Blue300">#7CEEFF</Color>
     <Color x:Key="Blue400">#44D7DD</Color>
-    <Color x:Key="Blue500">#1DB1B7</Color>
+    <Color x:Key="Blue500">#00C2CB</Color>
+    <Color x:Key="Blue600">#1DB1B7</Color>
+    <Color x:Key="Blue700">#00A1B7</Color>
+    <Color x:Key="Blue800">#06A0B5</Color>
+    <Color x:Key="Blue900">#1797A8</Color>
 
     <Color x:Key="Background">#121111</Color>
     <Color x:Key="Text">#fff</Color>
@@ -47,16 +51,10 @@
     <Color x:Key="Icon2">#979797</Color>
     <Color x:Key="Icon3">#FFFFFF</Color>
 
-    <Color x:Key="CardBackground1">#436369</Color>
-    <Color x:Key="CardBackground2">#1E1E1E</Color>
-    <Color x:Key="CardSubtitle">#8A9A9D</Color>
-    <Color x:Key="Highlight">#39C0D4</Color>
-    <Color x:Key="Outline">#00C2CB</Color>
-
     <LinearGradientBrush x:Key="BackgroundHeader" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Color="#0E0E0E" Offset="0.0" /> <!-- Start Color -->
         <GradientStop Color="#102B2D" Offset="0.36" /> <!-- Start Color -->
-        <GradientStop Color="#06A0B5" Offset="1.0" /> <!-- End Color -->
+        <GradientStop Color="{StaticResource Blue800}" Offset="1.0" /> <!-- End Color -->
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="BackgroundFooter" StartPoint="0,0" EndPoint="0,1">
@@ -66,13 +64,13 @@
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="Button" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#A6F3FF" Offset="0.0" /> <!-- Start Color -->
-        <GradientStop Color="#00C2CB" Offset="1.0" /> <!-- End Color -->
+        <GradientStop Color="{StaticResource Blue200}" Offset="0.0" /> <!-- Start Color -->
+        <GradientStop Color="{StaticResource Blue500}" Offset="1.0" /> <!-- End Color -->
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="ButtonActive" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#1797A8" Offset="0.0" /> <!-- Start Color -->
-        <GradientStop Color="#00C2CB" Offset="1.0" /> <!-- End Color -->
+        <GradientStop Color="{StaticResource Blue900}" Offset="0.0" /> <!-- Start Color -->
+        <GradientStop Color="{StaticResource Blue500}" Offset="1.0" /> <!-- End Color -->
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="BorderAvatar" StartPoint="0,0" EndPoint="1,1">
@@ -83,10 +81,8 @@
     <Shadow x:Key="DefaultDropShadow"
             Radius="10"
             Opacity="0.5"
-            Brush="#06A0B5"
+            Brush="{StaticResource Blue800}"
             Offset="5,5" />
-    
-    <Color x:Key="ButtonShadowColor">#06A0B5</Color>
 
     <!-- Define the shadow with its properties -->
     <Shadow x:Key="ButtonShadow"
@@ -96,7 +92,7 @@
             <Point X="0" Y="0" />
         </Shadow.Offset>
         <Shadow.Brush>
-            <SolidColorBrush Color="{StaticResource ButtonShadowColor}" />
+            <SolidColorBrush Color="{StaticResource Blue800}" />
         </Shadow.Brush>
     </Shadow>
 
@@ -118,7 +114,9 @@
 
     <SolidColorBrush x:Key="Blue100Brush" Color="{StaticResource Blue100}" />
     <SolidColorBrush x:Key="Blue200Brush" Color="{StaticResource Blue200}" />
-    <SolidColorBrush x:Key="Blue300Brush" Color="{StaticResource Blue300}" />
+    <SolidColorBrush x:Key="Blue300Brush" Color="{StaticResource Blue500}" />
     <SolidColorBrush x:Key="Blue400Brush" Color="{StaticResource Blue400}" />
-    <SolidColorBrush x:Key="Blue500Brush" Color="{StaticResource Blue500}" />
+    <SolidColorBrush x:Key="Blue500Brush" Color="{StaticResource Blue600}" />   
+    <SolidColorBrush x:Key="Blue600Brush" Color="{StaticResource Blue800}" />
+    <SolidColorBrush x:Key="Blue700Brush" Color="{StaticResource Blue900}" />
 </ResourceDictionary>

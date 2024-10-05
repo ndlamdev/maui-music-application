@@ -13,7 +13,7 @@
                 Style="{StaticResource AppName}">
                 <Label.Shadow>
                     <Shadow
-                        Brush="#29ECEF"
+                        Brush="{StaticResource Blue400}"
                         Offset="0,8"
                         Opacity="0.5" />
                 </Label.Shadow>
@@ -23,7 +23,7 @@
                 Style="{StaticResource AppName}">
                 <Label.Shadow>
                     <Shadow
-                        Brush="#29ECEF"
+                        Brush="{StaticResource Blue400}"
                         Offset="0,-8"
                         Opacity="0.5" />
                 </Label.Shadow>
@@ -33,7 +33,7 @@
                 Style="{StaticResource AppName}">
                 <Label.Shadow>
                     <Shadow
-                        Brush="#29ECEF"
+                        Brush="{StaticResource Blue400}"
                         Offset="8,0"
                         Opacity="0.5" />
                 </Label.Shadow>
@@ -43,7 +43,7 @@
                 Style="{StaticResource AppName}">
                 <Label.Shadow>
                     <Shadow
-                        Brush="#29ECEF"
+                        Brush="{StaticResource Blue400}"
                         Offset="-8,0"
                         Opacity="0.5" />
                 </Label.Shadow>
