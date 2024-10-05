@@ -119,10 +119,4 @@
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
         <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Data\" />
-      <Folder Include="ViewModels\" />
-      <Folder Include="Views\Components\" />
-    </ItemGroup>
 </Project>

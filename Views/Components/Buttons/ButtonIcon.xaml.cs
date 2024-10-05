@@ -41,4 +41,10 @@ public partial class ButtonIcon
     {
         set => Image.Source = value;
     }
+    
+    public double Spacing
+    {
+        set => StackLayout.Spacing = value;
+    }
+
 }
