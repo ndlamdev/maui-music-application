@@ -8,12 +8,12 @@ using Java.Security;
 
 namespace maui_music_application.Helpers;
 
-public class RandomColorGenerator
+public static class RandomColorGenerator
 {
-    private static readonly SecureRandom _random = new SecureRandom();
+    private static readonly SecureRandom Random = new SecureRandom();
 
     public static Color GetRandomColor()
     {
-        return Color.FromRgb(_random.NextInt(256), _random.NextInt(256), _random.NextInt(256));
+        return Color.FromRgb(Random.NextInt(256), Random.NextInt(256), Random.NextInt(256));
     }
 }

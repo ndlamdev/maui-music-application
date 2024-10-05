@@ -6,7 +6,7 @@
 
 using maui_music_application.Helpers;
 
-namespace maui_music_application.Components.Buttons;
+namespace maui_music_application.Views.Components.Buttons;
 
 public partial class ButtonIconCircle
 {

@@ -5,10 +5,10 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Components.Categories;
-using maui_music_application.Layouts;
+using maui_music_application.Views.Components.Categories;
+using maui_music_application.Views.Layouts;
 
-namespace maui_music_application.Adapters;
+namespace maui_music_application.Views.Adapters;
 
 using PlayListMusicLargeModel = Models.PlayListMusicLarge;
 using PlayListMusicLargeView = PlayListMusicLarge;

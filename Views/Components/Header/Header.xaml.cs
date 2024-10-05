@@ -1,6 +1,6 @@
 using maui_music_application.ViewModels;
 
-namespace maui_music_application.Components.Header;
+namespace maui_music_application.Views.Components.Header;
 
 public partial class Header : ContentView
 {

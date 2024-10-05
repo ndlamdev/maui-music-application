@@ -2,12 +2,12 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Components.Header.Header"
-             xmlns:avatar="clr-namespace:maui_music_application.Components.Avatar"
-             xmlns:buttons="clr-namespace:maui_music_application.Components.Buttons"
+             x:Class="maui_music_application.Views.Components.Header.Header"
              xmlns:vm="clr-namespace:maui_music_application.ViewModels"
              xmlns:convert="clr-namespace:maui_music_application.Helpers.Converter"
-             xmlns:logo="clr-namespace:maui_music_application.Components.Logo">
+             xmlns:avatar="clr-namespace:maui_music_application.Views.Components.Avatar"
+             xmlns:logo="clr-namespace:maui_music_application.Views.Components.Logo"
+             xmlns:buttons1="clr-namespace:maui_music_application.Views.Components.Buttons">
 
     <!-- Binding with view models -->
     <ContentPage.BindingContext>
@@ -36,15 +36,15 @@
                 </StackLayout>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
-                <buttons:ButtonIcon
+                <buttons1:ButtonIcon
                     Icon="status.svg"
                     Spacing="0"
                     SizeIcon="20" />
-                <buttons:ButtonIcon
+                <buttons1:ButtonIcon
                     Icon="bell.svg"
                     Spacing="0"
                     SizeIcon="20" />
-                <buttons:ButtonIcon
+                <buttons1:ButtonIcon
                     Icon="settings.svg"
                     Spacing="0"
                     SizeIcon="20" />

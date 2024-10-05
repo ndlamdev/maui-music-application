@@ -5,7 +5,7 @@
 // User: Lam Nguyen
 
 
-namespace maui_music_application.Layouts;
+namespace maui_music_application.Views.Layouts;
 
 public partial class GridLayout
 {

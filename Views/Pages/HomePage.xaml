@@ -2,11 +2,11 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons1="clr-namespace:maui_music_application.Components.Buttons"
-             xmlns:layouts="clr-namespace:maui_music_application.Layouts"
-             xmlns:musics="clr-namespace:maui_music_application.Components.Musics"
-             xmlns:header="clr-namespace:maui_music_application.Components.Header"
-             x:Class="maui_music_application.Pages.HomePage"
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
+             xmlns:musics1="clr-namespace:maui_music_application.Views.Components.Musics"
+             xmlns:header="clr-namespace:maui_music_application.Views.Components.Header"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             x:Class="maui_music_application.Views.Pages.HomePage"
              BackgroundColor="{DynamicResource BackgroundDark}">
     <VerticalStackLayout
         Padding="30,0"
@@ -21,36 +21,36 @@
             Text="Click me"
             SemanticProperties.Hint="Counts the number of times you click"
             HorizontalOptions="Fill" />
-        <musics:Process
+        <musics1:Process
             x:Name="Process" />
-        <buttons1:ButtonIconCircle
+        <buttons:ButtonIconCircle
             Clicked="OnCounterClicked"
             Icon="add.svg"
             Title="Add New Playlist" />
-        <buttons1:ButtonIcon
+        <buttons:ButtonIcon
             Clicked="OnCounterClicked"
             Icon="add.svg"
             Title="Add New Playlist" />
-        <buttons1:ButtonIconCircle
+        <buttons:ButtonIconCircle
             x:Name="ButtonControlMusic"
             Clicked="StartMusic"
             Icon="pause_white.svg" />
-        <buttons1:ButtonIconCircle
+        <buttons:ButtonIconCircle
             Clicked="OnCounterClicked"
             Icon="heart.svg"
             Title="Your Liked Songs" />
-        <buttons1:ButtonBorder
+        <buttons:ButtonBorder
             Clicked="OnCounterClicked"
             Text="CLEAR QUEUE"
             ColorButton="Aqua"
             FontSize="12" />
-        <buttons1:ButtonPaddingBottom
+        <buttons:ButtonPaddingBottom
             Clicked="OnCounterClicked"
             Text="Folders"
             FontSize="12"
             TextColor="White"
             PaddingBottom="10" />
-        <buttons1:ButtonBorderShadow
+        <buttons:ButtonBorderShadow
             Clicked="OnCounterClicked"
             Text="Create"
             FontSize="16" />
@@ -77,16 +77,16 @@
             Rows="1"
             Orientation="Horizontal"
             ColumnSpacing="30" />
-        <buttons1:ButtonSign Icon="dotnet_bot.png"
+        <buttons:ButtonSign Icon="dotnet_bot.png"
                              Title="Continue with Google"
                              Clicked="OnCounterClicked" />
-        <buttons1:ButtonSign Icon="dotnet_bot.png"
+        <buttons:ButtonSign Icon="dotnet_bot.png"
                              Title="Continue with Facebook"
                              Clicked="OnCounterClicked" />
-        <buttons1:ButtonSign Icon="dotnet_bot.png"
+        <buttons:ButtonSign Icon="dotnet_bot.png"
                              Title="Continue with Apple"
                              Clicked="OnCounterClicked" />
-        <musics:MusicInPlayList />
+        <musics1:MusicInPlayList />
         <layouts:GridLayout
             x:Name="MusicInTop"
             Columns="1"

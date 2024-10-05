@@ -2,7 +2,7 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Components.Buttons.ButtonSign">
+             x:Class="maui_music_application.Views.Components.Buttons.ButtonSign">
     <Frame x:Name="Frame" CornerRadius="16" 
            BorderColor="#DBE7E8" 
            BackgroundColor="#1E1E1E"

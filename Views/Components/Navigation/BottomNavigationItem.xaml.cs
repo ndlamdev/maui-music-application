@@ -6,7 +6,7 @@
 
 using maui_music_application.Helpers;
 
-namespace maui_music_application.Components.Navigation;
+namespace maui_music_application.Views.Components.Navigation;
 
 public partial class BottomNavigationItem
 {
