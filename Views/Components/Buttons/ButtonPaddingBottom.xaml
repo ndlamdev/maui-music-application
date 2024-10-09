@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             x:Class="maui_music_application.Views.Components.Buttons.ButtonPaddingBottom"
+             x:DataType="buttons:ButtonPaddingBottom">
+    <Button CornerRadius="9999"
+            x:Name="Button"
+            Text="{Binding Text}"
+            TextColor="{Binding TextColor}"
+            FontSize="{Binding FontSize}"
+            FontFamily="CenturyGothic"
+            HorizontalOptions="CenterAndExpand"
+            Padding="20, 0"
+            Clicked="Button_OnClicked"
+            Background="{StaticResource ButtonActive}">
+    </Button>
+</ContentView>
