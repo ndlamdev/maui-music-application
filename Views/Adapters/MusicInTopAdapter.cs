@@ -5,10 +5,10 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Layouts;
+using maui_music_application.Views.Layouts;
 using MusicInTop = maui_music_application.Models.MusicInTop;
 
-namespace maui_music_application.Adapters;
+namespace maui_music_application.Views.Adapters;
 
 using MusicInTopModel = MusicInTop;
 using MusicInTopView = Components.Musics.MusicInTop;

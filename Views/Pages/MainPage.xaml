@@ -2,8 +2,8 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Pages.MainPage"
-             xmlns:navigation="clr-namespace:maui_music_application.Components.Navigation">
+             x:Class="maui_music_application.Views.Pages.MainPage"
+             xmlns:navigation1="clr-namespace:maui_music_application.Views.Components.Navigation">
 
     <AbsoluteLayout
         BackgroundColor="{StaticResource Background}">
@@ -13,7 +13,7 @@
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             x:Name="Container"
             Margin="0, 0, 0, 100" />
-        <navigation:BottomNavigation
+        <navigation1:BottomNavigation
             AbsoluteLayout.LayoutFlags="YProportional, WidthProportional"
             AbsoluteLayout.LayoutBounds="0, 1, 1, 200"
             x:Name="BottomNavigation" IconSelected="0" />

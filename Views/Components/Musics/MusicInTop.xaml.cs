@@ -6,7 +6,7 @@
 
 using maui_music_application.Helpers;
 
-namespace maui_music_application.Components.Musics;
+namespace maui_music_application.Views.Components.Musics;
 
 public partial class MusicInTop
 {

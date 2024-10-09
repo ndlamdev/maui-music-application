@@ -1,7 +1,7 @@
 using maui_music_application.Helpers;
 using Microsoft.Maui.Controls.Shapes;
 
-namespace maui_music_application.Components.Avatar;
+namespace maui_music_application.Views.Components.Avatar;
 
 public partial class Avatar : ContentView
 {

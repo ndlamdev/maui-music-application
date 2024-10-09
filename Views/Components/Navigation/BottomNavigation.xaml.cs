@@ -4,7 +4,7 @@
 // Create at: 13:09:02 - 24/09/2024
 // User: Lam Nguyen
 
-namespace maui_music_application.Components.Navigation;
+namespace maui_music_application.Views.Components.Navigation;
 
 public partial class BottomNavigation
 {

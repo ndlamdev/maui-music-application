@@ -4,13 +4,14 @@
 // Create at: 14:09:12 - 22/09/2024
 // User: Lam Nguyen
 
-namespace maui_music_application.Components.Buttons;
+namespace maui_music_application.Views.Components.Buttons;
 
 public partial class ButtonBorderShadow
 {
     private string _text = "";
     public event EventHandler? Clicked;
     private double _fontSize = 12;
+    private Thickness _paddingButton = new(14, 18);
     private Color _textColor = Colors.White;
 
     public ButtonBorderShadow()
@@ -41,19 +42,24 @@ public partial class ButtonBorderShadow
 
     public Thickness PaddingButton
     {
-        set => Button.Padding = value;
+        get => _paddingButton;
+        set
+        {
+            _paddingButton = value;
+            OnPropertyChanged(nameof(PaddingButton));
+        }
     }
 
     public Color TextColor
     {
         get => _textColor;
+
         set
         {
             this._textColor = value;
             OnPropertyChanged(nameof(TextColor));
         }
     }
-
 
     private void Button_OnClicked(object? sender, EventArgs e)
     {

@@ -2,29 +2,23 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Components.Buttons.ButtonBorderShadow"
-             xmlns:buttons="clr-namespace:maui_music_application.Components.Buttons"
-             x:DataType="buttons:ButtonBorderShadow">
+             x:Class="maui_music_application.Views.Components.Buttons.ButtonBorderShadow"
+             xmlns:buttons1="clr-namespace:maui_music_application.Views.Components.Buttons"
+             x:DataType="buttons1:ButtonBorderShadow">
     <Button CornerRadius="9999"
-            x:Name="Button"
             Text="{Binding Text}"
             TextColor="{Binding TextColor}"
             FontSize="{Binding FontSize}"
             FontFamily="CenturyGothic"
             FontAttributes="Bold"
-            Padding="14, 4"
-            BackgroundColor="#06A0B5"
+            Padding="{Binding PaddingButton}"
+            BackgroundColor="{StaticResource Blue800}"
             Clicked="Button_OnClicked">
         <Button.Shadow>
-            <Shadow Opacity="0.8">
-                <Shadow.Offset>
-                    <Point X="0" Y="0" />
-                </Shadow.Offset>
-                <Shadow.Radius>99999</Shadow.Radius>
-                <Shadow.Brush>
-                    <Color>#06A0B5</Color>
-                </Shadow.Brush>
-            </Shadow>
+            <Shadow Opacity="0.8"
+                    Brush="{StaticResource Blue800}"
+                    Offset="0,0"
+                    Radius="999999" />
         </Button.Shadow>
     </Button>
 </ContentView>

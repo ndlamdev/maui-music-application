@@ -1,6 +1,6 @@
-﻿namespace maui_music_application;
+﻿using maui_music_application.Views.Pages;
 
-using Pages;
+namespace maui_music_application;
 
 public partial class App : Application
 {
@@ -8,6 +8,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new MainPage();
+        MainPage = new WelcomePage();
     }
 }

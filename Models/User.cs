@@ -1,12 +1,10 @@
-using maui_music_application.Components.Avatar;
-
 namespace maui_music_application.Models;
 
 public class User
 {
-    private string avatar;
-    private string name;
-    private string email;
+    private string _avatar;
+    private string _name;
+    private string _email;
 
     public User()
     {
@@ -14,26 +12,26 @@ public class User
 
     public User(string avatar, string name, string email)
     {
-        this.avatar = avatar;
-        this.name = name;
-        this.email = email;
+        this._avatar = avatar;
+        this._name = name;
+        this._email = email;
     }
 
     public string Avatar
     {
-        get => avatar;
-        set => avatar = value;
+        get => _avatar;
+        set => _avatar = value;
     }
 
     public string Name
     {
-        get => name;
-        set => name = value;
+        get => _name;
+        set => _name = value;
     }
 
     public string Email
     {
-        get => email;
-        set => email = value;
+        get => _email;
+        set => _email = value;
     }
 }

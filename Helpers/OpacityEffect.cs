@@ -6,7 +6,7 @@
 
 namespace maui_music_application.Helpers;
 
-public class OpacityEffect
+public static class OpacityEffect
 {
     public static async Task RunOpacity(View view, uint duration)
     {

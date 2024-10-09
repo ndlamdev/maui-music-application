@@ -4,11 +4,11 @@
 // Create at: 09:09:07 - 21/09/2024
 // User: Lam Nguyen
 
-using maui_music_application.Adapters;
 using maui_music_application.Models;
+using maui_music_application.Views.Adapters;
 using MusicInTop = maui_music_application.Models.MusicInTop;
 
-namespace maui_music_application.Pages;
+namespace maui_music_application.Views.Pages;
 
 public partial class HomePage
 {
