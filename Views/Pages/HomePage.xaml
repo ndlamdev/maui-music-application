@@ -52,8 +52,7 @@
             PaddingBottom="10" />
         <buttons:ButtonBorderShadow
             Clicked="OnCounterClicked"
-            Text="Create"
-            FontSize="16" />
+            Text="Create" />
         <layouts:GridLayout
             x:Name="KindMusic"
             Columns="2"
@@ -78,14 +77,14 @@
             Orientation="Horizontal"
             ColumnSpacing="30" />
         <buttons:ButtonSign Icon="dotnet_bot.png"
-                             Title="Continue with Google"
-                             Clicked="OnCounterClicked" />
+                            Title="Continue with Google"
+                            Clicked="OnCounterClicked" />
         <buttons:ButtonSign Icon="dotnet_bot.png"
-                             Title="Continue with Facebook"
-                             Clicked="OnCounterClicked" />
+                            Title="Continue with Facebook"
+                            Clicked="OnCounterClicked" />
         <buttons:ButtonSign Icon="dotnet_bot.png"
-                             Title="Continue with Apple"
-                             Clicked="OnCounterClicked" />
+                            Title="Continue with Apple"
+                            Clicked="OnCounterClicked" />
         <musics1:MusicInPlayList />
         <layouts:GridLayout
             x:Name="MusicInTop"

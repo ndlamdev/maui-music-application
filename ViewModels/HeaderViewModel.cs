@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Android.Util;
 using maui_music_application.Data;
 using maui_music_application.Helpers;
@@ -9,11 +10,7 @@ namespace maui_music_application.ViewModels;
 
 public class HeaderViewModel : INotifyPropertyChanged
 {
-    UserService _userService;
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected void OnPropertyChanged(string propertyName) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    private readonly UserService _userService;
 
     private bool _hasUser;
 
@@ -23,7 +20,7 @@ public class HeaderViewModel : INotifyPropertyChanged
         set
         {
             _hasUser = value;
-            OnPropertyChanged(nameof(HasUser)); // Notify the UI about the change
+            OnPropertyChanged(); // Notify the UI about the change
         }
     }
 
@@ -39,7 +36,7 @@ public class HeaderViewModel : INotifyPropertyChanged
             if (_user != value)
             {
                 _user = value;
-                OnPropertyChanged(nameof(User)); // Notify the UI about the change
+                OnPropertyChanged(); // Notify the UI about the change
             }
         }
     }
@@ -62,5 +59,12 @@ public class HeaderViewModel : INotifyPropertyChanged
             // Log the error for debugging purposes
             Log.Error($"Error checking user account status: {ex.Message}", ex.StackTrace);
         }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
