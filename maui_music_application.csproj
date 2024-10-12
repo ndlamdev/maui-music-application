@@ -117,6 +117,7 @@
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
+        <AdditionalFiles Include="Views\Icons\ArrowLeft.xaml" />
         <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
 </Project>
