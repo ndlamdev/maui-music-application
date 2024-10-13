@@ -6,7 +6,7 @@
              xmlns:view="clr-namespace:maui_music_application.Views.Components.Form"
              x:DataType="view:Input">
     <Border Style="{StaticResource Input}">
-        <FlexLayout Direction="Row" AlignItems="Center">
+        <FlexLayout Direction="Row" AlignItems="Center" HorizontalOptions="Center">
             <Image
                 x:Name="ImageIconLeft"
                 Source="{Binding IconLeft}"
@@ -17,6 +17,7 @@
                 </Image.GestureRecognizers>
             </Image>
             <Entry
+                x:Name="InputEntry"
                 Placeholder="{Binding Placeholder}"
                 Text="{Binding Text}"
                 PlaceholderColor="White"
@@ -24,7 +25,8 @@
                 IsPassword="{Binding ShowPassword}"
                 FlexLayout.Grow="1"
                 FlexLayout.Basis="1"
-                FontSize="{Binding FontSize}"/>
+                FontSize="{Binding FontSize}"
+                TextChanged="InputView_OnTextChanged" />
             <Image
                 x:Name="ImageIconRight"
                 Source="{Binding IconRight}"

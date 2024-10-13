@@ -1,5 +1,3 @@
-using Android.Util;
-
 namespace maui_music_application.Views.Components.Form;
 
 public partial class Input
@@ -64,6 +62,7 @@ public partial class Input
 
     public event EventHandler<TappedEventArgs>? IconLeftEvent;
     public event EventHandler<TappedEventArgs>? IconRightEvent;
+    public event EventHandler<TextChangedEventArgs>? TextChangeEvent;
 
     public string Text
     {
@@ -117,5 +116,16 @@ public partial class Input
             _size = value;
             OnPropertyChanged();
         }
+    }
+
+    private void InputView_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        TextChangeEvent?.Invoke(this, e);
+    }
+
+    public void Focus(bool focus)
+    {
+        if (focus) InputEntry.Focus();
+        else InputEntry.Unfocus();
     }
 }
