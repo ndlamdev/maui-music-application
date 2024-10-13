@@ -8,6 +8,7 @@ public partial class Input
     private ImageSource? _iconLeft, _iconRight;
     private Thickness _marginEntry = new(0);
     private bool _isPassword, _showPassword = true;
+    private double _size = 16;
     private const string IconShowPassword = "eye_opened.svg", IconHidePassword = "eye_closed.svg";
 
     public Input()
@@ -104,6 +105,16 @@ public partial class Input
             if (!IsPassword) return;
             _showPassword = value;
             IconRight = ShowPassword ? IconHidePassword : IconShowPassword;
+            OnPropertyChanged();
+        }
+    }
+
+    public double FontSize
+    {
+        get => _size;
+        set
+        {
+            _size = value;
             OnPropertyChanged();
         }
     }

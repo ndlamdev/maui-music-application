@@ -23,7 +23,8 @@
                 Margin="{Binding MarginEntry}"
                 IsPassword="{Binding ShowPassword}"
                 FlexLayout.Grow="1"
-                FlexLayout.Basis="1" />
+                FlexLayout.Basis="1"
+                FontSize="{Binding FontSize}"/>
             <Image
                 x:Name="ImageIconRight"
                 Source="{Binding IconRight}"
