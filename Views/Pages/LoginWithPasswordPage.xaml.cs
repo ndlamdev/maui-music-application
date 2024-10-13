@@ -24,6 +24,8 @@ public partial class LoginWithPasswordPage
         TodoAttribute.PrintTask<LoginWithPasswordPage>();
     }
 
+
+
     [Todo("Handle action click button login with password")]
     private void LoginWithPassword_OnClicked(object? sender, EventArgs e)
     {
