@@ -29,7 +29,7 @@
             </AbsoluteLayout>
             <Label
                 Text="Let’s get you in"
-                FontSize="44"
+                FontSize="35"
                 Padding="0, 30" />
             <VerticalStackLayout Spacing="20">
                 <button:ButtonSign

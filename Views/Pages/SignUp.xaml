@@ -30,7 +30,7 @@
             </AbsoluteLayout>
             <Label
                 Text="Create your account"
-                FontSize="44"
+                FontSize="35"
                 Padding="0, 30" />
             <VerticalStackLayout Spacing="20">
                 <form:Input

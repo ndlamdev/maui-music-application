@@ -87,7 +87,10 @@
         <MauiXaml Update="Views\Pages\SignUp.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Pages\ForgetPassword.xaml">
+        <MauiXaml Update="Views\Pages\ForgetPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\VerifyCodePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
@@ -121,8 +124,12 @@
           <DependentUpon>SignUp.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\ForgetPassword.xaml.cs">
+        <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
           <DependentUpon>ForgetPassword.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\VerifyCodePage.xaml.cs">
+          <DependentUpon>VerifyCodePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
