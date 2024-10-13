@@ -94,7 +94,7 @@ public partial class HomePage
     private void MusicInPlayList_OnOnScroll(object? sender, ScrolledEventArgs e)
     {
         var scrollView = sender as ScrollView;
-        if (e.ScrollY >= (scrollView.ContentSize.Height - 50 - scrollView.Height))
+        if (e.ScrollY >= (scrollView!.ContentSize.Height - 50 - scrollView.Height))
         {
             MusicInPlayList.AddElement(DataDemo.MusicInPlayLists);
         }

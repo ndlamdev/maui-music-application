@@ -45,7 +45,7 @@ public class HeaderViewModel : INotifyPropertyChanged
     public HeaderViewModel()
     {
         _userService = new UserService();
-        LoadDataAsync();
+        _ = LoadDataAsync();
     }
 
     private async Task LoadDataAsync()
@@ -57,7 +57,7 @@ public class HeaderViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             // Log the error for debugging purposes
-            Log.Error($"Error checking user account status: {ex.Message}", ex.StackTrace);
+            Log.Error($"Error checking user account status: {ex.Message}", ex.StackTrace ?? "");
         }
     }
 

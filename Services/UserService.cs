@@ -1,29 +1,22 @@
 using maui_music_application.Data;
-using maui_music_application.Helpers;
-using maui_music_application.Models;
 
 namespace maui_music_application.Services;
 
 public class UserService : IUserService
 {
-    private ISecureStorageService _secureStorageService;
+    private ISecureStorageService _secureStorageService = new SecureStorageService();
 
-    public UserService()
-    {
-        _secureStorageService = new SecureStorageService();
-    }
-
-    public async Task<bool> CheckIfUserHasAccount()
+    public Task<bool> CheckIfUserHasAccount()
     {
         try
         {
             // Về sau sẽ thay thế bằng kiểm tra token
             // return await _secureStorageService.isKeyPresent(AppConstraint.User);
-            return HeaderData.Logined;
+            return Task.FromResult(HeaderData.Logined);
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            return false;
+            return Task.FromResult(false);
         }
     }
 
