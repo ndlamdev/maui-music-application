@@ -81,6 +81,9 @@
         <MauiXaml Update="Views\Layouts\GridLayout.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Pages\LoginWithPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -101,6 +104,13 @@
           <DependentUpon>GridLayout.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Pages\LoginWithPasswordPage.xaml.cs">
+          <DependentUpon>LoginWithPasswordPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
+          <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -117,7 +127,6 @@
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
-        <AdditionalFiles Include="Views\Icons\ArrowLeft.xaml" />
         <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
 </Project>

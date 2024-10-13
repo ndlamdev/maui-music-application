@@ -1,5 +1,6 @@
 using Android.Util;
 using maui_music_application.Attributes;
+using maui_music_application.Helpers;
 
 namespace maui_music_application.Views.Pages;
 
@@ -41,8 +42,9 @@ public partial class LoginPage
     }
 
     [Todo("Handle action click button login with password")]
-    private void LoginWithPassword_OnClicked(object? sender, EventArgs e)
+    private async void LoginWithPassword_OnClicked(object sender, EventArgs e)
     {
         TodoAttribute.PrintTask<LoginPage>();
+        await OpacityEffect.RunOpacity((View)sender, 100);
     }
 }

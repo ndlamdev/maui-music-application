@@ -39,12 +39,12 @@ public partial class Avatar : ContentView
     }
 
 
-    public double Width
+    public new double Width
     {
         set => Border.WidthRequest = value;
     }
 
-    public double Height
+    public new double Height
     {
         set => Border.HeightRequest = value;
     }

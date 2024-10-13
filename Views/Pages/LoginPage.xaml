@@ -3,23 +3,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Pages.LoginPage"
-             xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons"
-             xmlns:icons="clr-namespace:maui_music_application.Views.Icons">
+             xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons">
     <ScrollView
         VerticalScrollBarVisibility="Never"
         Orientation="Vertical"
         VerticalOptions="Center">
         <VerticalStackLayout
             HorizontalOptions="Center"
-            Padding="25, 0">
+            Padding="25, 50">
             <AbsoluteLayout>
-                <icons:ArrowLeft
-                    Stroke="{StaticResource White}"
-                    StrokeThickness="2.5">
-                    <icons:ArrowLeft.GestureRecognizers>
+                <Image Source="arrow_left_white.svg" WidthRequest="25" HeightRequest="25">
+                    <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="BackTapped" />
-                    </icons:ArrowLeft.GestureRecognizers>
-                </icons:ArrowLeft>
+                    </Image.GestureRecognizers>
+                </Image>
                 <FlexLayout
                     JustifyContent="Center"
                     AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
@@ -74,7 +71,7 @@
             </ContentView>
             <button:ButtonBorderShadow
                 Text="Log in with a password"
-                Clicked="LoginWithPassword_OnClicked"/>
+                Clicked="LoginWithPassword_OnClicked" />
             <HorizontalStackLayout
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
