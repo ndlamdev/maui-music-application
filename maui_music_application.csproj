@@ -84,6 +84,12 @@
         <MauiXaml Update="Views\Pages\LoginWithPasswordPage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Pages\SignUp.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\ForgetPassword.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -110,6 +116,14 @@
         </Compile>
         <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
           <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+        </Compile>
+        <Compile Update="Views\Pages\SignUp.xaml.cs">
+          <DependentUpon>SignUp.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\ForgetPassword.xaml.cs">
+          <DependentUpon>ForgetPassword.xaml</DependentUpon>
+          <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
 

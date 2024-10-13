@@ -4,7 +4,7 @@ namespace maui_music_application.Views.Components.Form;
 
 public partial class Input
 {
-    private string? _placeholder, _text;
+    private string _placeholder = "", _text = "";
     private ImageSource? _iconLeft, _iconRight;
     private Thickness _marginEntry = new(0);
     private bool _isPassword, _showPassword = true;
@@ -64,7 +64,7 @@ public partial class Input
     public event EventHandler<TappedEventArgs>? IconLeftEvent;
     public event EventHandler<TappedEventArgs>? IconRightEvent;
 
-    public string? Text
+    public string Text
     {
         get => _text;
         set
@@ -74,7 +74,7 @@ public partial class Input
         }
     }
 
-    public string? Placeholder
+    public string Placeholder
     {
         get => _placeholder;
         set

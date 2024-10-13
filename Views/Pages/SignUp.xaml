@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.SignUp"
+             xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:form="clr-namespace:maui_music_application.Views.Components.Form">
+    <ScrollView
+        VerticalScrollBarVisibility="Never"
+        Orientation="Vertical"
+        VerticalOptions="Center">
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            Padding="25, 50">
+            <AbsoluteLayout>
+                <Image Source="arrow_left_white.svg" WidthRequest="25" HeightRequest="25">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <FlexLayout
+                    JustifyContent="Center"
+                    AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                    AbsoluteLayout.LayoutBounds="0,0,1,200">
+                    <Image
+                        Source="musium.png"
+                        WidthRequest="200"
+                        HeightRequest="200" />
+                </FlexLayout>
+            </AbsoluteLayout>
+            <Label
+                Text="Create your account"
+                FontSize="44"
+                Padding="0, 30" />
+            <VerticalStackLayout Spacing="20">
+                <form:Input
+                    x:Name="EntryEmail"
+                    IconLeft="letter.svg"
+                    Placeholder="Email" />
+                <form:Input
+                    x:Name="EntryPassword"
+                    IconLeft="lock.svg"
+                    Placeholder="Password"
+                    IsPassword="True" />
+                <form:Input
+                    x:Name="EntryConfirmPassword"
+                    IconLeft="lock.svg"
+                    Placeholder="Confirm Password"
+                    IsPassword="True" />
+            </VerticalStackLayout>
+            <button:ButtonBorderShadow
+                Text="Sign up"
+                Clicked="SignUp_OnClicked"
+                Margin="0, 35, 0, 0" />
+            <ContentView Padding="0, 35">
+                <AbsoluteLayout>
+                    <Line
+                        Y1="9"
+                        X2="150000"
+                        Y2="9"
+                        StrokeThickness="2"
+                        Stroke="{StaticResource White}"
+                        AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                        AbsoluteLayout.LayoutBounds="0,0,1,20" />
+                    <FlexLayout
+                        AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                        AbsoluteLayout.LayoutBounds="0,0,1,20"
+                        JustifyContent="Center"
+                        AlignItems="Center">
+                        <Label
+                            Text="Or"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            WidthRequest="50"
+                            BackgroundColor="{StaticResource PrimaryDark}" />
+                    </FlexLayout>
+                </AbsoluteLayout>
+            </ContentView>
+            <HorizontalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label
+                    Text="Have an account? " />
+                <Label
+                    Text="Login"
+                    TextColor="{StaticResource Blue300}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SignInTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
