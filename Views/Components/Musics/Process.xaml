@@ -33,7 +33,7 @@
             <Label
                 FlexLayout.Grow="1"
                 x:Name="TimeEndProgressLabel"
-                Text="00:00"
+                Text="{Binding TextDuration}"
                 FontFamily="CenturyGothic"
                 TextColor="{DynamicResource Text2}"
                 HorizontalOptions="End"

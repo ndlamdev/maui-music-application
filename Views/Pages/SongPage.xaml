@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.SongPage"
+             xmlns:page="clr-namespace:maui_music_application.Views.Pages"
+             xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="page:SongPage"
+             x:Name="RootView">
+    <ScrollView>
+        <ScrollView.GestureRecognizers>
+            <PanGestureRecognizer PanUpdated="PanGestureRecognizer_OnPanUpdated" />
+        </ScrollView.GestureRecognizers>
+        <VerticalStackLayout
+            Padding="25"
+            HorizontalOptions="Center">
+            <FlexLayout
+                Direction="Row" JustifyContent="SpaceBetween"
+                AlignItems="Center"
+                HeightRequest="40">
+                <VerticalStackLayout>
+                    <Label
+                        FontFamily="MulishVariableFont"
+                        FontSize="15"
+                        Text="PLAYING FROM PLAYLIST:"
+                        TextColor="#B7B7B7" />
+                    <HorizontalStackLayout Spacing="5">
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Playlist_OnTapped" />
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <Label
+                            FontFamily="MulishVariableFont"
+                            FontSize="18"
+                            Text="{Binding PlayListName}"
+                            TextColor="{StaticResource Blue300}" />
+                        <Image
+                            Source="triangle_down.svg" WidthRequest="18" HeightRequest="18" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <Image
+                    Source="option_vertical.svg"
+                    WidthRequest="35"
+                    HeightRequest="35">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Option_OnTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </FlexLayout>
+            <Frame HeightRequest="300"
+                   WidthRequest="300"
+                   CornerRadius="5"
+                   BorderColor="{StaticResource NullBackground}"
+                   Margin="0, 40, 0, 25"
+                   Padding="0">
+                <Image
+                    Source="{Binding SongThumbnail}"
+                    Aspect="Fill" />
+            </Frame>
+            <Label
+                Text="{Binding SongName}"
+                FontSize="24"
+                FontFamily="MulishVariableFont" />
+            <FlexLayout Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        AlignItems="Center"
+                        Margin="0,15,0,35">
+                <Label
+                    Text="{Binding SingerName}" />
+                <HorizontalStackLayout Spacing="20">
+                    <Image
+                        Source="share.svg"
+                        WidthRequest="20"
+                        HeightRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Share_OnTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image
+                        Source="heart_blue.svg"
+                        WidthRequest="20"
+                        HeightRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Heart_OnTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </HorizontalStackLayout>
+            </FlexLayout>
+            <musics:Process
+                x:Name="Process" />
+            <FlexLayout JustifyContent="Center">
+                <buttons:ButtonIconCircle
+                    x:Name="PlayButton"
+                    Clicked="PlayMusicClicked"
+                    Icon="pause_white.svg"
+                    Spacing="0" />
+            </FlexLayout>
+            <toolkit:MediaElement
+                x:Name="MediaElement"
+                ShouldAutoPlay="True"
+                MediaEnded="MediaElement_OnMediaEnded"
+                MediaFailed="MediaElement_OnMediaFailed"
+                MediaOpened="MediaElement_OnMediaOpened"
+                SeekCompleted="MediaElement_OnSeekCompleted"
+                PositionChanged="MediaElement_OnPositionChanged" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

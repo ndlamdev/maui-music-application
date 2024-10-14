@@ -8,7 +8,7 @@ namespace maui_music_application.Views.Components.Musics;
 
 public partial class Process
 {
-    private double _timeEndProgress;
+    private double _duration;
     private double _width;
     private double _timeProgress;
     private const int PaddingProcess = 16;
@@ -26,31 +26,34 @@ public partial class Process
         get => _timeProgress;
         set
         {
-            if (value > _timeEndProgress) return;
+            if (value > _duration) return;
             _timeProgress = value;
-            var process = value / _timeEndProgress;
+            var process = value / _duration;
             OnPropertyChanged(nameof(TextTimeProcess));
             ProgressBar.ProgressTo(process, 500, Easing.SinInOut);
             DotProgressBard.TranslateTo((_width - PaddingProcess) * process - SizeDot, -12, 500, Easing.SinInOut);
+            OnPropertyChanged(nameof(TextTimeProcess));
         }
     }
 
-    public double TimeEndProgress
+    public double Duration
     {
         set
         {
-            _timeEndProgress = value;
+            _duration = value;
             TimeEndProgressLabel.Text = FormatTime(value);
+            OnPropertyChanged(nameof(TextDuration));
         }
     }
 
-    private string FormatTime(double time)
+    private static string FormatTime(double time)
     {
         var ts = TimeSpan.FromSeconds(time);
         return ts.ToString(@"mm\:ss");
     }
 
     public string TextTimeProcess => FormatTime(_timeProgress);
+    public string TextDuration => FormatTime(_duration);
 
     private void Layout_OnSizeChanged(object? sender, EventArgs e)
     {

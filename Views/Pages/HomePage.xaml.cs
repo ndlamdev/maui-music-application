@@ -32,7 +32,7 @@ public partial class HomePage
             Process.TimeProgress += 1;
             if (Process.TimeProgress > 60 * 5) _timer.Stop();
         };
-        Process.TimeEndProgress = 60 * 5;
+        Process.Duration = 60 * 5;
     }
 
     private void OnCounterClicked(object sender, EventArgs e)
@@ -78,7 +78,7 @@ public partial class HomePage
     private void StartMusic(object? sender, EventArgs e)
     {
         _timer!.Enabled = true;
-        ButtonControlMusic.Icon = "play_white.svg";
+        ButtonControlMusic.Icon = "pause_white.svg";
         ButtonControlMusic.Clicked -= StartMusic;
         ButtonControlMusic.Clicked += PauseMusic;
     }
@@ -86,7 +86,7 @@ public partial class HomePage
     private void PauseMusic(object? sender, EventArgs e)
     {
         _timer!.Enabled = false;
-        ButtonControlMusic.Icon = "pause_white.svg";
+        ButtonControlMusic.Icon = "play_white.svg";
         ButtonControlMusic.Clicked -= PauseMusic;
         ButtonControlMusic.Clicked += StartMusic;
     }

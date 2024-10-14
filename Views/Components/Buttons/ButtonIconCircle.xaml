@@ -10,7 +10,7 @@
         <TapGestureRecognizer Tapped="Button_Clicked" />
     </ContentView.GestureRecognizers>
     <HorizontalStackLayout
-        Spacing="25"
+        Spacing="{Binding Spacing}"
         HorizontalOptions="Start"
         VerticalOptions="Center">
         <Frame
