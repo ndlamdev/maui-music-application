@@ -17,5 +17,5 @@
         BorderColor="{Binding ColorButton}"
         BorderWidth="1"
         HorizontalOptions="CenterAndExpand"
-        Padding="14, 4" />
+        Padding="20, 4" />
 </ContentView>

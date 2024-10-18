@@ -2,10 +2,76 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.LibraryPage">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Label Text="Library page" />
-        </VerticalStackLayout>
-    </ScrollView>
+             x:Class="maui_music_application.Views.Pages.LibraryPage"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts">
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="25">
+        <FlexLayout
+            Direction="Row"
+            AlignItems="Center"
+            HeightRequest="50">
+            <HorizontalStackLayout
+                Spacing="15"
+                VerticalOptions="Center"
+                FlexLayout.Grow="1">
+                <Image
+                    Source="musium.png"
+                    WidthRequest="50"
+                    HeightRequest="50" />
+                <Label
+                    Text="Search"
+                    TextColor="{StaticResource Blue500}"
+                    FontSize="27"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <Image
+                Source="search.svg"
+                WidthRequest="25"
+                HeightRequest="25">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Search_OnTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </FlexLayout>
+        <ScrollView
+            Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Never">
+            <HorizontalStackLayout
+                Spacing="10">
+                <buttons:ButtonBorder
+                    Text="Folders" />
+                <buttons:ButtonBorder
+                    Text="Playlists" />
+                <buttons:ButtonBorder
+                    Text="Artists" />
+                <buttons:ButtonBorder
+                    Text="Albums" />
+                <buttons:ButtonBorder
+                    Text="Podcasts" />
+            </HorizontalStackLayout>
+        </ScrollView>
+        <buttons:ButtonIconCircle
+            Icon="add.svg"
+            Title="Add New Playlist" />
+        <buttons:ButtonIconCircle
+            Icon="heart.svg"
+            Title="Your Liked Songs" />
+        <HorizontalStackLayout
+            Spacing="5">
+            <Image
+                Source="swap.svg"
+                WidthRequest="25"
+                HeightRequest="25" />
+            <Label
+                Text="Recently played"
+                TextColor="#39C0D4" />
+        </HorizontalStackLayout>
+        <layouts:GridLayout
+            x:Name="RecentPlaylist"
+            RowSpacing="25"
+            Columns="1"
+            Orientation="Vertical" />
+    </VerticalStackLayout>
 </ContentView>
