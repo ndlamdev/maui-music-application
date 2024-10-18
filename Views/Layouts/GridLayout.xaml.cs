@@ -5,6 +5,8 @@
 // User: Lam Nguyen
 
 
+using Android.Util;
+
 namespace maui_music_application.Views.Layouts;
 
 public partial class GridLayout
@@ -22,8 +24,8 @@ public partial class GridLayout
 
     public void Adapter<T>(GridLayoutAdapter<T> adapter)
     {
-        if (_columns != -1) _rows = adapter.ListData.Length / _columns;
-        else _columns = adapter.ListData.Length / _rows;
+        if (_columns != -1) _rows = (int)Math.Ceiling((double)adapter.ListData.Length / _columns);
+        else _columns = (int)Math.Ceiling((double)adapter.ListData.Length / _rows);
         _adapter = adapter;
         LoadContent(adapter);
     }
@@ -35,13 +37,13 @@ public partial class GridLayout
         adapter.ListData = adapter.ListData.Concat(data).ToArray();
         if (_orientation == ScrollOrientation.Horizontal)
         {
-            var newColumn = adapter.ListData.Length / _rows;
+            var newColumn = (int)Math.Ceiling((double)adapter.ListData.Length / _rows);
             AddColumnDefinitions(newColumn - _columns);
             _columns = newColumn;
         }
         else if (_orientation == ScrollOrientation.Vertical)
         {
-            var newRows = adapter.ListData.Length / _columns;
+            var newRows = (int)Math.Ceiling((double)adapter.ListData.Length / _columns);
             AddRowDefinitions(newRows - _rows);
             _rows = newRows;
         }
@@ -75,9 +77,10 @@ public partial class GridLayout
         {
             for (var column = 0; column < _columns; column++)
             {
-                _currentColumn = column;
                 var index = _currentRow * _columns + column;
-                IView view = layoutAdapter.LoadContentView(index, data[index]);
+                if (index >= data.Length) return;
+                _currentColumn = column;
+                var view = layoutAdapter.LoadContentView(index, data[index]);
                 Grid.Add(view, column, _currentRow);
             }
         }
@@ -85,16 +88,17 @@ public partial class GridLayout
 
     private void LoadContentAdd<T>(GridLayoutAdapter<T> layoutAdapter)
     {
-        var temp = _currentColumn;
+        var temp = _currentColumn == _columns - 1 ? -1 : _currentColumn + 1;
         var data = layoutAdapter.ListData;
         for (; _currentRow < _rows; _currentRow++)
         {
             for (var column = temp != -1 ? temp : 0; column < _columns; column++)
             {
                 temp = -1;
-                _currentColumn = column;
                 var index = _currentRow * _columns + column;
-                IView view = layoutAdapter.LoadContentView(index, data[index]);
+                if (index >= data.Length) return;
+                _currentColumn = column;
+                var view = layoutAdapter.LoadContentView(index, data[index]);
                 Grid.Add(view, column, _currentRow);
             }
         }
@@ -111,7 +115,7 @@ public partial class GridLayout
 
     private void AddColumnDefinitions(int columns)
     {
-        for (int i = 0; i < columns; i++)
+        for (var i = 0; i < columns; i++)
         {
             Grid.ColumnDefinitions.Add(new ColumnDefinition());
         }
@@ -119,7 +123,7 @@ public partial class GridLayout
 
     private void AddRowDefinitions(int rows)
     {
-        for (int i = 0; i < rows; i++)
+        for (var i = 0; i < rows; i++)
         {
             Grid.RowDefinitions.Add(new RowDefinition());
         }
