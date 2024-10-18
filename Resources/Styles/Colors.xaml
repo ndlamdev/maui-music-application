@@ -52,7 +52,8 @@
     <Color x:Key="Icon3">#FFFFFF</Color>
 
     <LinearGradientBrush x:Key="BackgroundHeader" StartPoint="0,1" EndPoint="0,0">
-        <GradientStop Color="{StaticResource NullBackground}" />
+        <GradientStop Color="{StaticResource PrimaryDark}" />
+        <GradientStop Color="{StaticResource PrimaryDark}" Offset="0.8" />
         <GradientStop Color="#0F2C30" Offset="1.0" />
     </LinearGradientBrush>
 
