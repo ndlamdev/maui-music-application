@@ -8,23 +8,18 @@
     <VerticalStackLayout
         SizeChanged="Layout_OnSizeChanged"
         Padding="8, 0">
-        <ProgressBar
-            x:Name="ProgressBar"
-            Progress="0"
-            BackgroundColor="{DynamicResource NullBackground}"
-            HeightRequest="4"
-            ProgressColor="{StaticResource Blue300}" />
-        <Frame
-            x:Name="DotProgressBard"
-            CornerRadius="9999"
-            TranslationY="-12"
-            WidthRequest="4"
-            HeightRequest="4"
-            HorizontalOptions="Start"
-            BackgroundColor="{StaticResource Blue300}"
-            BorderColor="{DynamicResource NullBackground}" />
+        <Slider
+            x:Name="ProcessBar"
+            Scale="1.5"
+            WidthRequest="150"
+            MinimumTrackColor="{StaticResource Blue300}"
+            MaximumTrackColor="#88989B"
+            ThumbColor="{StaticResource Blue300}"
+            Maximum="200"
+            Value="100" />
         <FlexLayout
-            TranslationY="-5">
+            TranslationY="-5"
+            Margin="0, 20, 0, 0">
             <Label
                 Text="{Binding TextTimeProcess}"
                 FontFamily="CenturyGothic"

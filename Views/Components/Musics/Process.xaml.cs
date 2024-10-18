@@ -11,9 +11,6 @@ public partial class Process
     private double _duration;
     private double _width;
     private double _timeProgress;
-    private const int PaddingProcess = 16;
-    private const int SizeDot = 12;
-
 
     public Process()
     {
@@ -29,9 +26,6 @@ public partial class Process
             if (value > _duration) return;
             _timeProgress = value;
             var process = value / _duration;
-            OnPropertyChanged(nameof(TextTimeProcess));
-            ProgressBar.ProgressTo(process, 500, Easing.SinInOut);
-            DotProgressBard.TranslateTo((_width - PaddingProcess) * process - SizeDot, -12, 500, Easing.SinInOut);
             OnPropertyChanged(nameof(TextTimeProcess));
         }
     }
@@ -59,6 +53,7 @@ public partial class Process
     {
         if (sender == null) return;
         if (sender is VerticalStackLayout layout) _width = layout.Width;
+        ProcessBar.WidthRequest = _width / 1.37;
         TimeProgress = _timeProgress;
     }
 }
