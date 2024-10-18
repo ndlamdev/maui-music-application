@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Components.Form.Search">
+    <Border
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="20" />
+        </Border.StrokeShape>
+        <FlexLayout
+            BackgroundColor="#D9D9D9"
+            VerticalOptions="Center"
+            Direction="Row"
+            AlignItems="Center"
+            Padding="10"
+            HeightRequest="50">
+            <Image
+                Source="search_browser.svg"
+                WidthRequest="25"
+                HeightRequest="25"
+                Margin="8, 0, 3, 0" />
+            <Entry
+                Placeholder="Songs, Artists, Podcasts &amp; More"
+                PlaceholderColor="#8A9A9D"
+                FlexLayout.Grow="1"
+                FlexLayout.Basis="1"
+                TextColor="Black"
+                TextChanged="InputView_OnTextChanged"/>
+        </FlexLayout>
+    </Border>
+</ContentView>
