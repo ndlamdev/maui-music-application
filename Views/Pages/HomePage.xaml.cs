@@ -12,92 +12,18 @@ namespace maui_music_application.Views.Pages;
 
 public partial class HomePage
 {
-    int _count;
-    private System.Timers.Timer? _timer;
-
-
     public HomePage()
     {
         InitializeComponent();
         BindingContext = this;
         Init();
-        CallApi();
     }
 
     private void Init()
     {
-        _timer = new System.Timers.Timer(1000);
-        _timer.Elapsed += (_, _) =>
-        {
-            Process.TimeProgress += 1;
-            if (Process.TimeProgress > 60 * 5) _timer.Stop();
-        };
-        Process.TimeEndProgress = 60 * 5;
-    }
-
-    private void OnCounterClicked(object sender, EventArgs e)
-    {
-        OnClick();
-    }
-
-    private void OnClick()
-    {
-        _count++;
-
-        if (_count == 1)
-            CountClick.Text = $"Action {_count} time";
-        else
-            CountClick.Text = $"Action {_count} times";
-
-        SemanticScreenReader.Announce(CountClick.Text);
-    }
-
-    private void CallApi()
-    {
-        KindMusic.Rows = DataDemo.Categories.Length / 2;
         KindMusic.Adapter(new KindMusicAdapter(DataDemo.Categories));
-
-        PlayList.Rows = DataDemo.PlayLists.Length / 2;
-        PlayList.Adapter(new PlayListMusicAdapter(DataDemo.PlayLists));
-
-        PlayListLarge.Adapter(new PlayListMusicLargeAdapter(DataDemo.PlayListLarges));
-
-        FolderPlayList.Rows = DataDemo.FolderPlayList.Length;
-        FolderPlayList.Adapter(new FolderPlayListMusicAdapter(DataDemo.FolderPlayList));
-
-        TopMixes.Columns = DataDemo.TopMixes.Length;
         TopMixes.Adapter(new TopMixesAdapter(DataDemo.TopMixes));
-
-        MusicInTop.Rows = DataDemo.MusicInTops.Length;
-        MusicInTop.Adapter(new MusicInTopAdapter(DataDemo.MusicInTops));
-
-        MusicInPlayList.Rows = DataDemo.MusicInPlayLists.Length;
-        MusicInPlayList.Adapter(new MusicInPlayListAdapter(DataDemo.MusicInPlayLists));
-    }
-
-    private void StartMusic(object? sender, EventArgs e)
-    {
-        _timer!.Enabled = true;
-        ButtonControlMusic.Icon = "play_white.svg";
-        ButtonControlMusic.Clicked -= StartMusic;
-        ButtonControlMusic.Clicked += PauseMusic;
-    }
-
-    private void PauseMusic(object? sender, EventArgs e)
-    {
-        _timer!.Enabled = false;
-        ButtonControlMusic.Icon = "pause_white.svg";
-        ButtonControlMusic.Clicked -= PauseMusic;
-        ButtonControlMusic.Clicked += StartMusic;
-    }
-
-    private void MusicInPlayList_OnOnScroll(object? sender, ScrolledEventArgs e)
-    {
-        var scrollView = sender as ScrollView;
-        if (e.ScrollY >= (scrollView!.ContentSize.Height - 50 - scrollView.Height))
-        {
-            MusicInPlayList.AddElement(DataDemo.MusicInPlayLists);
-        }
+        RecentListen.Adapter(new RecentListenAdapter(DataDemo.RecentListens));
     }
 }
 
@@ -170,5 +96,17 @@ internal static class DataDemo
         new("6", "Dance Monkey 6", "Tones and VI", "music_kpop.png"),
         new("7", "Dance Monkey 7", "Tones and VII", "music_kpop.png"),
         new("8", "Dance Monkey 8", "Tones and VIII", "music_kpop.png"),
+    ];
+
+    public static readonly RecentListen[] RecentListens =
+    [
+        new("1", "music_kpop.png"),
+        new("2", "music_kpop.png"),
+        new("3", "music_kpop.png"),
+        new("4", "music_kpop.png"),
+        new("5", "music_kpop.png"),
+        new("6", "music_kpop.png"),
+        new("7", "music_kpop.png"),
+        new("8", "music_kpop.png"),
     ];
 }

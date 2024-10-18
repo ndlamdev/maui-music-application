@@ -51,15 +51,14 @@
     <Color x:Key="Icon2">#979797</Color>
     <Color x:Key="Icon3">#FFFFFF</Color>
 
-    <LinearGradientBrush x:Key="BackgroundHeader" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#0E0E0E" Offset="0.0" /> <!-- Start Color -->
-        <GradientStop Color="#102B2D" Offset="0.36" /> <!-- Start Color -->
-        <GradientStop Color="{StaticResource Blue800}" Offset="1.0" /> <!-- End Color -->
+    <LinearGradientBrush x:Key="BackgroundHeader" StartPoint="0,1" EndPoint="0,0">
+        <GradientStop Color="{StaticResource NullBackground}" />
+        <GradientStop Color="#0F2C30" Offset="1.0" />
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="BackgroundFooter" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#00000000" />
-        <GradientStop Color="Black" Offset="0.7" />
+        <GradientStop Color="{StaticResource NullBackground}" />
+        <GradientStop Color="Black" Offset="0.5" />
         <GradientStop Color="Black" Offset="1" />
     </LinearGradientBrush>
 
@@ -116,7 +115,7 @@
     <SolidColorBrush x:Key="Blue200Brush" Color="{StaticResource Blue200}" />
     <SolidColorBrush x:Key="Blue300Brush" Color="{StaticResource Blue500}" />
     <SolidColorBrush x:Key="Blue400Brush" Color="{StaticResource Blue400}" />
-    <SolidColorBrush x:Key="Blue500Brush" Color="{StaticResource Blue600}" />   
+    <SolidColorBrush x:Key="Blue500Brush" Color="{StaticResource Blue600}" />
     <SolidColorBrush x:Key="Blue600Brush" Color="{StaticResource Blue800}" />
     <SolidColorBrush x:Key="Blue700Brush" Color="{StaticResource Blue900}" />
 </ResourceDictionary>

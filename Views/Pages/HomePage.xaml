@@ -3,92 +3,50 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
-             xmlns:musics1="clr-namespace:maui_music_application.Views.Components.Musics"
              xmlns:header="clr-namespace:maui_music_application.Views.Components.Header"
-             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
              x:Class="maui_music_application.Views.Pages.HomePage"
              BackgroundColor="{DynamicResource BackgroundDark}">
-    <VerticalStackLayout
-        Padding="30,0"
-        Spacing="25">
-        <header:Header />
-        <layouts:GridLayout
-            x:Name="MusicInPlayList"
-            Columns="1"
-            OnScroll="MusicInPlayList_OnOnScroll" />
-        <Label
-            x:Name="CountClick"
-            Text="Click me"
-            SemanticProperties.Hint="Counts the number of times you click"
-            HorizontalOptions="Fill" />
-        <musics1:Process
-            x:Name="Process" />
-        <buttons:ButtonIconCircle
-            Clicked="OnCounterClicked"
-            Icon="add.svg"
-            Title="Add New Playlist" />
-        <buttons:ButtonIcon
-            Clicked="OnCounterClicked"
-            Icon="add.svg"
-            Title="Add New Playlist" />
-        <buttons:ButtonIconCircle
-            x:Name="ButtonControlMusic"
-            Clicked="StartMusic"
-            Icon="pause_white.svg" />
-        <buttons:ButtonIconCircle
-            Clicked="OnCounterClicked"
-            Icon="heart.svg"
-            Title="Your Liked Songs" />
-        <buttons:ButtonBorder
-            Clicked="OnCounterClicked"
-            Text="CLEAR QUEUE"
-            ColorButton="Aqua"
-            FontSize="12" />
-        <buttons:ButtonPaddingBottom
-            Clicked="OnCounterClicked"
-            Text="Folders"
-            FontSize="12"
-            TextColor="White"
-            PaddingBottom="10" />
-        <buttons:ButtonBorderShadow
-            Clicked="OnCounterClicked"
-            Text="Create" />
-        <layouts:GridLayout
-            x:Name="KindMusic"
-            Columns="2"
-            ColumnSpacing="15"
-            RowSpacing="15" />
-        <layouts:GridLayout
-            x:Name="PlayList"
-            Columns="2"
-            ColumnSpacing="15"
-            RowSpacing="15" />
-        <layouts:GridLayout
-            x:Name="PlayListLarge"
-            Columns="1"
-            RowSpacing="15" />
-        <layouts:GridLayout
-            x:Name="FolderPlayList"
-            Columns="1"
-            RowSpacing="15" />
-        <layouts:GridLayout
-            x:Name="TopMixes"
-            Rows="1"
-            Orientation="Horizontal"
-            ColumnSpacing="30" />
-        <buttons:ButtonSign Icon="dotnet_bot.png"
-                            Title="Continue with Google"
-                            Clicked="OnCounterClicked" />
-        <buttons:ButtonSign Icon="dotnet_bot.png"
-                            Title="Continue with Facebook"
-                            Clicked="OnCounterClicked" />
-        <buttons:ButtonSign Icon="dotnet_bot.png"
-                            Title="Continue with Apple"
-                            Clicked="OnCounterClicked" />
-        <musics1:MusicInPlayList />
-        <layouts:GridLayout
-            x:Name="MusicInTop"
-            Columns="1"
-            RowSpacing="30" />
+    <VerticalStackLayout>
+        <VerticalStackLayout
+            HeightRequest="80"
+            Padding="20, 20, 20, 0"
+            Background="{DynamicResource BackgroundHeader}">
+            <header:Header />
+        </VerticalStackLayout>
+        <VerticalStackLayout
+            Padding="20, 0">
+            <Label
+                Text="Continue Listening"
+                FontSize="20"
+                HorizontalOptions="Fill"
+                Margin="0, 0, 0, 15" />
+            <layouts:GridLayout
+                x:Name="KindMusic"
+                Columns="2"
+                ColumnSpacing="15"
+                RowSpacing="15" />
+            <Label
+                Text="Your top mixes"
+                FontSize="20"
+                HorizontalOptions="Fill"
+                Margin="0, 30, 0, 15" />
+            <layouts:GridLayout
+                x:Name="TopMixes"
+                Rows="1"
+                Orientation="Horizontal"
+                ColumnSpacing="25" />
+            <Label
+                Text="Based on your recent listening"
+                FontSize="20"
+                HorizontalOptions="Fill"
+                Margin="0, 30, 0, 15" />
+            <layouts:GridLayout
+                x:Name="RecentListen"
+                Rows="1"
+                Orientation="Horizontal"
+                ColumnSpacing="25"
+                Padding="0, 0, 0, 20" />
+        </VerticalStackLayout>
     </VerticalStackLayout>
+
 </ContentView>

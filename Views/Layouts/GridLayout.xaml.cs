@@ -9,8 +9,8 @@ namespace maui_music_application.Views.Layouts;
 
 public partial class GridLayout
 {
-    private int _columns = 1;
-    private int _rows = 1;
+    private int _columns = -1;
+    private int _rows = -1;
     private int _currentRow, _currentColumn;
     private object? _adapter;
     private ScrollOrientation _orientation = ScrollOrientation.Vertical;
@@ -18,11 +18,12 @@ public partial class GridLayout
     public GridLayout()
     {
         InitializeComponent();
-        SetUpGrid(_columns, _rows);
     }
 
     public void Adapter<T>(GridLayoutAdapter<T> adapter)
     {
+        if (_columns != -1) _rows = adapter.ListData.Length / _columns;
+        else _columns = adapter.ListData.Length / _rows;
         _adapter = adapter;
         LoadContent(adapter);
     }

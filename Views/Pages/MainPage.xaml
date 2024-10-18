@@ -6,7 +6,8 @@
              xmlns:navigation1="clr-namespace:maui_music_application.Views.Components.Navigation">
 
     <AbsoluteLayout
-        BackgroundColor="{StaticResource Background}">
+        BackgroundColor="{StaticResource Background}"
+        >
         <ScrollView
             VerticalScrollBarVisibility="Never"
             AbsoluteLayout.LayoutFlags="All"
