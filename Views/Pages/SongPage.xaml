@@ -16,6 +16,15 @@
         <VerticalStackLayout
             Padding="25"
             HorizontalOptions="Center">
+            <toolkit:MediaElement
+                IsVisible="False"
+                x:Name="MediaElement"
+                ShouldAutoPlay="True"
+                MediaEnded="MediaElement_OnMediaEnded"
+                MediaFailed="MediaElement_OnMediaFailed"
+                MediaOpened="MediaElement_OnMediaOpened"
+                SeekCompleted="MediaElement_OnSeekCompleted"
+                PositionChanged="MediaElement_OnPositionChanged" />
             <FlexLayout
                 Direction="Row" JustifyContent="SpaceBetween"
                 AlignItems="Center"
@@ -90,20 +99,73 @@
             <musics:Process
                 x:Name="Process" />
             <FlexLayout JustifyContent="Center">
-                <buttons:ButtonIconCircle
-                    x:Name="PlayButton"
-                    Clicked="PlayMusicClicked"
-                    Icon="pause_white.svg"
-                    Spacing="0" />
+                <HorizontalStackLayout
+                    FlexLayout.Grow="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Border
+                        StrokeThickness="0"
+                        Padding="15"
+                        BackgroundColor="Black">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="99999" />
+                        </Border.StrokeShape>
+                        <ImageButton
+                            Source="random.svg"
+                            WidthRequest="20"
+                            HeightRequest="20"
+                            Clicked="Random_OnClicked" />
+                    </Border>
+                </HorizontalStackLayout>
+                <ContentView
+                    WidthRequest="150"
+                    HeightRequest="70">
+                    <FlexLayout
+                        JustifyContent="SpaceBetween"
+                        AlignItems="Center">
+                        <ImageButton
+                            Source="previous_white.svg"
+                            WidthRequest="25"
+                            HeightRequest="25"
+                            Clicked="Previous_OnClicked" />
+                        <buttons:ButtonIconCircle
+                            x:Name="PlayButton"
+                            Clicked="PlayMusicClicked"
+                            Icon="pause_white.svg"
+                            Spacing="0" />
+                        <ImageButton
+                            Source="next_white.svg"
+                            WidthRequest="25"
+                            HeightRequest="25"
+                            Clicked="Next_OnClicked" />
+                    </FlexLayout>
+                </ContentView>
+                <HorizontalStackLayout
+                    FlexLayout.Grow="1"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Spacing="15">
+                    <ImageButton
+                        Source="equalizer.svg"
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        Clicked="Equalizer_OnClicked" />
+                    <ImageButton
+                        Source="add_white.svg"
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        Clicked="Add_OnClicked" />
+                </HorizontalStackLayout>
             </FlexLayout>
-            <toolkit:MediaElement
-                x:Name="MediaElement"
-                ShouldAutoPlay="True"
-                MediaEnded="MediaElement_OnMediaEnded"
-                MediaFailed="MediaElement_OnMediaFailed"
-                MediaOpened="MediaElement_OnMediaOpened"
-                SeekCompleted="MediaElement_OnSeekCompleted"
-                PositionChanged="MediaElement_OnPositionChanged" />
+            <HorizontalStackLayout
+                Padding="20"
+                HorizontalOptions="End">
+                <ImageButton
+                    Source="download_white.svg"
+                    WidthRequest="20"
+                    HeightRequest="20"
+                    Clicked="Download_OnClicked" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

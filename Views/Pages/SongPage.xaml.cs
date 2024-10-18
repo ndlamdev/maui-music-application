@@ -23,6 +23,8 @@ public partial class SongPage
         InitializeComponent();
         BindingContext = this;
         MediaElement.Source = UrlTest;
+        Log.Info("SongPage",
+            $"{MediaElement.MetadataTitle}, {MediaElement.MetadataArtist}, {MediaElement.Duration}, {MediaElement.Position}");
     }
 
     public string PlayListName
@@ -125,7 +127,6 @@ public partial class SongPage
     private void MediaElement_OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
     {
         Process.TimeProgress = e.Position.Seconds;
-        Log.Info("SongPage", $"Seconds: {e.Position.Seconds}");
     }
 
     private void Process_OnOnValueChanged(object? sender, ValueChangedEventArgs e)
@@ -146,5 +147,29 @@ public partial class SongPage
     private void Process_OnOnDragStarted(object? sender, EventArgs e)
     {
         _isPans = true;
+    }
+
+    private void Random_OnClicked(object? sender, EventArgs e)
+    {
+    }
+
+    private void Previous_OnClicked(object? sender, EventArgs e)
+    {
+    }
+
+    private void Next_OnClicked(object? sender, EventArgs e)
+    {
+    }
+
+    private void Equalizer_OnClicked(object? sender, EventArgs e)
+    {
+    }
+
+    private void Add_OnClicked(object? sender, EventArgs e)
+    {
+    }
+
+    private void Download_OnClicked(object? sender, EventArgs e)
+    {
     }
 }
