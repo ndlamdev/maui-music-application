@@ -21,7 +21,7 @@ public partial class HomePage
 
     private void Init()
     {
-        KindMusic.Adapter(new KindMusicAdapter(DataDemo.Categories));
+        PlayListMusic.Adapter(new PlayListMusicAdapter(DataDemo.PlayLists));
         TopMixes.Adapter(new TopMixesAdapter(DataDemo.TopMixes));
         RecentListen.Adapter(new RecentListenAdapter(DataDemo.RecentListens));
     }
@@ -35,6 +35,7 @@ internal static class DataDemo
         new("Indie", "Indie", "music_kpop.png"),
         new("R&B", "R&B", "music_kpop.png"),
         new("Pop", "Pop", "music_kpop.png"),
+        new("Pop2", "Pop 2", "music_kpop.png"),
     ];
 
     public static readonly PlayListMusic[] PlayLists =

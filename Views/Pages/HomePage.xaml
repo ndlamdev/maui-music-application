@@ -7,7 +7,7 @@
              x:Class="maui_music_application.Views.Pages.HomePage"
              Background="{DynamicResource BackgroundHeader}">
     <VerticalStackLayout
-        Padding="20, 20, 20, 0">
+        Padding="20">
         <header:Header />
         <Label
             Text="Continue Listening"
@@ -15,7 +15,7 @@
             HorizontalOptions="Fill"
             Margin="0, 30, 0, 15" />
         <layouts:GridLayout
-            x:Name="KindMusic"
+            x:Name="PlayListMusic"
             Columns="2"
             ColumnSpacing="15"
             RowSpacing="15" />
