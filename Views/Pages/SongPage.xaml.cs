@@ -13,18 +13,16 @@ public partial class SongPage
         _singerName = "moody.",
         _thumbnail = "song_image.png";
 
-    private bool _isPans = false;
-
     private const string UrlTest =
-        "https://res.cloudinary.com/yourstyle/video/upload/ac_aac/v1/music-media/audio/bau-troi-moi-dalab.m3u8";
+        "https://res.cloudinary.com/dsap10o2q/video/upload/v1728828855/musium_maui/audio/neu_nhung_tiec_nuoi.mp3";
 
     public SongPage()
     {
         InitializeComponent();
         BindingContext = this;
         MediaElement.Source = UrlTest;
-        Log.Info("SongPage",
-            $"{MediaElement.MetadataTitle}, {MediaElement.MetadataArtist}, {MediaElement.Duration}, {MediaElement.Position}");
+        Process.Duration = 100;
+        //FileHelper.GetDurationFileM3u8(UrlTest).Result
     }
 
     public string PlayListName
@@ -114,9 +112,10 @@ public partial class SongPage
     {
     }
 
-    private void MediaElement_OnMediaOpened(object? sender, EventArgs e)
+    private async void MediaElement_OnMediaOpened(object? sender, EventArgs e)
     {
-        Process.Duration = MediaElement.Duration.Seconds;
+        var duration = await FileHelper.GetDurationFileM3U8(UrlTest);
+        Process.Duration = duration;
         PlayMusicClicked(sender, e);
     }
 
@@ -127,26 +126,6 @@ public partial class SongPage
     private void MediaElement_OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
     {
         Process.TimeProgress = e.Position.Seconds;
-    }
-
-    private void Process_OnOnValueChanged(object? sender, ValueChangedEventArgs e)
-    {
-        MediaElement.SeekTo(new TimeSpan((long)e.NewValue));
-    }
-
-    private void PanGestureRecognizer_OnPanUpdated(object? sender, PanUpdatedEventArgs e)
-    {
-        if (e.StatusType == GestureStatus.Completed)
-        {
-            _isPans = false;
-        }
-
-        if (_isPans) Log.Info("SongPage", $"Keo ne {e.TotalX}");
-    }
-
-    private void Process_OnOnDragStarted(object? sender, EventArgs e)
-    {
-        _isPans = true;
     }
 
     private void Random_OnClicked(object? sender, EventArgs e)
@@ -171,5 +150,11 @@ public partial class SongPage
 
     private void Download_OnClicked(object? sender, EventArgs e)
     {
+    }
+
+    private void Process_OnValueChanged(object? sender, ValueChangedEventArgs e)
+    {
+        if ((int)MediaElement.Position.TotalSeconds == (int)e.NewValue) return;
+        MediaElement.SeekTo(TimeSpan.FromSeconds(e.NewValue));
     }
 }

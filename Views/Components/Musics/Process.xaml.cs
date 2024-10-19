@@ -25,18 +25,20 @@ public partial class Process
         {
             if (value > _duration) return;
             _timeProgress = value;
-            var process = value / _duration;
+            OnPropertyChanged();
             OnPropertyChanged(nameof(TextTimeProcess));
         }
     }
 
     public double Duration
     {
+        get => _duration;
         set
         {
             _duration = value;
             TimeEndProgressLabel.Text = FormatTime(value);
             OnPropertyChanged(nameof(TextDuration));
+            OnPropertyChanged();
         }
     }
 
@@ -56,4 +58,11 @@ public partial class Process
         ProcessBar.WidthRequest = _width / 1.37;
         TimeProgress = _timeProgress;
     }
+
+    private void Process_OnValueChanged(object? sender, ValueChangedEventArgs e)
+    {
+        OnValueChanged?.Invoke(sender, e);
+    }
+
+    public event EventHandler<ValueChangedEventArgs>? OnValueChanged;
 }

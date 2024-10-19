@@ -15,8 +15,9 @@
             MinimumTrackColor="{StaticResource Blue300}"
             MaximumTrackColor="#88989B"
             ThumbColor="{StaticResource Blue300}"
-            Maximum="200"
-            Value="100" />
+            Maximum="{Binding Duration}"
+            Value="{Binding TimeProgress}"
+            ValueChanged="Process_OnValueChanged"/>
         <FlexLayout
             TranslationY="-5"
             Margin="0, 20, 0, 0">

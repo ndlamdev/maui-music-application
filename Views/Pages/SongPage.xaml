@@ -10,16 +10,13 @@
              x:DataType="page:SongPage"
              x:Name="RootView">
     <ScrollView>
-        <ScrollView.GestureRecognizers>
-            <PanGestureRecognizer PanUpdated="PanGestureRecognizer_OnPanUpdated" />
-        </ScrollView.GestureRecognizers>
         <VerticalStackLayout
             Padding="25"
             HorizontalOptions="Center">
             <toolkit:MediaElement
-                IsVisible="False"
                 x:Name="MediaElement"
                 ShouldAutoPlay="True"
+                IsVisible="False"
                 MediaEnded="MediaElement_OnMediaEnded"
                 MediaFailed="MediaElement_OnMediaFailed"
                 MediaOpened="MediaElement_OnMediaOpened"
@@ -97,7 +94,8 @@
                 </HorizontalStackLayout>
             </FlexLayout>
             <musics:Process
-                x:Name="Process" />
+                x:Name="Process"
+                OnValueChanged="Process_OnValueChanged" />
             <FlexLayout JustifyContent="Center">
                 <HorizontalStackLayout
                     FlexLayout.Grow="1"
