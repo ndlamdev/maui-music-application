@@ -5,8 +5,6 @@
 // User: Lam Nguyen
 
 
-using Android.Util;
-
 namespace maui_music_application.Views.Layouts;
 
 public partial class GridLayout
@@ -24,8 +22,8 @@ public partial class GridLayout
 
     public void Adapter<T>(GridLayoutAdapter<T> adapter)
     {
-        if (_columns != -1) _rows = (int)Math.Ceiling((double)adapter.ListData.Length / _columns);
-        else _columns = (int)Math.Ceiling((double)adapter.ListData.Length / _rows);
+        if (_columns != -1) Rows = (int)Math.Ceiling((double)adapter.ListData.Length / _columns);
+        else Columns = (int)Math.Ceiling((double)adapter.ListData.Length / _rows);
         _adapter = adapter;
         LoadContent(adapter);
     }
@@ -106,7 +104,7 @@ public partial class GridLayout
 
     private void SetUpGrid(int columns, int rows)
     {
-        Grid.Clear();
+        Grid.Children.Clear();
         Grid.ColumnDefinitions.Clear();
         Grid.RowDefinitions.Clear();
         AddColumnDefinitions(columns);

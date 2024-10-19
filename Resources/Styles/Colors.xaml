@@ -63,6 +63,11 @@
         <GradientStop Color="Black" Offset="1" />
     </LinearGradientBrush>
 
+    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="BackgroundButtonBorder">
+        <GradientStop Color="#15686B" Offset="0" />
+        <GradientStop Color="#06A0B5" Offset="1" />
+    </LinearGradientBrush>
+
     <LinearGradientBrush x:Key="Button" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Color="{StaticResource Blue200}" Offset="0.0" /> <!-- Start Color -->
         <GradientStop Color="{StaticResource Blue500}" Offset="1.0" /> <!-- End Color -->

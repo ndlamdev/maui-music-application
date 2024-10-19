@@ -7,7 +7,8 @@
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts">
     <VerticalStackLayout
         Padding="20"
-        Spacing="25">
+        Spacing="25"
+        x:Name="MainLayout">
         <FlexLayout
             Direction="Row"
             AlignItems="Center"
@@ -39,17 +40,28 @@
             Orientation="Horizontal"
             HorizontalScrollBarVisibility="Never">
             <HorizontalStackLayout
+                x:Name="ButtonHorizontalStackLayout"
                 Spacing="10">
                 <buttons:ButtonBorder
-                    Text="Folders" />
+                    x:Name="Folders"
+                    Text="Folders"
+                    Clicked="Folders_OnClicked" />
                 <buttons:ButtonBorder
-                    Text="Playlists" />
+                    x:Name="Playlists"
+                    Text="Playlists"
+                    Clicked="Playlists_OnClicked" />
                 <buttons:ButtonBorder
-                    Text="Artists" />
+                    x:Name="Artists"
+                    Text="Artists"
+                    Clicked="Artists_OnClicked" />
                 <buttons:ButtonBorder
-                    Text="Albums" />
+                    x:Name="Albums"
+                    Text="Albums"
+                    Clicked="Albums_OnClicked" />
                 <buttons:ButtonBorder
-                    Text="Podcasts" />
+                    x:Name="Podcasts"
+                    Text="Podcasts &amp; Shows"
+                    Clicked="Podcasts_OnClicked" />
             </HorizontalStackLayout>
         </ScrollView>
         <buttons:ButtonIconCircle
@@ -68,10 +80,10 @@
                 Text="Recently played"
                 TextColor="#39C0D4" />
         </HorizontalStackLayout>
-        <layouts:GridLayout
+        <!--<layouts:GridLayout
             x:Name="RecentPlaylist"
             RowSpacing="25"
             Columns="1"
-            Orientation="Vertical" />
+            Orientation="Vertical" />-->
     </VerticalStackLayout>
 </ContentView>

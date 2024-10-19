@@ -12,6 +12,7 @@ public partial class ButtonBorder
     public event EventHandler? Clicked;
     private Color _colorButton = Colors.White;
     private double _fontSize = 12;
+    private bool _selected;
 
     public ButtonBorder()
     {
@@ -25,7 +26,7 @@ public partial class ButtonBorder
         set
         {
             _text = value;
-            OnPropertyChanged(nameof(Text));
+            OnPropertyChanged();
         }
     }
 
@@ -40,7 +41,7 @@ public partial class ButtonBorder
         set
         {
             _colorButton = value;
-            OnPropertyChanged(nameof(ColorButton));
+            OnPropertyChanged();
         }
     }
 
@@ -50,12 +51,22 @@ public partial class ButtonBorder
         set
         {
             _fontSize = value;
-            OnPropertyChanged(nameof(FontSize));
+            OnPropertyChanged();
         }
     }
 
     private void Button_OnClicked(object? sender, EventArgs e)
     {
         Clicked?.Invoke(this, e);
+    }
+
+    public bool Selected
+    {
+        get => _selected;
+        set
+        {
+            _selected = value;
+            OnPropertyChanged();
+        }
     }
 }
