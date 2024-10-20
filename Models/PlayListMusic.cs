@@ -6,11 +6,13 @@
 
 namespace maui_music_application.Models;
 
-public class PlayListMusic(string id, string title, string image)
+public class PlayListMusic(string id, string title, string image, List<Music>? musics = null)
 {
     public string Id { get; set; } = id;
 
     public string Image { get; set; } = image;
 
     public string Title { get; set; } = title;
+
+    public List<Music>? Musics { get; set; } = musics;
 }
