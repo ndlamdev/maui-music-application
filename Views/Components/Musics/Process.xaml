@@ -17,7 +17,9 @@
             ThumbColor="{StaticResource Blue300}"
             Maximum="{Binding Duration}"
             Value="{Binding TimeProgress}"
-            ValueChanged="Process_OnValueChanged"/>
+            ValueChanged="Process_OnValueChanged"
+            DragCompleted="ProcessBar_OnDragCompleted"
+            DragStarted="ProcessBar_OnDragStarted" />
         <FlexLayout
             TranslationY="-5"
             Margin="0, 20, 0, 0">

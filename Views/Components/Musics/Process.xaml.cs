@@ -4,6 +4,8 @@
 // Create at: 20:09:11 - 22/09/2024
 // User: Lam Nguyen
 
+using Android.Util;
+
 namespace maui_music_application.Views.Components.Musics;
 
 public partial class Process
@@ -11,6 +13,9 @@ public partial class Process
     private double _duration;
     private double _width;
     private double _timeProgress;
+    public event EventHandler<double>? OnValueChangeCompleted;
+    private bool _drag;
+    private double _newValue;
 
     public Process()
     {
@@ -61,8 +66,23 @@ public partial class Process
 
     private void Process_OnValueChanged(object? sender, ValueChangedEventArgs e)
     {
+        if (!_drag)
+            return;
+        _newValue = e.NewValue;
+        TimeProgress = e.NewValue;
         OnValueChanged?.Invoke(sender, e);
     }
 
     public event EventHandler<ValueChangedEventArgs>? OnValueChanged;
+
+    private void ProcessBar_OnDragCompleted(object? sender, EventArgs e)
+    {
+        _drag = false;
+        OnValueChangeCompleted?.Invoke(sender, _newValue);
+    }
+
+    private void ProcessBar_OnDragStarted(object? sender, EventArgs e)
+    {
+        _drag = true;
+    }
 }
