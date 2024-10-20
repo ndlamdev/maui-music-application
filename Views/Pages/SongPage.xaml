@@ -9,7 +9,8 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="page:SongPage"
              x:Name="RootView"
-             Unloaded="ContentPage_Unloaded">
+             Unloaded="ContentPage_Unloaded"
+             BackgroundColor="{StaticResource PrimaryDark}">
     <ScrollView>
         <VerticalStackLayout
             Padding="25"
@@ -23,11 +24,11 @@
                 MetadataTitle="{Binding SongName}"
                 MetadataArtworkUrl="{Binding SongThumbnail}"
                 MetadataArtist="{Binding SingerName}"
-                StateChanged="MediaElement_OnStateChanged"
-                PositionChanged="MediaElement_OnPositionChanged"
-                MediaEnded="MediaElement_OnMediaEnded"
+                StateChanged="RootMediaElement_OnStateChanged"
+                PositionChanged="RootMediaElement_OnPositionChanged"
+                MediaEnded="RootMediaElement_OnMediaEnded"
                 SeekCompleted="RootMediaElement_OnSeekCompleted"
-               />
+                MediaFailed="RootMediaElement_OnMediaFailed" />
             <FlexLayout
                 Direction="Row" JustifyContent="SpaceBetween"
                 AlignItems="Center"
@@ -89,13 +90,15 @@
             <Label
                 Text="{Binding SongName}"
                 FontSize="24"
+                TextColor="White"
                 FontFamily="MulishVariableFont" />
             <FlexLayout Direction="Row"
                         JustifyContent="SpaceBetween"
                         AlignItems="Center"
                         Margin="0,15,0,35">
                 <Label
-                    Text="{Binding SingerName}" />
+                    Text="{Binding SingerName}"
+                    TextColor="{StaticResource Text2}" />
                 <HorizontalStackLayout Spacing="20">
                     <Image
                         Source="share.svg"

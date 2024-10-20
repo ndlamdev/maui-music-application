@@ -1,4 +1,3 @@
-using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Helpers;
@@ -23,8 +22,8 @@ public partial class SongPage
                 "https://res.cloudinary.com/dsap10o2q/video/upload/v1729425154/musium_maui/audio/va_em_se_la_nguoi_toi_yeu_nhat.mp3"),
             new Music("", "Những chuyến bay", "Vũ", "song_image.png",
                 "https://res.cloudinary.com/dsap10o2q/video/upload/v1729425154/musium_maui/audio/nhung_chuyen_bay.mp3"),
-            new Music("", "Nếu những nuối tiếc", "Vũ", "song_image.png",
-                "https://res.cloudinary.com/dsap10o2q/video/upload/v1729425154/musium_maui/audio/neu_nhung_nuoi_tiec.mp3"),
+            new Music("", "Nếu những tiếc nuối", "Vũ", "song_image.png",
+                "https://res.cloudinary.com/dsap10o2q/video/upload/v1729425154/musium_maui/audio/neu_nhung_tiec_nuoi.mp3"),
             new Music("", "Mây khóc vì điều gì", "Vũ", "song_image.png",
                 "https://res.cloudinary.com/dsap10o2q/video/upload/v1729425154/musium_maui/audio/may_khoc_vi_dieu_gi.mp3"),
             new Music("", "Ngồi trong vấn vương", "Vũ", "song_image.png",
@@ -48,7 +47,6 @@ public partial class SongPage
         InitializeComponent();
         BindingContext = this;
     }
-
 
     public string PlayListName => _playlist.Title;
 
@@ -96,19 +94,6 @@ public partial class SongPage
         }
     }
 
-
-    private void MediaElement_OnMediaEnded(object? sender, EventArgs e)
-    {
-        PlayMusic(ActionMusic.Next);
-    }
-
-    private void MediaElement_OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
-    {
-        if (Process.Duration.Equals(0.0)) Process.Duration = RootMediaElement.Duration.TotalSeconds;
-        Process.TimeProgress = e.Position.TotalSeconds;
-        ImageSongThumbnail.RotateTo(_degree++);
-    }
-
     private void Random_OnClicked(object? sender, EventArgs e)
     {
         Random = !_random;
@@ -122,6 +107,33 @@ public partial class SongPage
     private void Next_OnClicked(object? sender, EventArgs e)
     {
         PlayMusic(ActionMusic.Next);
+    }
+
+    private void RootMediaElement_OnMediaEnded(object? sender, EventArgs e)
+    {
+        PlayMusic(ActionMusic.Next);
+    }
+
+    private void RootMediaElement_OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
+    {
+        if (!Process.Duration.Equals(RootMediaElement.Duration.TotalSeconds))
+            Process.Duration = RootMediaElement.Duration.TotalSeconds;
+        Process.TimeProgress = e.Position.TotalSeconds;
+        ImageSongThumbnail.RotateTo(_degree++);
+    }
+    
+    private void RootMediaElement_OnMediaFailed(object? sender, MediaFailedEventArgs e)
+    {
+        PlayMusic(ActionMusic.Next);
+    }
+
+    private void RootMediaElement_OnStateChanged(object? sender, MediaStateChangedEventArgs e)
+    {
+        PlayPauseMusic.Icon = RootMediaElement.CurrentState switch
+        {
+            MediaElementState.Playing => "pause_white.svg",
+            _ => "play_white.svg",
+        };
     }
 
     private void Equalizer_OnClicked(object? sender, EventArgs e)
@@ -144,9 +156,8 @@ public partial class SongPage
     private void PlayMusic(ActionMusic action)
     {
         InitIndexCurrentMusic(action);
-        MusicMediaSource = MediaSource.FromFile(_playlist.Musics![_indexCurrentMusic].Uri);
-        Process.Duration = 0;
         _degree = 0;
+        MusicMediaSource = MediaSource.FromFile(_playlist.Musics![_indexCurrentMusic].Uri);
         OnPropertyChanged(nameof(SongThumbnail));
         OnPropertyChanged(nameof(SongName));
         OnPropertyChanged(nameof(SingerName));
@@ -178,21 +189,6 @@ public partial class SongPage
         RootMediaElement.Handler?.DisconnectHandler();
     }
 
-    private void MediaElement_OnStateChanged(object? sender, MediaStateChangedEventArgs e)
-    {
-        PlayPauseMusic.Icon = RootMediaElement.CurrentState switch
-        {
-            MediaElementState.Playing => "pause_white.svg",
-            _ => "play_white.svg",
-        };
-    }
-
-    private enum ActionMusic
-    {
-        Next,
-        Previous
-    }
-
     private void InitIndexCurrentMusic(ActionMusic action)
     {
         if (action == ActionMusic.Previous) _indexCurrentMusic = _previousIndexMusic;
@@ -213,6 +209,12 @@ public partial class SongPage
                     break;
             }
         }
+    }
+
+    private enum ActionMusic
+    {
+        Next,
+        Previous
     }
 
     private void RootMediaElement_OnSeekCompleted(object? sender, EventArgs e)
