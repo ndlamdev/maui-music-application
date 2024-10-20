@@ -21,7 +21,7 @@ public static class MauiProgram
                 fonts.AddFont("Century-Gothic-Bold-Italic.otf", "CenturyGothicBoldItalic");
                 fonts.AddFont("Century-Gothic-Bold.otf", "CenturyGothicBold");
                 fonts.AddFont("Century-Gothic.otf", "CenturyGothic");
-            }).UseMauiCommunityToolkitMediaElement();
+            });
 
 #if DEBUG
         builder.Logging.AddDebug();

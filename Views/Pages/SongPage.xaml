@@ -8,20 +8,26 @@
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="page:SongPage"
-             x:Name="RootView">
+             x:Name="RootView"
+             Unloaded="ContentPage_Unloaded">
     <ScrollView>
         <VerticalStackLayout
             Padding="25"
             HorizontalOptions="Center">
             <toolkit:MediaElement
-                x:Name="MediaElement"
-                ShouldAutoPlay="True"
+                x:Name="RootMediaElement"
                 IsVisible="False"
+                ShouldAutoPlay="True"
+                ShouldShowPlaybackControls="True"
+                Source="{Binding MusicMediaSource}"
+                MetadataTitle="{Binding SongName}"
+                MetadataArtworkUrl="{Binding SongThumbnail}"
+                MetadataArtist="{Binding SingerName}"
+                StateChanged="MediaElement_OnStateChanged"
+                PositionChanged="MediaElement_OnPositionChanged"
                 MediaEnded="MediaElement_OnMediaEnded"
-                MediaFailed="MediaElement_OnMediaFailed"
-                MediaOpened="MediaElement_OnMediaOpened"
-                SeekCompleted="MediaElement_OnSeekCompleted"
-                PositionChanged="MediaElement_OnPositionChanged" />
+                SeekCompleted="RootMediaElement_OnSeekCompleted"
+               />
             <FlexLayout
                 Direction="Row" JustifyContent="SpaceBetween"
                 AlignItems="Center"
@@ -54,16 +60,32 @@
                     </Image.GestureRecognizers>
                 </Image>
             </FlexLayout>
-            <Frame HeightRequest="300"
-                   WidthRequest="300"
-                   CornerRadius="5"
-                   BorderColor="{StaticResource NullBackground}"
-                   Margin="0, 40, 0, 25"
-                   Padding="0">
-                <Image
-                    Source="{Binding SongThumbnail}"
-                    Aspect="Fill" />
-            </Frame>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame HeightRequest="300"
+                       WidthRequest="300"
+                       CornerRadius="999999"
+                       BorderColor="{StaticResource NullBackground}"
+                       Margin="0, 40, 0, 25"
+                       Padding="0">
+                    <Image
+                        x:Name="ImageSongThumbnail"
+                        Source="{Binding SongThumbnail}"
+                        Aspect="Fill" />
+                </Frame>
+                <Frame HeightRequest="50"
+                       WidthRequest="50"
+                       CornerRadius="999999"
+                       BackgroundColor="{StaticResource Background}"
+                       BorderColor="Black"
+                       Margin="0, 40, 0, 25"
+                       Padding="0" />
+            </Grid>
             <Label
                 Text="{Binding SongName}"
                 FontSize="24"
@@ -95,25 +117,37 @@
             </FlexLayout>
             <musics:Process
                 x:Name="Process"
-                OnValueChanged="Process_OnValueChanged" />
+                OnValueChanged="Process_OnValueChanged"
+                OnValueChangeCompleted="Process_OnOnValueChangeCompleted" />
             <FlexLayout JustifyContent="Center">
                 <HorizontalStackLayout
                     FlexLayout.Grow="1"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
-                    <Border
-                        StrokeThickness="0"
+                    <ImageButton
+                        Source="random.svg"
+                        WidthRequest="50"
+                        HeightRequest="50"
                         Padding="15"
-                        BackgroundColor="Black">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="99999" />
-                        </Border.StrokeShape>
-                        <ImageButton
-                            Source="random.svg"
-                            WidthRequest="20"
-                            HeightRequest="20"
-                            Clicked="Random_OnClicked" />
-                    </Border>
+                        CornerRadius="99999"
+                        Clicked="Random_OnClicked">
+                        <ImageButton.Triggers>
+                            <DataTrigger
+                                TargetType="ImageButton"
+                                Binding="{Binding Random}"
+                                Value="True">
+                                <Setter Property="Background" Value="{StaticResource Blue500}" />
+                                <Setter Property="Source" Value="random_white.svg" />
+                            </DataTrigger>
+                            <DataTrigger
+                                TargetType="ImageButton"
+                                Binding="{Binding Random}"
+                                Value="False">
+                                <Setter Property="Background" Value="Black" />
+                                <Setter Property="Source" Value="random.svg" />
+                            </DataTrigger>
+                        </ImageButton.Triggers>
+                    </ImageButton>
                 </HorizontalStackLayout>
                 <ContentView
                     WidthRequest="150"
@@ -123,18 +157,22 @@
                         AlignItems="Center">
                         <ImageButton
                             Source="previous_white.svg"
-                            WidthRequest="25"
-                            HeightRequest="25"
+                            WidthRequest="35"
+                            HeightRequest="35"
+                            Padding="5"
+                            CornerRadius="999999"
                             Clicked="Previous_OnClicked" />
                         <buttons:ButtonIconCircle
-                            x:Name="PlayButton"
-                            Clicked="PlayMusicClicked"
-                            Icon="pause_white.svg"
+                            x:Name="PlayPauseMusic"
+                            Clicked="PlayPauseMusicClicked"
+                            Icon="play_white.svg"
                             Spacing="0" />
                         <ImageButton
                             Source="next_white.svg"
-                            WidthRequest="25"
-                            HeightRequest="25"
+                            WidthRequest="35"
+                            HeightRequest="35"
+                            Padding="5"
+                            CornerRadius="999999"
                             Clicked="Next_OnClicked" />
                     </FlexLayout>
                 </ContentView>
