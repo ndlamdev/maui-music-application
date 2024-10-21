@@ -6,6 +6,7 @@
 
 namespace maui_music_application.Models;
 
-public class TopMixes(string id, string title, string image) : PlayListMusic(id, title, image)
+public class TopMixes(string id, string title, string image, TimeSpan? timeCreate = null)
+    : PlayListMusic(id, title, image, timeCreate)
 {
 }

@@ -6,11 +6,19 @@
 
 namespace maui_music_application.Models;
 
-public class PlayListMusic(string id, string title, string image)
+public class PlayListMusic(string id, string title, string image, TimeSpan? timeCreate = null)
 {
+    private TimeSpan? _timeCreate = timeCreate;
+
     public string Id { get; set; } = id;
 
     public string Image { get; set; } = image;
 
     public string Title { get; set; } = title;
+
+    public TimeSpan? TimeCreate
+    {
+        get => _timeCreate ?? DateTime.Now.TimeOfDay;
+        set => _timeCreate = value;
+    }
 }
