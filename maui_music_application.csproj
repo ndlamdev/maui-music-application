@@ -93,6 +93,9 @@
         <MauiXaml Update="Views\Pages\VerifyCodePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Components\Categories\Artist.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -130,6 +133,10 @@
         </Compile>
         <Compile Update="Views\Pages\VerifyCodePage.xaml.cs">
           <DependentUpon>VerifyCodePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\Categories\Artist.xaml.cs">
+          <DependentUpon>Artist.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
