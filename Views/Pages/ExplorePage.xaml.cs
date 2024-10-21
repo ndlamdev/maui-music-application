@@ -5,6 +5,7 @@
 // User: Lam Nguyen
 
 using Android.Util;
+using maui_music_application.Data;
 using maui_music_application.Views.Adapters;
 
 namespace maui_music_application.Views.Pages;
@@ -20,10 +21,10 @@ public partial class ExplorePage
 
     private void Init()
     {
-        KindMusic.Adapter(new KindMusicAdapter(DataDemo.Categories));
-        Browse.Adapter(new KindMusicAdapter(DataDemo.Categories));
-        Browse.AddElement(DataDemo.Categories);
-        Browse.AddElement(DataDemo.Categories);
+        KindMusic.Adapter(new KindMusicAdapter(DataDemoGridLayout.Categories));
+        Browse.Adapter(new KindMusicAdapter(DataDemoGridLayout.Categories));
+        Browse.AddElement(DataDemoGridLayout.Categories);
+        Browse.AddElement(DataDemoGridLayout.Categories);
     }
 
     private void Search_OnOnTextChanged(object? sender, TextChangedEventArgs e)
