@@ -1,3 +1,4 @@
+using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Data;
@@ -20,6 +21,8 @@ public partial class SongPage
     {
         InitializeComponent();
         BindingContext = this;
+        Log.Info("SongPage", $"Height: {DeviceDisplay.Current.MainDisplayInfo.Height}");
+        ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
     }
 
     public string PlayListName => _playlist.Title;
@@ -42,15 +45,13 @@ public partial class SongPage
         await OpacityEffect.RunOpacity((View)sender, 100);
     }
 
-    private async void Share_OnTapped(object sender, TappedEventArgs e)
+    private async void Share_OnTapped(object? sender, EventArgs eventArgs)
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
     }
 
-    private async void Heart_OnTapped(object sender, TappedEventArgs e)
+    private void Heart_OnTapped(object? sender, EventArgs eventArgs)
     {
-        var image = (Image)sender;
-        await OpacityEffect.RunOpacity(image, 100);
     }
 
     private void PlayPauseMusicClicked(object? sender, EventArgs e)
@@ -116,6 +117,10 @@ public partial class SongPage
 
     private void Add_OnClicked(object? sender, EventArgs e)
     {
+        ShowMoreMenu.SongName = SongName;
+        ShowMoreMenu.SingerName = SingerName;
+        ShowMoreMenu.SongThumbnail = SongThumbnail;
+        ShowMoreMenu.TranslateTo(0, 0, 500);
     }
 
     private void Download_OnClicked(object? sender, EventArgs e)
@@ -199,5 +204,10 @@ public partial class SongPage
     private async void Process_OnOnValueChangeCompleted(object? sender, double e)
     {
         await RootMediaElement.SeekTo(TimeSpan.FromSeconds(e));
+    }
+
+    private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)
+    {
+        ShowMoreMenu.TranslateTo(0, DeviceDisplay.Current.MainDisplayInfo.Height, 500);
     }
 }

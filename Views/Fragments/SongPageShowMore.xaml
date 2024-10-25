@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Fragments.SongPageShowMore"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:content="clr-namespace:maui_music_application.Views.Fragments"
+             x:DataType="content:SongPageShowMore">
+    <ScrollView
+        Background="{StaticResource PrimaryDark }"
+        VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            Padding="25">
+            <FlexLayout JustifyContent="SpaceBetween">
+                <ImageButton
+                    Source="arrow_left_white.svg"
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    Padding="5"
+                    CornerRadius="99999"
+                    Clicked="Back_OnClicked" />
+                <ImageButton
+                    Source="heart_blue.svg"
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    Padding="5"
+                    CornerRadius="99999"
+                    Clicked="Heart_OnTapped" />
+            </FlexLayout>
+
+            <Frame
+                BackgroundColor="{StaticResource NullBackground}"
+                BorderColor="{StaticResource NullBackground}"
+                CornerRadius="10">
+                <Image
+                    Source="{Binding SongThumbnail}"
+                    Aspect="Fill"
+                    HeightRequest="250"
+                    WidthRequest="250" />
+            </Frame>
+
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                Margin="0,0,0,35"
+                Spacing="5">
+                <Label
+                    Text="{Binding SongName}"
+                    FontSize="24"
+                    TextColor="White"
+                    FontFamily="MulishVariableFont"
+                    HorizontalOptions="Center" />
+                <Label
+                    Text="{Binding SingerName}"
+                    TextColor="{StaticResource Text2}"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Spacing="20">
+                <buttons:ButtonIcon
+                    Icon="add_music.png"
+                    Title="Add to playlist" />
+                <buttons:ButtonIcon
+                    Icon="add_queue.png"
+                    Title="Add to queue" />
+                <buttons:ButtonIcon
+                    Icon="remove_white.svg"
+                    Title="Remove from playlist" />
+                <buttons:ButtonIcon
+                    Icon="tag_white.svg"
+                    Title="Modify tags" />
+                <buttons:ButtonIcon
+                    Icon="artist.png"
+                    Title="View Artist" />
+                <buttons:ButtonIcon
+                    Icon="album_white.svg"
+                    Title="View Album" />
+                <buttons:ButtonIcon
+                    Icon="user_information.png"
+                    Title="Show Credits" />
+                <buttons:ButtonIcon
+                    Icon="download_white.svg"
+                    Title="Download" />
+                <buttons:ButtonIcon
+                    Icon="share.svg"
+                    Title="Share" />
+                <buttons:ButtonIcon
+                    Icon="qr.svg"
+                    Title="Generate QR Code" />
+                <buttons:ButtonIcon
+                    Icon="moon_white.svg"
+                    Title="Sleep Timer" />
+                <buttons:ButtonIcon
+                    Icon="ban_white.svg"
+                    Title="Hide song" />
+                <buttons:ButtonIcon
+                    Icon="radio_white.svg"
+                    Title="Go to Song Radio" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

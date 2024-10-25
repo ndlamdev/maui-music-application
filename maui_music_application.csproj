@@ -82,6 +82,9 @@
         <MauiXaml Update="Views\Layouts\GridLayout.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Fragments\SongPageShowMore.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -100,6 +103,10 @@
         </Compile>
         <Compile Update="Views\Layouts\GridLayout.xaml.cs">
           <DependentUpon>GridLayout.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Fragments\SongPageShowMore.xaml.cs">
+          <DependentUpon>SongPageShowMore.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
