@@ -10,7 +10,7 @@ namespace maui_music_application.Views.Pages;
 
 public partial class SongPage
 {
-    private readonly PlayListMusic _playlist = SongPageData.Playlist;
+    private PlayListMusic _playlist = SongPageData.Playlist;
 
     private int _indexCurrentMusic, _previousIndexMusic;
     private int _degree;
@@ -21,8 +21,27 @@ public partial class SongPage
     {
         InitializeComponent();
         BindingContext = this;
-        Log.Info("SongPage", $"Height: {DeviceDisplay.Current.MainDisplayInfo.Height}");
         ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
+    }
+
+    public SongPage(PlayListMusic playListMusic, int position)
+    {
+        _indexCurrentMusic = position;
+        _previousIndexMusic = position;
+        _playlist = playListMusic;
+        InitializeComponent();
+        BindingContext = this;
+        ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsVisible = false
+        });
     }
 
     public string PlayListName => _playlist.Title;
@@ -43,6 +62,7 @@ public partial class SongPage
     private async void Playlist_OnTapped(object sender, TappedEventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
+        await Navigation.PopAsync();
     }
 
     private async void Share_OnTapped(object? sender, EventArgs eventArgs)
@@ -154,7 +174,7 @@ public partial class SongPage
 
     public MediaSource? MusicMediaSource
     {
-        get => _mediaSource ?? MediaSource.FromUri(_playlist.Musics![0].Uri);
+        get => _mediaSource ?? MediaSource.FromUri(_playlist.Musics![_indexCurrentMusic].Uri);
         set
         {
             _mediaSource = value;

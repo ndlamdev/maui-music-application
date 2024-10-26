@@ -71,8 +71,8 @@ public partial class HomePage
         MusicInTop.Rows = DataDemo.MusicInTops.Length;
         MusicInTop.Adapter(new MusicInTopAdapter(DataDemo.MusicInTops));
 
-        MusicInPlayList.Rows = DataDemo.MusicInPlayLists.Length;
-        MusicInPlayList.Adapter(new MusicInPlayListAdapter(DataDemo.MusicInPlayLists));
+        // MusicInPlayList.Rows = DataDemo.MusicInPlayLists.Length;
+        // MusicInPlayList.Adapter(new MusicInPlayListAdapter(DataDemo.MusicInPlayLists));
     }
 
     private void StartMusic(object? sender, EventArgs e)

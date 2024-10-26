@@ -85,6 +85,9 @@
         <MauiXaml Update="Views\Fragments\SongPageShowMore.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Components\Musics\MusicInPlayList.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -109,6 +112,10 @@
           <DependentUpon>SongPageShowMore.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Components\Musics\MusicInPlayList.xaml.cs">
+          <DependentUpon>MusicInPlayList.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -121,7 +128,6 @@
         <AdditionalFiles Include="Views\Components\Categories\PlayListMusic.xaml" />
         <AdditionalFiles Include="Views\Components\Categories\PlayListMusicLarge.xaml" />
         <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml" />
-        <AdditionalFiles Include="Views\Components\Musics\MusicInPlayList.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />

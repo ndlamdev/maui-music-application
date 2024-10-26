@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.PlayListMusicPage"
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
+             xmlns:content="clr-namespace:maui_music_application.Views.Pages"
+             x:DataType="content:PlayListMusicPage">
+    <Grid
+        Padding="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <VerticalStackLayout>
+            <FlexLayout
+                AlignItems="Center"
+                JustifyContent="SpaceBetween">
+                <ImageButton
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    CornerRadius="99999"
+                    Source="arrow_left_white.svg"
+                    Clicked="OnBack" />
+                <Label
+                    Text="FROM “PLAYLISTS”"
+                    FontSize="20" />
+                <ImageButton
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    CornerRadius="99999"
+                    Source="option_vertical.svg"
+                    Clicked="OnOption" />
+            </FlexLayout>
+            <Frame
+                WidthRequest="250"
+                HeightRequest="250"
+                CornerRadius="15"
+                Margin="0,25,0,25">
+                <Image
+                    WidthRequest="250"
+                    HeightRequest="250"
+                    Source="{Binding PlayListThumbnail}"
+                    Aspect="Fill" />
+            </Frame>
+
+            <VerticalStackLayout
+                Margin="0, 0, 0, 40"
+                HorizontalOptions="Center"
+                Spacing="5">
+                <Label
+                    Text="{Binding PlayListName}"
+                    FontSize="24"
+                    TextColor="White"
+                    FontFamily="MulishVariableFont"
+                    HorizontalTextAlignment="Center" />
+                <Label
+                    Text="{Binding PlayListType}"
+                    TextColor="{StaticResource Text2}"
+                    HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+        <layouts:GridLayout
+            x:Name="GridLayoutMusic"
+            Grid.Row="1"
+            Columns="1"
+            RowSpacing="10" />
+    </Grid>
+</ContentPage>

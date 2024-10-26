@@ -22,7 +22,7 @@ public class PlayListMusicLargeAdapter(PlayListMusicLargeModel[] listData)
         {
             Title = data.Title,
             SubTitle = data.SubTitle,
-            Source = data.Image,
+            Source = data.Thumbnail,
             Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
         };
         return view;

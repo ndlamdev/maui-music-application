@@ -4,6 +4,7 @@
 // Create at: 09:09:00 - 26/09/2024
 // User: Lam Nguyen
 
+using Android.App;
 using Android.Util;
 using maui_music_application.Helpers;
 
@@ -11,8 +12,7 @@ namespace maui_music_application.Views.Components.Musics;
 
 public partial class MusicInPlayList
 {
-    private const string KeyDrag = "ElementIsDragging";
-    private int _index, _initIndex = -1;
+    private string? _songName, _singerName, _songThumbnail;
 
     public MusicInPlayList()
     {
@@ -28,73 +28,47 @@ public partial class MusicInPlayList
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += async (_, _) =>
             {
-                value.Invoke();
                 await OpacityEffect.RunOpacity(this, 100);
+                value.Invoke();
             };
             GestureRecognizers.Add(tapGestureRecognizer);
         }
     }
 
-    public string Name
-    {
-        set => NameLabel.Text = value;
-    }
+    public Action? OptionAction { get; set; }
 
-    public string Singer
+    public string SongName
     {
-        set => SingerLabel.Text = value;
-    }
-
-    private void DragGestureRecognizer_OnDragStarting(object? sender, DragStartingEventArgs e)
-    {
-        e.Data.Properties.Add(KeyDrag, this);
-        Vibration.Vibrate(TimeSpan.FromMilliseconds(100));
-        Opacity = 0;
-    }
-
-    private void DropGestureRecognizer_OnDragOver(object? sender, DragEventArgs e)
-    {
-        if (GetElementDragging(e) is not { } element) return;
-        var index = CurrentIndexWithTranslationY(element);
-        Log.Info("Index MusicInPlayList", index.ToString());
-        (element.Index, Index) = (Index, element.Index);
-    }
-
-    private double GetRealHeight() => Height + Margin.Bottom;
-
-    private double GetTranslationYInitWithParent()
-    {
-        return _initIndex * GetRealHeight();
-    }
-
-    public int Index
-    {
-        get => _index;
+        get => _songName ?? "";
         set
         {
-            _index = value;
-            if (_initIndex.Equals(-1))
-                _initIndex = value;
-            else this.TranslateTo(0, _index * GetRealHeight() - GetTranslationYInitWithParent(), 100, Easing.SinInOut);
+            _songName = value;
+            OnPropertyChanged();
         }
     }
 
-    private async void DragGestureRecognizer_OnDropCompleted(object? sender, DropCompletedEventArgs e)
+    public string SingerName
     {
-        await this.TranslateTo(0, _index * GetRealHeight() - GetTranslationYInitWithParent(), 200, Easing.SinInOut);
-        Opacity = 1;
+        get => _singerName ?? "";
+        set
+        {
+            _singerName = value;
+            OnPropertyChanged();
+        }
     }
 
-    private static MusicInPlayList? GetElementDragging(DragEventArgs e)
+    public string SongThumbnail
     {
-        if (!e.Data.Properties.TryGetValue(KeyDrag, out var valueElementIsDragging)
-            || valueElementIsDragging is not MusicInPlayList element) return null;
-
-        return element;
+        get => _songThumbnail ?? "";
+        set
+        {
+            _songThumbnail = value;
+            OnPropertyChanged();
+        }
     }
 
-    private int CurrentIndexWithTranslationY(MusicInPlayList element)
+    private void ImageButton_OnClicked(object? sender, EventArgs e)
     {
-        return (int)Math.Floor((element.TranslationY + element.GetTranslationYInitWithParent()) / GetRealHeight());
+        OptionAction?.Invoke();
     }
 }

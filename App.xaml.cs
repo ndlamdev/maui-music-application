@@ -1,13 +1,11 @@
-﻿using maui_music_application.Views.Pages;
+﻿namespace maui_music_application;
 
-namespace maui_music_application;
-
-public partial class App : Application
+public partial class App
 {
     public App()
     {
         InitializeComponent();
 
-        MainPage = new SongPage();
+        MainPage = new AppShell();
     }
 }

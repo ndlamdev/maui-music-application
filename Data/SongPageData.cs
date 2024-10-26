@@ -10,8 +10,9 @@ namespace maui_music_application.Data;
 
 public class SongPageData
 {
-    public static readonly PlayListMusic Playlist = new("", "My playlist", "")
+    public static readonly PlayListMusic Playlist = new("", "My playlist", "playlist_thumbnail.png")
     {
+        Type = "soft, chill, dreamy, lo-fi beats",
         Musics =
         [
             new Music("", "Bầu trời mới", "Dalab", "song_image.png",
