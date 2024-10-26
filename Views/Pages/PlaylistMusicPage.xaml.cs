@@ -10,21 +10,21 @@ using maui_music_application.Views.Adapters;
 
 namespace maui_music_application.Views.Pages;
 
-public partial class PlayListMusicPage
+public partial class PlaylistMusicPage
 {
-    private readonly PlayListMusic _playListMusic = SongPageData.Playlist;
+    private readonly PlaylistMusic _playlistMusic = SongPageData.Playlist;
 
-    public PlayListMusicPage()
+    public PlaylistMusicPage()
     {
         InitializeComponent();
         BindingContext = this;
-        GridLayoutMusic.Rows = _playListMusic.Musics!.Count;
-        GridLayoutMusic.Adapter(new MusicInPlayListAdapter(_playListMusic, Navigation));
+        GridLayoutMusic.Rows = _playlistMusic.Musics!.Count;
+        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistMusic, Navigation));
     }
 
-    public string PlayListThumbnail => _playListMusic.Thumbnail;
-    public string PlayListName => _playListMusic.Title;
-    public string PlayListType => _playListMusic.Type;
+    public string PlayListThumbnail => _playlistMusic.Thumbnail;
+    public string PlayListName => _playlistMusic.Title;
+    public string PlayListType => _playlistMusic.Type;
 
     private void OnBack(object? sender, EventArgs e)
     {

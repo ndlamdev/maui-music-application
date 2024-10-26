@@ -2,10 +2,10 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.PlayListMusicPage"
+             x:Class="maui_music_application.Views.Pages.PlaylistMusicPage"
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
              xmlns:content="clr-namespace:maui_music_application.Views.Pages"
-             x:DataType="content:PlayListMusicPage">
+             x:DataType="content:PlaylistMusicPage">
     <Grid
         Padding="25">
         <Grid.RowDefinitions>

@@ -1,0 +1,25 @@
+// Author: Nguyen Dinh Lam
+// Email: kiminonawa1305@gmail.com
+// Phone number: +84 855354919
+// Create at: 07:09:04 - 23/09/2024
+// User: Lam Nguyen
+
+using Android.Util;
+using maui_music_application.Models;
+using maui_music_application.Views.Layouts;
+
+namespace maui_music_application.Views.Adapters;
+
+public class PlaylistMusicAdapter(PlaylistMusic[] listData) : GridLayoutAdapter<PlaylistMusic>(listData)
+{
+    public override IView LoadContentView(int _,PlaylistMusic data)
+    {
+        var view = new Components.Categories.PlaylistMusic
+        {
+            Title = data.Title,
+            Source = data.Thumbnail,
+            Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
+        };
+        return view;
+    }
+}

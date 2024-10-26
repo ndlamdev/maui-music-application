@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 
 namespace maui_music_application;
 
@@ -22,6 +23,7 @@ public static class MauiProgram
                 fonts.AddFont("Century-Gothic-Bold.otf", "CenturyGothicBold");
                 fonts.AddFont("Century-Gothic.otf", "CenturyGothic");
             });
+        builder.Services.AddSingleton(AudioManager.Current);
 
 #if DEBUG
         builder.Logging.AddDebug();

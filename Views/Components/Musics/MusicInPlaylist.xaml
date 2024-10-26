@@ -3,8 +3,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
-             x:Class="maui_music_application.Views.Components.Musics.MusicInPlayList"
-             x:DataType="musics:MusicInPlayList"
+             x:Class="maui_music_application.Views.Components.Musics.MusicInPlaylist"
+             x:DataType="musics:MusicInPlaylist"
              HeightRequest="50"
              Margin="0,0,0,10">
     <FlexLayout

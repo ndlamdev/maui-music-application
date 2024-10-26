@@ -5,5 +5,5 @@
        xmlns:local="clr-namespace:maui_music_application.Views.Pages"
        x:Class="maui_music_application.AppShell">
 
-    <ShellContent Title="" ContentTemplate="{DataTemplate local:PlayListMusicPage}" />
+    <ShellContent Title="" ContentTemplate="{DataTemplate local:PlaylistMusicPage}" />
 </Shell>

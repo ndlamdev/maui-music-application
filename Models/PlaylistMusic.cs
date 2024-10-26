@@ -6,7 +6,7 @@
 
 namespace maui_music_application.Models;
 
-public class PlayListMusic(string id, string title, string thumbnail, List<Music>? musics = null, string type = "")
+public class PlaylistMusic(string id, string title, string thumbnail, List<Music>? musics = null, string type = "")
 {
     public string Id { get; set; } = id;
 

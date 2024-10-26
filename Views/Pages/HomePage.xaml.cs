@@ -58,12 +58,12 @@ public partial class HomePage
         KindMusic.Adapter(new KindMusicAdapter(DataDemo.Categories));
 
         PlayList.Rows = DataDemo.PlayLists.Length / 2;
-        PlayList.Adapter(new PlayListMusicAdapter(DataDemo.PlayLists));
+        PlayList.Adapter(new PlaylistMusicAdapter(DataDemo.PlayLists));
 
-        PlayListLarge.Adapter(new PlayListMusicLargeAdapter(DataDemo.PlayListLarges));
+        PlayListLarge.Adapter(new PlaylistMusicLargeAdapter(DataDemo.PlayListLarges));
 
         FolderPlayList.Rows = DataDemo.FolderPlayList.Length;
-        FolderPlayList.Adapter(new FolderPlayListMusicAdapter(DataDemo.FolderPlayList));
+        FolderPlayList.Adapter(new FolderPlaylistMusicAdapter(DataDemo.FolderPlayList));
 
         TopMixes.Columns = DataDemo.TopMixes.Length;
         TopMixes.Adapter(new TopMixesAdapter(DataDemo.TopMixes));
@@ -111,7 +111,7 @@ internal static class DataDemo
         new("Pop", "Pop", "music_kpop.png"),
     ];
 
-    public static readonly PlayListMusic[] PlayLists =
+    public static readonly PlaylistMusic[] PlayLists =
     [
         new("Coffee & Jazz", "Coffee & Jazz", "music_kpop.png"),
         new("RELEASED", "RELEASED", "music_kpop.png"),
@@ -121,7 +121,7 @@ internal static class DataDemo
         new("Lo-Fi Beats", "Lo-Fi Beats", "music_kpop.png"),
     ];
 
-    public static readonly PlayListMusicLarge[] PlayListLarges =
+    public static readonly PlaylistMusicLarge[] PlayListLarges =
     [
         new("current favorites", "current favorites", "20 songs", "music_kpop.png"),
         new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
@@ -133,7 +133,7 @@ internal static class DataDemo
         new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
     ];
 
-    public static readonly FolderPlayListMusic[] FolderPlayList =
+    public static readonly FolderPlaylistMusic[] FolderPlayList =
     [
         new("moods", "moods", "11 playlists"),
         new("blends", "blends", "8 playlists"),

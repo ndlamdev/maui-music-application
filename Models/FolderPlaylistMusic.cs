@@ -6,7 +6,7 @@
 
 namespace maui_music_application.Models;
 
-public class FolderPlayListMusic(string id, string title, string subTitle)
-    : PlayListMusicLarge(id, title, subTitle, "folder_icon.png")
+public class FolderPlaylistMusic(string id, string title, string subTitle)
+    : PlaylistMusicLarge(id, title, subTitle, "folder_icon.png")
 {
 }

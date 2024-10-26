@@ -8,9 +8,9 @@ using maui_music_application.Helpers;
 
 namespace maui_music_application.Views.Components.Categories;
 
-public partial class PlayListMusicLarge
+public partial class PlaylistMusicLarge
 {
-    public PlayListMusicLarge()
+    public PlaylistMusicLarge()
     {
         InitializeComponent();
     }

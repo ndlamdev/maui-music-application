@@ -61,6 +61,7 @@
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -85,7 +86,7 @@
         <MauiXaml Update="Views\Fragments\SongPageShowMore.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Components\Musics\MusicInPlayList.xaml">
+        <MauiXaml Update="Views\Components\Musics\MusicInPlaylist.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
@@ -112,7 +113,7 @@
           <DependentUpon>SongPageShowMore.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Components\Musics\MusicInPlayList.xaml.cs">
+        <Compile Update="Views\Components\Musics\MusicInPlaylist.xaml.cs">
           <DependentUpon>MusicInPlayList.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
@@ -125,8 +126,8 @@
         <AdditionalFiles Include="Views\Components\Buttons\ButtonPaddingBottom.xaml" />
         <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml" />
         <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\PlayListMusic.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\PlayListMusicLarge.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusic.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusicLarge.xaml" />
         <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />

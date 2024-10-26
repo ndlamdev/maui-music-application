@@ -5,20 +5,19 @@
 // User: Lam Nguyen
 
 using Android.Util;
+using maui_music_application.Models;
 using maui_music_application.Views.Components.Categories;
 using maui_music_application.Views.Layouts;
+using PlaylistMusicLarge = maui_music_application.Views.Components.Categories.PlaylistMusicLarge;
 
 namespace maui_music_application.Views.Adapters;
 
-using PlayListMusicLargeModel = Models.PlayListMusicLarge;
-using PlayListMusicLargeView = PlayListMusicLarge;
-
-public class PlayListMusicLargeAdapter(PlayListMusicLargeModel[] listData)
-    : GridLayoutAdapter<PlayListMusicLargeModel>(listData)
+public class PlaylistMusicLargeAdapter(Models.PlaylistMusicLarge[] listData)
+    : GridLayoutAdapter<Models.PlaylistMusicLarge>(listData)
 {
-    public override IView LoadContentView(int _,PlayListMusicLargeModel data)
+    public override IView LoadContentView(int _,Models.PlaylistMusicLarge data)
     {
-        var view = new PlayListMusicLargeView
+        var view = new PlaylistMusicLarge
         {
             Title = data.Title,
             SubTitle = data.SubTitle,

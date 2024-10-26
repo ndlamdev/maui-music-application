@@ -10,7 +10,7 @@ namespace maui_music_application.Views.Pages;
 
 public partial class SongPage
 {
-    private PlayListMusic _playlist = SongPageData.Playlist;
+    private PlaylistMusic _playlist = SongPageData.Playlist;
 
     private int _indexCurrentMusic, _previousIndexMusic;
     private int _degree;
@@ -24,11 +24,11 @@ public partial class SongPage
         ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
     }
 
-    public SongPage(PlayListMusic playListMusic, int position)
+    public SongPage(PlaylistMusic playlistMusic, int position)
     {
         _indexCurrentMusic = position;
         _previousIndexMusic = position;
-        _playlist = playListMusic;
+        _playlist = playlistMusic;
         InitializeComponent();
         BindingContext = this;
         ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;

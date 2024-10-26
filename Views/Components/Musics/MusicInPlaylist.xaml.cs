@@ -10,11 +10,11 @@ using maui_music_application.Helpers;
 
 namespace maui_music_application.Views.Components.Musics;
 
-public partial class MusicInPlayList
+public partial class MusicInPlaylist
 {
     private string? _songName, _singerName, _songThumbnail;
 
-    public MusicInPlayList()
+    public MusicInPlaylist()
     {
         InitializeComponent();
         BindingContext = this;

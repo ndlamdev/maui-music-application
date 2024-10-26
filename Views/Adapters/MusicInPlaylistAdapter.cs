@@ -13,14 +13,14 @@ using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Adapters;
 
-public class MusicInPlayListAdapter(PlayListMusic playListMusic, INavigation navigation)
-    : GridLayoutAdapter<Music>(playListMusic.Musics!.ToArray())
+public class MusicInPlaylistAdapter(PlaylistMusic playlistMusic, INavigation navigation)
+    : GridLayoutAdapter<Music>(playlistMusic.Musics!.ToArray())
 {
     public override IView LoadContentView(int position, Music data)
     {
         Log.Info("MusicInPlayListAdapter", data.Name);
 
-        return new MusicInPlayList()
+        return new MusicInPlaylist()
         {
             SongName = data.Name,
             SingerName = data.Signer,
@@ -30,7 +30,7 @@ public class MusicInPlayListAdapter(PlayListMusic playListMusic, INavigation nav
 
         async void Action()
         {
-            await navigation.PushAsync(new SongPage(playListMusic, position));
+            await navigation.PushAsync(new SongPage(playlistMusic, position));
         }
     }
 }
