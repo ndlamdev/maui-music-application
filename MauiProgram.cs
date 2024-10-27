@@ -1,4 +1,5 @@
-﻿using maui_music_application.Models;
+﻿using maui_music_application.Handlers;
+using maui_music_application.Models;
 using maui_music_application.Services;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,7 @@ public static class MauiProgram
                 fonts.AddFont("Century-Gothic.otf", "CenturyGothic");
             });
 
+        FormHandler.RemoveBorders();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

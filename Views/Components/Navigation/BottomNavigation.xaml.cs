@@ -35,7 +35,7 @@ public partial class BottomNavigation
             {
                 item.TranslateTo(0, selected ? -10 : 0, 200, Easing.SinInOut);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 item.TranslationY = selected ? -10 : 0;
             }

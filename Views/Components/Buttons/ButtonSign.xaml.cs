@@ -11,10 +11,13 @@ namespace maui_music_application.Views.Components.Buttons;
 public partial class ButtonSign
 {
     public event EventHandler? Clicked;
+    private int _spacingIcon = 10;
+    private int _widthRequestText = 200;
 
     public ButtonSign()
     {
         InitializeComponent();
+        BindingContext = this;
     }
 
     public Action Action
@@ -22,7 +25,7 @@ public partial class ButtonSign
         set
         {
             var action = new TapGestureRecognizer();
-            action.Tapped += async (sender, args) =>
+            action.Tapped += async (_, _) =>
             {
                 value?.Invoke();
                 await OpacityEffect.RunOpacity(this, 100);
@@ -45,5 +48,25 @@ public partial class ButtonSign
     public string Title
     {
         set => Label.Text = value;
+    }
+
+    public int SpacingIcon
+    {
+        get => _spacingIcon;
+        set
+        {
+            _spacingIcon = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int WidthRequestText
+    {
+        get => _widthRequestText;
+        set
+        {
+            _widthRequestText = value;
+            OnPropertyChanged();
+        }
     }
 }

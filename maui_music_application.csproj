@@ -81,6 +81,18 @@
         <MauiXaml Update="Views\Layouts\GridLayout.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Pages\LoginWithPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\SignUp.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\ForgetPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\VerifyCodePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -99,6 +111,25 @@
         </Compile>
         <Compile Update="Views\Layouts\GridLayout.xaml.cs">
           <DependentUpon>GridLayout.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\LoginWithPasswordPage.xaml.cs">
+          <DependentUpon>LoginWithPasswordPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
+          <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+        </Compile>
+        <Compile Update="Views\Pages\SignUp.xaml.cs">
+          <DependentUpon>SignUp.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
+          <DependentUpon>ForgetPassword.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\VerifyCodePage.xaml.cs">
+          <DependentUpon>VerifyCodePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>

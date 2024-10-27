@@ -14,8 +14,7 @@
                 x:Name="Label"
                 Text="Kpop"
                 Padding="10"
-                FontAttributes="Bold"
-                FontSize="16" />
+                FontAttributes="Bold" />
             <Frame
                 x:Name="FrameImage"
                 BackgroundColor="{DynamicResource NullBackground}"

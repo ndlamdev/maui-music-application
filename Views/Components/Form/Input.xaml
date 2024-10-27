@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Components.Form.Input"
+             xmlns:view="clr-namespace:maui_music_application.Views.Components.Form"
+             x:DataType="view:Input">
+    <Border Style="{StaticResource Input}">
+        <FlexLayout Direction="Row" AlignItems="Center" HorizontalOptions="Center">
+            <Image
+                x:Name="ImageIconLeft"
+                Source="{Binding IconLeft}"
+                WidthRequest="0"
+                HeightRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="IconLeftTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Entry
+                x:Name="InputEntry"
+                Placeholder="{Binding Placeholder}"
+                Text="{Binding Text}"
+                PlaceholderColor="White"
+                Margin="{Binding MarginEntry}"
+                IsPassword="{Binding ShowPassword}"
+                FlexLayout.Grow="1"
+                FlexLayout.Basis="1"
+                FontSize="{Binding FontSize}"
+                TextChanged="InputView_OnTextChanged" />
+            <Image
+                x:Name="ImageIconRight"
+                Source="{Binding IconRight}"
+                WidthRequest="0"
+                HeightRequest="20"
+                HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="IconRightTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </FlexLayout>
+    </Border>
+</ContentView>

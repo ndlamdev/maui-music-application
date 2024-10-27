@@ -44,7 +44,7 @@ public partial class Process
         }
     }
 
-    private string FormatTime(double time)
+    private static string FormatTime(double time)
     {
         var ts = TimeSpan.FromSeconds(time);
         return ts.ToString(@"mm\:ss");
