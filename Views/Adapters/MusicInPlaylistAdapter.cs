@@ -18,8 +18,6 @@ public class MusicInPlaylistAdapter(PlaylistMusic playlistMusic, INavigation nav
 {
     public override IView LoadContentView(int position, Music data)
     {
-        Log.Info("MusicInPlayListAdapter", data.Name);
-
         return new MusicInPlaylist()
         {
             SongName = data.Name,

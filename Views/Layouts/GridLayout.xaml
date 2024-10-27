@@ -6,6 +6,7 @@
     <ScrollView x:Name="ScrollView"
                 HorizontalScrollBarVisibility="Never"
                 VerticalScrollBarVisibility="Never"
+                Orientation="Vertical"
                 Scrolled="OnScrollViewScrolled">
         <Frame Padding="0"
                BackgroundColor="{DynamicResource NullBackground}"

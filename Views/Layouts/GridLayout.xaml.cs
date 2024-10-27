@@ -5,6 +5,8 @@
 // User: Lam Nguyen
 
 
+using Android.Util;
+
 namespace maui_music_application.Views.Layouts;
 
 public partial class GridLayout
@@ -13,7 +15,6 @@ public partial class GridLayout
     private int _rows = 1;
     private int _currentRow, _currentColumn;
     private object? _adapter;
-    private ScrollOrientation _orientation = ScrollOrientation.Vertical;
 
     public GridLayout()
     {
@@ -32,13 +33,13 @@ public partial class GridLayout
         if (_adapter is not GridLayoutAdapter<T> adapter) return;
 
         adapter.ListData = adapter.ListData.Concat(data).ToArray();
-        if (_orientation == ScrollOrientation.Horizontal)
+        if (ScrollView.Orientation == ScrollOrientation.Horizontal)
         {
             var newColumn = adapter.ListData.Length / _rows;
             AddColumnDefinitions(newColumn - _columns);
             _columns = newColumn;
         }
-        else if (_orientation == ScrollOrientation.Vertical)
+        else if (ScrollView.Orientation == ScrollOrientation.Vertical)
         {
             var newRows = adapter.ListData.Length / _columns;
             AddRowDefinitions(newRows - _rows);
@@ -136,11 +137,7 @@ public partial class GridLayout
 
     public ScrollOrientation Orientation
     {
-        set
-        {
-            _orientation = value;
-            ScrollView.Orientation = value;
-        }
+        set => ScrollView.Orientation = value;
     }
 
     private void OnScrollViewScrolled(object? sender, ScrolledEventArgs e)

@@ -1,37 +1,33 @@
 using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
-using CommunityToolkit.Maui.Views;
-using maui_music_application.Data;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
-using Random = Java.Util.Random;
+using maui_music_application.Services;
+using maui_music_application.Services.impl;
 
 namespace maui_music_application.Views.Pages;
 
 public partial class SongPage
 {
-    private PlaylistMusic _playlist = SongPageData.Playlist;
-
-    private int _indexCurrentMusic, _previousIndexMusic;
     private int _degree;
-    private bool _random;
-    private MediaSource? _mediaSource;
-
-    public SongPage()
-    {
-        InitializeComponent();
-        BindingContext = this;
-        ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
-    }
+    private bool _playRandom;
+    private IAudioPlayerService AudioService { get; }
 
     public SongPage(PlaylistMusic playlistMusic, int position)
     {
-        _indexCurrentMusic = position;
-        _previousIndexMusic = position;
-        _playlist = playlistMusic;
         InitializeComponent();
-        BindingContext = this;
         ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
+        AudioService = AudioPlayerService.GetInstance();
+        AudioService.PositionChanged += OnPositionChanged;
+        AudioService.StateChanged += OnStateChanged;
+        AudioService.MediaFailed += OnMediaFailed;
+        AudioService.MediaEnded += OnMediaEnded;
+        PlayRandom = AudioService.PlayRandom;
+        SetIconButtonPlayPause();
+        AudioService.SetContent(RootView);
+        AudioService.Playlist = playlistMusic;
+        AudioService.Play(position);
+        BindingContext = this;
     }
 
     protected override void OnAppearing()
@@ -44,15 +40,15 @@ public partial class SongPage
         });
     }
 
-    public string PlayListName => _playlist.Title;
+    public string PlayListName => AudioService.Playlist!.Title;
 
-    public string SongName => _playlist.Musics![_indexCurrentMusic].Name;
+    public string SongName => AudioService.SongName;
 
     public string SingerName
-        => _playlist.Musics![_indexCurrentMusic].Signer;
+        => AudioService.SingerName;
 
     public string SongThumbnail
-        => _playlist.Musics![_indexCurrentMusic].Thumbnail;
+        => AudioService.SongThumbnail;
 
     private async void Option_OnTapped(object sender, TappedEventArgs e)
     {
@@ -67,163 +63,120 @@ public partial class SongPage
 
     private async void Share_OnTapped(object? sender, EventArgs eventArgs)
     {
-        await OpacityEffect.RunOpacity((View)sender, 100);
+        await OpacityEffect.RunOpacity((View)sender!, 100);
     }
 
-    private void Heart_OnTapped(object? sender, EventArgs eventArgs)
+    private async void Heart_OnTapped(object? sender, EventArgs eventArgs)
     {
+        await OpacityEffect.RunOpacity((View)sender!, 100);
     }
 
     private void PlayPauseMusicClicked(object? sender, EventArgs e)
     {
-        switch (RootMediaElement.CurrentState)
+        switch (AudioService.CurrentState())
         {
             case MediaElementState.Stopped or MediaElementState.Paused:
                 PlayPauseMusic.Icon = "play_white.svg";
-                RootMediaElement.Play();
+                AudioService.Play();
                 break;
             case MediaElementState.Playing:
                 PlayPauseMusic.Icon = "pause_white.svg";
-                RootMediaElement.Pause();
+                AudioService.Pause();
                 break;
         }
     }
 
-    private void Random_OnClicked(object? sender, EventArgs e)
+    private async void Random_OnClicked(object? sender, EventArgs e)
     {
-        Random = !_random;
+        await OpacityEffect.RunOpacity((View)sender!, 100);
+        PlayRandom = !PlayRandom;
     }
 
-    private void Previous_OnClicked(object? sender, EventArgs e)
+    private async void Previous_OnClicked(object? sender, EventArgs e)
     {
-        PlayMusic(ActionMusic.Previous);
+        await OpacityEffect.RunOpacity((View)sender!, 100);
+        AudioService.Previous();
     }
 
-    private void Next_OnClicked(object? sender, EventArgs e)
+    private async void Next_OnClicked(object? sender, EventArgs e)
     {
-        PlayMusic(ActionMusic.Next);
+        await OpacityEffect.RunOpacity((View)sender!, 100);
+        AudioService.Next();
     }
 
-    private void RootMediaElement_OnMediaEnded(object? sender, EventArgs e)
-    {
-        PlayMusic(ActionMusic.Next);
-    }
 
-    private void RootMediaElement_OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
+    private void OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
     {
-        if (!Process.Duration.Equals(RootMediaElement.Duration.TotalSeconds))
-            Process.Duration = RootMediaElement.Duration.TotalSeconds;
+        if (!Process.Duration.Equals(AudioService.Duration))
+            Process.Duration = AudioService.Duration;
         Process.TimeProgress = e.Position.TotalSeconds;
-        ImageSongThumbnail.RotateTo(_degree++);
+        ImageSongThumbnail.RotateTo(_degree += 2);
     }
 
-    private void RootMediaElement_OnMediaFailed(object? sender, MediaFailedEventArgs e)
+    private void OnMediaFailed(object? sender, MediaFailedEventArgs e)
     {
-        PlayMusic(ActionMusic.Next);
+        AudioService.Next();
     }
 
-    private void RootMediaElement_OnStateChanged(object? sender, MediaStateChangedEventArgs e)
+    private void OnStateChanged(object? sender, MediaStateChangedEventArgs e)
     {
-        PlayPauseMusic.Icon = RootMediaElement.CurrentState switch
+        SetIconButtonPlayPause();
+    }
+
+    private void OnMediaEnded(object? sender, EventArgs e)
+    {
+        AudioService.Next();
+    }
+
+    private void SetIconButtonPlayPause()
+    {
+        PlayPauseMusic.Icon = AudioService.CurrentState() switch
         {
             MediaElementState.Playing => "pause_white.svg",
             _ => "play_white.svg",
         };
     }
 
-    private void Equalizer_OnClicked(object? sender, EventArgs e)
+    private async void Equalizer_OnClicked(object? sender, EventArgs e)
     {
+        await OpacityEffect.RunOpacity((View)sender!, 100);
     }
 
-    private void Add_OnClicked(object? sender, EventArgs e)
+    private async void Add_OnClicked(object? sender, EventArgs e)
     {
+        await OpacityEffect.RunOpacity((View)sender!, 100);
         ShowMoreMenu.SongName = SongName;
         ShowMoreMenu.SingerName = SingerName;
         ShowMoreMenu.SongThumbnail = SongThumbnail;
-        ShowMoreMenu.TranslateTo(0, 0, 500);
+        await ShowMoreMenu.TranslateTo(0, 0, 500);
     }
 
-    private void Download_OnClicked(object? sender, EventArgs e)
+    private async void Download_OnClicked(object? sender, EventArgs e)
     {
+        await OpacityEffect.RunOpacity((View)sender!, 100);
     }
 
     private void Process_OnValueChanged(object? sender, ValueChangedEventArgs e)
     {
-        if (RootMediaElement.CurrentState == MediaElementState.Playing) RootMediaElement.Pause();
+        if (AudioService.CurrentState() == MediaElementState.Playing) AudioService.Pause();
+        _degree = (int)e.NewValue * 10;
+        ImageSongThumbnail.Rotation = _degree;
     }
 
-    private void PlayMusic(ActionMusic action)
+    public bool PlayRandom
     {
-        InitIndexCurrentMusic(action);
-        _degree = 0;
-        MusicMediaSource = MediaSource.FromFile(_playlist.Musics![_indexCurrentMusic].Uri);
-        OnPropertyChanged(nameof(SongThumbnail));
-        OnPropertyChanged(nameof(SongName));
-        OnPropertyChanged(nameof(SingerName));
-    }
-
-    public bool Random
-    {
-        get => _random;
+        get => _playRandom;
         set
         {
-            _random = value;
+            _playRandom = value;
+            AudioService.PlayRandom = value;
             OnPropertyChanged();
         }
     }
 
-    public MediaSource? MusicMediaSource
+    private void Process_OnValueChangeCompleted(object? sender, double e)
     {
-        get => _mediaSource ?? MediaSource.FromUri(_playlist.Musics![_indexCurrentMusic].Uri);
-        set
-        {
-            _mediaSource = value;
-            OnPropertyChanged();
-        }
-    }
-
-
-    private void ContentPage_Unloaded(object? sender, EventArgs e)
-    {
-        RootMediaElement.Handler?.DisconnectHandler();
-    }
-
-    private void InitIndexCurrentMusic(ActionMusic action)
-    {
-        if (action == ActionMusic.Previous) _indexCurrentMusic = _previousIndexMusic;
-        else
-        {
-            _previousIndexMusic = _indexCurrentMusic;
-            switch (_random)
-            {
-                case true:
-                    var random = new Random();
-                    _indexCurrentMusic = random.NextInt(_playlist.Musics!.Count);
-                    break;
-                case false when _indexCurrentMusic < _playlist.Musics!.Count - 1:
-                    _indexCurrentMusic++;
-                    break;
-                default:
-                    _indexCurrentMusic = 0;
-                    break;
-            }
-        }
-    }
-
-    private enum ActionMusic
-    {
-        Next,
-        Previous
-    }
-
-    private void RootMediaElement_OnSeekCompleted(object? sender, EventArgs e)
-    {
-        RootMediaElement.Play();
-    }
-
-    private async void Process_OnOnValueChangeCompleted(object? sender, double e)
-    {
-        await RootMediaElement.SeekTo(TimeSpan.FromSeconds(e));
+        AudioService.SeekTo(e);
     }
 
     private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)

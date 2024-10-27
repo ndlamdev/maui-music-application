@@ -4,6 +4,8 @@
 // Create at: 15:10:03 - 25/10/2024
 // User: Lam Nguyen
 
+using maui_music_application.Helpers;
+
 namespace maui_music_application.Views.Fragments;
 
 public partial class SongPageShowMore
@@ -46,15 +48,68 @@ public partial class SongPageShowMore
         }
     }
 
-    private void Back_OnClicked(object? sender, EventArgs e)
+    private async void Back_OnClicked(object? sender, EventArgs e)
     {
+        await OpacityEffect.RunOpacity((View)sender!, 100);
         OnBack?.Invoke(sender, e);
     }
 
-    private void Heart_OnTapped(object? sender, EventArgs e)
+    private async void Heart_OnTapped(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        await OpacityEffect.RunOpacity((View)sender!, 100);
     }
 
     public event EventHandler? OnBack;
+
+    private void OnAddToPlaylist(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnAddToQueue(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnRemoveFromPlaylist(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnModifyTags(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnViewArtist(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnViewAlbum(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnChowCredits(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnDownload(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnShare(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnGenerateQRCode(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnSleepTimer(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnHideSong(object? sender, EventArgs e)
+    {
+    }
+
+    private void OnGoToSongRadio(object? sender, EventArgs e)
+    {
+    }
 }

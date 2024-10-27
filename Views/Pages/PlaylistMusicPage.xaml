@@ -15,7 +15,8 @@
         <VerticalStackLayout>
             <FlexLayout
                 AlignItems="Center"
-                JustifyContent="SpaceBetween">
+                JustifyContent="SpaceBetween"
+                Margin="0,0,0,25">
                 <ImageButton
                     WidthRequest="30"
                     HeightRequest="30"
@@ -32,38 +33,44 @@
                     Source="option_vertical.svg"
                     Clicked="OnOption" />
             </FlexLayout>
-            <Frame
-                WidthRequest="250"
-                HeightRequest="250"
-                CornerRadius="15"
-                Margin="0,25,0,25">
-                <Image
+        </VerticalStackLayout>
+        <ScrollView
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout>
+                <Frame
                     WidthRequest="250"
                     HeightRequest="250"
-                    Source="{Binding PlayListThumbnail}"
-                    Aspect="Fill" />
-            </Frame>
+                    CornerRadius="15"
+                    Margin="0,0,0,25">
+                    <Image
+                        WidthRequest="250"
+                        HeightRequest="250"
+                        Source="{Binding PlayListThumbnail}"
+                        Aspect="Fill" />
+                </Frame>
 
-            <VerticalStackLayout
-                Margin="0, 0, 0, 40"
-                HorizontalOptions="Center"
-                Spacing="5">
-                <Label
-                    Text="{Binding PlayListName}"
-                    FontSize="24"
-                    TextColor="White"
-                    FontFamily="MulishVariableFont"
-                    HorizontalTextAlignment="Center" />
-                <Label
-                    Text="{Binding PlayListType}"
-                    TextColor="{StaticResource Text2}"
-                    HorizontalTextAlignment="Center" />
+                <VerticalStackLayout
+                    Margin="0, 0, 0, 40"
+                    HorizontalOptions="Center"
+                    Spacing="5">
+                    <Label
+                        Text="{Binding PlayListName}"
+                        FontSize="24"
+                        TextColor="White"
+                        FontFamily="MulishVariableFont"
+                        HorizontalTextAlignment="Center" />
+                    <Label
+                        Text="{Binding PlayListType}"
+                        TextColor="{StaticResource Text2}"
+                        HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <layouts:GridLayout
+                    x:Name="GridLayoutMusic"
+                    Columns="1"
+                    RowSpacing="10" />
             </VerticalStackLayout>
-        </VerticalStackLayout>
-        <layouts:GridLayout
-            x:Name="GridLayoutMusic"
-            Grid.Row="1"
-            Columns="1"
-            RowSpacing="10" />
+        </ScrollView>
     </Grid>
 </ContentPage>
