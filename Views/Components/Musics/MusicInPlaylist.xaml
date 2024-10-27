@@ -17,9 +17,7 @@
             <Frame
                 WidthRequest="50"
                 HeightRequest="50"
-                CornerRadius="5"
-                BorderColor="{StaticResource NullBackground}"
-                BackgroundColor="{StaticResource NullBackground}">
+                CornerRadius="5">
                 <Image
                     Source="{Binding SongThumbnail}"
                     WidthRequest="50"
@@ -27,8 +25,7 @@
                     Aspect="Fill" />
             </Frame>
             <VerticalStackLayout
-                VerticalOptions="Center"
-               >
+                VerticalOptions="Center">
                 <Label
                     Text="{Binding SongName}"
                     FontSize="16"

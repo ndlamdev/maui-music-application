@@ -5,7 +5,8 @@
              x:Class="maui_music_application.Views.Pages.PlaylistMusicPage"
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
              xmlns:content="clr-namespace:maui_music_application.Views.Pages"
-             x:DataType="content:PlaylistMusicPage">
+             x:DataType="content:PlaylistMusicPage"
+             BackgroundColor="{StaticResource Background}">
     <Grid
         Padding="25">
         <Grid.RowDefinitions>
@@ -17,21 +18,37 @@
                 AlignItems="Center"
                 JustifyContent="SpaceBetween"
                 Margin="0,0,0,25">
-                <ImageButton
-                    WidthRequest="30"
-                    HeightRequest="30"
+                <Frame
                     CornerRadius="99999"
-                    Source="arrow_left_white.svg"
-                    Clicked="OnBack" />
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                    <Image
+                        Source="arrow_left_white.svg"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBack" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
                 <Label
                     Text="FROM “PLAYLISTS”"
                     FontSize="20" />
-                <ImageButton
-                    WidthRequest="30"
-                    HeightRequest="30"
+                <Frame
                     CornerRadius="99999"
-                    Source="option_vertical.svg"
-                    Clicked="OnOption" />
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                    <Image
+                        Source="option_vertical.svg"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnOption" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
             </FlexLayout>
         </VerticalStackLayout>
         <ScrollView
@@ -57,7 +74,6 @@
                     <Label
                         Text="{Binding PlayListName}"
                         FontSize="24"
-                        TextColor="White"
                         FontFamily="MulishVariableFont"
                         HorizontalTextAlignment="Center" />
                     <Label

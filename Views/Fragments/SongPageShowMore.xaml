@@ -6,7 +6,7 @@
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
              xmlns:content="clr-namespace:maui_music_application.Views.Fragments"
              x:DataType="content:SongPageShowMore"
-             Background="{StaticResource PrimaryDark }">
+             Background="{StaticResource Background }">
     <Grid
         Padding="25">
         <Grid.RowDefinitions>
@@ -22,8 +22,7 @@
                 CornerRadius="99999"
                 Padding="5"
                 WidthRequest="40"
-                HeightRequest="40"
-                BackgroundColor="{StaticResource NullBackground}">
+                HeightRequest="40">
                 <Image
                     Source="arrow_left_white.svg"
                     WidthRequest="30"
@@ -37,8 +36,7 @@
                 CornerRadius="99999"
                 Padding="5"
                 WidthRequest="40"
-                HeightRequest="40"
-                BackgroundColor="{StaticResource NullBackground}">
+                HeightRequest="40">
                 <Image
                     Source="heart_blue.svg"
                     WidthRequest="30"
@@ -56,8 +54,6 @@
             Orientation="Vertical">
             <VerticalStackLayout>
                 <Frame
-                    BackgroundColor="{StaticResource NullBackground}"
-                    BorderColor="{StaticResource NullBackground}"
                     CornerRadius="10"
                     HeightRequest="250"
                     WidthRequest="250"

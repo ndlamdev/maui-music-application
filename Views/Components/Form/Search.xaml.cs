@@ -1,0 +1,28 @@
+// Author: Lam Nguyen
+// Email: ndlam.dev@gmail.com
+// Phone number: +84 855354919
+// Create at: 10:10:13 - 18/10/2024
+// User: Lam Nguyen
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace maui_music_application.Views.Components.Form;
+
+public partial class Search
+{
+    public Search()
+    {
+        InitializeComponent();
+    }
+
+    private void InputView_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        OnTextChanged?.Invoke(sender, e);
+    }
+
+    public event EventHandler<TextChangedEventArgs>? OnTextChanged;
+}

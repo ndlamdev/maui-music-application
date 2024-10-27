@@ -9,8 +9,7 @@
                 Orientation="Vertical"
                 Scrolled="OnScrollViewScrolled">
         <Frame Padding="0"
-               BackgroundColor="{DynamicResource NullBackground}"
-               BorderColor="{DynamicResource NullBackground}">
+               >
             <Grid x:Name="Grid" />
         </Frame>
     </ScrollView>

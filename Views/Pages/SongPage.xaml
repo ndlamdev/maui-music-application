@@ -8,7 +8,7 @@
              xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
              x:DataType="pages:SongPage"
-             BackgroundColor="{StaticResource PrimaryDark}">
+             BackgroundColor="{StaticResource Background}">
     <Grid
         x:Name="RootView">
         <Grid.RowDefinitions>
@@ -66,7 +66,6 @@
                     <Frame HeightRequest="300"
                            WidthRequest="300"
                            CornerRadius="999999"
-                           BorderColor="{StaticResource NullBackground}"
                            Margin="0, 40, 0, 25"
                            Padding="0">
                         <Image
@@ -100,8 +99,7 @@
                             CornerRadius="99999"
                             Padding="5"
                             WidthRequest="30"
-                            HeightRequest="30"
-                            BackgroundColor="{StaticResource NullBackground}">
+                            HeightRequest="30">
                             <Image
                                 Source="share.svg"
                                 WidthRequest="20"
@@ -115,8 +113,7 @@
                             CornerRadius="99999"
                             Padding="5"
                             WidthRequest="30"
-                            HeightRequest="30"
-                            BackgroundColor="{StaticResource NullBackground}">
+                            HeightRequest="30">
                             <Image
                                 Source="heart_blue.svg"
                                 WidthRequest="20"
@@ -190,8 +187,7 @@
                                 CornerRadius="99999"
                                 Padding="5"
                                 WidthRequest="35"
-                                HeightRequest="35"
-                                BackgroundColor="{StaticResource NullBackground}">
+                                HeightRequest="35">
                                 <Image
                                     Source="previous_white.svg"
                                     WidthRequest="25"
@@ -210,8 +206,7 @@
                                 CornerRadius="99999"
                                 Padding="5"
                                 WidthRequest="35"
-                                HeightRequest="35"
-                                BackgroundColor="{StaticResource NullBackground}">
+                                HeightRequest="35">
                                 <Image
                                     Source="next_white.svg"
                                     WidthRequest="25"
@@ -232,8 +227,7 @@
                             CornerRadius="99999"
                             Padding="5"
                             WidthRequest="30"
-                            HeightRequest="30"
-                            BackgroundColor="{StaticResource NullBackground}">
+                            HeightRequest="30">
                             <Image
                                 Source="equalizer.svg"
                                 WidthRequest="20"
@@ -247,8 +241,7 @@
                             CornerRadius="99999"
                             Padding="5"
                             WidthRequest="30"
-                            HeightRequest="30"
-                            BackgroundColor="{StaticResource NullBackground}">
+                            HeightRequest="30">
                             <Image
                                 Source="add_white.svg"
                                 WidthRequest="20"
@@ -267,8 +260,7 @@
                         CornerRadius="99999"
                         Padding="5"
                         WidthRequest="30"
-                        HeightRequest="30"
-                        BackgroundColor="{StaticResource NullBackground}">
+                        HeightRequest="30">
                         <Image
                             Source="download_white.svg"
                             WidthRequest="20"

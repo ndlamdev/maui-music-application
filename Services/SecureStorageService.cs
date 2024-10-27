@@ -15,7 +15,7 @@ public class SecureStorageService : ISecureStorageService
         catch (Exception ex)
         {
             // Handle any exceptions (e.g., secure storage not available)
-            Log.Error($"Error saving to secure storage: {ex.Message}", ex.StackTrace);
+            Log.Error($"Error saving to secure storage: {ex.Message}", ex.StackTrace ?? "");
         }
     }
 
@@ -38,7 +38,7 @@ public class SecureStorageService : ISecureStorageService
         catch (Exception ex)
         {
             // Log the error for debugging purposes
-            Log.Error($"Error retrieving data from secure storage: {ex.Message}", ex.StackTrace);
+            Log.Error($"Error retrieving data from secure storage: {ex.Message}", ex.StackTrace ?? "");
 
             // Rethrow the exception to propagate the error
             throw new Exception($"Failed to retrieve data for key '{key}'", ex);
@@ -61,7 +61,7 @@ public class SecureStorageService : ISecureStorageService
         catch (Exception ex)
         {
             // Handle any exceptions (e.g., secure storage not available)
-            Log.Error($"Error removing to secure storage: {ex.Message}", ex.StackTrace);
+            Log.Error($"Error removing to secure storage: {ex.Message}", ex.StackTrace ?? "");
         }
     }
 
@@ -74,7 +74,7 @@ public class SecureStorageService : ISecureStorageService
         catch (Exception ex)
         {
             // Handle any exceptions (e.g., secure storage not available)
-            Log.Error($"Error removing all to secure storage: {ex.Message}", ex.StackTrace);
+            Log.Error($"Error removing all to secure storage: {ex.Message}", ex.StackTrace ?? "");
         }
     }
 }

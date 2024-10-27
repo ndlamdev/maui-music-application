@@ -5,15 +5,11 @@
              x:Class="maui_music_application.Views.Components.Categories.PlaylistMusicLarge">
     <Frame
         x:Name="Frame"
-        BackgroundColor="{DynamicResource NullBackground}"
         HeightRequest="85"
-        BorderColor="{DynamicResource NullBackground}"
         Padding="0">
         <HorizontalStackLayout VerticalOptions="Center">
             <Frame
                 x:Name="FrameImage"
-                BackgroundColor="{DynamicResource NullBackground}"
-                BorderColor="{DynamicResource NullBackground}"
                 Padding="0"
                 Margin="0, 0, 10, 0"
                 CornerRadius="15">

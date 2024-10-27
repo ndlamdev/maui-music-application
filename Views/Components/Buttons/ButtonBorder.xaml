@@ -12,10 +12,21 @@
         TextColor="{Binding ColorButton}"
         FontSize="{Binding FontSize}"
         FontFamily="CenturyGothic"
-        BackgroundColor="{DynamicResource NullBackground}"
         CornerRadius="9999"
         BorderColor="{Binding ColorButton}"
         BorderWidth="1"
         HorizontalOptions="CenterAndExpand"
-        Padding="14, 4" />
+        Padding="20, 4"
+        Background="{StaticResource BackgroundButtonBorder}">
+        <Button.Triggers>
+            <DataTrigger TargetType="Button" Binding="{Binding Selected}" Value="True">
+                <Setter Property="Background" Value="{StaticResource BackgroundButtonBorder}" />
+                <Setter Property="BorderWidth" Value="0" />
+            </DataTrigger>
+            <DataTrigger TargetType="Button" Binding="{Binding Selected}" Value="False">
+                <Setter Property="Background" Value="{StaticResource NullBackground}" />
+                <Setter Property="BorderWidth" Value="1" />
+            </DataTrigger>
+        </Button.Triggers>
+    </Button>
 </ContentView>

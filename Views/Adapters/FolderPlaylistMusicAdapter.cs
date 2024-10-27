@@ -14,12 +14,12 @@ namespace maui_music_application.Views.Adapters;
 public class FolderPlaylistMusicAdapter(FolderPlaylistMusic[] listData)
     : GridLayoutAdapter<FolderPlaylistMusic>(listData)
 {
-    public override IView LoadContentView(int _,FolderPlaylistMusic data)
+    public override IView LoadContentView(int _, FolderPlaylistMusic data)
     {
         var view = new PlaylistMusicLarge
         {
             Title = data.Title,
-            SubTitle = data.SubTitle,
+            SubTitle = $"{data.Playlists.Count} playlists",
             Source = data.Thumbnail,
             Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
         };

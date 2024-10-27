@@ -17,10 +17,8 @@
                HeightRequest="25" />
         <Label
             x:Name="Label"
-            TextColor="{StaticResource White}"
-            FontFamily="CenturyGothic"
             FontAttributes="Bold"
-            FontSize="16"
+            TextColor="White"
             VerticalOptions="Center" />
     </HorizontalStackLayout>
 </ContentView>

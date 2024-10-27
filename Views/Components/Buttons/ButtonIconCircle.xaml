@@ -15,8 +15,6 @@
         VerticalOptions="Center">
         <Frame
             CornerRadius="9999"
-            BorderColor="{DynamicResource NullBackground}"
-            BackgroundColor="{DynamicResource NullBackground}"
             Padding="{Binding PaddingButton}"
             Background="{StaticResource Button}">
             <Frame.GestureRecognizers>

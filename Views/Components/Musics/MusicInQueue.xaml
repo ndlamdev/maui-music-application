@@ -22,12 +22,9 @@
             <CheckBox />
             <VerticalStackLayout>
                 <Label
-                    x:Name="NameLabel"
-                    FontSize="16"
-                    TextColor="White" />
+                    x:Name="NameLabel" />
                 <Label
                     x:Name="SingerLabel"
-                    FontSize="16"
                     TextColor="{DynamicResource Text2}" />
             </VerticalStackLayout>
         </HorizontalStackLayout>

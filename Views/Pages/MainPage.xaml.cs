@@ -1,4 +1,6 @@
-﻿namespace maui_music_application.Views.Pages;
+﻿using maui_music_application.Views.Fragments;
+
+namespace maui_music_application.Views.Pages;
 
 public partial class MainPage
 {

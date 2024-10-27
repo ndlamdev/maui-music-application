@@ -21,8 +21,8 @@
     </ContentView.Resources>
 
     <!-- Header if has user -->
-    <StackLayout Padding="10"
-                 BackgroundColor="Transparent">
+    <StackLayout
+        BackgroundColor="Transparent">
         <FlexLayout Direction="Row" IsVisible="{Binding HasUser}"
                     JustifyContent="SpaceBetween">
             <HorizontalStackLayout Spacing="20">
@@ -31,7 +31,7 @@
                     Size="34"
                     Radius="999" />
                 <StackLayout>
-                    <Label Text="Welcome back!" FontSize="15" TextColor="White" />
+                    <Label Text="Welcome back!" />
                     <Label Text="{Binding User.Email}" FontSize="12" TextColor="LightGray" />
                 </StackLayout>
             </HorizontalStackLayout>
@@ -57,7 +57,7 @@
                     JustifyContent="SpaceBetween">
             <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                 <logo:Logo />
-                <Label Text="Home" TextColor="White" FontSize="16" />
+                <Label Text="Home" />
             </HorizontalStackLayout>
         </FlexLayout>
     </StackLayout>

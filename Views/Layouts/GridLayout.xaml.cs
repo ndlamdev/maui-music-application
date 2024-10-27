@@ -5,25 +5,23 @@
 // User: Lam Nguyen
 
 
-using Android.Util;
-
 namespace maui_music_application.Views.Layouts;
 
 public partial class GridLayout
 {
-    private int _columns = 1;
-    private int _rows = 1;
     private int _currentRow, _currentColumn;
     private object? _adapter;
 
     public GridLayout()
     {
         InitializeComponent();
-        SetUpGrid(_columns, _rows);
     }
 
     public void Adapter<T>(GridLayoutAdapter<T> adapter)
     {
+        if (Columns != -1) Rows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
+        else Columns = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
+        SetUpGrid(Columns, Rows);
         _adapter = adapter;
         LoadContent(adapter);
     }
@@ -33,51 +31,45 @@ public partial class GridLayout
         if (_adapter is not GridLayoutAdapter<T> adapter) return;
 
         adapter.ListData = adapter.ListData.Concat(data).ToArray();
-        if (ScrollView.Orientation == ScrollOrientation.Horizontal)
+        switch (ScrollView.Orientation)
         {
-            var newColumn = adapter.ListData.Length / _rows;
-            AddColumnDefinitions(newColumn - _columns);
-            _columns = newColumn;
-        }
-        else if (ScrollView.Orientation == ScrollOrientation.Vertical)
+            case ScrollOrientation.Horizontal:
         {
-            var newRows = adapter.ListData.Length / _columns;
-            AddRowDefinitions(newRows - _rows);
-            _rows = newRows;
+            var newColumn = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
+            AddColumnDefinitions(newColumn - Columns);
+            Columns = newColumn;
+            break;
         }
-
+            case ScrollOrientation.Vertical:
+        {
+            var newRows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
+            AddRowDefinitions(newRows - Rows);
+            Rows = newRows;
+            break;
+        }
+            case ScrollOrientation.Both:
+            case ScrollOrientation.Neither:
+            default: break;
+}
         LoadContentAdd(adapter);
     }
 
 
-    public int Columns
-    {
-        set
-        {
-            _columns = value;
-            SetUpGrid(_columns, _rows);
-        }
-    }
+    public int Columns { get; set; } = -1;
 
-    public int Rows
-    {
-        set
-        {
-            _rows = value;
-            SetUpGrid(_columns, _rows);
-        }
-    }
+    public int Rows { get; set; } = -1;
 
     private void LoadContent<T>(GridLayoutAdapter<T> layoutAdapter)
     {
         var data = layoutAdapter.ListData;
-        for (; _currentRow < _rows; _currentRow++)
+        for (; _currentRow < Rows; _currentRow++)
         {
-            for (var column = 0; column < _columns; column++)
+            for (var column = 0; column < Columns; column++)
             {
+                var index = _currentRow * Columns + column;
+                if (index >= data.Length) return;
                 _currentColumn = column;
-                var index = _currentRow * _columns + column;
-                IView view = layoutAdapter.LoadContentView(index, data[index]);
+                var view = layoutAdapter.LoadContentView(index, data[index]);
                 Grid.Add(view, column, _currentRow);
             }
         }
@@ -85,16 +77,17 @@ public partial class GridLayout
 
     private void LoadContentAdd<T>(GridLayoutAdapter<T> layoutAdapter)
     {
-        var temp = _currentColumn;
+        var temp = _currentColumn == Columns - 1 ? -1 : _currentColumn + 1;
         var data = layoutAdapter.ListData;
-        for (; _currentRow < _rows; _currentRow++)
+        for (; _currentRow < Rows; _currentRow++)
         {
-            for (var column = temp != -1 ? temp : 0; column < _columns; column++)
+            for (var column = temp != -1 ? temp : 0; column < Columns; column++)
             {
                 temp = -1;
+                var index = _currentRow * Columns + column;
+                if (index >= data.Length) return;
                 _currentColumn = column;
-                var index = _currentRow * _columns + column;
-                IView view = layoutAdapter.LoadContentView(index, data[index]);
+                var view = layoutAdapter.LoadContentView(index, data[index]);
                 Grid.Add(view, column, _currentRow);
             }
         }
@@ -102,16 +95,18 @@ public partial class GridLayout
 
     private void SetUpGrid(int columns, int rows)
     {
-        Grid.Clear();
+        Grid.Children.Clear();
         Grid.ColumnDefinitions.Clear();
         Grid.RowDefinitions.Clear();
         AddColumnDefinitions(columns);
         AddRowDefinitions(rows);
+        _currentColumn = 0;
+        _currentRow = 0;
     }
 
     private void AddColumnDefinitions(int columns)
     {
-        for (int i = 0; i < columns; i++)
+        for (var i = 0; i < columns; i++)
         {
             Grid.ColumnDefinitions.Add(new ColumnDefinition());
         }
@@ -119,7 +114,7 @@ public partial class GridLayout
 
     private void AddRowDefinitions(int rows)
     {
-        for (int i = 0; i < rows; i++)
+        for (var i = 0; i < rows; i++)
         {
             Grid.RowDefinitions.Add(new RowDefinition());
         }
@@ -152,6 +147,12 @@ public partial class GridLayout
 
     public event EventHandler<ScrolledEventArgs>? OnScrollEnd;
     public event EventHandler<ScrolledEventArgs>? OnScroll;
+
+    public T[] GetData<T>()
+    {
+        var a = DateTime.Now.TimeOfDay;
+        return _adapter is not GridLayoutAdapter<T> adapter ? [] : adapter.ListData;
+    }
 }
 
 public abstract class GridLayoutAdapter<T>(T[] listData)
