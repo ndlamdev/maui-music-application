@@ -21,8 +21,8 @@
     </ContentView.Resources>
 
     <!-- Header if has user -->
-    <StackLayout Padding="10"
-                 BackgroundColor="Transparent">
+    <StackLayout
+        BackgroundColor="Transparent">
         <FlexLayout Direction="Row" IsVisible="{Binding HasUser}"
                     JustifyContent="SpaceBetween">
             <HorizontalStackLayout Spacing="20">

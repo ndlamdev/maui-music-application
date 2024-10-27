@@ -2,10 +2,47 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.ExplorePage">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Label Text="Explore page" />
-        </VerticalStackLayout>
-    </ScrollView>
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
+             xmlns:forms="clr-namespace:maui_music_application.Views.Components.Form"
+             x:Class="maui_music_application.Views.Pages.ExplorePage"
+             Background="{DynamicResource BackgroundHeader}">
+    <VerticalStackLayout
+        Padding="20">
+        <HorizontalStackLayout
+            Spacing="15"
+            VerticalOptions="Center"
+            Margin="0,0,0, 30">
+            <Image
+                Source="musium.png"
+                WidthRequest="50"
+                Height="50" />
+            <Label
+                Text="Search"
+                TextColor="{StaticResource Blue500}"
+                FontSize="27"
+                VerticalOptions="Center" />
+        </HorizontalStackLayout>
+        <forms:Search
+            OnTextChanged="Search_OnOnTextChanged"/>
+        <Label
+            Text="Your Top Genres"
+            FontSize="20"
+            HorizontalOptions="Fill"
+            Margin="0, 30, 0, 15" />
+        <layouts:GridLayout
+            x:Name="KindMusic"
+            Columns="2"
+            ColumnSpacing="15"
+            RowSpacing="15" />
+        <Label
+            Text="Browse All"
+            FontSize="20"
+            HorizontalOptions="Fill"
+            Margin="0, 50, 0, 15" />
+        <layouts:GridLayout
+            x:Name="Browse"
+            Columns="2"
+            ColumnSpacing="15"
+            RowSpacing="15" />
+    </VerticalStackLayout>
 </ContentView>
