@@ -4,7 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Components.Musics.MusicInTop">
     <Frame
-        BorderColor="{DynamicResource NullBackground}"
         CornerRadius="10"
         BackgroundColor="#1B1B1B"
         Padding="24, 15"
@@ -17,9 +16,8 @@
                 FontSize="20"
                 FontFamily="CenturyGothic"
                 VerticalOptions="Center" />
-            <Frame BorderColor="{DynamicResource NullBackground}"
-                   BackgroundColor="{DynamicResource NullBackground}"
-                   CornerRadius="5" 
+            <Frame
+                   CornerRadius="5"
                    Padding="0"
                    x:Name="ImageView">
                 <Image

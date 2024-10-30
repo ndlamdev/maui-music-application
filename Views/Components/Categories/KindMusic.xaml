@@ -17,8 +17,6 @@
                 FontAttributes="Bold" />
             <Frame
                 x:Name="FrameImage"
-                BackgroundColor="{DynamicResource NullBackground}"
-                BorderColor="{DynamicResource NullBackground}"
                 Padding="0"
                 TranslationY="-22"
                 TranslationX="10"

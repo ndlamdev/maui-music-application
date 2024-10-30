@@ -10,13 +10,11 @@
         <TapGestureRecognizer Tapped="Button_Clicked" />
     </ContentView.GestureRecognizers>
     <HorizontalStackLayout
-        Spacing="25"
+        Spacing="{Binding Spacing}"
         HorizontalOptions="Start"
         VerticalOptions="Center">
         <Frame
             CornerRadius="9999"
-            BorderColor="{DynamicResource NullBackground}"
-            BackgroundColor="{DynamicResource NullBackground}"
             Padding="{Binding PaddingButton}"
             Background="{StaticResource Button}">
             <Frame.GestureRecognizers>

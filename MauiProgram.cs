@@ -1,7 +1,6 @@
-﻿using maui_music_application.Handlers;
-using maui_music_application.Models;
-using maui_music_application.Services;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using maui_music_application.Handlers;
 
 namespace maui_music_application;
 
@@ -12,6 +11,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkitMediaElement()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

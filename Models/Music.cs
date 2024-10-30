@@ -6,10 +6,11 @@
 
 namespace maui_music_application.Models;
 
-public class Music(string id, string name, string signer, string thumbnail)
+public class Music(string id, string name, string signer, string thumbnail, string? uri = "")
 {
     public string Id { get; set; } = id;
     public string Name { get; set; } = name;
     public string Signer { get; set; } = signer;
     public string Thumbnail { get; set; } = thumbnail;
+    public string Uri { get; set; } = uri;
 }

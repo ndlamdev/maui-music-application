@@ -12,7 +12,6 @@
         TextColor="{Binding ColorButton}"
         FontSize="{Binding FontSize}"
         FontFamily="CenturyGothic"
-        BackgroundColor="{DynamicResource NullBackground}"
         CornerRadius="9999"
         BorderColor="{Binding ColorButton}"
         BorderWidth="1"

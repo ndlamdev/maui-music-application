@@ -18,6 +18,7 @@
         <Label
             x:Name="Label"
             FontAttributes="Bold"
+            TextColor="White"
             VerticalOptions="Center" />
     </HorizontalStackLayout>
 </ContentView>

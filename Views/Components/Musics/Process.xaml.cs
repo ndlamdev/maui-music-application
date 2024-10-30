@@ -4,16 +4,18 @@
 // Create at: 20:09:11 - 22/09/2024
 // User: Lam Nguyen
 
+using Android.Util;
+
 namespace maui_music_application.Views.Components.Musics;
 
 public partial class Process
 {
-    private double _timeEndProgress;
+    private double _duration;
     private double _width;
     private double _timeProgress;
-    private const int PaddingProcess = 16;
-    private const int SizeDot = 12;
-
+    public event EventHandler<double>? OnValueChangeCompleted;
+    private bool _drag;
+    private double _newValue;
 
     public Process()
     {
@@ -26,21 +28,22 @@ public partial class Process
         get => _timeProgress;
         set
         {
-            if (value > _timeEndProgress) return;
+            if (value > _duration) return;
             _timeProgress = value;
-            var process = value / _timeEndProgress;
+            OnPropertyChanged();
             OnPropertyChanged(nameof(TextTimeProcess));
-            ProgressBar.ProgressTo(process, 500, Easing.SinInOut);
-            DotProgressBard.TranslateTo((_width - PaddingProcess) * process - SizeDot, -12, 500, Easing.SinInOut);
         }
     }
 
-    public double TimeEndProgress
+    public double Duration
     {
+        get => _duration;
         set
         {
-            _timeEndProgress = value;
+            _duration = value;
             TimeEndProgressLabel.Text = FormatTime(value);
+            OnPropertyChanged(nameof(TextDuration));
+            OnPropertyChanged();
         }
     }
 
@@ -51,11 +54,35 @@ public partial class Process
     }
 
     public string TextTimeProcess => FormatTime(_timeProgress);
+    public string TextDuration => FormatTime(_duration);
 
     private void Layout_OnSizeChanged(object? sender, EventArgs e)
     {
         if (sender == null) return;
         if (sender is VerticalStackLayout layout) _width = layout.Width;
+        ProcessBar.WidthRequest = _width / 1.37;
         TimeProgress = _timeProgress;
+    }
+
+    private void Process_OnValueChanged(object? sender, ValueChangedEventArgs e)
+    {
+        if (!_drag)
+            return;
+        _newValue = e.NewValue;
+        TimeProgress = e.NewValue;
+        OnValueChanged?.Invoke(sender, e);
+    }
+
+    public event EventHandler<ValueChangedEventArgs>? OnValueChanged;
+
+    private void ProcessBar_OnDragCompleted(object? sender, EventArgs e)
+    {
+        _drag = false;
+        OnValueChangeCompleted?.Invoke(sender, _newValue);
+    }
+
+    private void ProcessBar_OnDragStarted(object? sender, EventArgs e)
+    {
+        _drag = true;
     }
 }

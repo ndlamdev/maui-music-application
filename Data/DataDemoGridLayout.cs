@@ -19,7 +19,7 @@ public class DataDemoGridLayout
         new("Pop2", "Pop 2", "music_kpop.png"),
     ];
 
-    public static readonly PlayListMusic[] PlayLists =
+    public static readonly PlaylistMusic[] Playlists =
     [
         new("Coffee & Jazz", "Coffee & Jazz", "music_kpop.png"),
         new("RELEASED", "RELEASED", "music_kpop.png"),
@@ -29,24 +29,17 @@ public class DataDemoGridLayout
         new("Lo-Fi Beats", "Lo-Fi Beats", "music_kpop.png"),
     ];
 
-    public static readonly PlayListMusicLarge[] PlayListLarges =
+    public static readonly PlaylistMusic[] PlaylistLarges =
     [
-        new("current favorites", "current favorites", "20 songs", "music_kpop.png"),
-        new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
-        new("Lofi Loft", "Lofi Loft", "63 songs", "music_kpop.png"),
-        new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
-        new("Anime OSTs", "Anime OSTs", "20 songs", "music_kpop.png"),
-        new("3:00am vibes", "3:00am vibes", "18 songs", "music_kpop.png"),
-        new("Lofi Loft", "Lofi Loft", "18 songs", "music_kpop.png"),
-        new("rain on my window", "rain on my window", "32 songs", "music_kpop.png"),
+        SongPageData.Playlist,
     ];
 
-    public static readonly FolderPlayListMusic[] FolderPlayList =
+    public static readonly FolderPlaylistMusic[] FolderPlaylist =
     [
-        new("moods", "moods", "11 playlists"),
-        new("blends", "blends", "8 playlists"),
-        new("favs", "favs", "14 playlists"),
-        new("random?", "random?", "10 playlists"),
+        new("moods", "moods", []),
+        new("blends", "blends", []),
+        new("favs", "favs", []),
+        new("random?", "random?", []),
     ];
 
     public static readonly TopMixes[] TopMixes =
@@ -68,7 +61,7 @@ public class DataDemoGridLayout
         new("8", "Dance Monkey 8", "Tones and I", "music_kpop.png", 8),
     ];
 
-    public static readonly Music[] MusicInPlayLists =
+    public static readonly Music[] MusicInPlaylists =
     [
         new("1", "Dance Monkey 1", "Tones and I", "music_kpop.png"),
         new("2", "Dance Monkey 2", "Tones and II", "music_kpop.png"),
@@ -106,7 +99,7 @@ public class DataDemoGridLayout
         new("10", "music_kpop.png", "keshi"),
     ];
 
-    public static readonly PlayListMusicLarge[] Albums =
+    public static readonly Album[] Albums =
     [
         new("1", "Superache", "Conan Gray", "music_kpop.png"),
         new("2", "DAWN FM", "The Weekend", "music_kpop.png"),
@@ -120,7 +113,7 @@ public class DataDemoGridLayout
         new("10", "Bloom", "Troye Sivan", "music_kpop.png"),
     ];
 
-    public static readonly PlayListMusicLarge[] PodcastsAndShows =
+    public static readonly PodcastAndShow[] PodcastsAndShows =
     [
         new("1", "Anything Goes", "Updated Aug 31 • Emma Chamberlain", "music_kpop.png"),
         new("2", "Ask Me Another", "Updated Aug 18 • NPR Studios", "music_kpop.png"),

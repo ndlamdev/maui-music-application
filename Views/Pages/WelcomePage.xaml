@@ -40,13 +40,11 @@
                 <VerticalStackLayout Margin="20, 0">
                     <FlexLayout Direction="Row" Margin="0,0,0, 40" JustifyContent="Center">
                         <Frame CornerRadius="99999"
-                               BorderColor="{StaticResource NullBackground}"
                                WidthRequest="60"
                                HeightRequest="10"
                                MinimumHeightRequest="0"
                                BackgroundColor="{StaticResource Blue500}" />
                         <Frame CornerRadius="99999"
-                               BorderColor="{StaticResource NullBackground}"
                                WidthRequest="60"
                                HeightRequest="10"
                                MinimumHeightRequest="0"

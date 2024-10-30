@@ -170,10 +170,10 @@
     <Style TargetType="Frame">
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BorderColor"
-                Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
+                Value="{StaticResource NullBackground}" />
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+                Value="{StaticResource NullBackground}" />
     </Style>
 
     <Style TargetType="ImageButton">
@@ -198,9 +198,14 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ContentPage">
+        <Setter Property="Background" Value="{DynamicResource Background}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Background}" />
+    </Style>
+
     <Style TargetType="Label">
         <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="CenturyGothic" />
         <Setter Property="FontSize" Value="16" />

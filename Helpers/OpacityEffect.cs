@@ -8,7 +8,7 @@ namespace maui_music_application.Helpers;
 
 public static class OpacityEffect
 {
-    public static async Task RunOpacity(View view, uint duration)
+    public static async Task RunOpacity(View? view, uint duration)
     {
         await view.FadeTo(0.5, duration);
         await view.FadeTo(1, duration);

@@ -40,26 +40,30 @@
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*" Resize="True" BaseSize="500,500"/>
-        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185"/>
+        <MauiImage Include="Resources\Images\*" Resize="True" BaseSize="500,500" />
+        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
         <!-- Custom Fonts -->
-        <MauiFont Include="Resources\Fonts\*"/>
+        <MauiFont Include="Resources\Fonts\*" />
 
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
+        <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -69,17 +73,14 @@
         <MauiXaml Update="Views\Categories\CategoryKindMusic.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Pages\ExplorePage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Views\Pages\HomePage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Views\Pages\LibraryPage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
         <MauiXaml Update="Views\Layouts\GridLayout.xaml">
           <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Fragments\SongPageShowMore.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Components\Musics\MusicInPlaylist.xaml">
+            <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Pages\LoginWithPasswordPage.xaml">
           <SubType>Designer</SubType>
@@ -96,47 +97,63 @@
         <MauiXaml Update="Views\Components\Categories\Artist.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Fragments\LibraryPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Fragments\HomePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Fragments\ExplorePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Views\Buttons\ButtonIconCircle.cs" />
-        <Compile Update="Views\Pages\ExplorePage.xaml.cs">
-          <DependentUpon>ExplorePage.xaml</DependentUpon>
-          <SubType>Code</SubType>
+        <Compile Update="Views\Layouts\GridLayout.xaml.cs">
+            <DependentUpon>GridLayout.xaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\HomePage.xaml.cs">
-          <DependentUpon>HomePage.xaml</DependentUpon>
-          <SubType>Code</SubType>
+        <Compile Update="Views\Pages\LoginWithPasswordPage.xaml.cs">
+            <DependentUpon>LoginWithPasswordPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\LibraryPage.xaml.cs">
+        <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
+            <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+        </Compile>
+        <Compile Update="Views\Pages\SignUp.xaml.cs">
+            <DependentUpon>SignUp.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
+            <DependentUpon>ForgetPassword.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\VerifyCodePage.xaml.cs">
+            <DependentUpon>VerifyCodePage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\Categories\Artist.xaml.cs">
+            <DependentUpon>Artist.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Fragments\SongPageShowMore.xaml.cs">
+            <DependentUpon>SongPageShowMore.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\Musics\MusicInPlaylist.xaml.cs">
+            <DependentUpon>MusicInPlayList.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Fragments\LibraryPage.xaml.cs">
           <DependentUpon>LibraryPage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Layouts\GridLayout.xaml.cs">
-          <DependentUpon>GridLayout.xaml</DependentUpon>
+        <Compile Update="Views\Fragments\HomePage.xaml.cs">
+          <DependentUpon>HomePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\LoginWithPasswordPage.xaml.cs">
-          <DependentUpon>LoginWithPasswordPage.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
-          <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
-        </Compile>
-        <Compile Update="Views\Pages\SignUp.xaml.cs">
-          <DependentUpon>SignUp.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
-          <DependentUpon>ForgetPassword.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Pages\VerifyCodePage.xaml.cs">
-          <DependentUpon>VerifyCodePage.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Components\Categories\Artist.xaml.cs">
-          <DependentUpon>Artist.xaml</DependentUpon>
+        <Compile Update="Views\Fragments\ExplorePage.xaml.cs">
+          <DependentUpon>ExplorePage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
@@ -148,13 +165,15 @@
         <AdditionalFiles Include="Views\Components\Buttons\ButtonPaddingBottom.xaml" />
         <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml" />
         <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\PlayListMusic.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\PlayListMusicLarge.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusic.xaml" />
+        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusicLarge.xaml" />
         <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml" />
-        <AdditionalFiles Include="Views\Components\Musics\MusicInPlayList.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
+        <AdditionalFiles Include="Views\Layouts\ExplorePage.xaml" />
+        <AdditionalFiles Include="Views\Layouts\HomePage.xaml" />
+        <AdditionalFiles Include="Views\Layouts\LibraryPage.xaml" />
         <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
 </Project>

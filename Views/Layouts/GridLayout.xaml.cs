@@ -11,7 +11,6 @@ public partial class GridLayout
 {
     private int _currentRow, _currentColumn;
     private object? _adapter;
-    private ScrollOrientation _orientation = ScrollOrientation.Vertical;
 
     public GridLayout()
     {
@@ -32,27 +31,26 @@ public partial class GridLayout
         if (_adapter is not GridLayoutAdapter<T> adapter) return;
 
         adapter.ListData = adapter.ListData.Concat(data).ToArray();
-        switch (_orientation)
+        switch (ScrollView.Orientation)
         {
             case ScrollOrientation.Horizontal:
-            {
-                var newColumn = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
-                AddColumnDefinitions(newColumn - Columns);
-                Columns = newColumn;
-                break;
-            }
+        {
+            var newColumn = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
+            AddColumnDefinitions(newColumn - Columns);
+            Columns = newColumn;
+            break;
+        }
             case ScrollOrientation.Vertical:
-            {
-                var newRows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
-                AddRowDefinitions(newRows - Rows);
-                Rows = newRows;
-                break;
-            }
+        {
+            var newRows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
+            AddRowDefinitions(newRows - Rows);
+            Rows = newRows;
+            break;
+        }
             case ScrollOrientation.Both:
             case ScrollOrientation.Neither:
             default: break;
-        }
-
+}
         LoadContentAdd(adapter);
     }
 
@@ -134,11 +132,7 @@ public partial class GridLayout
 
     public ScrollOrientation Orientation
     {
-        set
-        {
-            _orientation = value;
-            ScrollView.Orientation = value;
-        }
+        set => ScrollView.Orientation = value;
     }
 
     private void OnScrollViewScrolled(object? sender, ScrolledEventArgs e)

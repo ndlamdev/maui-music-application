@@ -13,6 +13,7 @@ public partial class ButtonIconCircle
     public event EventHandler? Clicked;
     private double _sizeIcon = 24;
     private double _paddingButton = 16;
+    private double _spacing = 25;
 
     public ButtonIconCircle()
     {
@@ -54,5 +55,15 @@ public partial class ButtonIconCircle
     public ImageSource Icon
     {
         set => Image.Source = value;
+    }
+
+    public double Spacing
+    {
+        get => _spacing;
+        set
+        {
+            _spacing = value;
+            OnPropertyChanged();
+        }
     }
 }

@@ -2,12 +2,12 @@
 
 namespace maui_music_application;
 
-public partial class App : Application
+public partial class App
 {
     public App()
     {
         InitializeComponent();
 
-        MainPage = new MainPage();
+        MainPage = new AppShell();
     }
 }
