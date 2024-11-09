@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.CreatePlaylist"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons">
+    <Grid
+        Padding="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout
+            HorizontalOptions="Start">
+            <Frame
+                CornerRadius="99999"
+                Padding="5"
+                WidthRequest="40"
+                HeightRequest="40">
+                <Image
+                    Source="arrow_left_white.svg"
+                    WidthRequest="30"
+                    HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBack" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            VerticalOptions="Center">
+            <Label
+                Text="New Playlist"
+                FontSize="25"
+                HorizontalTextAlignment="Center"
+                Margin="0, 0, 0, 25" />
+            <Entry
+                Placeholder="Give your playlist a title"
+                PlaceholderColor="{StaticResource Text2}"
+                Margin="0, 0, 0, 3"
+                FontSize="18" />
+
+            <HorizontalStackLayout
+                IsClippedToBounds="True">
+                <Line
+                    X1="0"
+                    Y1="0"
+                    X2="99999"
+                    Y2="0"
+                    StrokeThickness="2"
+                    Stroke="{StaticResource Text2}"
+                    Margin="0, 0, 0, 35"
+                    HeightRequest="2"
+                    WidthRequest="99999" />
+            </HorizontalStackLayout>
+
+            <Label
+                Text="Privacy"
+                FontSize="20"
+                Margin="0, 0, 0, 15" />
+
+            <HorizontalStackLayout>
+                <Border
+                    Stroke="{StaticResource Blue500}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout
+                        Padding="10"
+                        Spacing="10"
+                        VerticalOptions="Center">
+                        <Image
+                            Source="earth.svg"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            Margin="0,0, 10,0" />
+
+                        <Picker
+                            x:Name="MyPicker"
+                            WidthRequest="70"
+                            VerticalOptions="Center"
+                            TextColor="{StaticResource Blue800}"
+                            TitleColor="{StaticResource Blue800}"
+                            FontSize="18"
+                            SelectedIndexChanged="Picker_OnSelectedIndexChanged"
+                            SelectedIndex="0">
+                            <Picker.Shadow>
+                                <Shadow>
+                                    <Shadow.Offset>
+                                        <Point X="0" Y="0" />
+                                    </Shadow.Offset>
+                                    <Shadow.Brush>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="{StaticResource Blue800}" />
+                                            <GradientStop Color="{StaticResource Blue600}" />
+                                        </LinearGradientBrush>
+                                    </Shadow.Brush>
+                                </Shadow>
+                            </Picker.Shadow>
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Public</x:String>
+                                    <x:String>Private</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <Image
+                            Source="triangle_down_blue.svg"
+                            WidthRequest="15"
+                            HeightRequest="15"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </HorizontalStackLayout>
+
+            <FlexLayout
+                JustifyContent="SpaceBetween"
+                Margin="0, 30, 0, 0">
+                <Button
+                    Text="Cancel"
+                    TextColor="White"
+                    BackgroundColor="#2C2F30"
+                    CornerRadius="9999"
+                    WidthRequest="150"
+                    FontSize="17">
+                    <Button.Shadow>
+                        <Shadow>
+                            <Shadow.Radius>9998</Shadow.Radius>
+                            <Shadow.Brush>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#2C2F30" Offset="1" />
+                                    <GradientStop Color="#2C2F30" Offset="0" />
+                                </LinearGradientBrush>
+                            </Shadow.Brush>
+                        </Shadow>
+                    </Button.Shadow>
+                </Button>
+
+                <buttons:ButtonBorderShadow
+                    Text="Create"
+                    WidthRequest="150"
+                    FontSize="17" />
+            </FlexLayout>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

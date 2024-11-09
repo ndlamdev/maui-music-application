@@ -9,6 +9,7 @@ using maui_music_application.Models;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
 using maui_music_application.Views.Layouts;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Fragments;
 
@@ -151,5 +152,10 @@ public partial class LibraryPage
                 : RootGridLayout.GetData<PlaylistMusic>().OrderBy(music => music.Title).ToArray();
             RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(data, Navigation));
         }
+    }
+
+    private async void ButtonAdd_OnClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CreatePlaylist(), true);
     }
 }
