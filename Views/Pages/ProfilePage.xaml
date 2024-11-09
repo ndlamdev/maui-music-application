@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.ProfilePage"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons">
+    <Grid
+        Padding="25"
+        RowSpacing="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            Spacing="20">
+            <FlexLayout
+                JustifyContent="SpaceBetween"
+                AlignItems="Center">
+                <Frame
+                    CornerRadius="99999"
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                    <Image
+                        Source="arrow_left_white.svg"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBack" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+                <Label
+                    Text="Profile"
+                    FontSize="25" />
+                <Frame
+                    CornerRadius="99999"
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    Opacity="0" />
+            </FlexLayout>
+
+            <Frame
+                CornerRadius="10"
+                WidthRequest="250"
+                HeightRequest="250">
+                <Image
+                    Source="song_image.png"
+                    WidthRequest="250"
+                    HeightRequest="250"
+                    Aspect="Fill" />
+            </Frame>
+
+            <Label
+                TextColor="White"
+                FontSize="20"
+                Text="Nguyễn Đình Lam"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout
+                Spacing="25">
+                <buttons:ButtonIcon
+                    Icon="user.svg"
+                    Title="Information" />
+                <buttons:ButtonIcon
+                    Icon="logout.svg"
+                    Title="Logout" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
