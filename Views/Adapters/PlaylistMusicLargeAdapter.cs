@@ -17,6 +17,8 @@ namespace maui_music_application.Views.Adapters;
 public class PlaylistMusicLargeAdapter(PlaylistMusic[] listData, INavigation navigation)
     : GridLayoutAdapter<PlaylistMusic>(listData)
 {
+    private bool _isSelected;
+
     public override IView LoadContentView(int _, PlaylistMusic data)
     {
         var view = new PlaylistMusicLarge
@@ -30,7 +32,10 @@ public class PlaylistMusicLargeAdapter(PlaylistMusic[] listData, INavigation nav
 
         async void Clicked()
         {
+            if (_isSelected) return;
+            _isSelected = true;
             await navigation.PushAsync(new PlaylistMusicPage(data.Id));
+            _isSelected = false;
         }
     }
 }

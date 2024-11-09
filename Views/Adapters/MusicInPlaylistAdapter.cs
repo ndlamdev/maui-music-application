@@ -16,6 +16,8 @@ namespace maui_music_application.Views.Adapters;
 public class MusicInPlaylistAdapter(PlaylistMusic playlistMusic, INavigation navigation)
     : GridLayoutAdapter<Music>(playlistMusic.Musics!.ToArray())
 {
+    private bool _isSelected;
+
     public override IView LoadContentView(int position, Music data)
     {
         return new MusicInPlaylist()
@@ -28,7 +30,10 @@ public class MusicInPlaylistAdapter(PlaylistMusic playlistMusic, INavigation nav
 
         async void Action()
         {
+            if (_isSelected) return;
+            _isSelected = true;
             await navigation.PushAsync(new SongPage(playlistMusic, position));
+            _isSelected = false;
         }
     }
 }

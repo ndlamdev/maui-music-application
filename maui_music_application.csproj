@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0-android</TargetFramework>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -21,7 +20,7 @@
         <Nullable>enable</Nullable>
 
         <!-- Display name -->
-        <ApplicationTitle>maui_music_application</ApplicationTitle>
+        <ApplicationTitle>Musium</ApplicationTitle>
 
         <!-- App Identifier -->
         <ApplicationId>com.lamnguyen</ApplicationId>
@@ -60,8 +59,6 @@
         <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
         <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
     </ItemGroup>
@@ -171,9 +168,6 @@
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
-        <AdditionalFiles Include="Views\Layouts\ExplorePage.xaml" />
-        <AdditionalFiles Include="Views\Layouts\HomePage.xaml" />
-        <AdditionalFiles Include="Views\Layouts\LibraryPage.xaml" />
         <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
 </Project>
