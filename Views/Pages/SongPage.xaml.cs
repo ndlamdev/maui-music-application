@@ -1,3 +1,4 @@
+using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
@@ -125,6 +126,7 @@ public partial class SongPage
 
     private void OnMediaEnded(object? sender, EventArgs e)
     {
+        AudioService.Next();
         MusicChanged();
     }
 
