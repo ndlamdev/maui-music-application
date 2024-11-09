@@ -17,6 +17,7 @@ public partial class LibraryPage
 {
     private ButtonBorder[] _buttons;
     private GridLayout? _layout;
+    private bool _isSelected;
 
     private enum SortStatus
     {
@@ -156,6 +157,9 @@ public partial class LibraryPage
 
     private async void ButtonAdd_OnClicked(object? sender, EventArgs e)
     {
+        if (_isSelected) return;
+        _isSelected = true;
         await Navigation.PushAsync(new CreatePlaylist(), true);
+        _isSelected = false;
     }
 }
