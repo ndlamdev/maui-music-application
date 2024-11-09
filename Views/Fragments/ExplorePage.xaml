@@ -5,7 +5,8 @@
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
              xmlns:forms="clr-namespace:maui_music_application.Views.Components.Form"
              x:Class="maui_music_application.Views.Fragments.ExplorePage"
-             Background="{DynamicResource BackgroundHeader}">
+             Background="{DynamicResource BackgroundHeader}"
+             Loaded="OnContentViewLoaded">
     <VerticalStackLayout
         Padding="20">
         <HorizontalStackLayout
@@ -23,7 +24,7 @@
                 VerticalOptions="Center" />
         </HorizontalStackLayout>
         <forms:Search
-            OnTextChanged="Search_OnOnTextChanged"/>
+            OnTextChanged="Search_OnOnTextChanged" />
         <Label
             Text="Your Top Genres"
             FontSize="20"

@@ -38,7 +38,14 @@ public class AudioPlayerService : IAudioPlayerService
             PositionChanged?.Invoke(sender, args);
         };
         MediaElement.StateChanged += (sender, args) => StateChanged?.Invoke(sender, args);
-        MediaElement.MediaEnded += (sender, args) => MediaEnded?.Invoke(sender, args);
+        MediaElement.MediaEnded += (sender, args) =>
+        {
+            if (!MediaElement.ShouldLoopPlayback)
+                Next();
+            else
+                Play();
+            MediaEnded?.Invoke(sender, args);
+        };
         MediaElement.MediaFailed += (sender, args) => MediaFailed?.Invoke(sender, args);
     }
 
@@ -90,8 +97,7 @@ public class AudioPlayerService : IAudioPlayerService
             return;
         }
 
-        _indexCurrentSongInPlaylist = Random.Shared.Next(Playlist!.Musics?.Count ?? -1);
-        Play(_indexCurrentSongInPlaylist);
+        Play(Random.Shared.Next(Playlist!.Musics?.Count ?? -1));
     }
 
     public void Previous()

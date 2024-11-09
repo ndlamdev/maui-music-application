@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Fragments.LibraryPage"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
-             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts">
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
+             Loaded="OnContentViewLoaded">
     <VerticalStackLayout
         Padding="20"
         Spacing="25"
@@ -68,10 +69,11 @@
         <buttons:ButtonIconCircle
             x:Name="ButtonAdd"
             Icon="add.svg"
-            Title="Add New Playlist" />
+            Title="Add New Playlist"
+            Clicked="ButtonAdd_OnClicked"/>
         <buttons:ButtonIconCircle
             x:Name="ButtonHeart"
-            Icon="heart.svg"
+            Icon="heart_black.svg"
             Title="Your Liked Songs" />
         <HorizontalStackLayout
             Spacing="5"

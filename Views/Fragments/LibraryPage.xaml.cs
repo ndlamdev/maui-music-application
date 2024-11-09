@@ -9,6 +9,7 @@ using maui_music_application.Models;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
 using maui_music_application.Views.Layouts;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Fragments;
 
@@ -16,6 +17,7 @@ public partial class LibraryPage
 {
     private ButtonBorder[] _buttons;
     private GridLayout? _layout;
+    private bool _isSelected;
 
     private enum SortStatus
     {
@@ -31,6 +33,11 @@ public partial class LibraryPage
         InitializeComponent();
         _buttons = [Folders, Playlists, Artists, Albums, Podcasts];
         RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(DataDemoGridLayout.PlaylistLarges, Navigation));
+    }
+
+    /*Call request here!*/
+    private async void OnContentViewLoaded(object sender, EventArgs e)
+    {
     }
 
     private void Search_OnTapped(object? sender, TappedEventArgs e)
@@ -146,5 +153,13 @@ public partial class LibraryPage
                 : RootGridLayout.GetData<PlaylistMusic>().OrderBy(music => music.Title).ToArray();
             RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(data, Navigation));
         }
+    }
+
+    private async void ButtonAdd_OnClicked(object? sender, EventArgs e)
+    {
+        if (_isSelected) return;
+        _isSelected = true;
+        await Navigation.PushAsync(new CreatePlaylist(), true);
+        _isSelected = false;
     }
 }
