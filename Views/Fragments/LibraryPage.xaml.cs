@@ -33,6 +33,11 @@ public partial class LibraryPage
         RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(DataDemoGridLayout.PlaylistLarges, Navigation));
     }
 
+    /*Call request here!*/
+    private async void OnContentViewLoaded(object sender, EventArgs e)
+    {
+    }
+
     private void Search_OnTapped(object? sender, TappedEventArgs e)
     {
     }

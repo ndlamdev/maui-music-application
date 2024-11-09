@@ -1,4 +1,3 @@
-using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
@@ -44,11 +43,9 @@ public partial class SongPage
 
     public string SongName => AudioService.SongName;
 
-    public string SingerName
-        => AudioService.SingerName;
+    public string SingerName => AudioService.SingerName;
 
-    public string SongThumbnail
-        => AudioService.SongThumbnail;
+    public string SongThumbnail => AudioService.SongThumbnail;
 
     private async void Option_OnTapped(object sender, TappedEventArgs e)
     {
@@ -96,12 +93,14 @@ public partial class SongPage
     {
         await OpacityEffect.RunOpacity((View)sender!, 100);
         AudioService.Previous();
+        MusicChanged();
     }
 
     private async void Next_OnClicked(object? sender, EventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender!, 100);
         AudioService.Next();
+        MusicChanged();
     }
 
 
@@ -116,6 +115,7 @@ public partial class SongPage
     private void OnMediaFailed(object? sender, MediaFailedEventArgs e)
     {
         AudioService.Next();
+        MusicChanged();
     }
 
     private void OnStateChanged(object? sender, MediaStateChangedEventArgs e)
@@ -125,7 +125,7 @@ public partial class SongPage
 
     private void OnMediaEnded(object? sender, EventArgs e)
     {
-        AudioService.Next();
+        MusicChanged();
     }
 
     private void SetIconButtonPlayPause()
@@ -182,5 +182,13 @@ public partial class SongPage
     private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)
     {
         ShowMoreMenu.TranslateTo(0, DeviceDisplay.Current.MainDisplayInfo.Height, 500);
+    }
+
+    private void MusicChanged()
+    {
+        _degree = 0;
+        OnPropertyChanged(nameof(SongName));
+        OnPropertyChanged(nameof(SingerName));
+        OnPropertyChanged(nameof(SongThumbnail));
     }
 }

@@ -15,8 +15,12 @@ public partial class ExplorePage
     public ExplorePage()
     {
         InitializeComponent();
-        BindingContext = this;
         Init();
+    }
+
+    /*Call request here!*/
+    private async void OnContentViewLoaded(object sender, EventArgs e)
+    {
     }
 
     private void Init()
