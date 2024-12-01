@@ -51,7 +51,7 @@
                                TranslationX="-10"
                                BackgroundColor="White" />
                     </FlexLayout>
-                    <butons:ButtonBorderShadow Text="Get Started" FontSize="16" />
+                    <butons:ButtonBorderShadow Text="Get Started" FontSize="16" Clicked="ButtonBorderShadow_OnClicked" />
                 </VerticalStackLayout>
             </FlexLayout>
         </Border>

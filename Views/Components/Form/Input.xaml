@@ -19,14 +19,15 @@
             <Entry
                 x:Name="InputEntry"
                 Placeholder="{Binding Placeholder}"
-                Text="{Binding Text}"
+                Text="{Binding EntryText, Mode=TwoWay}"
                 PlaceholderColor="White"
                 Margin="{Binding MarginEntry}"
                 IsPassword="{Binding ShowPassword}"
                 FlexLayout.Grow="1"
                 FlexLayout.Basis="1"
                 FontSize="{Binding FontSize}"
-                TextChanged="InputView_OnTextChanged" />
+                Keyboard="{Binding Keyboard}"
+                TextChanged="InputView_OnTextChanged"/>
             <Image
                 x:Name="ImageIconRight"
                 Source="{Binding IconRight}"

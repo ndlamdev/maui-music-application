@@ -11,19 +11,23 @@ namespace maui_music_application.Attributes;
 ]
 public class TodoAttribute : Attribute
 {
+    private readonly string _task = string.Empty;
+
     public TodoAttribute()
     {
     }
 
     public TodoAttribute(string task)
     {
-        Log.Info("TodoAttribute", task);
+        _task = task;
     }
 
     public static void PrintTask<T>([CallerMemberName] string? methodName = null)
     {
         var method = typeof(T).GetMethod(methodName ?? "", BindingFlags.NonPublic | BindingFlags.Instance);
         if (method == null) return;
-        method.GetCustomAttribute<TodoAttribute>();
+        var attribute = method.GetCustomAttribute<TodoAttribute>();
+        if (attribute == null) return;
+        Log.Info("TodoAttribute", $"Class: {typeof(T)}\nMethod: {methodName}\nTask message: {attribute._task}");
     }
 }

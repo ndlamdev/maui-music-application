@@ -14,12 +14,6 @@
         <vm:HeaderViewModel />
     </ContentPage.BindingContext>
 
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <convert:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
-
     <!-- Header if has user -->
     <StackLayout
         BackgroundColor="Transparent">

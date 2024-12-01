@@ -10,16 +10,31 @@ public partial class LoginPage
         InitializeComponent();
     }
 
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsVisible = false
+        });
+    }
+
     [Todo("Handle action click button Sign up")]
-    private void SignUpTapped(object? sender, TappedEventArgs e)
+    private async void SignUpTapped(object sender, TappedEventArgs e)
     {
         TodoAttribute.PrintTask<LoginPage>();
+        await OpacityEffect.RunOpacity((View)sender, 100);
+        await Navigation.PushAsync(new SignUpPage());
     }
 
     [Todo("Handle action click button back")]
-    private void BackTapped(object? sender, TappedEventArgs e)
+    private async void BackTapped(object sender, TappedEventArgs e)
     {
         TodoAttribute.PrintTask<LoginPage>();
+        await OpacityEffect.RunOpacity((View)sender, 100);
+        await Navigation.PopAsync();
     }
 
     [Todo("Handle action click button login by Google")]
@@ -45,5 +60,6 @@ public partial class LoginPage
     {
         TodoAttribute.PrintTask<LoginPage>();
         await OpacityEffect.RunOpacity((View)sender, 100);
+        await Navigation.PushAsync(new LoginWithPasswordPage());
     }
 }

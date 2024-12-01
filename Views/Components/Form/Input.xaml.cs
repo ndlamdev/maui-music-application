@@ -7,6 +7,7 @@ public partial class Input
     private Thickness _marginEntry = new(0);
     private bool _isPassword, _showPassword = true;
     private double _size = 16;
+    private string? _keyboard;
     private const string IconShowPassword = "eye_opened.svg", IconHidePassword = "eye_closed.svg";
 
     public Input()
@@ -62,16 +63,20 @@ public partial class Input
 
     public event EventHandler<TappedEventArgs>? IconLeftEvent;
     public event EventHandler<TappedEventArgs>? IconRightEvent;
-    public event EventHandler<TextChangedEventArgs>? TextChangeEvent;
+    public event EventHandler<TextChangedEventArgs>? TextChanged;
 
-    public string Text
+    private static readonly BindableProperty TextProperty = BindableProperty.Create(
+        nameof(EntryText),
+        typeof(string),
+        typeof(Input),
+        default(string),
+        BindingMode.TwoWay
+    );
+
+    public string? EntryText
     {
-        get => _text;
-        set
-        {
-            _text = value;
-            OnPropertyChanged();
-        }
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
     }
 
     public string Placeholder
@@ -118,14 +123,31 @@ public partial class Input
         }
     }
 
+    public string Keyboard
+    {
+        get => _keyboard;
+        set
+        {
+            _keyboard = value;
+            OnPropertyChanged();
+        }
+    }
+
+
     private void InputView_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        TextChangeEvent?.Invoke(this, e);
+        TextChanged?.Invoke(this, e);
     }
 
     public void Focus(bool focus)
     {
         if (focus) InputEntry.Focus();
         else InputEntry.Unfocus();
+    }
+
+    public class EntryInputChangedArgs(string oldValue, string newValue)
+    {
+        public string OldValue { get; set; } = oldValue;
+        public string NewValue { get; set; } = newValue;
     }
 }

@@ -26,7 +26,7 @@ public partial class ButtonBorderShadow
         set
         {
             _text = value;
-            OnPropertyChanged(nameof(Text));
+            OnPropertyChanged();
         }
     }
 
@@ -36,7 +36,7 @@ public partial class ButtonBorderShadow
         set
         {
             _fontSize = value;
-            OnPropertyChanged(nameof(FontSize));
+            OnPropertyChanged();
         }
     }
 
@@ -46,7 +46,7 @@ public partial class ButtonBorderShadow
         set
         {
             _paddingButton = value;
-            OnPropertyChanged(nameof(PaddingButton));
+            OnPropertyChanged();
         }
     }
 
@@ -56,8 +56,8 @@ public partial class ButtonBorderShadow
 
         set
         {
-            this._textColor = value;
-            OnPropertyChanged(nameof(TextColor));
+            _textColor = value;
+            OnPropertyChanged();
         }
     }
 
