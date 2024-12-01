@@ -13,8 +13,16 @@ public partial class AppShell
     public AppShell()
     {
         InitializeComponent();
+        Routing.RegisterRoute("LaunchPage", typeof(LaunchPage));
+        Routing.RegisterRoute("WelcomePage", typeof(WelcomePage));
+        Routing.RegisterRoute("SignUpPage", typeof(SignUpPage));
+        Routing.RegisterRoute("LoginPage", typeof(LoginPage));
+        Routing.RegisterRoute("LoginWithPasswordPage", typeof(LoginWithPasswordPage));
+        Routing.RegisterRoute("ForgetPasswordPage", typeof(ForgetPasswordPage));
+        Routing.RegisterRoute("ResetPasswordPage", typeof(ResetPasswordPage));
+        Routing.RegisterRoute("MainPage", typeof(MainPage));
         Routing.RegisterRoute("PlayListMusicPage", typeof(PlaylistMusicPage));
         Routing.RegisterRoute("SongPage", typeof(SongPage));
-        Routing.RegisterRoute("CreatePlaylist", typeof(CreatePlaylist));
+        Routing.RegisterRoute("CreatePlaylist", typeof(CreatePlaylistPage));
     }
 }

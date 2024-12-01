@@ -8,9 +8,9 @@ using maui_music_application.Helpers;
 
 namespace maui_music_application.Views.Pages;
 
-public partial class CreatePlaylist
+public partial class CreatePlaylistPage
 {
-    public CreatePlaylist()
+    public CreatePlaylistPage()
     {
         InitializeComponent();
     }

@@ -1,6 +1,8 @@
 using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
 using maui_music_application.Handlers;
+using maui_music_application.Helpers;
+using maui_music_application.Services;
+using Microsoft.Extensions.Logging;
 
 namespace maui_music_application;
 
@@ -23,12 +25,13 @@ public static class MauiProgram
                 fonts.AddFont("Century-Gothic-Bold.otf", "CenturyGothicBold");
                 fonts.AddFont("Century-Gothic.otf", "CenturyGothic");
             });
-
+        builder.Services.AddSingleton<IUserService, UserService>();
         FormHandler.RemoveBorders();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
-
-        return builder.Build();
+        var app = builder.Build();
+        ServiceHelper.Initialize(app.Services);
+        return app;
     }
 }

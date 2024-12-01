@@ -4,8 +4,6 @@
 // Create at: 20:09:11 - 22/09/2024
 // User: Lam Nguyen
 
-using Android.Util;
-
 namespace maui_music_application.Views.Components.Musics;
 
 public partial class Process

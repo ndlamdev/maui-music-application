@@ -57,6 +57,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -82,7 +83,7 @@
         <MauiXaml Update="Views\Pages\LoginWithPasswordPage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Pages\SignUp.xaml">
+        <MauiXaml Update="Views\Pages\SignUpPage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Pages\ForgetPasswordPage.xaml">
@@ -103,6 +104,9 @@
         <MauiXaml Update="Views\Fragments\ExplorePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Pages\ResetPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -117,7 +121,7 @@
         <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
             <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
         </Compile>
-        <Compile Update="Views\Pages\SignUp.xaml.cs">
+        <Compile Update="Views\Pages\SignUpPage.xaml.cs">
             <DependentUpon>SignUp.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
@@ -151,6 +155,10 @@
         </Compile>
         <Compile Update="Views\Fragments\ExplorePage.xaml.cs">
           <DependentUpon>ExplorePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\ResetPasswordPage.xaml.cs">
+          <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
