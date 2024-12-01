@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Android.Util;
 
-namespace maui_music_application.Services;
+namespace maui_music_application.Services.impl;
 
 public class SecureStorageService : ISecureStorageService
 
