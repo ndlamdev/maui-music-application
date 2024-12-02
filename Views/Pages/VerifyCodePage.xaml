@@ -4,11 +4,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Pages.VerifyCodePage"
              xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons"
-             xmlns:form="clr-namespace:maui_music_application.Views.Components.Form">
+             xmlns:form="clr-namespace:maui_music_application.Views.Components.Form"
+             xmlns:viewModes="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="viewModes:VerifyCodeViewModel">
     <ScrollView
         VerticalScrollBarVisibility="Never"
-        Orientation="Vertical"
-        VerticalOptions="Center">
+        Orientation="Vertical">
         <VerticalStackLayout
             HorizontalOptions="Center"
             Padding="25, 50">
@@ -34,18 +35,22 @@
                 Padding="0, 30" />
             <FlexLayout Direction="Row" JustifyContent="SpaceBetween">
                 <form:Input x:Name="Code1" WidthRequest="52" FontSize="20" Placeholder="*"
-                            TextChangeEvent="Code_OnTextChangeEvent" />
+                            TextChanged="Code_OnTextChangeEvent" />
                 <form:Input x:Name="Code2" WidthRequest="52" FontSize="20" Placeholder="*"
-                            TextChangeEvent="Code_OnTextChangeEvent" />
+                            TextChanged="Code_OnTextChangeEvent" />
                 <form:Input x:Name="Code3" WidthRequest="52" FontSize="20" Placeholder="*"
-                            TextChangeEvent="Code_OnTextChangeEvent" />
+                            TextChanged="Code_OnTextChangeEvent" />
                 <form:Input x:Name="Code4" WidthRequest="52" FontSize="20" Placeholder="*"
-                            TextChangeEvent="Code_OnTextChangeEvent" />
+                            TextChanged="Code_OnTextChangeEvent" />
                 <form:Input x:Name="Code5" WidthRequest="52" FontSize="20" Placeholder="*"
-                            TextChangeEvent="Code_OnTextChangeEvent" />
+                            TextChanged="Code_OnTextChangeEvent" />
                 <form:Input x:Name="Code6" WidthRequest="52" FontSize="20" Placeholder="*"
-                            TextChangeEvent="Code_OnTextChangeEvent" />
+                            TextChanged="Code_OnTextChangeEvent" />
             </FlexLayout>
+            <Label
+                Text="{Binding [CodeVerify].ErrorMessage}"
+                TextColor="Red"
+                Padding="0,0,0,20" />
             <button:ButtonBorderShadow
                 Text="Verify"
                 Clicked="Verify_OnClicked"

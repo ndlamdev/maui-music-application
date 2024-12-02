@@ -159,7 +159,7 @@ public partial class LibraryPage
     {
         if (_isSelected) return;
         _isSelected = true;
-        await Navigation.PushAsync(new CreatePlaylist(), true);
+        await Navigation.PushAsync(new CreatePlaylistPage(), true);
         _isSelected = false;
     }
 }

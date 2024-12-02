@@ -2,12 +2,11 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.LoginWithPasswordPage"
+             x:Class="maui_music_application.Views.Pages.SignUpPage"
              xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons"
              xmlns:form="clr-namespace:maui_music_application.Views.Components.Form"
-             xmlns:viewModes="clr-namespace:maui_music_application.ViewModels"
-             x:DataType="viewModes:LoginWithPasswordViewModel">
-
+             xmlns:model="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="model:SignUpViewModel">
     <ScrollView
         VerticalScrollBarVisibility="Never"
         Orientation="Vertical"
@@ -32,7 +31,7 @@
                 </FlexLayout>
             </AbsoluteLayout>
             <Label
-                Text="Login to your account"
+                Text="Create your account"
                 FontSize="35"
                 Padding="0, 30" />
             <VerticalStackLayout>
@@ -62,36 +61,25 @@
                     TextColor="Red"
                     Padding="0,0,0,20"
                     IsVisible="{Binding [Password].HasError}" />
+                <form:Input
+                    IconLeft="lock.svg"
+                    Placeholder="Confirm Password"
+                    IsPassword="True"
+                    TextChanged="EntryConfirmPassword_OnTextChanged" />
+                <BoxView
+                    HeightRequest="20"
+                    IsVisible="{Binding [ConfirmPassword].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+                <Label
+                    Text="{Binding [ConfirmPassword].ErrorMessage}"
+                    TextColor="Red"
+                    Padding="0,0,0,20"
+                    IsVisible="{Binding [ConfirmPassword].HasError}" />
             </VerticalStackLayout>
-            <HorizontalStackLayout Spacing="15" Margin="20, 30,0, 30">
-                <CheckBox x:Name="CheckBoxRememberMe"
-                          Color="{StaticResource Blue500}"
-                          CheckedChanged="CheckBoxRememberMe_OnCheckedChanged">
-                    <CheckBox.Shadow>
-                        <Shadow Brush="{StaticResource Blue500}"
-                                Radius="5"
-                                Opacity="0.8" />
-                    </CheckBox.Shadow>
-                </CheckBox>
-                <Label Text="Remember me" VerticalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="RememberMe_OnTapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
             <button:ButtonBorderShadow
-                Text="Log in"
-                Clicked="LoginWithPassword_OnClicked" />
-            <Label
-                Text="Forgot the password?"
-                TextColor="{StaticResource Blue400}"
-                Padding="0, 20, 0, 40"
-                HorizontalTextAlignment="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="ForgetPassword_OnTapped" />
-                </Label.GestureRecognizers>
-            </Label>
-            <ContentView Padding="0, 20">
+                Text="Sign up"
+                Clicked="SignUp_OnClicked"
+                Margin="0, 35, 0, 0" />
+            <ContentView Padding="0, 35">
                 <AbsoluteLayout>
                     <Line
                         Y1="9"
@@ -107,36 +95,24 @@
                         JustifyContent="Center"
                         AlignItems="Center">
                         <Label
-                            Text="or continue with"
+                            Text="Or"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
-                            WidthRequest="150"
+                            WidthRequest="50"
                             BackgroundColor="{StaticResource PrimaryDark}" />
                     </FlexLayout>
                 </AbsoluteLayout>
             </ContentView>
-            <HorizontalStackLayout Spacing="50" Margin="0,30" HorizontalOptions="Center">
-                <Border Style="{StaticResource IconOtherLogin}">
-                    <Image Source="google_icon.svg" WidthRequest="25" HeightRequest="25" />
-                </Border>
-                <Border Style="{StaticResource IconOtherLogin}">
-                    <Image Source="facebook_icon.svg" WidthRequest="25" HeightRequest="25" />
-                </Border>
-                <Border Style="{StaticResource IconOtherLogin}">
-                    <Image Source="apple_icon.svg" WidthRequest="25" HeightRequest="25" />
-                </Border>
-            </HorizontalStackLayout>
             <HorizontalStackLayout
                 VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Margin="0, 20, 0, 0">
+                HorizontalOptions="Center">
                 <Label
-                    Text="Don’t have an account? " />
+                    Text="Have an account? " />
                 <Label
-                    Text="Sign Up"
+                    Text="Login"
                     TextColor="{StaticResource Blue300}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SignUpTapped" />
+                        <TapGestureRecognizer Tapped="SignInTapped" />
                     </Label.GestureRecognizers>
                 </Label>
             </HorizontalStackLayout>

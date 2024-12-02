@@ -13,6 +13,16 @@ public partial class MainPage
         Init();
         Event();
     }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsVisible = false
+        });
+    }
 
     private void Init()
     {
