@@ -14,14 +14,14 @@ public class TokenService : ITokenService
         _secureStorageService = ServiceHelper.GetService<ISecureStorageService>();
     }
 
-    public async Task<string> GetAccessToken()
+    public async Task<string?> GetAccessToken()
     {
-        return await _secureStorageService.GetAsync<string>(AppConstraint.AccessToken);
+        return await _secureStorageService.GetAsync(AppConstraint.AccessToken);
     }
 
-    public async Task<string> GetRefreshToken()
+    public async Task<string?> GetRefreshToken()
     {
-        return await _secureStorageService.GetAsync<string>(AppConstraint.RefreshToken);
+        return await _secureStorageService.GetAsync(AppConstraint.RefreshToken);
     }
 
     public async Task SaveAccessToken(string token)

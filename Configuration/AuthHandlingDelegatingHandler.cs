@@ -29,7 +29,7 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
         // Check if the path is excluded from authentication
         if (!IsExcludedPath(request.RequestUri))
         {
-            string accessToken = await tokenService.GetAccessToken();
+            string? accessToken = await tokenService.GetAccessToken();
 
             if (!string.IsNullOrEmpty(accessToken))
             {
@@ -43,7 +43,7 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
         if (response.StatusCode == HttpStatusCode.Unauthorized)
         {
             await GetNewAccessTokenAsync();
-            string accessToken = await tokenService.GetAccessToken();
+            string? accessToken = await tokenService.GetAccessToken();
             if (!string.IsNullOrEmpty(accessToken))
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
@@ -58,7 +58,7 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
     {
         ITokenService tokenService = ServiceHelper.GetService<ITokenService>();
         var request = new HttpRequestMessage(HttpMethod.Post, AppConstraint.BaseUrl + "/auth/refresh-token");
-        string refreshToken = await tokenService.GetRefreshToken();
+        string? refreshToken = await tokenService.GetRefreshToken();
         request.Headers.Add("Accept", "application/json");
         request.AddCookie("refresh-token", refreshToken);
 

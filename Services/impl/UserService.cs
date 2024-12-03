@@ -22,18 +22,10 @@ public class UserService : IUserService
     }
 
 
-    public Task<bool> CheckIfUserHasAccount()
+    public async Task<bool> CheckIfUserHasAccount()
     {
-        try
-        {
-            // Về sau sẽ thay thế bằng kiểm tra token
-            // return await _secureStorageService.isKeyPresent(AppConstraint.User);
-            return Task.FromResult(HeaderData.Logined);
-        }
-        catch (Exception)
-        {
-            return Task.FromResult(false);
-        }
+        string accessToken = await _tokenService.GetAccessToken();
+        return accessToken != null;
     }
 
     [Todo("API Login")]

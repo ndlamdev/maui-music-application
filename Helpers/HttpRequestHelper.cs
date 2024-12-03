@@ -2,7 +2,7 @@ namespace maui_music_application.Helpers;
 
 public static class HttpRequestHelper
 {
-    public static void AddCookie(this HttpRequestMessage request, string cookieName, string cookieValue)
+    public static void AddCookie(this HttpRequestMessage request, string cookieName, string? cookieValue)
     {
         if (request == null) throw new ArgumentNullException(nameof(request));
         if (string.IsNullOrWhiteSpace(cookieName))

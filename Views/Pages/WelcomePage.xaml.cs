@@ -5,6 +5,8 @@
 // User: Lam Nguyen
 
 using maui_music_application.Attributes;
+using maui_music_application.Helpers;
+using maui_music_application.Services;
 
 namespace maui_music_application.Views.Pages;
 
@@ -26,9 +28,18 @@ public partial class WelcomePage
     }
 
     [Todo("Handle button 'Get Started'")]
-    private void ButtonBorderShadow_OnClicked(object? sender, EventArgs e)
+    private async void ButtonBorderShadow_OnClicked(object? sender, EventArgs e)
     {
+        IUserService userService = ServiceHelper.GetService<IUserService>();
         TodoAttribute.PrintTask<WelcomePage>();
-        Navigation.PushAsync(new LoginPage());
+        bool isLogin = await userService.CheckIfUserHasAccount();
+        if (isLogin)
+        {
+            Navigation.PushAsync(new MainPage());
+        }
+        else
+        {
+            Navigation.PushAsync(new LoginPage());
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Android.Util;
+using maui_music_application.Helpers;
 
 namespace maui_music_application.Services.impl;
 
@@ -11,6 +12,7 @@ public class SecureStorageService : ISecureStorageService
         try
         {
             await SecureStorage.SetAsync(key, value);
+            AndroidHelper.ShowToast("Data saved successfully");
         }
         catch (Exception ex)
         {
@@ -19,30 +21,16 @@ public class SecureStorageService : ISecureStorageService
         }
     }
 
-    public async Task<T> GetAsync<T>(string key)
+    public async Task<string?> GetAsync(string key)
     {
-        try
+        var result = await SecureStorage.GetAsync(key);
+
+        if (string.IsNullOrEmpty(result))
         {
-            // Retrieve the string from SecureStorage asynchronously
-            var result = await SecureStorage.GetAsync(key);
-
-            // Check if the result is null or empty, indicating the key doesn't exist
-            if (string.IsNullOrEmpty(result))
-            {
-                throw new KeyNotFoundException($"The key '{key}' was not found in secure storage.");
-            }
-
-            // Attempt to deserialize the string to the specified type T
-            return JsonSerializer.Deserialize<T>(result) ?? throw new Exception("Failed to deserialize data");
+            return default;
         }
-        catch (Exception ex)
-        {
-            // Log the error for debugging purposes
-            Log.Error($"Error retrieving data from secure storage: {ex.Message}", ex.StackTrace ?? "");
 
-            // Rethrow the exception to propagate the error
-            throw new Exception($"Failed to retrieve data for key '{key}'", ex);
-        }
+        return result;
     }
 
     public async Task<bool> isKeyPresent(string key)
