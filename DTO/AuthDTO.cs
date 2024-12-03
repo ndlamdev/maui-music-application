@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Refit;
 
 namespace maui_music_application.Dto;
@@ -13,14 +14,12 @@ public class RequestAuthDTO
         Email = email;
         Password = password;
     }
-
-    private string Email { get; set; }
-    private string Password { get; set; }
+    public string Email { get; private set; }
+    public string Password { get; private set; }
 }
 
 public class ResponseAuthDTO
 {
-    [AliasAs("access_token")]
     public string AccessToken { get; set; }
     public string RefreshToken { get; set; }
     public UserDto User { get; set; }

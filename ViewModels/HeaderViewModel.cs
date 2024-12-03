@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Android.Util;
 using maui_music_application.Data;
+using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Services.impl;
@@ -44,7 +45,7 @@ public class HeaderViewModel : INotifyPropertyChanged
     public HeaderViewModel()
     {
 
-        _userService = App.Services.GetService<IUserService>();
+        _userService = ServiceHelper.GetService<IUserService>();
         _ = LoadDataAsync();
     }
 

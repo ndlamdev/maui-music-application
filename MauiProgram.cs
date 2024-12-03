@@ -1,6 +1,12 @@
 using CommunityToolkit.Maui;
+using maui_music_application.Configuration;
 using Microsoft.Extensions.Logging;
 using maui_music_application.Handlers;
+using maui_music_application.Helpers;
+using maui_music_application.Services;
+using maui_music_application.Services.Api;
+using maui_music_application.Services.impl;
+using Refit;
 
 namespace maui_music_application;
 
@@ -25,7 +31,6 @@ public static class MauiProgram
             });
         builder.AddHttpClientConfig();
         builder.AddServices();
-
         FormHandler.RemoveBorders();
 #if DEBUG
         builder.Logging.AddDebug();
