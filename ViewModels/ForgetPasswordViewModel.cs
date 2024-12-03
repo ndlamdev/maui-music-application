@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 using maui_music_application.Attributes;
 using maui_music_application.Models;
 using maui_music_application.Views.Pages;
-using Microsoft.Maui.Controls;
 
 namespace maui_music_application.ViewModels;
 
