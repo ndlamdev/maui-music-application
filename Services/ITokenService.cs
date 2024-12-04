@@ -6,4 +6,6 @@ public interface ITokenService
     Task<string?> GetRefreshToken();
     Task SaveAccessToken(string token);
     Task SaveRefreshToken(string token);
+    void RemoveAccessToken();
+    void RemoveRefreshToken();
 }

@@ -6,9 +6,14 @@
 
 using System.ComponentModel.DataAnnotations;
 using Android.Util;
+using Java.Nio.FileNio.Attributes;
 using maui_music_application.Attributes;
+using maui_music_application.Dto;
+using maui_music_application.Helpers;
 using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
+using maui_music_application.Services;
+using maui_music_application.Services.impl;
 using maui_music_application.Views.Pages;
 
 namespace maui_music_application.ViewModels;
@@ -74,8 +79,22 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
     private void SignUp()
     {
         TodoAttribute.PrintTask<SignUpViewModel>();
+        string email = _email;
+        string password = _password;
+        string fullName = "Guest";
+        IUserService userService = ServiceHelper.GetService<IUserService>();
+        try
+        {
+            userService.Register(new RequestRegister(email, password, fullName));
+            AndroidHelper.ShowToast("Sign up success");
+            // if success => Navigation.PushAsync(new VerifyCodePage(code));
+        }
+        catch (Exception e)
+        {
+            Log.Error("ViewModel", "SignUp: " + e.Message);
+            AndroidHelper.ShowToast("Sign up failed" + e.Message.ToString());
+        }
 
-        //if success => Navigation.PushAsync(new VerifyCodePage(code));
     }
 
     [Todo("Handle OnVerify Sign up")]

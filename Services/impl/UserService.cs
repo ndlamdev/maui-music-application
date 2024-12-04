@@ -1,7 +1,5 @@
 using Android.Util;
 using maui_music_application.Attributes;
-using maui_music_application.Configuration;
-using maui_music_application.Data;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Services.Api;
@@ -18,7 +16,6 @@ public class UserService : IUserService
     {
         _tokenService = ServiceHelper.GetService<ITokenService>();
         _authApi = ServiceHelper.GetService<IAuthApi>();
-        Log.Info("Service", "SecureStorageService: " + _tokenService + " AuthApi: " + _authApi);
     }
 
 
@@ -34,7 +31,7 @@ public class UserService : IUserService
         TodoAttribute.PrintTask<UserService>();
         try
         {
-            var response = await _authApi.Login(new RequestAuthDTO(username, password));
+            var response = await _authApi.Login(new RequestLogin(username, password));
             if (response.StatusCode != 200) throw new Exception();
             await _tokenService.SaveAccessToken(response.Data.AccessToken);
         }
@@ -45,13 +42,19 @@ public class UserService : IUserService
         }
     }
 
-    public Task<bool> Register(string username, string password)
+    public async Task Register(RequestRegister request)
     {
-        throw new NotImplementedException();
+        var response = await _authApi.Register(request);
+        if (response.StatusCode != 200) throw new Exception(response.Message.ToString());
     }
 
-    public Task<bool> Logout()
+    [Todo("API Logout")]
+    public Task Logout()
     {
-        throw new NotImplementedException();
+        TodoAttribute.PrintTask<UserService>();
+        _tokenService.RemoveAccessToken();
+        _tokenService.RemoveRefreshToken();
+        _authApi.Logout();
+        return Task.CompletedTask;
     }
 }

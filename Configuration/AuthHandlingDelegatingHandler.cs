@@ -72,7 +72,7 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
 
         var responseJson = await response.Content.ReadAsStringAsync();
 
-        var tokenResponse = JsonSerializer.Deserialize<APIResponse<ResponseAuthDTO>>(responseJson);
+        var tokenResponse = JsonSerializer.Deserialize<APIResponse<ResponseAuthentication>>(responseJson);
 
         tokenService.SaveAccessToken(tokenResponse?.Data.AccessToken ?? "");
     }

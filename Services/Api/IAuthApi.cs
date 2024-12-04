@@ -6,10 +6,18 @@ namespace maui_music_application.Services.Api;
 public interface IAuthApi
 {
     [Post("/auth/login")]
-    Task<APIResponse<ResponseAuthDTO>> Login([Body]RequestAuthDTO request);
+    Task<APIResponse<ResponseAuthentication>> Login([Body] RequestLogin request);
 
     // Sử dụng để test
     [Get("/hello")]
     public Task<APIResponse<int>> Hello();
 
+    [Post("/auth/register")]
+    public Task<APIResponse> Register([Body] RequestRegister request);
+
+    [Post("/auth/verify")]
+    public Task<APIResponse> Verify([Body] RequestVerify request);
+
+    [Post("/auth/logout")]
+    public Task<APIResponse> Logout();
 }

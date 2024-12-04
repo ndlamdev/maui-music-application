@@ -34,4 +34,13 @@ public class TokenService : ITokenService
         await _secureStorageService.SaveAsync(AppConstraint.RefreshToken, token);
     }
 
+    public void RemoveAccessToken()
+    {
+        _secureStorageService.Remove(AppConstraint.AccessToken);
+    }
+
+    public void RemoveRefreshToken()
+    {
+        _secureStorageService.Remove(AppConstraint.RefreshToken);
+    }
 }
