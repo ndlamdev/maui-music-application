@@ -5,10 +5,17 @@ namespace maui_music_application.Views.Pages;
 public partial class MainPage
 {
     private View? _currentView;
-    private readonly View[] _views = [new HomePage(), new ExplorePage(), new LibraryPage()];
+    private readonly View[] _views;
 
     public MainPage()
     {
+        _views =
+        [
+            new HomePage(),
+            new ExplorePage(),
+            new LibraryPage()
+        ];
+
         InitializeComponent();
         Init();
         Event();

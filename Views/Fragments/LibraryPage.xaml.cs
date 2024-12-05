@@ -5,7 +5,9 @@
 // User: Lam Nguyen
 
 using maui_music_application.Data;
+using maui_music_application.Helpers;
 using maui_music_application.Models;
+using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
 using maui_music_application.Views.Layouts;
@@ -160,6 +162,17 @@ public partial class LibraryPage
         if (_isSelected) return;
         _isSelected = true;
         await Navigation.PushAsync(new CreatePlaylistPage(), true);
+        _isSelected = false;
+    }
+
+    private async void ButtonLogout_OnClicked(object? sender, EventArgs e)
+    {
+        IUserService userService = ServiceHelper.GetService<IUserService>();
+        if (_isSelected) return;
+        _isSelected = true;
+        await userService.Logout();
+        // Chưa xử lý lỗi redicrect
+        await Navigation.PushAsync(new MainPage(), true);
         _isSelected = false;
     }
 }

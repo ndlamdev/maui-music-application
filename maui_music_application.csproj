@@ -45,8 +45,8 @@
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*" Resize="True" BaseSize="500,500" />
-        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+        <MauiImage Include="Resources\Images\*" Resize="True" BaseSize="500,500"/>
+        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185"/>
 
         <!-- Custom Fonts -->
         <MauiFont Include="Resources\Fonts\*" />
@@ -56,12 +56,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
+        <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0"/>
+
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
+        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1"/>
+        <PackageReference Include="Refit" Version="8.0.0"/>
+        <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0"/>
+        <PackageReference Include="Refit.Newtonsoft.Json" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -84,7 +89,7 @@
           <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Pages\SignUpPage.xaml">
-          <SubType>Designer</SubType>
+            <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Pages\ForgetPasswordPage.xaml">
           <SubType>Designer</SubType>
@@ -102,10 +107,10 @@
           <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Fragments\ExplorePage.xaml">
-          <SubType>Designer</SubType>
+            <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Views\Pages\ResetPasswordPage.xaml">
-          <SubType>Designer</SubType>
+            <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
 
@@ -154,28 +159,32 @@
           <SubType>Code</SubType>
         </Compile>
         <Compile Update="Views\Fragments\ExplorePage.xaml.cs">
-          <DependentUpon>ExplorePage.xaml</DependentUpon>
-          <SubType>Code</SubType>
+            <DependentUpon>ExplorePage.xaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
         <Compile Update="Views\Pages\ResetPasswordPage.xaml.cs">
-          <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
-          <SubType>Code</SubType>
+            <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\ResetPasswordPage.xaml.cs">
+            <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Views\Components\Buttons\ButtonBorderShadow.xaml" />
-        <AdditionalFiles Include="Views\Components\Buttons\ButtonIcon.xaml" />
-        <AdditionalFiles Include="Views\Components\Buttons\ButtonIconCircle.xaml" />
-        <AdditionalFiles Include="Views\Components\Buttons\ButtonPaddingBottom.xaml" />
-        <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusic.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusicLarge.xaml" />
-        <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml" />
-        <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
-        <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
-        <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
-        <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonBorderShadow.xaml"/>
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonIcon.xaml"/>
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonIconCircle.xaml"/>
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonPaddingBottom.xaml"/>
+        <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml"/>
+        <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml"/>
+        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusic.xaml"/>
+        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusicLarge.xaml"/>
+        <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml"/>
+        <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml"/>
+        <AdditionalFiles Include="Views\Components\Musics\Process.xaml"/>
+        <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml"/>
+        <AdditionalFiles Include="Views\Pages\MainPage.xaml"/>
     </ItemGroup>
 </Project>

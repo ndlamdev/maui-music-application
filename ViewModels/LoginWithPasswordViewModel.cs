@@ -5,18 +5,27 @@
 // User: Lam Nguyen
 
 using System.ComponentModel.DataAnnotations;
+using Android.Util;
 using maui_music_application.Attributes;
+using maui_music_application.Helpers;
 using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
+using maui_music_application.Services;
+using maui_music_application.Services.Api;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.ViewModels;
 
 public class LoginWithPasswordViewModel
     : AObservableValidator
 {
+    private IUserService? userService;
+
     public LoginWithPasswordViewModel(INavigation navigation, bool validateOnChanged = true) : base(validateOnChanged)
     {
         Navigation = navigation;
+        userService = ServiceHelper.GetService<IUserService>();
+        // Log.Info("ViewModel", "UserService: {}", userService);
     }
 
     private INavigation Navigation { get; set; }
@@ -54,6 +63,16 @@ public class LoginWithPasswordViewModel
     private void Login()
     {
         TodoAttribute.PrintTask<LoginWithPasswordViewModel>();
-        //if success =>  Navigation.PushAsync(new MainPage());
+
+        try
+        {
+            userService?.Login(Email, Password);
+            AndroidHelper.ShowToast("Login success");
+            Navigation.PushAsync(new MainPage());
+        }
+        catch (Exception e)
+        {
+            AndroidHelper.ShowToast(e.Message);
+        }
     }
 }
