@@ -6,7 +6,7 @@ namespace maui_music_application.Services.Api;
 public interface IAuthApi
 {
     [Post("/auth/login")]
-    Task<APIResponse<ResponseAuthentication>> Login([Body] RequestLogin request);
+    Task<APIResponse<ResponseAuthentication>> Login([Body] RequestLogin request, CancellationToken cancellationToken);
 
     // Sử dụng để test
     [Get("/hello")]

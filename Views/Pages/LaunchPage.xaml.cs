@@ -4,9 +4,9 @@
 // Create at: 22:10:39 - 05/10/2024
 // User: Lam Nguyen
 
-using Android.Text.Format;
-using Android.Util;
 using maui_music_application.Attributes;
+using maui_music_application.Helpers;
+using maui_music_application.Services;
 using Timer = System.Timers.Timer;
 
 namespace maui_music_application.Views.Pages;
@@ -50,12 +50,38 @@ public partial class LaunchPage
     }
 
     [Todo("Check some think before run application")]
-    private async void TodoBeforeRunApplication()
+    private void TodoBeforeRunApplication()
     {
         TodoAttribute.PrintTask<LaunchPage>();
+        if (!Preferences.Get("FIRST_OPEN", false))
+        {
+            Preferences.Set("FIRST_OPEN", true);
+            Navigation.PushAsync(new WelcomePage());
+            Navigation.RemovePage(this);
+            return;
+        }
 
-        await Task.Delay(5000);
-        _timer.Enabled = false;
-        await Navigation.PushAsync(new WelcomePage());
+        var userService = ServiceHelper.GetService<IUserService>();
+        if (userService is null)
+        {
+            Navigation.PushAsync(new LoginPage());
+            Navigation.RemovePage(this);
+            return;
+        }
+
+        try
+        {
+            userService.CheckIfUserHasAccount().ContinueWith(task =>
+            {
+                if (!task.IsCompleted) return;
+                Navigation.PushAsync(task.Result ? new MainPage() : new LoginPage());
+                Navigation.RemovePage(this);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+        catch (Exception _)
+        {
+            Navigation.PushAsync(new LoginPage());
+            Navigation.RemovePage(this);
+        }
     }
 }

@@ -6,8 +6,8 @@
 
 using Android.Util;
 using maui_music_application.Models;
+using maui_music_application.Views.Components.Categories;
 using maui_music_application.Views.Layouts;
-using PlaylistMusicLarge = maui_music_application.Views.Components.Categories.PlaylistMusicLarge;
 
 namespace maui_music_application.Views.Adapters;
 
@@ -16,7 +16,7 @@ public class FolderPlaylistMusicAdapter(FolderPlaylistMusic[] listData)
 {
     public override IView LoadContentView(int _, FolderPlaylistMusic data)
     {
-        var view = new PlaylistMusicLarge
+        var view = new PlaylistCard
         {
             Title = data.Title,
             SubTitle = $"{data.Playlists.Count} playlists",

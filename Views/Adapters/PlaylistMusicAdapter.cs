@@ -10,9 +10,9 @@ using maui_music_application.Views.Layouts;
 
 namespace maui_music_application.Views.Adapters;
 
-public class PlaylistMusicAdapter(PlaylistMusic[] listData) : GridLayoutAdapter<PlaylistMusic>(listData)
+public class PlaylistMusicAdapter(PlaylistDetail[] listData) : GridLayoutAdapter<PlaylistDetail>(listData)
 {
-    public override IView LoadContentView(int _,PlaylistMusic data)
+    public override IView LoadContentView(int _,PlaylistDetail data)
     {
         var view = new Components.Categories.PlaylistMusic
         {

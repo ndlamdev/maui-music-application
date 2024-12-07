@@ -5,16 +5,17 @@
 // User: Lam Nguyen
 
 using CommunityToolkit.Maui.Core.Primitives;
+using maui_music_application.Dto;
 using maui_music_application.Models;
 
 namespace maui_music_application.Services;
 
 public interface IAudioPlayerService
 {
-    event EventHandler<MediaPositionChangedEventArgs>? PositionChanged;
-    event EventHandler<MediaStateChangedEventArgs>? StateChanged;
-    event EventHandler<MediaFailedEventArgs>? MediaFailed;
-    event EventHandler? MediaEnded;
+    Action<MediaPositionChangedEventArgs>? PositionChanged { get; set; }
+    Action<MediaStateChangedEventArgs>? StateChanged { get; set; }
+    Action<MediaFailedEventArgs>? MediaFailed { get; set; }
+    Action? MediaEnded { get; set; }
     void Play(int position);
     void Play();
     void Pause();
@@ -30,6 +31,7 @@ public interface IAudioPlayerService
     string SongName { get; }
     string SongThumbnail { get; }
     string SingerName { get; }
-    PlaylistMusic? Playlist { get; set; }
+    ResponsePlaylistDetail? Playlist { get; set; }
+    MusicCard? CurrentMusicCard { get; protected set; }
     Music? CurrentMusic { get; protected set; }
 }

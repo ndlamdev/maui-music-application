@@ -1,12 +1,8 @@
 using CommunityToolkit.Maui;
 using maui_music_application.Configuration;
-using Microsoft.Extensions.Logging;
 using maui_music_application.Handlers;
 using maui_music_application.Helpers;
-using maui_music_application.Services;
-using maui_music_application.Services.Api;
-using maui_music_application.Services.impl;
-using Refit;
+using Microsoft.Extensions.Logging;
 
 namespace maui_music_application;
 
@@ -18,6 +14,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkitMediaElement()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -29,6 +26,7 @@ public static class MauiProgram
                 fonts.AddFont("Century-Gothic-Bold.otf", "CenturyGothicBold");
                 fonts.AddFont("Century-Gothic.otf", "CenturyGothic");
             });
+        builder.AddMappers();
         builder.AddHttpClientConfig();
         builder.AddServices();
         FormHandler.RemoveBorders();

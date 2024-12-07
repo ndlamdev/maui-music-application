@@ -4,21 +4,20 @@
 // Create at: 09:09:07 - 21/09/2024
 // User: Lam Nguyen
 
+using Java.Lang;
 using maui_music_application.Data;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
-using maui_music_application.Views.Layouts;
 using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Fragments;
 
 public partial class LibraryPage
 {
-    private ButtonBorder[] _buttons;
-    private GridLayout? _layout;
+    private readonly ButtonBorder[] _buttons;
     private bool _isSelected;
 
     private enum SortStatus
@@ -34,12 +33,21 @@ public partial class LibraryPage
     {
         InitializeComponent();
         _buttons = [Folders, Playlists, Artists, Albums, Podcasts];
-        RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(DataDemoGridLayout.PlaylistLarges, Navigation));
     }
 
     /*Call request here!*/
-    private async void OnContentViewLoaded(object sender, EventArgs e)
+    private void OnContentViewLoaded(object sender, EventArgs e)
     {
+        var service = ServiceHelper.GetService<IPlaylistService>();
+        if (service == null) throw new NullPointerException();
+        service.GetPlaylistCards().ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            var result = task.Result;
+            RootGridLayout.Adapter(
+                new PlaylistCardAdapter(result.Content.ToArray(),
+                    Navigation));
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     private void Search_OnTapped(object? sender, TappedEventArgs e)
@@ -54,11 +62,11 @@ public partial class LibraryPage
         }
     }
 
-    private void Playlists_OnClicked(object? sender, EventArgs e)
+    private async void Playlists_OnClicked(object? sender, EventArgs e)
     {
         SetBackgroundButtonSelected(sender);
         SetUpButtonAddAndHeart(sender);
-        RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(DataDemoGridLayout.PlaylistLarges, Navigation));
+        // RootGridLayout.Adapter(new PlaylistCardAdapter(DataDemoGridLayout.PlaylistLarges, Navigation));
     }
 
     private void Folders_OnClicked(object? sender, EventArgs e)
@@ -125,9 +133,9 @@ public partial class LibraryPage
         if (Playlists.Selected || Albums.Selected)
         {
             var data = _sortStatus is SortStatus.Null or SortStatus.Desc
-                ? RootGridLayout.GetData<PlaylistMusic>().OrderByDescending(music => music.TimeCreate).ToArray()
-                : RootGridLayout.GetData<PlaylistMusic>().OrderBy(music => music.TimeCreate).ToArray();
-            RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(data, Navigation));
+                ? RootGridLayout.GetData<PlaylistDetail>().OrderByDescending(music => music.TimeCreate).ToArray()
+                : RootGridLayout.GetData<PlaylistDetail>().OrderBy(music => music.TimeCreate).ToArray();
+            // RootGridLayout.Adapter(new PlaylistCardAdapter(data, Navigation));
             return;
         }
 
@@ -151,9 +159,9 @@ public partial class LibraryPage
 
         {
             var data = _sortStatus is SortStatus.Null or SortStatus.Desc
-                ? RootGridLayout.GetData<PlaylistMusic>().OrderByDescending(music => music.Title).ToArray()
-                : RootGridLayout.GetData<PlaylistMusic>().OrderBy(music => music.Title).ToArray();
-            RootGridLayout.Adapter(new PlaylistMusicLargeAdapter(data, Navigation));
+                ? RootGridLayout.GetData<PlaylistDetail>().OrderByDescending(music => music.Title).ToArray()
+                : RootGridLayout.GetData<PlaylistDetail>().OrderBy(music => music.Title).ToArray();
+            // RootGridLayout.Adapter(new PlaylistCardAdapter(data, Navigation));
         }
     }
 
@@ -167,12 +175,12 @@ public partial class LibraryPage
 
     private async void ButtonLogout_OnClicked(object? sender, EventArgs e)
     {
-        IUserService userService = ServiceHelper.GetService<IUserService>();
-        if (_isSelected) return;
+        var userService = ServiceHelper.GetService<IUserService>();
+        if (userService == null || _isSelected) return;
         _isSelected = true;
         await userService.Logout();
         // Chưa xử lý lỗi redicrect
-        await Navigation.PushAsync(new MainPage(), true);
+        await Navigation.PushAsync(new LoginPage(), true);
         _isSelected = false;
     }
 }

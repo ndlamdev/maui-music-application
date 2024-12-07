@@ -6,6 +6,7 @@
 
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
+using maui_music_application.Dto;
 using maui_music_application.Models;
 using Exception = Java.Lang.Exception;
 
@@ -13,17 +14,21 @@ namespace maui_music_application.Services.impl;
 
 public class AudioPlayerService : IAudioPlayerService
 {
-    public event EventHandler<MediaPositionChangedEventArgs>? PositionChanged;
-    public event EventHandler<MediaStateChangedEventArgs>? StateChanged;
-    public event EventHandler<MediaFailedEventArgs>? MediaFailed;
-    public event EventHandler? MediaEnded;
-    private static AudioPlayerService? _instance;
-    private int _indexCurrentSongInPlaylist = -1, _indexPreviousSongInPlaylist;
+    public Action<MediaPositionChangedEventArgs>? PositionChanged { get; set; }
+    public Action<MediaStateChangedEventArgs>? StateChanged { get; set; }
+    public Action<MediaFailedEventArgs>? MediaFailed { get; set; }
+    public Action? MediaEnded { get; set; }
+
+    private int _indexCurrentSongInPlaylist, _indexPreviousSongInPlaylist;
     private MediaElement MediaElement { get; }
     private Layout? _content;
+    private ResponsePlaylistDetail? _playlistDetail;
 
-    private AudioPlayerService()
+    private readonly ISongService _api;
+
+    public AudioPlayerService(ISongService api)
     {
+        _api = api;
         MediaElement = new MediaElement
         {
             ShouldAutoPlay = true,
@@ -32,46 +37,63 @@ public class AudioPlayerService : IAudioPlayerService
             WidthRequest = 0,
             HeightRequest = 0,
         };
-        MediaElement.PositionChanged += (sender, args) =>
+        MediaElement.PositionChanged += (_, args) =>
         {
             if (!Duration.Equals(MediaElement.Duration.TotalSeconds)) Duration = MediaElement.Duration.TotalSeconds;
-            PositionChanged?.Invoke(sender, args);
+            PositionChanged?.Invoke(args);
         };
-        MediaElement.StateChanged += (sender, args) => StateChanged?.Invoke(sender, args);
-        MediaElement.MediaEnded += (sender, args) =>
+        MediaElement.StateChanged += (_, args) => StateChanged?.Invoke(args);
+        MediaElement.MediaEnded += (_, _) =>
         {
             if (!MediaElement.ShouldLoopPlayback)
                 Next();
             else
                 Play();
-            MediaEnded?.Invoke(sender, args);
+            MediaEnded?.Invoke();
         };
-        MediaElement.MediaFailed += (sender, args) => MediaFailed?.Invoke(sender, args);
+        MediaElement.MediaFailed += (_, args) => MediaFailed?.Invoke(args);
     }
 
-    public static AudioPlayerService GetInstance()
+    public ResponsePlaylistDetail? Playlist
     {
-        return _instance ??= new AudioPlayerService();
+        get => _playlistDetail;
+        set
+        {
+            if (_playlistDetail != null && (value == null || value.Id == _playlistDetail.Id)) return;
+            _indexCurrentSongInPlaylist = -1;
+            _indexPreviousSongInPlaylist = -1;
+            _playlistDetail = value;
+        }
     }
 
-    public PlaylistMusic? Playlist { get; set; }
     public bool PlayRandom { get; set; }
     public double Duration { get; set; }
+    public MusicCard? CurrentMusicCard { get; set; }
     public Music? CurrentMusic { get; set; }
 
     public void Play(int position)
     {
         if (Playlist == null) throw new Exception("List nhạc đang bị rỗng. Hãy set playlist nhạc trước!");
         if (position == _indexCurrentSongInPlaylist ||
-            (position < 0 && position >= Playlist.Musics!.Count)) return;
+            (position < 0 && position >= Playlist.TotalSong)) return;
         _indexPreviousSongInPlaylist = _indexCurrentSongInPlaylist;
         _indexCurrentSongInPlaylist = position;
-        CurrentMusic = Playlist.Musics!.ElementAt(position);
+        CurrentMusicCard = Playlist.Songs.Content.ElementAt(position);
 
-        MediaElement.MetadataTitle = CurrentMusic.Name;
-        MediaElement.MetadataArtist = CurrentMusic.Signer;
-        MediaElement.MetadataArtworkUrl = CurrentMusic.Thumbnail;
-        MediaElement.Source = CurrentMusic.Uri;
+        MediaElement.MetadataTitle = SongName;
+        MediaElement.MetadataArtist = SingerName;
+        MediaElement.MetadataArtworkUrl = SongThumbnail;
+        LoadSong(CurrentMusicCard.Id);
+    }
+
+    private void LoadSong(long id)
+    {
+        _api.GetMusic(id).ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            CurrentMusic = task.Result;
+            MediaElement.Source = CurrentMusic.Url;
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public void Play()
@@ -97,11 +119,12 @@ public class AudioPlayerService : IAudioPlayerService
             return;
         }
 
-        Play(Random.Shared.Next(Playlist!.Musics?.Count ?? -1));
+        Play(Random.Shared.Next(Playlist?.TotalSong ?? -1));
     }
 
     public void Previous()
     {
+        if (_indexPreviousSongInPlaylist < 0) return;
         Play(_indexPreviousSongInPlaylist);
     }
 
@@ -128,9 +151,9 @@ public class AudioPlayerService : IAudioPlayerService
         content.Add(MediaElement);
     }
 
-    public string SongName => CurrentMusic!.Name;
+    public string SongName => CurrentMusicCard?.Title ?? "";
 
-    public string SongThumbnail => CurrentMusic!.Thumbnail;
+    public string SongThumbnail => CurrentMusicCard?.Cover ?? "";
 
-    public string SingerName => CurrentMusic!.Signer;
+    public string SingerName => CurrentMusicCard?.Artist ?? "";
 }

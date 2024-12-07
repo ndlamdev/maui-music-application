@@ -2,7 +2,7 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Components.Categories.PlaylistMusicLarge">
+             x:Class="maui_music_application.Views.Components.Categories.PlaylistCard">
     <Frame
         x:Name="Frame"
         HeightRequest="85"
@@ -16,7 +16,8 @@
                 <Image
                     x:Name="Image"
                     HeightRequest="85"
-                    WidthRequest="85" />
+                    WidthRequest="85"
+                    Aspect="Center" />
             </Frame>
             <VerticalStackLayout VerticalOptions="Center">
                 <Label

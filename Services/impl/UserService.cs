@@ -1,27 +1,17 @@
 using Android.Util;
 using maui_music_application.Attributes;
+using maui_music_application.Configuration;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Services.Api;
 
 namespace maui_music_application.Services.impl;
 
-public class UserService : IUserService
+public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserService
 {
-    private readonly ITokenService _tokenService;
-    private readonly IAuthApi _authApi;
-
-    // TODO: Lấy
-    public UserService()
-    {
-        _tokenService = ServiceHelper.GetService<ITokenService>();
-        _authApi = ServiceHelper.GetService<IAuthApi>();
-    }
-
-
     public async Task<bool> CheckIfUserHasAccount()
     {
-        string accessToken = await _tokenService.GetAccessToken();
+        var accessToken = await tokenService.GetAccessToken();
         return accessToken != null;
     }
 
@@ -31,9 +21,11 @@ public class UserService : IUserService
         TodoAttribute.PrintTask<UserService>();
         try
         {
-            var response = await _authApi.Login(new RequestLogin(username, password));
+            var tokenSource = new CancellationTokenSource();
+            tokenSource.CancelAfter(AppConstraint.Timeout);
+            var response = await authApi.Login(new RequestLogin(username, password), tokenSource.Token);
             if (response.StatusCode != 200) throw new Exception();
-            await _tokenService.SaveAccessToken(response.Data.AccessToken);
+            await tokenService.SaveAccessToken(response.Data.AccessToken);
         }
         catch (Exception e)
         {
@@ -44,7 +36,7 @@ public class UserService : IUserService
 
     public async Task Register(RequestRegister request)
     {
-        var response = await _authApi.Register(request);
+        var response = await authApi.Register(request);
         if (response.StatusCode != 200) throw new Exception(response.Message.ToString());
     }
 
@@ -52,9 +44,9 @@ public class UserService : IUserService
     public Task Logout()
     {
         TodoAttribute.PrintTask<UserService>();
-        _tokenService.RemoveAccessToken();
-        _tokenService.RemoveRefreshToken();
-        _authApi.Logout();
+        tokenService.RemoveAccessToken();
+        tokenService.RemoveRefreshToken();
+        authApi.Logout();
         return Task.CompletedTask;
     }
 }

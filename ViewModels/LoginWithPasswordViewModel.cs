@@ -6,29 +6,26 @@
 
 using System.ComponentModel.DataAnnotations;
 using Android.Util;
+using CommunityToolkit.Maui.Views;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
 using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Services.Api;
+using maui_music_application.Views.Components.Popup;
 using maui_music_application.Views.Pages;
 
 namespace maui_music_application.ViewModels;
 
-public class LoginWithPasswordViewModel
-    : AObservableValidator
+public class LoginWithPasswordViewModel(INavigation navigation, bool validateOnChanged = true)
+    : AObservableValidator(validateOnChanged)
 {
-    private IUserService? userService;
+    private IUserService? _userService = ServiceHelper.GetService<IUserService>();
 
-    public LoginWithPasswordViewModel(INavigation navigation, bool validateOnChanged = true) : base(validateOnChanged)
-    {
-        Navigation = navigation;
-        userService = ServiceHelper.GetService<IUserService>();
-        // Log.Info("ViewModel", "UserService: {}", userService);
-    }
+    // Log.Info("ViewModel", "UserService: {}", userService);
 
-    private INavigation Navigation { get; set; }
+    private INavigation Navigation { get; set; } = navigation;
     private string _email = string.Empty;
     private string _password = string.Empty;
 
@@ -48,7 +45,7 @@ public class LoginWithPasswordViewModel
 
     public bool RememberMe { get; set; }
 
-    public void OnSubmit()
+    public void OnSubmit(Page page)
     {
         ValidateAllProperties();
         OnErrorChanged(nameof(Email));
@@ -56,22 +53,26 @@ public class LoginWithPasswordViewModel
         if (HasErrors)
             return;
 
-        Login();
+        Login(page);
     }
 
     [Todo("Handle Login")]
-    private void Login()
+    private async void Login(Page page)
     {
         TodoAttribute.PrintTask<LoginWithPasswordViewModel>();
-
+        var popup = LoadingPopup.GetInstance();
         try
         {
-            userService?.Login(Email, Password);
+            if (_userService == null) throw new NullReferenceException(nameof(_userService));
+            page.ShowPopup(popup);
+            await _userService.Login(Email, Password);
+            popup.Close();
             AndroidHelper.ShowToast("Login success");
-            Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new MainPage());
         }
         catch (Exception e)
         {
+            popup.Close();
             AndroidHelper.ShowToast(e.Message);
         }
     }

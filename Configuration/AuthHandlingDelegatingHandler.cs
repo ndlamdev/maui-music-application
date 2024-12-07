@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using Android.Util;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Services;
@@ -24,12 +25,15 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        ITokenService tokenService = ServiceHelper.GetService<ITokenService>();
+        var tokenService = ServiceHelper.GetService<ITokenService>();
+        if (tokenService == null)
+            throw new NullReferenceException(nameof(tokenService));
 
+        Log.Info("Call api", $"Call to -> {request.RequestUri?.AbsoluteUri}");
         // Check if the path is excluded from authentication
         if (!IsExcludedPath(request.RequestUri))
         {
-            string? accessToken = await tokenService.GetAccessToken();
+            var accessToken = await tokenService.GetAccessToken();
 
             if (!string.IsNullOrEmpty(accessToken))
             {
@@ -40,15 +44,13 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
         var response = await base.SendAsync(request, cancellationToken);
 
         // If the response is 401 Unauthorized => the token is expired
-        if (response.StatusCode == HttpStatusCode.Unauthorized)
+        if (response.StatusCode != HttpStatusCode.Unauthorized) return response;
         {
             await GetNewAccessTokenAsync();
-            string? accessToken = await tokenService.GetAccessToken();
-            if (!string.IsNullOrEmpty(accessToken))
-            {
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                response = await base.SendAsync(request, cancellationToken);
-            }
+            var accessToken = await tokenService.GetAccessToken();
+            if (string.IsNullOrEmpty(accessToken)) return response;
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            response = await base.SendAsync(request, cancellationToken);
         }
 
         return response;
@@ -56,7 +58,9 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
 
     private async Task GetNewAccessTokenAsync()
     {
-        ITokenService tokenService = ServiceHelper.GetService<ITokenService>();
+        var tokenService = ServiceHelper.GetService<ITokenService>();
+        if (tokenService == null)
+            throw new NullReferenceException(nameof(tokenService));
         var request = new HttpRequestMessage(HttpMethod.Post, AppConstraint.BaseUrl + "/auth/refresh-token");
         string? refreshToken = await tokenService.GetRefreshToken();
         request.Headers.Add("Accept", "application/json");
@@ -74,7 +78,7 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
 
         var tokenResponse = JsonSerializer.Deserialize<APIResponse<ResponseAuthentication>>(responseJson);
 
-        tokenService.SaveAccessToken(tokenResponse?.Data.AccessToken ?? "");
+        await tokenService.SaveAccessToken(tokenResponse?.Data.AccessToken ?? "");
     }
 
     private bool IsExcludedPath(Uri? requestUri)
@@ -87,5 +91,4 @@ public class AuthHandlingDelegatingHandler : DelegatingHandler
         return _excludedPaths.Any(excludedPath =>
             requestUri.AbsolutePath.StartsWith(excludedPath, StringComparison.OrdinalIgnoreCase));
     }
-
 }

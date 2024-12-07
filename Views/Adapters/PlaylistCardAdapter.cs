@@ -4,28 +4,25 @@
 // Create at: 07:09:21 - 23/09/2024
 // User: Lam Nguyen
 
-using Android.Util;
-using maui_music_application.Models;
+using maui_music_application.Dto;
 using maui_music_application.Views.Components.Categories;
 using maui_music_application.Views.Layouts;
 using maui_music_application.Views.Pages;
-using PlaylistMusic = maui_music_application.Models.PlaylistMusic;
-using PlaylistMusicLarge = maui_music_application.Views.Components.Categories.PlaylistMusicLarge;
 
 namespace maui_music_application.Views.Adapters;
 
-public class PlaylistMusicLargeAdapter(PlaylistMusic[] listData, INavigation navigation)
-    : GridLayoutAdapter<PlaylistMusic>(listData)
+public class PlaylistCardAdapter(ResponsePlaylistCard[] listData, INavigation navigation)
+    : GridLayoutAdapter<ResponsePlaylistCard>(listData)
 {
     private bool _isSelected;
 
-    public override IView LoadContentView(int _, PlaylistMusic data)
+    public override IView LoadContentView(int _, ResponsePlaylistCard data)
     {
-        var view = new PlaylistMusicLarge
+        var view = new PlaylistCard
         {
-            Title = data.Title,
-            SubTitle = $"{data.Musics!.Count} songs",
-            Source = data.Thumbnail,
+            Title = data.Name,
+            SubTitle = $"{data.TotalSong} songs",
+            Source = data.CoverUrl,
             Clicked = Clicked
         };
         return view;

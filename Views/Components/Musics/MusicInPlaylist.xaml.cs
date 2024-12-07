@@ -4,15 +4,15 @@
 // Create at: 09:09:00 - 26/09/2024
 // User: Lam Nguyen
 
-using Android.App;
-using Android.Util;
 using maui_music_application.Helpers;
+using maui_music_application.Views.Components.Popup;
 
 namespace maui_music_application.Views.Components.Musics;
 
 public partial class MusicInPlaylist
 {
     private string? _songName, _singerName, _songThumbnail;
+    public Action<ShowPopupArgs>? OptionAction { get; init; }
 
     public MusicInPlaylist()
     {
@@ -34,8 +34,6 @@ public partial class MusicInPlaylist
             GestureRecognizers.Add(tapGestureRecognizer);
         }
     }
-
-    public Action? OptionAction { get; set; }
 
     public string SongName
     {
@@ -67,8 +65,15 @@ public partial class MusicInPlaylist
         }
     }
 
-    private void ImageButton_OnClicked(object? sender, EventArgs e)
+    private void ImageButton_OnClicked(object sender, EventArgs e)
     {
-        OptionAction?.Invoke();
+        var popup = new ContextMenuPopup();
+        OptionAction?.Invoke(new ShowPopupArgs((ImageButton)sender, popup));
+    }
+
+    public class ShowPopupArgs(ImageButton sender, CommunityToolkit.Maui.Views.Popup popup)
+    {
+        public ImageButton Sender { get; } = sender;
+        public CommunityToolkit.Maui.Views.Popup Popup { get; } = popup;
     }
 }

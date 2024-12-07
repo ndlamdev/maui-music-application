@@ -1,5 +1,4 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
+using Android.Util;
 using maui_music_application.Services.Api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -11,8 +10,10 @@ public static class HttpConfiguration
 {
     public static void AddHttpClientConfig(this MauiAppBuilder builder)
     {
-        builder.Services.AddSingleton<AuthHandlingDelegatingHandler>();
+        builder.Services.AddTransient<AuthHandlingDelegatingHandler>();
         builder.Services.AddRefitClient<IAuthApi>();
+        builder.Services.AddRefitClient<IPlaylistApi>();
+        builder.Services.AddRefitClient<ISongApi>();
     }
 
     private static void AddRefitClient<TInterface>(
