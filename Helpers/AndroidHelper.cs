@@ -5,7 +5,7 @@ namespace maui_music_application.Helpers;
 
 public static class AndroidHelper
 {
-    public static void ShowToast(string message)
+    public static void ShowToast(string? message = "Message")
     {
         Toast.MakeText(Application.Context, message, ToastLength.Short)!.Show();
     }

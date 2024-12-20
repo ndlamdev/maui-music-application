@@ -118,7 +118,7 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
 
                     if (!task.IsCompleted) return;
                     popup.Close();
-                    AndroidHelper.ShowToast("Sign up success");
+                    AndroidHelper.ShowToast(task.Result.Message);
                     Navigation.PushAsync(new VerifyCodePage(OnVerify));
                 }, TaskScheduler.FromCurrentSynchronizationContext());
     }
@@ -134,13 +134,14 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
             if (task.IsFaulted)
             {
                 popup.Close();
-                Log.Error(nameof(SignUpViewModel), "Verify: " + task.Exception);
-                AndroidHelper.ShowToast("Verify failed" + task.Exception);
+                Log.Error(nameof(SignUpViewModel), "Verify: " + task.Exception.GetBaseException());
+                AndroidHelper.ShowToast("Verify failed!");
                 return;
             }
 
             if (!task.IsCompleted) return;
             OnVerifySuccess(popup);
+            AndroidHelper.ShowToast(task.Result.Message);
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
@@ -158,7 +159,6 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
         }
 
         popup.Close();
-        AndroidHelper.ShowToast("Verify success");
     }
 
     public DateTime MinDate { get; } = new(1980, 01, 01);

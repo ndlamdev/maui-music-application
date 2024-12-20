@@ -35,10 +35,9 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
         }
     }
 
-    public async Task Register(RequestRegister request)
+    public Task<APIResponse> Register(RequestRegister request)
     {
-        var response = await authApi.Register(request);
-        if (response.StatusCode != 201) throw new Exception(response.Message.ToString());
+        return authApi.Register(request);
     }
 
     [Todo("API Logout")]
@@ -47,13 +46,11 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
         TodoAttribute.PrintTask<UserService>();
         tokenService.RemoveAccessToken();
         tokenService.RemoveRefreshToken();
-        authApi.Logout();
-        return Task.CompletedTask;
+        return authApi.Logout();
     }
 
-    public Task VerifyRegister(string email, CodeVerify code)
+    public Task<APIResponse> VerifyRegister(string email, CodeVerify code)
     {
-        authApi.VerifyRegister(email, code);
-        return Task.CompletedTask;
+        return authApi.VerifyRegister(email, code);
     }
 }
