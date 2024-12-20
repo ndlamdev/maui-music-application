@@ -4,13 +4,9 @@
 // Create at: 12:10:05 - 26/10/2024
 // User: Lam Nguyen
 
-using Android.Util;
-using CommunityToolkit.Maui.Views;
 using Java.Lang;
-using maui_music_application.Data;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
-using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 
@@ -68,14 +64,14 @@ public partial class PlaylistMusicPage
 
     public string PlayListType => ""; //_playlistDetail.Type
 
-    private async void OnBack(object? sender, EventArgs e)
+    private async void OnBack(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
         await Navigation.PopAsync();
     }
 
-    private async void OnOption(object? sender, EventArgs e)
+    private async void OnOption(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
     }
 }

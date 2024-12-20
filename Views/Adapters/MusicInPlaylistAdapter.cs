@@ -28,7 +28,6 @@ public class MusicInPlaylistAdapter(
             SingerName = data.Artist,
             SongThumbnail = data.Cover,
             Action = Action,
-            OptionAction = optionAction
         };
 
         async void Action()

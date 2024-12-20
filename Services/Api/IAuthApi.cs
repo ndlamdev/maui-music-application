@@ -1,4 +1,5 @@
 using maui_music_application.Dto;
+using maui_music_application.Models;
 using Refit;
 
 namespace maui_music_application.Services.Api;
@@ -20,4 +21,7 @@ public interface IAuthApi
 
     [Post("/auth/logout")]
     public Task<APIResponse> Logout();
+
+    [Post("/auth/verify")]
+    public Task<APIResponse> VerifyRegister([Header("email")] string email, [Body] CodeVerify code);
 }

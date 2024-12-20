@@ -6,14 +6,14 @@
 
 using System.ComponentModel.DataAnnotations;
 using Android.Util;
-using Java.Nio.FileNio.Attributes;
+using CommunityToolkit.Maui.Views;
 using maui_music_application.Attributes;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
 using maui_music_application.Services;
-using maui_music_application.Services.impl;
+using maui_music_application.Views.Components.Popup;
 using maui_music_application.Views.Pages;
 
 namespace maui_music_application.ViewModels;
@@ -24,7 +24,10 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
     private INavigation Navigation { get; set; } = navigation;
     private string _email = string.Empty;
     private string _password = string.Empty;
+    private string _fullName = string.Empty;
     private string _confirmPassword = string.Empty;
+    private string _phoneNumber = string.Empty;
+    private DateTime _birthday;
     private bool _isInputConfirmPassword;
 
     [EmailAddress(ErrorMessage = "Vui lòng nhập email hợp lệ!")]
@@ -51,7 +54,7 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
         }
     }
 
-    [NotBlank(ErrorMessage = "Vui lòng nhập lại mật khẩu!")]
+    [NotBlank(ErrorMessage = "Vui lòng nhập mật khẩu!")]
     [Equals(nameof(Password), ErrorMessage = "Mật khẩu không khớp!")]
     public string ConfirmPassword
     {
@@ -63,52 +66,90 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
         }
     }
 
-    public void OnSubmit()
+    [NotBlank(ErrorMessage = "Vui lòng nhập họ và tên!")]
+    public string FullName
+    {
+        get => _fullName;
+        set => SetProperty(ref _fullName, value, validate: true);
+    }
+
+    [Phone(ErrorMessage = "Vui lòng nhập số điện thoại!")]
+    public string PhoneNumber
+    {
+        get => _phoneNumber;
+        set => SetProperty(ref _phoneNumber, value, validate: true);
+    }
+
+    public DateTime Birthday
+    {
+        get => _birthday;
+        set => SetProperty(ref _birthday, value, validate: true);
+    }
+
+    public bool Sex { get; set; }
+
+    public void OnSubmit(Page page)
     {
         ValidateAllProperties();
-        OnErrorChanged(nameof(Email));
-        OnErrorChanged(nameof(Password));
-        OnErrorChanged(nameof(ConfirmPassword));
         if (HasErrors)
             return;
 
-        SignUp();
+        SignUp(page);
     }
 
     [Todo("Handle action button Sign up")]
-    private void SignUp()
+    private void SignUp(Page page)
     {
         TodoAttribute.PrintTask<SignUpViewModel>();
-        string email = _email;
-        string password = _password;
-        string fullName = "Guest";
-        IUserService userService = ServiceHelper.GetService<IUserService>();
-        try
-        {
-            userService.Register(new RequestRegister(email, password, fullName));
-            AndroidHelper.ShowToast("Sign up success");
-            // if success => Navigation.PushAsync(new VerifyCodePage(code));
-        }
-        catch (Exception e)
-        {
-            Log.Error("ViewModel", "SignUp: " + e.Message);
-            AndroidHelper.ShowToast("Sign up failed" + e.Message.ToString());
-        }
+        var userService = ServiceHelper.GetService<IUserService>();
+        var popup = LoadingPopup.GetInstance();
+        page.ShowPopup(popup);
+        userService?.Register(new RequestRegister(Email, Password, FullName, PhoneNumber, Birthday, Sex))
+            .ContinueWith(
+                task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        popup.Close();
+                        Log.Error(nameof(SignUpViewModel), "SignUp: " + task.Exception);
+                        AndroidHelper.ShowToast("Sign up failed" + task.Exception);
+                        return;
+                    }
 
+                    if (!task.IsCompleted) return;
+                    popup.Close();
+                    AndroidHelper.ShowToast("Sign up success");
+                    Navigation.PushAsync(new VerifyCodePage(OnVerify));
+                }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     [Todo("Handle OnVerify Sign up")]
-    private void OnVerify(string code)
+    private void OnVerify(VerifyActionProps action)
     {
-        //if success => OnVerifySuccess();
+        var userService = ServiceHelper.GetService<IUserService>();
+        var popup = LoadingPopup.GetInstance();
+        action.Page.ShowPopup(popup);
+        userService?.VerifyRegister(Email, new CodeVerify(action.Code)).ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                popup.Close();
+                Log.Error(nameof(SignUpViewModel), "Verify: " + task.Exception);
+                AndroidHelper.ShowToast("Verify failed" + task.Exception);
+                return;
+            }
+
+            if (!task.IsCompleted) return;
+            OnVerifySuccess(popup);
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
-    private async void OnVerifySuccess()
+    private void OnVerifySuccess(Popup popup)
     {
         var navigationStack = Navigation.NavigationStack;
         var pagesToKeep = new HashSet<Type>
-            { typeof(WelcomePage), typeof(LaunchPage), typeof(LoginPage), typeof(LoginWithPasswordPage) };
-        for (var i = navigationStack.Count - 2; i >= 0; i--)
+            { typeof(LoginPage) };
+        for (var i = navigationStack.Count - 1; i >= 0; i--)
         {
             var page = navigationStack[i];
             if (page == null) continue;
@@ -116,6 +157,9 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
             Navigation.RemovePage(page);
         }
 
-        await Navigation.PopAsync();
+        popup.Close();
+        AndroidHelper.ShowToast("Verify success");
     }
+
+    public DateTime MinDate { get; } = new(1980, 01, 01);
 }

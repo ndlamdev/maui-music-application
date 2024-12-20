@@ -181,7 +181,6 @@
         <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml"/>
         <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml"/>
         <AdditionalFiles Include="Views\Components\Categories\PlaylistMusic.xaml"/>
-        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusicLarge.xaml"/>
         <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml"/>
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml"/>
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml"/>

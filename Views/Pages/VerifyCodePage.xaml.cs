@@ -1,20 +1,17 @@
-using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
+using maui_music_application.Models;
 using maui_music_application.ViewModels;
 using maui_music_application.Views.Components.Form;
 
 namespace maui_music_application.Views.Pages;
-
-using static System.Text.RegularExpressions.Regex;
 
 public partial class VerifyCodePage
 {
     private readonly List<Input> _list;
     private readonly VerifyCodeViewModel _viewModel;
 
-
-    public VerifyCodePage(Action<string> callback, string code)
+    public VerifyCodePage(Action<VerifyActionProps> callback, string? code = null)
     {
         InitializeComponent();
         _list =
@@ -26,7 +23,7 @@ public partial class VerifyCodePage
             Code5,
             Code6
         ];
-        _viewModel = new VerifyCodeViewModel(Navigation, callback, code, true);
+        _viewModel = new VerifyCodeViewModel(this, callback, code, true);
         BindingContext = _viewModel;
     }
 
@@ -84,12 +81,6 @@ public partial class VerifyCodePage
         // input new value
         if (newValue.Length > oldValue.Length && newValue.Length == 1)
         {
-            if (!IsMatch(newValue, "[0-9]"))
-            {
-                _list[index].EntryText = "";
-                return;
-            }
-
             for (; index < _list.Count; index++)
             {
                 var input = _list[index];

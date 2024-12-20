@@ -3,6 +3,7 @@ using maui_music_application.Attributes;
 using maui_music_application.Configuration;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Models;
 using maui_music_application.Services.Api;
 
 namespace maui_music_application.Services.impl;
@@ -37,7 +38,7 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
     public async Task Register(RequestRegister request)
     {
         var response = await authApi.Register(request);
-        if (response.StatusCode != 200) throw new Exception(response.Message.ToString());
+        if (response.StatusCode != 201) throw new Exception(response.Message.ToString());
     }
 
     [Todo("API Logout")]
@@ -47,6 +48,12 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
         tokenService.RemoveAccessToken();
         tokenService.RemoveRefreshToken();
         authApi.Logout();
+        return Task.CompletedTask;
+    }
+
+    public Task VerifyRegister(string email, CodeVerify code)
+    {
+        authApi.VerifyRegister(email, code);
         return Task.CompletedTask;
     }
 }
