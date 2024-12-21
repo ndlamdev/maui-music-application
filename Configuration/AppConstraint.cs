@@ -2,8 +2,7 @@ namespace maui_music_application.Configuration;
 
 public class AppConstraint
 {
-    public const string BaseUrl = "http://10.0.11.95:8081/api/v1";
-    public const int Timeout = 5000;
+    public const string BaseUrl = "http://10.0.3.217:8081/api/v1";
     public const string User = "USER";
     public const string RefreshToken = "REFRESH_TOKEN";
     public const string AccessToken = "ACCESS_TOKEN";
