@@ -11,16 +11,16 @@ using maui_music_application.Views.Layouts;
 
 namespace maui_music_application.Views.Adapters;
 
-public class MusicInQueueAdapter(Music[] listData) : GridLayoutAdapter<Music>(listData)
+public class MusicInQueueAdapter(MusicCard[] listData) : GridLayoutAdapter<MusicCard>(listData)
 {
-    public override IView LoadContentView(int position, Music data)
+    public override IView LoadContentView(int position, MusicCard data)
     {
         return new MusicInQueue
         {
             Index = position,
-            Name = data.Name,
-            Singer = data.Signer,
-            Action = () => { Log.Info("MusicInPlayList", $"Click {data.Name}"); }
+            Name = data.Title,
+            Singer = data.Artist,
+            Action = () => { Log.Info("MusicInPlayList", $"Click {data.Title}"); }
         };
     }
 }

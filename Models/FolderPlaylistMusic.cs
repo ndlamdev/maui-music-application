@@ -6,11 +6,11 @@
 
 namespace maui_music_application.Models;
 
-public class FolderPlaylistMusic(string id, string title, List<PlaylistMusic> playlists, TimeSpan? timeCreate = null)
+public class FolderPlaylistMusic(string id, string title, List<PlaylistDetail> playlists, TimeSpan? timeCreate = null)
 {
     public string Id { get; set; } = id;
     public string Title { get; set; } = title;
-    public List<PlaylistMusic> Playlists { get; set; } = playlists;
+    public List<PlaylistDetail> Playlists { get; set; } = playlists;
     public TimeSpan TimeCreate { get; set; } = timeCreate ?? DateTime.Now.TimeOfDay;
     public string Thumbnail => "folder_icon.png";
 }

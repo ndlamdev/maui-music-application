@@ -2,7 +2,7 @@ namespace maui_music_application.Views.Components.Form;
 
 public partial class Input
 {
-    private string _placeholder = "", _text = "";
+    private string _placeholder = "";
     private ImageSource? _iconLeft, _iconRight;
     private Thickness _marginEntry = new(0);
     private bool _isPassword, _showPassword = true;

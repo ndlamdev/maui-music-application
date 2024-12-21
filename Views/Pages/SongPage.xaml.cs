@@ -1,9 +1,8 @@
-using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
+using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
-using maui_music_application.Services.impl;
 
 namespace maui_music_application.Views.Pages;
 
@@ -11,21 +10,29 @@ public partial class SongPage
 {
     private int _degree;
     private bool _playRandom;
-    private IAudioPlayerService AudioService { get; }
+    private IAudioPlayerService? AudioService { get; }
 
-    public SongPage(PlaylistMusic playlistMusic, int position)
+    public SongPage(ResponsePlaylistDetail playlistDetail, int position = 0)
     {
+        AudioService = ServiceHelper.GetService<IAudioPlayerService>();
+        if (AudioService is null)
+        {
+            Navigation.PopAsync();
+            return;
+        }
+
         InitializeComponent();
+
         ShowMoreMenu.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
-        AudioService = AudioPlayerService.GetInstance();
-        AudioService.PositionChanged += OnPositionChanged;
-        AudioService.StateChanged += OnStateChanged;
-        AudioService.MediaFailed += OnMediaFailed;
-        AudioService.MediaEnded += OnMediaEnded;
-        PlayRandom = AudioService.PlayRandom;
         SetIconButtonPlayPause();
+        PlayRandom = AudioService.PlayRandom;
+
+        AudioService.Playlist = playlistDetail;
         AudioService.SetContent(RootView);
-        AudioService.Playlist = playlistMusic;
+        AudioService.PositionChanged = OnPositionChanged;
+        AudioService.StateChanged = OnStateChanged;
+        AudioService.MediaFailed = OnMediaFailed;
+        AudioService.MediaEnded = OnMediaEnded;
         AudioService.Play(position);
         BindingContext = this;
     }
@@ -40,13 +47,13 @@ public partial class SongPage
         });
     }
 
-    public string PlayListName => AudioService.Playlist!.Title;
+    public string PlayListName => AudioService?.Playlist?.Name ?? string.Empty;
 
-    public string SongName => AudioService.SongName;
+    public string SongName => AudioService?.SongName ?? string.Empty;
 
-    public string SingerName => AudioService.SingerName;
+    public string SingerName => AudioService?.SingerName ?? string.Empty;
 
-    public string SongThumbnail => AudioService.SongThumbnail;
+    public string SongThumbnail => AudioService?.SongThumbnail ?? string.Empty;
 
     private async void Option_OnTapped(object sender, TappedEventArgs e)
     {
@@ -59,108 +66,107 @@ public partial class SongPage
         await Navigation.PopAsync();
     }
 
-    private async void Share_OnTapped(object? sender, EventArgs eventArgs)
+    private async void Share_OnTapped(object sender, EventArgs eventArgs)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
     }
 
-    private async void Heart_OnTapped(object? sender, EventArgs eventArgs)
+    private async void Heart_OnTapped(object sender, EventArgs eventArgs)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
     }
 
     private void PlayPauseMusicClicked(object? sender, EventArgs e)
     {
-        switch (AudioService.CurrentState())
+        var current = AudioService?.CurrentState() ?? MediaElementState.None;
+        switch (current)
         {
             case MediaElementState.Stopped or MediaElementState.Paused:
-                PlayPauseMusic.Icon = "play_white.svg";
-                AudioService.Play();
+                AudioService?.Play();
                 break;
             case MediaElementState.Playing:
-                PlayPauseMusic.Icon = "pause_white.svg";
-                AudioService.Pause();
+                AudioService?.Pause();
                 break;
         }
     }
 
-    private async void Random_OnClicked(object? sender, EventArgs e)
+    private async void Random_OnClicked(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
         PlayRandom = !PlayRandom;
     }
 
-    private async void Previous_OnClicked(object? sender, EventArgs e)
+    private async void Previous_OnClicked(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
-        AudioService.Previous();
+        await OpacityEffect.RunOpacity((View)sender, 100);
+        AudioService?.Previous();
         MusicChanged();
     }
 
-    private async void Next_OnClicked(object? sender, EventArgs e)
+    private async void Next_OnClicked(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
-        AudioService.Next();
+        await OpacityEffect.RunOpacity((View)sender, 100);
+        AudioService?.Next();
         MusicChanged();
     }
 
 
-    private void OnPositionChanged(object? sender, MediaPositionChangedEventArgs e)
+    private void OnPositionChanged(MediaPositionChangedEventArgs e)
     {
-        if (!Process.Duration.Equals(AudioService.Duration))
-            Process.Duration = AudioService.Duration;
+        if (!Process.Duration.Equals(AudioService?.Duration))
+            Process.Duration = AudioService?.Duration ?? 0;
         Process.TimeProgress = e.Position.TotalSeconds;
         ImageSongThumbnail.RotateTo(_degree += 2);
     }
 
-    private void OnMediaFailed(object? sender, MediaFailedEventArgs e)
+    private void OnMediaFailed(MediaFailedEventArgs e)
     {
-        AudioService.Next();
+        AudioService?.Next();
         MusicChanged();
     }
 
-    private void OnStateChanged(object? sender, MediaStateChangedEventArgs e)
+    private void OnStateChanged(MediaStateChangedEventArgs e)
     {
         SetIconButtonPlayPause();
     }
 
-    private void OnMediaEnded(object? sender, EventArgs e)
+    private void OnMediaEnded()
     {
-        AudioService.Next();
+        AudioService?.Next();
         MusicChanged();
     }
 
     private void SetIconButtonPlayPause()
     {
-        PlayPauseMusic.Icon = AudioService.CurrentState() switch
+        PlayPauseMusic.Icon = AudioService?.CurrentState() switch
         {
             MediaElementState.Playing => "pause_white.svg",
             _ => "play_white.svg",
         };
     }
 
-    private async void Equalizer_OnClicked(object? sender, EventArgs e)
+    private async void Equalizer_OnClicked(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
     }
 
-    private async void Add_OnClicked(object? sender, EventArgs e)
+    private async void Add_OnClicked(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
         ShowMoreMenu.SongName = SongName;
         ShowMoreMenu.SingerName = SingerName;
         ShowMoreMenu.SongThumbnail = SongThumbnail;
         await ShowMoreMenu.TranslateTo(0, 0, 500);
     }
 
-    private async void Download_OnClicked(object? sender, EventArgs e)
+    private async void Download_OnClicked(object sender, EventArgs e)
     {
-        await OpacityEffect.RunOpacity((View)sender!, 100);
+        await OpacityEffect.RunOpacity((View)sender, 100);
     }
 
     private void Process_OnValueChanged(object? sender, ValueChangedEventArgs e)
     {
-        if (AudioService.CurrentState() == MediaElementState.Playing) AudioService.Pause();
+        if (AudioService?.CurrentState() == MediaElementState.Playing) AudioService.Pause();
         _degree = (int)e.NewValue * 10;
         ImageSongThumbnail.Rotation = _degree;
     }
@@ -171,6 +177,7 @@ public partial class SongPage
         set
         {
             _playRandom = value;
+            if (AudioService is null) return;
             AudioService.PlayRandom = value;
             OnPropertyChanged();
         }
@@ -178,7 +185,7 @@ public partial class SongPage
 
     private void Process_OnValueChangeCompleted(object? sender, double e)
     {
-        AudioService.SeekTo(e);
+        AudioService?.SeekTo(e);
     }
 
     private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)

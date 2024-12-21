@@ -1,26 +1,22 @@
-﻿using maui_music_application.Views.Fragments;
+﻿using Android.Util;
+using maui_music_application.Helpers;
+using maui_music_application.Services;
+using maui_music_application.Views.Fragments;
 
 namespace maui_music_application.Views.Pages;
 
 public partial class MainPage
 {
     private View? _currentView;
-    private readonly View[] _views;
+    private View[] _views = [];
 
     public MainPage()
     {
-        _views =
-        [
-            new HomePage(),
-            new ExplorePage(),
-            new LibraryPage()
-        ];
-
         InitializeComponent();
         Init();
         Event();
     }
-    
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -33,6 +29,12 @@ public partial class MainPage
 
     private void Init()
     {
+        _views =
+        [
+            new HomePage(),
+            new ExplorePage(),
+            new LibraryPage()
+        ];
         Container.Content = _views[0];
     }
 

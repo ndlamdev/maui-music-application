@@ -6,8 +6,8 @@
 
 namespace maui_music_application.Models;
 
-public class MusicInTop(string id, string name, string signer, string thumbnail, int top)
-    : Music(id, name, signer, thumbnail)
+public class MusicCardInTop(long id, string title, string artist, string cover, int top)
+    : MusicCard(id, title, artist, cover)
 {
     public int Top { get; set; } = top;
 }

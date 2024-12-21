@@ -19,7 +19,7 @@ public class DataDemoGridLayout
         new("Pop2", "Pop 2", "music_kpop.png"),
     ];
 
-    public static readonly PlaylistMusic[] Playlists =
+    public static readonly PlaylistDetail[] Playlists =
     [
         new("Coffee & Jazz", "Coffee & Jazz", "music_kpop.png"),
         new("RELEASED", "RELEASED", "music_kpop.png"),
@@ -29,7 +29,7 @@ public class DataDemoGridLayout
         new("Lo-Fi Beats", "Lo-Fi Beats", "music_kpop.png"),
     ];
 
-    public static readonly PlaylistMusic[] PlaylistLarges =
+    public static readonly PlaylistDetail[] PlaylistLarges =
     [
         SongPageData.Playlist,
     ];
@@ -49,28 +49,28 @@ public class DataDemoGridLayout
         new("Pop", "Pop", "music_kpop.png"),
     ];
 
-    public static readonly MusicInTop[] MusicInTops =
+    public static readonly MusicCardInTop[] MusicInTops =
     [
-        new("1", "Dance Monkey 1", "Tones and I", "music_kpop.png", 1),
-        new("2", "Dance Monkey 2", "Tones and I", "music_kpop.png", 2),
-        new("3", "Dance Monkey 3", "Tones and I", "music_kpop.png", 3),
-        new("4", "Dance Monkey 4", "Tones and I", "music_kpop.png", 4),
-        new("5", "Dance Monkey 5", "Tones and I", "music_kpop.png", 5),
-        new("6", "Dance Monkey 6", "Tones and I", "music_kpop.png", 6),
-        new("7", "Dance Monkey 7", "Tones and I", "music_kpop.png", 7),
-        new("8", "Dance Monkey 8", "Tones and I", "music_kpop.png", 8),
+        new(1, "Dance Monkey 1", "Tones and I", "music_kpop.png", 1),
+        new(2, "Dance Monkey 2", "Tones and I", "music_kpop.png", 2),
+        new(3, "Dance Monkey 3", "Tones and I", "music_kpop.png", 3),
+        new(4, "Dance Monkey 4", "Tones and I", "music_kpop.png", 4),
+        new(5, "Dance Monkey 5", "Tones and I", "music_kpop.png", 5),
+        new(6, "Dance Monkey 6", "Tones and I", "music_kpop.png", 6),
+        new(7, "Dance Monkey 7", "Tones and I", "music_kpop.png", 7),
+        new(8, "Dance Monkey 8", "Tones and I", "music_kpop.png", 8),
     ];
 
-    public static readonly Music[] MusicInPlaylists =
+    public static readonly MusicCard[] MusicInPlaylists =
     [
-        new("1", "Dance Monkey 1", "Tones and I", "music_kpop.png"),
-        new("2", "Dance Monkey 2", "Tones and II", "music_kpop.png"),
-        new("3", "Dance Monkey 3", "Tones and III", "music_kpop.png"),
-        new("4", "Dance Monkey 4", "Tones and IV", "music_kpop.png"),
-        new("5", "Dance Monkey 5", "Tones and V", "music_kpop.png"),
-        new("6", "Dance Monkey 6", "Tones and VI", "music_kpop.png"),
-        new("7", "Dance Monkey 7", "Tones and VII", "music_kpop.png"),
-        new("8", "Dance Monkey 8", "Tones and VIII", "music_kpop.png"),
+        new(1, "Dance Monkey 1", "Tones and I", "music_kpop.png"),
+        new(2, "Dance Monkey 2", "Tones and II", "music_kpop.png"),
+        new(3, "Dance Monkey 3", "Tones and III", "music_kpop.png"),
+        new(4, "Dance Monkey 4", "Tones and IV", "music_kpop.png"),
+        new(5, "Dance Monkey 5", "Tones and V", "music_kpop.png"),
+        new(6, "Dance Monkey 6", "Tones and VI", "music_kpop.png"),
+        new(7, "Dance Monkey 7", "Tones and VII", "music_kpop.png"),
+        new(8, "Dance Monkey 8", "Tones and VIII", "music_kpop.png"),
     ];
 
     public static readonly RecentListen[] RecentListens =

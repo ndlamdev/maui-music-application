@@ -1,6 +1,8 @@
+using System.ComponentModel.Design;
 using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
+using maui_music_application.Services;
 using maui_music_application.ViewModels;
 
 namespace maui_music_application.Views.Pages;
@@ -57,7 +59,7 @@ public partial class SignUpPage
     private void SignUp_OnClicked(object? sender, EventArgs e)
     {
         TodoAttribute.PrintTask<SignUpPage>();
-        _viewModel.OnSubmit();
+        _viewModel.OnSubmit(this);
     }
 
     private void EntryEmail_OnTextChanged(object? sender, TextChangedEventArgs e)
@@ -73,5 +75,24 @@ public partial class SignUpPage
     private void EntryConfirmPassword_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         _viewModel.ConfirmPassword = e.NewTextValue;
+    }
+
+    private void EntryFullName_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        _viewModel.FullName = e.NewTextValue;
+    }
+
+    private void EntryPhoneNumber_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        _viewModel.PhoneNumber = e.NewTextValue;
+    }
+
+    private void SexPicker_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        var selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex != -1)
+            _viewModel.Sex = picker.Items[selectedIndex] == "Male";
     }
 }

@@ -5,7 +5,6 @@ namespace maui_music_application.Dto;
 
 public class RequestLogin
 {
-
     public string Email { get; private set; }
     public string Password { get; private set; }
 
@@ -14,7 +13,6 @@ public class RequestLogin
         Email = email;
         Password = password;
     }
-
 }
 
 public class ResponseAuthentication
@@ -31,18 +29,20 @@ public class ResponseAuthentication
     }
 }
 
-public class RequestRegister
+public class RequestRegister(
+    string email,
+    string password,
+    string fullName,
+    string phoneNumber,
+    DateTime birthday,
+    bool sex)
 {
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string FullName { get; set; }
-
-    public RequestRegister(string email, string password, string fullName)
-    {
-        Email = email;
-        Password = password;
-        FullName = fullName;
-    }
+    public string Email { get; set; } = email;
+    public string Password { get; set; } = password;
+    public string FullName { get; set; } = fullName;
+    public string PhoneNumber { get; set; } = phoneNumber;
+    public DateTime Birthday { get; set; } = birthday;
+    public bool Sex { get; set; } = sex;
 }
 
 public class RequestVerify

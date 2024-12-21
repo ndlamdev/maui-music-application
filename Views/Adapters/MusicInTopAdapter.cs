@@ -5,27 +5,26 @@
 // User: Lam Nguyen
 
 using Android.Util;
+using maui_music_application.Models;
 using maui_music_application.Views.Layouts;
-using MusicInTop = maui_music_application.Models.MusicInTop;
 
 namespace maui_music_application.Views.Adapters;
 
-using MusicInTopModel = MusicInTop;
 using MusicInTopView = Components.Musics.MusicInTop;
 
-public class MusicInTopAdapter(MusicInTopModel[] listData) : GridLayoutAdapter<MusicInTopModel>(listData)
+public class MusicInTopAdapter(MusicCardInTop[] listData) : GridLayoutAdapter<MusicCardInTop>(listData)
 {
-    public override IView LoadContentView(int _,MusicInTopModel data)
+    public override IView LoadContentView(int _,MusicCardInTop data)
     {
         return new MusicInTopView
         {
-            Name = data.Name,
-            Singer = data.Signer,
+            Name = data.Title,
+            Singer = data.Artist,
             Top = data.Top,
-            Source = data.Thumbnail,
+            Source = data.Cover,
             Action = () =>
             {
-                Log.Info("MusicInTopView", $"Click {data.Name}");
+                Log.Info("MusicInTopView", $"Click {data.Title}");
             }
         };
     }

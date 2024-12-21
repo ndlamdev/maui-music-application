@@ -56,10 +56,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.2"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview3" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0"/>
-
+        <PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
@@ -180,7 +181,6 @@
         <AdditionalFiles Include="Views\Components\Buttons\ButtonSign.xaml"/>
         <AdditionalFiles Include="Views\Components\Categories\KindMusic.xaml"/>
         <AdditionalFiles Include="Views\Components\Categories\PlaylistMusic.xaml"/>
-        <AdditionalFiles Include="Views\Components\Categories\PlaylistMusicLarge.xaml"/>
         <AdditionalFiles Include="Views\Components\Categories\TopMixes.xaml"/>
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml"/>
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml"/>

@@ -8,24 +8,34 @@ using System.ComponentModel.DataAnnotations;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.ViewModels;
 
-public class VerifyCodeViewModel(INavigation navigation, Action<string> callback, string code, bool validateOnChanged = false)
+public class VerifyCodeViewModel(
+    Page page,
+    Action<VerifyActionProps> callback,
+    string? code,
+    bool validateOnChanged = false)
     : AObservableValidator(validateOnChanged)
 {
-    private INavigation Navigation { get; set; } = navigation;
     private string _codeVerify = "0";
 
-    public string Code { get; set; } = code;
 
     [MinLength(6, ErrorMessage = "Vui lòng nhập mã xác thực")]
-    [Equals(nameof(Code), ErrorMessage = "Mã xác thực không chính xác!")]
     public string CodeVerify
     {
         get => _codeVerify;
-        set => SetProperty(ref _codeVerify, value, true);
+        set
+        {
+            SetProperty(ref _codeVerify, value, true);
+            if (code != null)
+                ValidateProperty(Code, nameof(Code));
+        }
     }
+
+    [Equals(nameof(CodeVerify), ErrorMessage = "Mã xác thực không hợp lệ!")]
+    public string? Code => code;
 
 
     public void OnSubmit()
@@ -39,6 +49,6 @@ public class VerifyCodeViewModel(INavigation navigation, Action<string> callback
     private void VerifySuccess()
     {
         TodoAttribute.PrintTask<VerifyCodeViewModel>();
-        callback.Invoke(CodeVerify);
+        callback.Invoke(new VerifyActionProps(page, CodeVerify));
     }
 }

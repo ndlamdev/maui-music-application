@@ -4,9 +4,8 @@
 // Create at: 09:09:00 - 26/09/2024
 // User: Lam Nguyen
 
-using Android.App;
-using Android.Util;
 using maui_music_application.Helpers;
+using maui_music_application.Views.Components.Popup;
 
 namespace maui_music_application.Views.Components.Musics;
 
@@ -35,7 +34,7 @@ public partial class MusicInPlaylist
         }
     }
 
-    public Action? OptionAction { get; set; }
+    public Action<CommunityToolkit.Maui.Views.Popup>? OptionAction { get; set; }
 
     public string SongName
     {
@@ -69,6 +68,13 @@ public partial class MusicInPlaylist
 
     private void ImageButton_OnClicked(object? sender, EventArgs e)
     {
-        OptionAction?.Invoke();
+        var button = sender as Button;
+        var popup = new ContextMenuPopup();
+        popup.SetAnchor(button.AnchorX - 100, button.AnchorY);
+        OptionAction?.Invoke(popup);
+    }
+
+    public class ShowPopupArgs
+    {
     }
 }

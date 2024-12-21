@@ -50,7 +50,7 @@ public partial class LoginWithPasswordPage
     private void LoginWithPassword_OnClicked(object? sender, EventArgs e)
     {
         TodoAttribute.PrintTask<LoginWithPasswordPage>();
-        _viewModel.OnSubmit();
+        _viewModel.OnSubmit(this);
     }
 
     [Todo("Handle action click button forget password")]
