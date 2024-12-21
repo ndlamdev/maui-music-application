@@ -15,6 +15,7 @@ using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Components.Popup;
 using maui_music_application.Views.Pages;
+using Newtonsoft.Json;
 
 namespace maui_music_application.ViewModels;
 
@@ -110,9 +111,7 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
                 {
                     if (task.IsFaulted)
                     {
-                        popup.Close();
-                        Log.Error(nameof(SignUpViewModel), "SignUp: " + task.Exception);
-                        AndroidHelper.ShowToast("Sign up failed" + task.Exception);
+                        ShowToastErrorHelper.ShowToast<SignUpViewModel>(task, popup, "Sign up failed: ");
                         return;
                     }
 
@@ -133,9 +132,7 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
         {
             if (task.IsFaulted)
             {
-                popup.Close();
-                Log.Error(nameof(SignUpViewModel), "Verify: " + task.Exception.GetBaseException());
-                AndroidHelper.ShowToast("Verify failed!");
+                ShowToastErrorHelper.ShowToast<SignUpViewModel>(task, popup, "Verify error: ");
                 return;
             }
 
