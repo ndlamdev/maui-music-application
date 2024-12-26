@@ -15,12 +15,12 @@ public partial class SongPageShowMore
     public SongPageShowMore()
     {
         InitializeComponent();
-        BindingContext = this;
+        BindingContext = null;
     }
 
     public string SongName
     {
-        get => _songName ?? "";
+        get => _songName ?? string.Empty;
         set
         {
             _songName = value;
@@ -30,7 +30,7 @@ public partial class SongPageShowMore
 
     public string SingerName
     {
-        get => _singerName ?? "";
+        get => _singerName ?? string.Empty;
         set
         {
             _singerName = value;
@@ -40,13 +40,17 @@ public partial class SongPageShowMore
 
     public string SongThumbnail
     {
-        get => _thumbnail ?? "";
+        get => _thumbnail ?? string.Empty;
         set
         {
             _thumbnail = value;
             OnPropertyChanged();
         }
     }
+
+    public string SongId { get; set; }
+    
+    public bool IsLike { get; set; }
 
     private async void Back_OnClicked(object? sender, EventArgs e)
     {

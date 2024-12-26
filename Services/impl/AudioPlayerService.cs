@@ -4,6 +4,7 @@
 // Create at: 09:10:15 - 14/10/2024
 // User: Lam Nguyen
 
+using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Dto;
@@ -23,6 +24,7 @@ public class AudioPlayerService : IAudioPlayerService
     private MediaElement MediaElement { get; }
     private Layout? _content;
     private ResponsePlaylistDetail? _playlistDetail;
+    private bool _endPlayList = false;
 
     private readonly ISongService _api;
 
@@ -46,9 +48,13 @@ public class AudioPlayerService : IAudioPlayerService
         MediaElement.MediaEnded += (_, _) =>
         {
             if (!MediaElement.ShouldLoopPlayback)
+            {
+                _endPlayList = _indexCurrentSongInPlaylist == Playlist.TotalSong - 1;
                 Next();
+            }
             else
                 Play();
+
             MediaEnded?.Invoke();
         };
         MediaElement.MediaFailed += (_, args) => MediaFailed?.Invoke(args);
@@ -75,7 +81,9 @@ public class AudioPlayerService : IAudioPlayerService
     {
         if (Playlist == null) throw new Exception("List nhạc đang bị rỗng. Hãy set playlist nhạc trước!");
         if (position == _indexCurrentSongInPlaylist ||
-            (position < 0 && position >= Playlist.TotalSong)) return;
+            position < 0 || position >= Playlist.TotalSong)
+            return;
+
         _indexPreviousSongInPlaylist = _indexCurrentSongInPlaylist;
         _indexCurrentSongInPlaylist = position;
         CurrentMusicCard = Playlist.Songs.Content.ElementAt(position);
@@ -98,7 +106,14 @@ public class AudioPlayerService : IAudioPlayerService
 
     public void Play()
     {
-        MediaElement.Play();
+        if (_endPlayList)
+        {
+            _indexCurrentSongInPlaylist = -1;
+            Play(0);
+            _endPlayList = false;
+        }
+        else
+            MediaElement.Play();
     }
 
     public void Pause()
