@@ -52,6 +52,7 @@ public partial class LaunchPage
     [Todo("Check some think before run application")]
     private void TodoBeforeRunApplication()
     {
+        //..
         TodoAttribute.PrintTask<LaunchPage>();
         if (!Preferences.Get("FIRST_OPEN", false))
         {
