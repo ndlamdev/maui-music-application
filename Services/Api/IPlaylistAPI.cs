@@ -18,4 +18,7 @@ public interface IPlaylistApi
 
     [Delete("/playlist/{id}")]
     Task<APIResponse> RemovePlayList([AliasAs("id")] long id);
+
+    [Put("/playlist/remove/{playlist-id}/{song-id}")]
+    Task<APIResponse> RemoveSongIntoPlayList([AliasAs("playlist-id")] long playlistID, [AliasAs("song-id")] long songID);
 }

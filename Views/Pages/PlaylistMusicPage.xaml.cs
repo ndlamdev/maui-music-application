@@ -48,8 +48,13 @@ public partial class PlaylistMusicPage
         OnPropertyChanged(nameof(PlayListName));
         OnPropertyChanged(nameof(PlayListType));
         GridLayoutMusic.Rows = _playlistDetail.TotalSong;
-        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistDetail, Navigation,
-            args => { }));
+        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistDetail, Navigation, this));
+    }
+
+    public void RemoveSong(long id)
+    {
+        _playlistDetail.Songs.Content = _playlistDetail.Songs.Content.Where(card => card.Id != id).ToList();
+        LoadPlaylist(_playlistDetail);
     }
 
     protected override void OnAppearing()
@@ -82,7 +87,7 @@ public partial class PlaylistMusicPage
         [
             (_, _) => RemovePlaylist(contextMenuPopup)
         ]);
-        contextMenuPopup.SetPoint(e.GetPosition(this)?.X - 100 ?? 0, e.GetPosition(this)?.Y + 10 ?? 0);
+        contextMenuPopup.SetPoint(e.GetPosition(this)?.X - 130 ?? 0, e.GetPosition(this)?.Y + 10 ?? 0);
         this.ShowPopup(contextMenuPopup);
     }
 
@@ -96,7 +101,6 @@ public partial class PlaylistMusicPage
         {
             if (task.IsFaulted)
             {
-                popup.Close();
                 ShowToastErrorHelper.ShowToast<PlaylistMusicPage>(task, popup, "Remove playlist failed: ");
                 return;
             }

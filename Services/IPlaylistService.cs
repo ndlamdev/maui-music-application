@@ -10,6 +10,8 @@ public interface IPlaylistService
     Task<ApiPaging<ResponsePlaylistCard>> GetPlaylistCards(Pageable? pageable = null);
 
     Task<APIResponse<ResponsePlaylistDetail>> GetPlaylistDetail(long playlistId, Pageable? pageable = null);
-   
+
     Task<APIResponse> RemovePlayList(long id);
+    
+    Task<APIResponse> RemoveSongIntoPlayList(long playlistId, long songId);
 }

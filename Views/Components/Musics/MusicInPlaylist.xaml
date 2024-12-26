@@ -38,9 +38,13 @@
             </VerticalStackLayout>
         </HorizontalStackLayout>
         <ImageButton
-            WidthRequest="30"
+            WidthRequest="40"
             HeightRequest="30"
             Source="option_vertical.svg"
-            Clicked="ImageButton_OnClicked" />
+             >
+            <ImageButton.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ImageButton_OnClicked"/>
+            </ImageButton.GestureRecognizers>
+        </ImageButton>
     </FlexLayout>
 </ContentView>

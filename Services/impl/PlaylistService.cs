@@ -29,4 +29,9 @@ public class PlaylistService(IPlaylistApi api) : IPlaylistService
     {
         return api.RemovePlayList(id);
     }
+
+    public Task<APIResponse> RemoveSongIntoPlayList(long playlistId, long songId)
+    {
+        return api.RemoveSongIntoPlayList(playlistId, songId);
+    }
 }

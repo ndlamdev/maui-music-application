@@ -7,6 +7,7 @@
 using maui_music_application.Dto;
 using maui_music_application.Models;
 using maui_music_application.Views.Components.Musics;
+using maui_music_application.Views.Components.Popup;
 using maui_music_application.Views.Layouts;
 using maui_music_application.Views.Pages;
 
@@ -15,7 +16,7 @@ namespace maui_music_application.Views.Adapters;
 public class MusicInPlaylistAdapter(
     ResponsePlaylistDetail playlistDetail,
     INavigation navigation,
-    Action<MusicInPlaylist.ShowPopupArgs>? optionAction = null)
+    Page page = null)
     : GridLayoutAdapter<MusicCard>(playlistDetail.Songs.Content.ToArray())
 {
     private bool _isSelected;
@@ -24,10 +25,13 @@ public class MusicInPlaylistAdapter(
     {
         return new MusicInPlaylist()
         {
+            PlaylistID = playlistDetail.Id,
+            SongID = data.Id,
             SongName = data.Title,
             SingerName = data.Artist,
             SongThumbnail = data.Cover,
             Action = Action,
+            Page = page
         };
 
         async void Action()
