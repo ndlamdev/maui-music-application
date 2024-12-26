@@ -7,4 +7,5 @@ public class AppConstraint
     public const string RefreshToken = "REFRESH_TOKEN";
     public const string AccessToken = "ACCESS_TOKEN";
     public static int Timeout = 5000;
+    public static string DefaultAvatar = "https://i.pinimg.com/564x/29/6b/86/296b8682cc0e2c405a991a1d0cd5e9df.jpg";
 }

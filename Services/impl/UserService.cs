@@ -5,15 +5,32 @@ using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services.Api;
+using Newtonsoft.Json;
 
 namespace maui_music_application.Services.impl;
 
 public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserService
 {
-    public async Task<bool> CheckIfUserHasAccount()
+    public async Task CheckIfUserHasAccount()
     {
-        var accessToken = await tokenService.GetAccessToken();
-        return accessToken != null;
+        try
+        {
+            APIResponse<UserGetAccount> response = await authApi.GetAccount();
+            Log.Info("UserService", "CheckIfUserHasAccount {0}", response.StatusCode);
+            ResponseAuthentication.UserDto userDto = response.Data.User;
+            User user = new User(
+                userDto.Avatar == null ? AppConstraint.DefaultAvatar : userDto.Avatar,
+                response.Data.User.FullName,
+                response.Data.User.Email
+            );
+            Preferences.Set(AppConstraint.User, JsonConvert.SerializeObject(user));
+        }
+        catch (Exception ex)
+        {
+            // Refit auto ném exception nếu status code ko nằm trong 200 - 299 
+            Log.Error("UserService", "{0} {1}", ex.Data, ex.Message);
+            throw;
+        }
     }
 
     [Todo("API Login")]

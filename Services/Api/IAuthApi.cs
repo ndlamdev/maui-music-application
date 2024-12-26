@@ -9,10 +9,6 @@ public interface IAuthApi
     [Post("/auth/login")]
     Task<APIResponse<ResponseAuthentication>> Login([Body] RequestLogin request, CancellationToken cancellationToken);
 
-    // Sử dụng để test
-    [Get("/hello")]
-    public Task<APIResponse<int>> Hello();
-
     [Post("/auth/register")]
     public Task<APIResponse> Register([Body] RequestRegister request);
 
@@ -24,4 +20,7 @@ public interface IAuthApi
 
     [Post("/auth/verify")]
     public Task<APIResponse> VerifyRegister([Header("email")] string email, [Body] CodeVerify code);
+
+    [Get("/auth/account")]
+    public Task<APIResponse<UserGetAccount>> GetAccount();
 }

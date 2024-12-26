@@ -4,9 +4,11 @@
 // Create at: 22:10:39 - 05/10/2024
 // User: Lam Nguyen
 
+using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
 using maui_music_application.Services;
+using maui_music_application.Services.Api;
 using Timer = System.Timers.Timer;
 
 namespace maui_music_application.Views.Pages;
@@ -24,10 +26,10 @@ public partial class LaunchPage
     {
         InitializeComponent();
         BindingContext = this;
-        Loading();
+        _ = LoadingAsync();
     }
 
-    private void Loading()
+    private async Task LoadingAsync()
     {
         _timer = new Timer();
         _timer.Interval = 1000;
@@ -46,43 +48,77 @@ public partial class LaunchPage
         };
 
         _timer.Enabled = true;
-        TodoBeforeRunApplication();
+        await TodoBeforeRunApplication();
     }
 
-    [Todo("Check some think before run application")]
-    private void TodoBeforeRunApplication()
+    private async Task
+        TodoBeforeRunApplication()
     {
-        //..
+        Log.Info("LaunchPage", "Join Application");
+        Log.Info("LaunchPage", "Go first {0}", Preferences.Get("FIRST_OPEN", false));
         TodoAttribute.PrintTask<LaunchPage>();
         if (!Preferences.Get("FIRST_OPEN", false))
         {
             Preferences.Set("FIRST_OPEN", true);
-            Navigation.PushAsync(new WelcomePage());
+            await Navigation.PushAsync(new WelcomePage());
             Navigation.RemovePage(this);
             return;
         }
 
+        // Kiểm tra server còn sống không?
+        bool isServerAlive = await IsServerAlive();
+        Log.Info("LaunchPage", $"Join Application IsAlive = {isServerAlive}");
+        if (isServerAlive)
+        {
+            await HandleNavigate();
+        }
+        else
+        {
+            Navigation.PushAsync(new LoginPage());
+            Navigation.RemovePage(this);
+            AndroidHelper.ShowToast("Server đang trong thời gian bảo trì, vui lòng truy cập app sau!");
+        }
+    }
+
+    private async Task HandleNavigate()
+    {
         var userService = ServiceHelper.GetService<IUserService>();
         if (userService is null)
         {
-            Navigation.PushAsync(new LoginPage());
+            await Navigation.PushAsync(new LoginPage());
             Navigation.RemovePage(this);
             return;
         }
 
+        var cts = new CancellationTokenSource();
+        Log.Info("LaunchPage", "Check user login before run application");
         try
         {
-            userService.CheckIfUserHasAccount().ContinueWith(task =>
-            {
-                if (!task.IsCompleted) return;
-                Navigation.PushAsync(task.Result ? new MainPage() : new LoginPage());
-                Navigation.RemovePage(this);
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-        }
-        catch (Exception _)
-        {
-            Navigation.PushAsync(new LoginPage());
+            await userService.CheckIfUserHasAccount();
+            await Navigation.PushAsync(new MainPage());
             Navigation.RemovePage(this);
+        }
+        catch (Exception ex)
+        {
+            // Call Api thất bại 
+            Log.Info("LaunchPage", "Expired Token: {0} {1}", ex.Message, ex.StackTrace);
+            await Navigation.PushAsync(new LoginPage());
+            Navigation.RemovePage(this);
+            AndroidHelper.ShowToast("Token hết hạn, vui lòng đăng nhập lại");
+        }
+    }
+
+    private async Task<bool> IsServerAlive()
+    {
+        IServerApi api = ServiceHelper.GetService<IServerApi>();
+        try
+        {
+            await api.Status();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
         }
     }
 }
