@@ -6,7 +6,6 @@
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
              xmlns:content="clr-namespace:maui_music_application.Views.Pages"
              x:DataType="content:PlaylistMusicPage"
-             Loaded="OnContentViewLoaded"
              BackgroundColor="{StaticResource Background}">
     <Grid
         Padding="25">

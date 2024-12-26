@@ -19,4 +19,9 @@ public class SongService(ISongApi api) : ISongService
     {
         return currentStatus ? api.Unlike(id) : api.Like(id);
     }
+
+    public Task<List<MusicCard>> GetSongsFavorite()
+    {
+        throw new NotImplementedException();
+    }
 }

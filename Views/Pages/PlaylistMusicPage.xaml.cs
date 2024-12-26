@@ -27,19 +27,6 @@ public partial class PlaylistMusicPage
         BindingContext = this;
     }
 
-    /*Call request here!*/
-    private void OnContentViewLoaded(object sender, EventArgs e)
-    {
-        var service = ServiceHelper.GetService<IPlaylistService>();
-        if (service == null) throw new NullPointerException();
-        service.GetPlaylistDetail(_musicId).ContinueWith(task =>
-        {
-            if (!task.IsCompleted) return;
-            LoadPlaylist(task.Result.Data);
-        }, TaskScheduler.FromCurrentSynchronizationContext());
-    }
-
-
     private void LoadPlaylist(ResponsePlaylistDetail playlistDetail)
     {
         _playlistDetail = playlistDetail;
@@ -60,6 +47,13 @@ public partial class PlaylistMusicPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        var service = ServiceHelper.GetService<IPlaylistService>();
+        if (service == null) throw new NullPointerException();
+        service.GetPlaylistDetail(_musicId).ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            LoadPlaylist(task.Result.Data);
+        }, TaskScheduler.FromCurrentSynchronizationContext());
 
         Shell.SetBackButtonBehavior(this, new BackButtonBehavior
         {
@@ -81,6 +75,7 @@ public partial class PlaylistMusicPage
 
     private async void OnOption(object sender, TappedEventArgs e)
     {
+        if (_musicId == -999) return;
         await OpacityEffect.RunOpacity((View)sender, 100);
         var contextMenuPopup = new ContextMenuPopup();
         contextMenuPopup.SetMenuItems(["Xóa playlist"],

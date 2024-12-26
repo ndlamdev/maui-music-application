@@ -5,17 +5,20 @@
 // User: Lam Nguyen
 
 using maui_music_application.Helpers;
+using maui_music_application.Services;
 
 namespace maui_music_application.Views.Fragments;
 
 public partial class SongPageShowMore
 {
     private string? _songName, _singerName, _thumbnail;
+    private bool _isClick = false;
+    private bool _like;
 
     public SongPageShowMore()
     {
         InitializeComponent();
-        BindingContext = null;
+        BindingContext = this;
     }
 
     public string SongName
@@ -48,9 +51,17 @@ public partial class SongPageShowMore
         }
     }
 
-    public string SongId { get; set; }
-    
-    public bool IsLike { get; set; }
+    public long SongId { get; set; }
+
+    public bool Like
+    {
+        get => _like;
+        set
+        {
+            _like = value;
+            OnPropertyChanged();
+        }
+    }
 
     private async void Back_OnClicked(object? sender, EventArgs e)
     {
@@ -61,6 +72,25 @@ public partial class SongPageShowMore
     private async void Heart_OnTapped(object? sender, EventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender!, 100);
+        var service = ServiceHelper.GetService<ISongService>();
+        if (service == null || _isClick) return;
+        _isClick = true;
+        service.Like(Like, SongId)
+            .ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    _isClick = false;
+                    AndroidHelper.ShowToast("Failed");
+                    return;
+                }
+
+                if (!task.IsCompleted) return;
+                _isClick = false;
+                AndroidHelper.ShowToast(task.Result.Message);
+                ServiceHelper.GetService<IAudioPlayerService>()!.CurrentMusic.Like = !Like;
+                Like = !Like;
+            }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public event EventHandler? OnBack;

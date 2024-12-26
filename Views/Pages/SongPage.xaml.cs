@@ -1,8 +1,6 @@
-using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
-using maui_music_application.Models;
 using maui_music_application.Services;
 
 namespace maui_music_application.Views.Pages;
@@ -183,6 +181,8 @@ public partial class SongPage
         ShowMoreMenu.SongName = SongName;
         ShowMoreMenu.SingerName = SingerName;
         ShowMoreMenu.SongThumbnail = SongThumbnail;
+        ShowMoreMenu.SongId = SongID;
+        ShowMoreMenu.Like = Like;
         await ShowMoreMenu.TranslateTo(0, 0, 500);
     }
 
@@ -218,6 +218,7 @@ public partial class SongPage
     private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)
     {
         ShowMoreMenu.TranslateTo(0, DeviceDisplay.Current.MainDisplayInfo.Height, 500);
+        MusicChanged();
     }
 
     private void MusicChanged()

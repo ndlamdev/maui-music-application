@@ -43,7 +43,7 @@ public partial class LibraryPage
     {
         LoadPlaylist();
     }
-    
+
     public void Reload()
     {
         LoadPlaylist();
@@ -200,5 +200,10 @@ public partial class LibraryPage
         {
             AndroidHelper.ShowToast(exception.Message);
         }
+    }
+
+    private async void Favorites_OnClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new PlaylistMusicPage(-999), true);
     }
 }

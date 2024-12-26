@@ -44,6 +44,14 @@
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Heart_OnTapped" />
                     </Image.GestureRecognizers>
+                    <Image.Triggers>
+                        <DataTrigger TargetType="Image" Binding="{Binding Like}" Value="False">
+                            <Setter Property="Source" Value="heart_blue.svg" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Image" Binding="{Binding Like}" Value="True">
+                            <Setter Property="Source" Value="heart_fill_blue.svg" />
+                        </DataTrigger>
+                    </Image.Triggers>
                 </Image>
             </Frame>
         </FlexLayout>
