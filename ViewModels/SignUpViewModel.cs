@@ -109,6 +109,7 @@ public class SignUpViewModel(INavigation navigation, bool validateOnChanged = tr
                 {
                     if (task.IsFaulted)
                     {
+                        popup.Close();
                         ShowToastErrorHelper.ShowToast<SignUpViewModel>(task, popup, "Sign up failed: ");
                         return;
                     }
