@@ -15,4 +15,7 @@ public interface IPlaylistApi
     [Get("/playlist/{id}")]
     Task<APIResponse<ResponsePlaylistDetail>> GetPlaylistDetail([AliasAs("id")] long playlistId,
         [Query] Pageable pageable);
+
+    [Delete("/playlist/{id}")]
+    Task<APIResponse> RemovePlayList([AliasAs("id")] long id);
 }

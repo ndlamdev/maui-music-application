@@ -3,7 +3,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Pages.CreatePlaylistPage"
-             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons">
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:viewModes="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="viewModes:CreatePlayListViewModel">
     <Grid
         Padding="25">
         <Grid.RowDefinitions>
@@ -44,8 +46,8 @@
                 Placeholder="Give your playlist a title"
                 PlaceholderColor="{StaticResource Text2}"
                 Margin="0, 0, 0, 3"
-                FontSize="18" />
-
+                FontSize="18"
+                Text="{Binding Name, Mode=TwoWay}" />
             <HorizontalStackLayout
                 IsClippedToBounds="True">
                 <Line
@@ -55,10 +57,17 @@
                     Y2="0"
                     StrokeThickness="2"
                     Stroke="{StaticResource Text2}"
-                    Margin="0, 0, 0, 35"
                     HeightRequest="2"
                     WidthRequest="99999" />
             </HorizontalStackLayout>
+            <BoxView
+                HeightRequest="35"
+                IsVisible="{Binding [Name].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+            <Label
+                Text="{Binding [Name].ErrorMessage}"
+                TextColor="Red"
+                Padding="0,0,0,35"
+                IsVisible="{Binding [Name].HasError}" />
 
             <Label
                 Text="Privacy"
@@ -132,7 +141,8 @@
                     BackgroundColor="#2C2F30"
                     CornerRadius="9999"
                     WidthRequest="150"
-                    FontSize="17">
+                    FontSize="17"
+                    Clicked="Cancel_OnClicked">
                     <Button.Shadow>
                         <Shadow>
                             <Shadow.Radius>9998</Shadow.Radius>
@@ -149,7 +159,8 @@
                 <buttons:ButtonBorderShadow
                     Text="Create"
                     WidthRequest="150"
-                    FontSize="17" />
+                    FontSize="17"
+                    Clicked="Create_OnClicked" />
             </FlexLayout>
         </VerticalStackLayout>
     </Grid>

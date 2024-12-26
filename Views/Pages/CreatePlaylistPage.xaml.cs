@@ -5,14 +5,20 @@
 // User: Lam Nguyen
 
 using maui_music_application.Helpers;
+using maui_music_application.ViewModels;
 
 namespace maui_music_application.Views.Pages;
 
 public partial class CreatePlaylistPage
 {
+    private readonly CreatePlayListViewModel _model;
+    private bool _onClick;
+
     public CreatePlaylistPage()
     {
         InitializeComponent();
+        _model = new CreatePlayListViewModel(this, true);
+        BindingContext = _model;
     }
 
     protected override void OnAppearing()
@@ -33,12 +39,38 @@ public partial class CreatePlaylistPage
 
     private void Picker_OnSelectedIndexChanged(object? sender, EventArgs e)
     {
+        if (MyPicker.SelectedIndex != -1)
+            _model.IsPublic = MyPicker.Items[MyPicker.SelectedIndex] == "Public";
     }
 
-    private void TapGestureRecognizer_OnTapped(object? sender, TappedEventArgs e)
+    private async void TapGestureRecognizer_OnTapped(object? sender, TappedEventArgs e)
     {
-        OpacityEffect.RunOpacity((View?)sender, 100);
+        if (_onClick) return;
+        _onClick = true;
+        await OpacityEffect.RunOpacity((View?)sender, 100);
         MyPicker.Unfocus();
         MyPicker.Focus();
+        _onClick = false;
+    }
+
+    private async void Cancel_OnClicked(object? sender, EventArgs e)
+    {
+        if (_onClick) return;
+        _onClick = true;
+        await OpacityEffect.RunOpacity((View?)sender, 100);
+        await Navigation.PopAsync(true);
+        _onClick = false;
+    }
+
+    private void Create_OnClicked(object? sender, EventArgs e)
+    {
+        if (_onClick) return;
+        _onClick = true;
+        _model.OnSubmit(async () =>
+        {
+            await OpacityEffect.RunOpacity((View?)sender, 100);
+            await Navigation.PopAsync(true);
+        });
+        _onClick = false;
     }
 }

@@ -42,6 +42,7 @@
                     WidthRequest="40"
                     HeightRequest="40">
                     <Image
+                        x:Name="OptionButton"
                         Source="option_vertical.svg"
                         WidthRequest="30"
                         HeightRequest="30">

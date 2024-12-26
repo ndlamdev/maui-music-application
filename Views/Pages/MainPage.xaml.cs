@@ -9,6 +9,7 @@ public partial class MainPage
 {
     private View? _currentView;
     private View[] _views = [];
+    private int _currentFrame = 0;
 
     public MainPage()
     {
@@ -21,11 +22,17 @@ public partial class MainPage
     {
         base.OnAppearing();
 
+        if (_views[_currentFrame] is LibraryPage page)
+        {
+            page.Reload();
+        }
+
         Shell.SetBackButtonBehavior(this, new BackButtonBehavior
         {
             IsVisible = false
         });
     }
+
 
     private void Init()
     {
@@ -40,7 +47,11 @@ public partial class MainPage
 
     private void Event()
     {
-        BottomNavigation.OnClickItem = index => { ChangePage(_views[index]); };
+        BottomNavigation.OnClickItem = index =>
+        {
+            ChangePage(_views[index]);
+            _currentFrame = index;
+        };
     }
 
     private async void ChangePage(View view)

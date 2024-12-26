@@ -6,11 +6,9 @@ namespace maui_music_application.Services.impl;
 
 public class PlaylistService(IPlaylistApi api) : IPlaylistService
 {
-    public async Task<ResponseCreatePlaylist> CreatePlaylist(RequestCreatePlaylist request)
+    public Task<APIResponse<ResponseCreatePlaylist>> CreatePlaylist(RequestCreatePlaylist request)
     {
-        var response = await api.CreatePlaylist(request);
-        if (response.StatusCode != 200) throw new Exception();
-        return response.Data;
+        return api.CreatePlaylist(request);
     }
 
     public async Task<ApiPaging<ResponsePlaylistCard>> GetPlaylistCards(Pageable? pageable = null)
@@ -20,11 +18,15 @@ public class PlaylistService(IPlaylistApi api) : IPlaylistService
         return response.Data;
     }
 
-    public async Task<ResponsePlaylistDetail> GetPlaylistDetail(long playlistId, Pageable? pageable = null)
+    public async Task<APIResponse<ResponsePlaylistDetail>> GetPlaylistDetail(long playlistId, Pageable? pageable = null)
     {
         var response = await api.GetPlaylistDetail(playlistId, pageable ?? new Pageable());
-        if (response.StatusCode != 200) throw new Exception();
         if (string.IsNullOrEmpty(response.Data.CoverUrl)) response.Data.CoverUrl = "main_logo.svg";
-        return response.Data;
+        return response;
+    }
+
+    public Task<APIResponse> RemovePlayList(long id)
+    {
+        return api.RemovePlayList(id);
     }
 }

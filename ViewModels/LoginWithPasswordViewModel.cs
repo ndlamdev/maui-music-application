@@ -48,8 +48,6 @@ public class LoginWithPasswordViewModel(INavigation navigation, bool validateOnC
     public void OnSubmit(Page page)
     {
         ValidateAllProperties();
-        OnErrorChanged(nameof(Email));
-        OnErrorChanged(nameof(Password));
         if (HasErrors)
             return;
 

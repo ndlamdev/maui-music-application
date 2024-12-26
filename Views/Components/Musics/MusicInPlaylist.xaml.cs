@@ -70,7 +70,7 @@ public partial class MusicInPlaylist
     {
         var button = sender as Button;
         var popup = new ContextMenuPopup();
-        popup.SetAnchor(button.AnchorX - 100, button.AnchorY);
+        popup.SetPoint(button.AnchorX - 100, button.AnchorY);
         OptionAction?.Invoke(popup);
     }
 
