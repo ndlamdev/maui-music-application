@@ -5,22 +5,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="maui_music_application.Views.Components.Popup.ContextMenuPopup"
-    Color="{StaticResource NullBackground}">
+    Color="{StaticResource NullBackground}"
+    xmlns:context="clr-namespace:maui_music_application.Views.Components.Popup"
+    x:DataType="context:ContextMenuPopup">
     <AbsoluteLayout>
         <Frame
             AbsoluteLayout.LayoutFlags="All"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
-            BackgroundColor="Transparent">
-            <Frame
-                CornerRadius="25"
-                BackgroundColor="White">
+            BackgroundColor="Transparent"
+            Padding="0"
+            Margin="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+            </Frame.GestureRecognizers>
+            <HorizontalStackLayout>
                 <VerticalStackLayout
-                    x:Name="Menu">
-                    <Label Text="Option 1" TextColor="Black" />
-                    <Label Text="Option 2" TextColor="Black" />
-                    <Label Text="Option 3" TextColor="Black" />
+                    x:Name="FrameX">
+                    <Frame
+                        BackgroundColor="White"
+                        x:Name="FrameY">
+                        <VerticalStackLayout
+                            x:Name="MenuContext">
+                        </VerticalStackLayout>
+                    </Frame>
                 </VerticalStackLayout>
-            </Frame>
+            </HorizontalStackLayout>
         </Frame>
     </AbsoluteLayout>
 </toolkit:Popup>
