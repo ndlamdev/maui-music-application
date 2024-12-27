@@ -16,6 +16,7 @@ public static class HttpConfiguration
         builder.Services.AddRefitClient<ISongApi>();
         builder.Services.AddRefitClient<IHomeApi>();
         builder.Services.AddRefitClient<IServerApi>();
+        builder.Services.AddRefitClient<IGenreApi>();
     }
 
     private static void AddRefitClient<TInterface>(
