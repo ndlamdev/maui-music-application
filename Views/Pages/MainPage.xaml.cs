@@ -38,7 +38,7 @@ public partial class MainPage
     {
         _views =
         [
-            new HomePage(),
+            new HomePage(this),
             new ExplorePage(),
             new LibraryPage()
         ];

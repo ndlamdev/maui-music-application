@@ -11,6 +11,7 @@ using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
+using maui_music_application.Views.Pages;
 using Microsoft.Extensions.Logging;
 using Exception = Java.Lang.Exception;
 using TopMixes = maui_music_application.Models.TopMixes;
@@ -25,16 +26,18 @@ public partial class HomePage
     private IHomeService? _service;
     private readonly ILogger<HomePage> _logger;
 
-    public HomePage()
+    public HomePage(MainPage page)
     {
+        Page = page;
         InitializeComponent();
         BindingContext = this;
         Init();
     }
 
+    private MainPage Page { get; set; }
+
     private async Task GetPlaylists()
     {
-
         try
         {
             List<ResponsePlaylistCard> response = await _service.GetPlayList();
@@ -51,8 +54,10 @@ public partial class HomePage
                         TimeSpan.Zero.ToString()
                     ));
                 }
+
                 _playlistDetails = playlists.ToArray();
             }
+
             Log.Info("Call Api Home Page", "GetPlaylists called {0} {1} ", this._playlistDetails.ToString(),
                 this._playlistDetails.Length);
         }
@@ -80,8 +85,10 @@ public partial class HomePage
                         item.ReleaseDate.TimeOfDay
                     ));
                 }
+
                 this._topMixes = topMixes.ToArray();
             }
+
             Log.Info("Call Api Home Page", "GetAlbum called {0} ", _topMixes);
         }
         catch (Exception e)
@@ -106,8 +113,10 @@ public partial class HomePage
                         item.Cover
                     ));
                 }
+
                 this._recentListen = recentListen.ToArray();
             }
+
             Log.Info("Call Api Home Page", "GetAlbum called {0} ", _topMixes);
         }
         catch (Exception e)
@@ -120,6 +129,8 @@ public partial class HomePage
 
     private async void Init()
     {
+        Header.Page = Page;
+
         _service = ServiceHelper.GetService<IHomeService>();
 
         await GetPlaylists();
