@@ -5,13 +5,20 @@
 // User: Lam Nguyen
 
 using Android.Util;
+using Android.Webkit;
 using maui_music_application.Data;
+using maui_music_application.Helpers;
+using maui_music_application.Models;
+using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 
 namespace maui_music_application.Views.Fragments;
 
 public partial class ExplorePage
 {
+    private KindMusic[] _categories = [];
+    private IGenreServices? _genreServices;
+
     public ExplorePage()
     {
         InitializeComponent();
@@ -21,14 +28,36 @@ public partial class ExplorePage
     /*Call request here!*/
     private async void OnContentViewLoaded(object sender, EventArgs e)
     {
+
     }
 
-    private void Init()
+    private async Task GetCategories()
     {
-        KindMusic.Adapter(new KindMusicAdapter(DataDemoGridLayout.Categories));
-        Browse.Adapter(new KindMusicAdapter(DataDemoGridLayout.Categories));
-        Browse.AddElement(DataDemoGridLayout.Categories);
-        Browse.AddElement(DataDemoGridLayout.Categories);
+        try
+        {
+            _genreServices = ServiceHelper.GetService<IGenreServices>();
+            List<KindMusic> categories = await _genreServices.GetCategories();
+            if (categories is not null)
+            {
+                _categories = categories.ToArray();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Log.Error("ExplorePage", $"{ex.Message}");
+        }
+
+    }
+
+    private async void Init()
+    {
+        await GetCategories();
+        Log.Info("ExplorePage", $"Data {_categories.Length} items");
+        KindMusic.Adapter(new KindMusicAdapter(_categories));
+        Browse.Adapter(new KindMusicAdapter(_categories));
+        Browse.AddElement(_categories);
+        Browse.AddElement(_categories);
     }
 
     private void Search_OnOnTextChanged(object? sender, TextChangedEventArgs e)

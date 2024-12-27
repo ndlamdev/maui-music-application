@@ -21,7 +21,7 @@ obj/
 
 # Visual Studio Code
 .vscode/
-
+.vs
 # Packages
 /packages/
 

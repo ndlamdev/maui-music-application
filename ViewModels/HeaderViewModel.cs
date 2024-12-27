@@ -1,11 +1,13 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Android.Util;
+using maui_music_application.Configuration;
 using maui_music_application.Data;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Services.impl;
+using Newtonsoft.Json;
 
 namespace maui_music_application.ViewModels;
 
@@ -24,11 +26,11 @@ public class HeaderViewModel : INotifyPropertyChanged
         }
     }
 
-    // Data example
-    private User _user =
-        HeaderData.UserData;
+    private User? _user =
+        JsonConvert.DeserializeObject<User>
+            (Preferences.Get(AppConstraint.User, string.Empty));
 
-    public User User
+    public User? User
     {
         get => _user;
         set
@@ -36,7 +38,7 @@ public class HeaderViewModel : INotifyPropertyChanged
             if (_user != value)
             {
                 _user = value;
-                OnPropertyChanged(); // Notify the UI about the change
+                OnPropertyChanged();
             }
         }
     }
@@ -53,12 +55,12 @@ public class HeaderViewModel : INotifyPropertyChanged
     {
         try
         {
-            HasUser = await _userService.CheckIfUserHasAccount();
+            await _userService.CheckIfUserHasAccount();
+            HasUser = true;
         }
         catch (Exception ex)
         {
-            // Log the error for debugging purposes
-            Log.Error($"Error checking user account status: {ex.Message}", ex.StackTrace ?? "");
+            HasUser = false;
         }
     }
 

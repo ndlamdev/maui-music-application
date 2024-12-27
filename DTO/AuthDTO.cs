@@ -26,6 +26,7 @@ public class ResponseAuthentication
         public long Id { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
+        public string Avatar { get; set; }
     }
 }
 
@@ -49,4 +50,9 @@ public class RequestVerify
 {
     public string Email { get; set; }
     public string Otp { get; set; }
+}
+
+public class UserGetAccount
+{
+    public ResponseAuthentication.UserDto User { get; set; }
 }
