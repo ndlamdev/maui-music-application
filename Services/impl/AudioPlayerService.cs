@@ -50,8 +50,12 @@ public class AudioPlayerService : IAudioPlayerService
         {
             if (!MediaElement.ShouldLoopPlayback)
             {
-                _endPlayList = _singleSongID != -1 || _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
-                Next();
+                if (_singleSongID == -1)
+                {
+                    Next();
+                    _endPlayList = _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
+                }
+                else _endPlayList = true;
             }
             else
                 Play();

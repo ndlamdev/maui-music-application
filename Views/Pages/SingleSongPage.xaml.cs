@@ -147,7 +147,6 @@ public partial class SingleSongPage
 
     private void OnMediaEnded()
     {
-        AudioService?.Next();
         MusicChanged();
     }
 
