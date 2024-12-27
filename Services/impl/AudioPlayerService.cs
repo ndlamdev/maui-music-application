@@ -4,6 +4,7 @@
 // Create at: 09:10:15 - 14/10/2024
 // User: Lam Nguyen
 
+using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Dto;
@@ -23,6 +24,8 @@ public class AudioPlayerService : IAudioPlayerService
     private MediaElement MediaElement { get; }
     private Layout? _content;
     private ResponsePlaylistDetail? _playlistDetail;
+    private bool _endPlayList;
+    private long _singleSongID = -1;
 
     private readonly ISongService _api;
 
@@ -46,9 +49,17 @@ public class AudioPlayerService : IAudioPlayerService
         MediaElement.MediaEnded += (_, _) =>
         {
             if (!MediaElement.ShouldLoopPlayback)
-                Next();
+            {
+                if (_singleSongID == -1)
+                {
+                    _endPlayList = _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
+                    Next();
+                }
+                else _endPlayList = true;
+            }
             else
                 Play();
+
             MediaEnded?.Invoke();
         };
         MediaElement.MediaFailed += (_, args) => MediaFailed?.Invoke(args);
@@ -59,7 +70,11 @@ public class AudioPlayerService : IAudioPlayerService
         get => _playlistDetail;
         set
         {
-            if (_playlistDetail != null && (value == null || value.Id == _playlistDetail.Id)) return;
+            if (_playlistDetail != null &&
+                (value == null ||
+                 (value.Id == _playlistDetail.Id &&
+                  value.IsAlbum == _playlistDetail.IsAlbum))) return;
+            _singleSongID = -1;
             _indexCurrentSongInPlaylist = -1;
             _indexPreviousSongInPlaylist = -1;
             _playlistDetail = value;
@@ -71,11 +86,31 @@ public class AudioPlayerService : IAudioPlayerService
     public MusicCard? CurrentMusicCard { get; set; }
     public Music? CurrentMusic { get; set; }
 
+    public void PlaySingleSong(long songId)
+    {
+        if (songId == _singleSongID && !_endPlayList) return;
+        _singleSongID = songId;
+        _api.GetMusic(songId).ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            CurrentMusic = task.Result;
+            CurrentMusicCard =
+                new MusicCard(CurrentMusic.Id, CurrentMusic.Title, CurrentMusic.Artist, CurrentMusic.Cover);
+            MediaElement.Source = CurrentMusic.Url;
+            MediaElement.MetadataTitle = CurrentMusic.Title;
+            MediaElement.MetadataArtist = CurrentMusic.Artist;
+            MediaElement.MetadataArtworkUrl = CurrentMusic.Cover;
+            _endPlayList = false;
+        }, TaskScheduler.FromCurrentSynchronizationContext());
+    }
+
     public void Play(int position)
     {
         if (Playlist == null) throw new Exception("List nhạc đang bị rỗng. Hãy set playlist nhạc trước!");
         if (position == _indexCurrentSongInPlaylist ||
-            (position < 0 && position >= Playlist.TotalSong)) return;
+            position < 0 || position >= Playlist.TotalSong)
+            return;
+
         _indexPreviousSongInPlaylist = _indexCurrentSongInPlaylist;
         _indexCurrentSongInPlaylist = position;
         CurrentMusicCard = Playlist.Songs.Content.ElementAt(position);
@@ -98,7 +133,20 @@ public class AudioPlayerService : IAudioPlayerService
 
     public void Play()
     {
-        MediaElement.Play();
+        if (_endPlayList)
+        {
+            if (_singleSongID != -1)
+            {
+                PlaySingleSong(_singleSongID);
+                return;
+            }
+
+            _indexCurrentSongInPlaylist = -1;
+            Play(0);
+            _endPlayList = false;
+        }
+        else
+            MediaElement.Play();
     }
 
     public void Pause()

@@ -1,18 +1,19 @@
+using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
-using maui_music_application.Models;
 using maui_music_application.Services;
 
 namespace maui_music_application.Views.Pages;
 
-public partial class SongPage
+public partial class SongInPlaylistPage
 {
     private int _degree;
     private bool _playRandom;
     private IAudioPlayerService? AudioService { get; }
+    private bool _isClick;
 
-    public SongPage(ResponsePlaylistDetail playlistDetail, int position = 0)
+    public SongInPlaylistPage(ResponsePlaylistDetail playlistDetail, int position = 0)
     {
         AudioService = ServiceHelper.GetService<IAudioPlayerService>();
         if (AudioService is null)
@@ -51,9 +52,13 @@ public partial class SongPage
 
     public string SongName => AudioService?.SongName ?? string.Empty;
 
+    public bool Like => AudioService?.CurrentMusic?.Like ?? false;
+
     public string SingerName => AudioService?.SingerName ?? string.Empty;
 
     public string SongThumbnail => AudioService?.SongThumbnail ?? string.Empty;
+
+    public long SongID => AudioService?.CurrentMusicCard?.Id ?? -1;
 
     private async void Option_OnTapped(object sender, TappedEventArgs e)
     {
@@ -74,6 +79,25 @@ public partial class SongPage
     private async void Heart_OnTapped(object sender, EventArgs eventArgs)
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
+        var service = ServiceHelper.GetService<ISongService>();
+        if (service == null || _isClick) return;
+        _isClick = true;
+        service.Like(Like, SongID)
+            .ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    _isClick = false;
+                    AndroidHelper.ShowToast("Failed");
+                    return;
+                }
+
+                if (!task.IsCompleted) return;
+                _isClick = false;
+                AndroidHelper.ShowToast(task.Result.Message);
+                AudioService.CurrentMusic.Like = !Like;
+                OnPropertyChanged(nameof(Like));
+            }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     private void PlayPauseMusicClicked(object? sender, EventArgs e)
@@ -128,11 +152,13 @@ public partial class SongPage
     private void OnStateChanged(MediaStateChangedEventArgs e)
     {
         SetIconButtonPlayPause();
+        ShowMoreMenu.BindingContext ??= AudioService?.CurrentMusicCard;
+        if (AudioService.CurrentState() == MediaElementState.Opening)
+            MusicChanged();
     }
 
     private void OnMediaEnded()
     {
-        AudioService?.Next();
         MusicChanged();
     }
 
@@ -156,6 +182,8 @@ public partial class SongPage
         ShowMoreMenu.SongName = SongName;
         ShowMoreMenu.SingerName = SingerName;
         ShowMoreMenu.SongThumbnail = SongThumbnail;
+        ShowMoreMenu.SongId = SongID;
+        ShowMoreMenu.Like = Like;
         await ShowMoreMenu.TranslateTo(0, 0, 500);
     }
 
@@ -191,13 +219,16 @@ public partial class SongPage
     private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)
     {
         ShowMoreMenu.TranslateTo(0, DeviceDisplay.Current.MainDisplayInfo.Height, 500);
+        MusicChanged(false);
     }
 
-    private void MusicChanged()
+    private void MusicChanged(bool resetDegree = true)
     {
-        _degree = 0;
+        if (resetDegree)
+            _degree = 0;
         OnPropertyChanged(nameof(SongName));
         OnPropertyChanged(nameof(SingerName));
         OnPropertyChanged(nameof(SongThumbnail));
+        OnPropertyChanged(nameof(Like));
     }
 }

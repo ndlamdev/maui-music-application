@@ -17,7 +17,7 @@
                     x:Name="Image"
                     HeightRequest="85"
                     WidthRequest="85"
-                    Aspect="Center" />
+                    Aspect="Fill" />
             </Frame>
             <VerticalStackLayout VerticalOptions="Center">
                 <Label

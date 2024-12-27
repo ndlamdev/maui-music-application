@@ -27,8 +27,9 @@ public class ResponsePlaylistCard
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public string CoverUrl { get; set; } = string.Empty;
+    public string CoverUrl { get; set; } = "folder_icon.png";
     public int TotalSong { get; set; }
+    public bool IsAlbum { get; set; } = false;
 }
 
 public class ResponsePlaylistDetail : ResponsePlaylistCard

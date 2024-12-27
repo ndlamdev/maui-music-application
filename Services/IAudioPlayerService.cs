@@ -34,4 +34,5 @@ public interface IAudioPlayerService
     ResponsePlaylistDetail? Playlist { get; set; }
     MusicCard? CurrentMusicCard { get; protected set; }
     Music? CurrentMusic { get; protected set; }
+    void PlaySingleSong(long songId);
 }

@@ -22,7 +22,8 @@ public partial class AppShell
         Routing.RegisterRoute("ResetPasswordPage", typeof(ResetPasswordPage));
         Routing.RegisterRoute("MainPage", typeof(MainPage));
         Routing.RegisterRoute("PlayListMusicPage", typeof(PlaylistMusicPage));
-        Routing.RegisterRoute("SongPage", typeof(SongPage));
+        Routing.RegisterRoute("SongPage", typeof(SongInPlaylistPage));
         Routing.RegisterRoute("CreatePlaylist", typeof(CreatePlaylistPage));
+        Routing.RegisterRoute("TopPage", typeof(TopPage));
     }
 }

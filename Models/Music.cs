@@ -6,8 +6,10 @@ public class Music(
     string artist,
     string cover,
     string url,
-    string genre) : MusicCard(id, title, artist, cover)
+    string genre,
+    bool like = false) : MusicCard(id, title, artist, cover)
 {
     public string Url { get; set; } = url;
     public string Genre { get; set; } = genre;
+    public bool Like { get; set; } = like;
 }

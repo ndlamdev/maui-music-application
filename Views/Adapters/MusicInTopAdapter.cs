@@ -7,25 +7,23 @@
 using Android.Util;
 using maui_music_application.Models;
 using maui_music_application.Views.Layouts;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Adapters;
 
 using MusicInTopView = Components.Musics.MusicInTop;
 
-public class MusicInTopAdapter(MusicCardInTop[] listData) : GridLayoutAdapter<MusicCardInTop>(listData)
+public class MusicInTopAdapter(MusicCardInTop[] listData, INavigation navigation) : GridLayoutAdapter<MusicCardInTop>(listData)
 {
-    public override IView LoadContentView(int _,MusicCardInTop data)
+    public override IView LoadContentView(int position, MusicCardInTop data)
     {
         return new MusicInTopView
         {
             Name = data.Title,
             Singer = data.Artist,
-            Top = data.Top,
+            Top = position + 1,
             Source = data.Cover,
-            Action = () =>
-            {
-                Log.Info("MusicInTopView", $"Click {data.Title}");
-            }
+            Action = () => { navigation.PushAsync(new SingleSongPage(data.Id));  }
         };
     }
 }

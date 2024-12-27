@@ -40,4 +40,111 @@ public class ShowToastErrorHelper
             AndroidHelper.ShowToast($"{subject}: {exception.Message}");
         }
     }
+
+    public static void ShowToast<T, R>(Task<APIResponse<R>> task, Popup popup, string subject)
+    {
+        var exception = task.Exception.GetBaseException();
+        Log.Error(nameof(T), $"{subject}: " + exception);
+
+        if (exception is Refit.ApiException apiException)
+        {
+            var responseContent = apiException.Content;
+
+            try
+            {
+                popup.Close();
+                var errorResponse = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                AndroidHelper.ShowToast($"{subject}: {errorResponse?.Message ?? "Unknown error"}");
+            }
+            catch
+            {
+                popup.Close();
+                AndroidHelper.ShowToast($"{subject}: Invalid error response.");
+            }
+        }
+        else
+        {
+            popup.Close();
+            AndroidHelper.ShowToast($"{subject}: {exception.Message}");
+        }
+    }
+    
+    public static void ShowToast<T, R>(Task<List<R>> task, Popup popup, string subject)
+    {
+        var exception = task.Exception.GetBaseException();
+        Log.Error(nameof(T), $"{subject}: " + exception);
+
+        if (exception is Refit.ApiException apiException)
+        {
+            var responseContent = apiException.Content;
+
+            try
+            {
+                popup.Close();
+                var errorResponse = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                AndroidHelper.ShowToast($"{subject}: {errorResponse?.Message ?? "Unknown error"}");
+            }
+            catch
+            {
+                popup.Close();
+                AndroidHelper.ShowToast($"{subject}: Invalid error response.");
+            }
+        }
+        else
+        {
+            popup.Close();
+            AndroidHelper.ShowToast($"{subject}: {exception.Message}");
+        }
+    }
+
+
+    public static void ShowToast<T>(Task<APIResponse> task, string subject)
+    {
+        var exception = task.Exception.GetBaseException();
+        Log.Error(nameof(T), $"{subject}: " + exception);
+
+        if (exception is Refit.ApiException apiException)
+        {
+            var responseContent = apiException.Content;
+
+            try
+            {
+                var errorResponse = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                AndroidHelper.ShowToast($"{subject}: {errorResponse?.Message ?? "Unknown error"}");
+            }
+            catch
+            {
+                AndroidHelper.ShowToast($"{subject}: Invalid error response.");
+            }
+        }
+        else
+        {
+            AndroidHelper.ShowToast($"{subject}: {exception.Message}");
+        }
+    }
+
+    public static void ShowToast<T, R>(Task<APIResponse<R>> task, string subject)
+    {
+        var exception = task.Exception.GetBaseException();
+        Log.Error(nameof(T), $"{subject}: " + exception);
+
+        if (exception is Refit.ApiException apiException)
+        {
+            var responseContent = apiException.Content;
+
+            try
+            {
+                var errorResponse = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                AndroidHelper.ShowToast($"{subject}: {errorResponse?.Message ?? "Unknown error"}");
+            }
+            catch
+            {
+                AndroidHelper.ShowToast($"{subject}: Invalid error response.");
+            }
+        }
+        else
+        {
+            AndroidHelper.ShowToast($"{subject}: {exception.Message}");
+        }
+    }
 }
