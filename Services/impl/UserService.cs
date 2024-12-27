@@ -61,9 +61,10 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
     public Task Logout()
     {
         TodoAttribute.PrintTask<UserService>();
+        var result = authApi.Logout();
         tokenService.RemoveAccessToken();
         tokenService.RemoveRefreshToken();
-        return authApi.Logout();
+        return result;
     }
 
     public Task<APIResponse> VerifyRegister(string email, CodeVerify code)
