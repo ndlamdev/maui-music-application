@@ -6,11 +6,11 @@
 
 namespace maui_music_application.Models;
 
-public class Album(string id, string name, string artist, string cover, string type = "", DateTime? releaseDate = null)
+public class Album(long id, string name, string artist, string coverUrl, string type = "", DateTime? releaseDate = null)
 {
-    public string Id { get; set; } = id;
+    public long Id { get; set; } = id;
 
-    public string Cover { get; set; } = cover;
+    public string CoverUrl { get; set; } = coverUrl;
 
     public string Name { get; set; } = name;
 

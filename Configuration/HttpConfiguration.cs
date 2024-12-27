@@ -15,6 +15,7 @@ public static class HttpConfiguration
         builder.Services.AddRefitClient<IPlaylistApi>();
         builder.Services.AddRefitClient<ISongApi>();
         builder.Services.AddRefitClient<ITopPlayApi>();
+        builder.Services.AddRefitClient<IAlbumApi>();
     }
 
     private static void AddRefitClient<TInterface>(

@@ -52,8 +52,8 @@ public class AudioPlayerService : IAudioPlayerService
             {
                 if (_singleSongID == -1)
                 {
-                    Next();
                     _endPlayList = _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
+                    Next();
                 }
                 else _endPlayList = true;
             }
@@ -97,6 +97,7 @@ public class AudioPlayerService : IAudioPlayerService
             MediaElement.MetadataTitle = CurrentMusic.Title;
             MediaElement.MetadataArtist = CurrentMusic.Artist;
             MediaElement.MetadataArtworkUrl = CurrentMusic.Cover;
+            _endPlayList = false;
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 

@@ -60,6 +60,7 @@ public partial class MusicInPlaylist
 
     public long SongID { get; set; }
     public long PlaylistID { get; set; }
+    public bool CanRemove { get; set; }
 
     public string SongThumbnail
     {
@@ -75,6 +76,7 @@ public partial class MusicInPlaylist
 
     private async void ImageButton_OnClicked(object sender, TappedEventArgs e)
     {
+        if (!CanRemove) return;
         await OpacityEffect.RunOpacity((View)sender, 100);
         var contextMenuPopup = new ContextMenuPopup();
         contextMenuPopup.SetMenuItems(["Xóa khỏi playlist"],
@@ -96,7 +98,8 @@ public partial class MusicInPlaylist
         {
             if (task.IsFaulted)
             {
-                ShowToastErrorHelper.ShowToast<MusicInPlaylist>(task, popupLoading, "Remove song into playlist failed: ");
+                ShowToastErrorHelper.ShowToast<MusicInPlaylist>(task, popupLoading,
+                    "Remove song into playlist failed: ");
                 return;
             }
 

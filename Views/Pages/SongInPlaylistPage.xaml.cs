@@ -152,12 +152,12 @@ public partial class SongInPlaylistPage
     {
         SetIconButtonPlayPause();
         ShowMoreMenu.BindingContext ??= AudioService?.CurrentMusicCard;
-        OnPropertyChanged(nameof(Like));
+        if (AudioService.CurrentState() == MediaElementState.Opening)
+            MusicChanged();
     }
 
     private void OnMediaEnded()
     {
-        AudioService?.Next();
         MusicChanged();
     }
 

@@ -4,7 +4,6 @@
 // Create at: 12:10:05 - 26/10/2024
 // User: Lam Nguyen
 
-using Android.Util;
 using CommunityToolkit.Maui.Views;
 using Java.Lang;
 using maui_music_application.Dto;
@@ -18,16 +17,18 @@ namespace maui_music_application.Views.Pages;
 public partial class PlaylistMusicPage
 {
     private ResponsePlaylistDetail _playlistDetail = new();
-    private readonly long _musicId;
+    private readonly long _id;
+    private readonly bool _album;
 
-    public PlaylistMusicPage(long dataId)
+    public PlaylistMusicPage(long dataId, bool album = false)
     {
-        _musicId = dataId;
+        _id = dataId;
+        _album = album;
         InitializeComponent();
         BindingContext = this;
     }
 
-    private void LoadPlaylist(ResponsePlaylistDetail playlistDetail)
+    private void LoadPlaylist(ResponsePlaylistDetail playlistDetail, bool canRemove = true)
     {
         _playlistDetail = playlistDetail;
         playlistDetail.CoverUrl = string.IsNullOrWhiteSpace(playlistDetail.CoverUrl) ? "" : playlistDetail.CoverUrl;
@@ -35,7 +36,7 @@ public partial class PlaylistMusicPage
         OnPropertyChanged(nameof(PlayListName));
         OnPropertyChanged(nameof(PlayListType));
         GridLayoutMusic.Rows = _playlistDetail.TotalSong;
-        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistDetail, Navigation, this));
+        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistDetail, Navigation, this, canRemove));
     }
 
     public void RemoveSong(long id)
@@ -47,18 +48,30 @@ public partial class PlaylistMusicPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        var service = ServiceHelper.GetService<IPlaylistService>();
-        if (service == null) throw new NullPointerException();
-        service.GetPlaylistDetail(_musicId).ContinueWith(task =>
-        {
-            if (!task.IsCompleted) return;
-            LoadPlaylist(task.Result.Data);
-        }, TaskScheduler.FromCurrentSynchronizationContext());
-
         Shell.SetBackButtonBehavior(this, new BackButtonBehavior
         {
             IsVisible = false
         });
+
+        if (_album)
+        {
+            var albumService = ServiceHelper.GetService<IAlbumService>();
+            if (albumService == null) throw new NullPointerException();
+            albumService.GetAlbumDetail(_id).ContinueWith(task =>
+            {
+                if (!task.IsCompleted) return;
+                LoadPlaylist(task.Result, false);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+            return;
+        }
+
+        var playlistService = ServiceHelper.GetService<IPlaylistService>();
+        if (playlistService == null) throw new NullPointerException();
+        playlistService.GetPlaylistDetail(_id).ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            LoadPlaylist(task.Result.Data);
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public string PlayListThumbnail => _playlistDetail.CoverUrl;
@@ -75,7 +88,7 @@ public partial class PlaylistMusicPage
 
     private async void OnOption(object sender, TappedEventArgs e)
     {
-        if (_musicId == -999) return;
+        if (_id == -999 || _album) return;
         await OpacityEffect.RunOpacity((View)sender, 100);
         var contextMenuPopup = new ContextMenuPopup();
         contextMenuPopup.SetMenuItems(["Xóa playlist"],

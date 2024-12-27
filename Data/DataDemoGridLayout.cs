@@ -87,30 +87,30 @@ public class DataDemoGridLayout
 
     public static readonly Artist[] Artists =
     [
-        new("1", "music_kpop.png", "Conan Gray"),
-        new("2", "music_kpop.png", "Chase Atlantic"),
-        new("3", "music_kpop.png", "beabadoobee"),
-        new("4", "music_kpop.png", "New Jeans"),
-        new("5", "music_kpop.png", "keshi"),
-        new("6", "music_kpop.png", "Conan Gray"),
-        new("7", "music_kpop.png", "Chase Atlantic"),
-        new("8", "music_kpop.png", "beabadoobee"),
-        new("9", "music_kpop.png", "New Jeans"),
-        new("10", "music_kpop.png", "keshi"),
+        new(1, "music_kpop.png", "Conan Gray"),
+        new(2, "music_kpop.png", "Chase Atlantic"),
+        new(3, "music_kpop.png", "beabadoobee"),
+        new(4, "music_kpop.png", "New Jeans"),
+        new(5, "music_kpop.png", "keshi"),
+        new(6, "music_kpop.png", "Conan Gray"),
+        new(7, "music_kpop.png", "Chase Atlantic"),
+        new(8, "music_kpop.png", "beabadoobee"),
+        new(9, "music_kpop.png", "New Jeans"),
+        new(10, "music_kpop.png", "keshi"),
     ];
 
     public static readonly Album[] Albums =
     [
-        new("1", "Superache", "Conan Gray", "music_kpop.png"),
-        new("2", "DAWN FM", "The Weekend", "music_kpop.png"),
-        new("3", "Planet Her", "Doja Cat", "music_kpop.png"),
-        new("4", "Wiped Out!", "The Neighbourhood", "music_kpop.png"),
-        new("5", "Bloom", "Troye Sivan", "music_kpop.png"),
-        new("6", "Superache", "Conan Gray", "music_kpop.png"),
-        new("7", "DAWN FM", "The Weekend", "music_kpop.png"),
-        new("8", "Planet Her", "Doja Cat", "music_kpop.png"),
-        new("9", "Wiped Out!", "The Neighbourhood", "music_kpop.png"),
-        new("10", "Bloom", "Troye Sivan", "music_kpop.png"),
+        new(1, "Superache", "Conan Gray", "music_kpop.png"),
+        new(2, "DAWN FM", "The Weekend", "music_kpop.png"),
+        new(3, "Planet Her", "Doja Cat", "music_kpop.png"),
+        new(4, "Wiped Out!", "The Neighbourhood", "music_kpop.png"),
+        new(5, "Bloom", "Troye Sivan", "music_kpop.png"),
+        new(6, "Superache", "Conan Gray", "music_kpop.png"),
+        new(7, "DAWN FM", "The Weekend", "music_kpop.png"),
+        new(8, "Planet Her", "Doja Cat", "music_kpop.png"),
+        new(9, "Wiped Out!", "The Neighbourhood", "music_kpop.png"),
+        new(10, "Bloom", "Troye Sivan", "music_kpop.png"),
     ];
 
     public static readonly PodcastAndShow[] PodcastsAndShows =

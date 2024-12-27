@@ -16,14 +16,15 @@ namespace maui_music_application.Views.Adapters;
 public class MusicInPlaylistAdapter(
     ResponsePlaylistDetail playlistDetail,
     INavigation navigation,
-    Page page = null)
+    Page page = null,
+    bool canRemove = true)
     : GridLayoutAdapter<MusicCard>(playlistDetail.Songs.Content.ToArray())
 {
     private bool _isSelected;
 
     public override IView LoadContentView(int position, MusicCard data)
     {
-        return new MusicInPlaylist()
+        return new MusicInPlaylist
         {
             PlaylistID = playlistDetail.Id,
             SongID = data.Id,
@@ -31,7 +32,8 @@ public class MusicInPlaylistAdapter(
             SingerName = data.Artist,
             SongThumbnail = data.Cover,
             Action = Action,
-            Page = page
+            Page = page,
+            CanRemove = canRemove
         };
 
         async void Action()

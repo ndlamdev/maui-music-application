@@ -6,9 +6,9 @@
 
 namespace maui_music_application.Models;
 
-public class Artist(string id, string avatar, string name, TimeSpan? timeCreate = null)
+public class Artist(long id, string avatar, string name, TimeSpan? timeCreate = null)
 {
-    public string Id { get; set; } = id;
+    public long Id { get; set; } = id;
     public string Avatar { get; set; } = avatar;
     public string Name { get; set; } = name;
     public TimeSpan? TimeCreate { get; set; } = timeCreate;

@@ -4,10 +4,10 @@
 // Create at: 07:09:21 - 23/09/2024
 // User: Lam Nguyen
 
-using Android.Util;
 using maui_music_application.Models;
 using maui_music_application.Views.Components.Categories;
 using maui_music_application.Views.Layouts;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Adapters;
 
@@ -20,8 +20,8 @@ public class AlbumAdapter(Album[] listData, INavigation navigation)
         {
             Title = data.Name,
             SubTitle = data.Artist,
-            Source = data.Cover,
-            Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
+            Source = data.CoverUrl,
+            Clicked = () => { navigation.PushAsync(new PlaylistMusicPage(data.Id, true)); }
         };
         return view;
     }
