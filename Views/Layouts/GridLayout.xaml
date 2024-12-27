@@ -8,8 +8,7 @@
                 VerticalScrollBarVisibility="Never"
                 Orientation="Vertical"
                 Scrolled="OnScrollViewScrolled">
-        <Frame Padding="0"
-               >
+        <Frame Padding="0">
             <Grid x:Name="Grid" />
         </Frame>
     </ScrollView>

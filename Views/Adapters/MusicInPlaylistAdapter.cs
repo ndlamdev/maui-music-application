@@ -7,6 +7,7 @@
 using maui_music_application.Dto;
 using maui_music_application.Models;
 using maui_music_application.Views.Components.Musics;
+using maui_music_application.Views.Components.Popup;
 using maui_music_application.Views.Layouts;
 using maui_music_application.Views.Pages;
 
@@ -15,26 +16,31 @@ namespace maui_music_application.Views.Adapters;
 public class MusicInPlaylistAdapter(
     ResponsePlaylistDetail playlistDetail,
     INavigation navigation,
-    Action<MusicInPlaylist.ShowPopupArgs>? optionAction = null)
+    Page page = null,
+    bool canRemove = true)
     : GridLayoutAdapter<MusicCard>(playlistDetail.Songs.Content.ToArray())
 {
     private bool _isSelected;
 
     public override IView LoadContentView(int position, MusicCard data)
     {
-        return new MusicInPlaylist()
+        return new MusicInPlaylist
         {
+            PlaylistID = playlistDetail.Id,
+            SongID = data.Id,
             SongName = data.Title,
             SingerName = data.Artist,
             SongThumbnail = data.Cover,
             Action = Action,
+            Page = page,
+            CanRemove = canRemove
         };
 
         async void Action()
         {
             if (_isSelected) return;
             _isSelected = true;
-            await navigation.PushAsync(new SongPage(playlistDetail, position));
+            await navigation.PushAsync(new SongInPlaylistPage(playlistDetail, position));
             _isSelected = false;
         }
     }

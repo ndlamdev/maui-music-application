@@ -5,12 +5,15 @@
 // User: Lam Nguyen
 
 using maui_music_application.Helpers;
+using maui_music_application.Services;
 
 namespace maui_music_application.Views.Fragments;
 
 public partial class SongPageShowMore
 {
     private string? _songName, _singerName, _thumbnail;
+    private bool _isClick = false;
+    private bool _like;
 
     public SongPageShowMore()
     {
@@ -20,7 +23,7 @@ public partial class SongPageShowMore
 
     public string SongName
     {
-        get => _songName ?? "";
+        get => _songName ?? string.Empty;
         set
         {
             _songName = value;
@@ -30,7 +33,7 @@ public partial class SongPageShowMore
 
     public string SingerName
     {
-        get => _singerName ?? "";
+        get => _singerName ?? string.Empty;
         set
         {
             _singerName = value;
@@ -40,10 +43,22 @@ public partial class SongPageShowMore
 
     public string SongThumbnail
     {
-        get => _thumbnail ?? "";
+        get => _thumbnail ?? string.Empty;
         set
         {
             _thumbnail = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public long SongId { get; set; }
+
+    public bool Like
+    {
+        get => _like;
+        set
+        {
+            _like = value;
             OnPropertyChanged();
         }
     }
@@ -57,6 +72,25 @@ public partial class SongPageShowMore
     private async void Heart_OnTapped(object? sender, EventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender!, 100);
+        var service = ServiceHelper.GetService<ISongService>();
+        if (service == null || _isClick) return;
+        _isClick = true;
+        service.Like(Like, SongId)
+            .ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    _isClick = false;
+                    AndroidHelper.ShowToast("Failed");
+                    return;
+                }
+
+                if (!task.IsCompleted) return;
+                _isClick = false;
+                AndroidHelper.ShowToast(task.Result.Message);
+                ServiceHelper.GetService<IAudioPlayerService>()!.CurrentMusic.Like = !Like;
+                Like = !Like;
+            }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public event EventHandler? OnBack;

@@ -6,12 +6,14 @@
 
 using Java.Lang;
 using maui_music_application.Data;
+using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
 using maui_music_application.Views.Pages;
+using Exception = System.Exception;
 
 namespace maui_music_application.Views.Fragments;
 
@@ -19,6 +21,7 @@ public partial class LibraryPage
 {
     private readonly ButtonBorder[] _buttons;
     private bool _isSelected;
+    private ApiPaging<ResponsePlaylistCard> _playlists = new();
 
     private enum SortStatus
     {
@@ -35,8 +38,18 @@ public partial class LibraryPage
         _buttons = [Folders, Playlists, Artists, Albums, Podcasts];
     }
 
-    /*Call request here!*/
+
     private void OnContentViewLoaded(object sender, EventArgs e)
+    {
+        LoadPlaylist();
+    }
+
+    public void Reload()
+    {
+        LoadPlaylist();
+    }
+
+    private void LoadPlaylist()
     {
         var service = ServiceHelper.GetService<IPlaylistService>();
         if (service == null) throw new NullPointerException();
@@ -44,9 +57,8 @@ public partial class LibraryPage
         {
             if (!task.IsCompleted) return;
             var result = task.Result;
-            RootGridLayout.Adapter(
-                new PlaylistCardAdapter(result.Content.ToArray(),
-                    Navigation));
+            _playlists = result;
+            RootGridLayout.Adapter(new PlaylistCardAdapter(result.Content.ToArray(), Navigation));
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
@@ -66,7 +78,7 @@ public partial class LibraryPage
     {
         SetBackgroundButtonSelected(sender);
         SetUpButtonAddAndHeart(sender);
-        // RootGridLayout.Adapter(new PlaylistCardAdapter(DataDemoGridLayout.PlaylistLarges, Navigation));
+        RootGridLayout.Adapter(new PlaylistCardAdapter(_playlists.Content.ToArray(), Navigation));
     }
 
     private void Folders_OnClicked(object? sender, EventArgs e)
@@ -175,12 +187,23 @@ public partial class LibraryPage
 
     private async void ButtonLogout_OnClicked(object? sender, EventArgs e)
     {
-        var userService = ServiceHelper.GetService<IUserService>();
-        if (userService == null || _isSelected) return;
-        _isSelected = true;
-        await userService.Logout();
-        // Chưa xử lý lỗi redicrect
-        await Navigation.PushAsync(new LoginPage(), true);
-        _isSelected = false;
+        try
+        {
+            var userService = ServiceHelper.GetService<IUserService>();
+            if (userService == null || _isSelected) return;
+            _isSelected = true;
+            await userService.Logout();
+            await Navigation.PushAsync(new LoginPage(), true);
+            _isSelected = false;
+        }
+        catch (Exception exception)
+        {
+            AndroidHelper.ShowToast(exception.Message);
+        }
+    }
+
+    private async void Favorites_OnClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new PlaylistMusicPage(-999), true);
     }
 }

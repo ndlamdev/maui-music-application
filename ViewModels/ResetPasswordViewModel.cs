@@ -53,8 +53,6 @@ public class ResetPasswordViewModel(INavigation navigation, bool validateOnChang
     public void OnSubmit()
     {
         ValidateAllProperties();
-        OnErrorChanged(nameof(Password));
-        OnErrorChanged(nameof(ConfirmPassword));
         if (HasErrors)
             return;
 

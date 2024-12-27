@@ -14,6 +14,8 @@ public static class HttpConfiguration
         builder.Services.AddRefitClient<IAuthApi>();
         builder.Services.AddRefitClient<IPlaylistApi>();
         builder.Services.AddRefitClient<ISongApi>();
+        builder.Services.AddRefitClient<ITopPlayApi>();
+        builder.Services.AddRefitClient<IAlbumApi>();
         builder.Services.AddRefitClient<IHomeApi>();
         builder.Services.AddRefitClient<IServerApi>();
         builder.Services.AddRefitClient<IGenreApi>();
