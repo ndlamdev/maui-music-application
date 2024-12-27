@@ -15,6 +15,9 @@ public class AlbumService(IAlbumApi api) : IAlbumService
     public async Task<ResponsePlaylistDetail> GetAlbumDetail(long id, Pageable? pageable = null)
     {
         var result = await api.GetAlbumDetail(id, pageable ?? new Pageable());
-        return result.Data;
+        var data = result.Data;
+        data.IsAlbum = true;
+        data.TotalSong = data.Songs.Content.Count;
+        return data;
     }
 }

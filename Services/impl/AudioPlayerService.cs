@@ -70,7 +70,10 @@ public class AudioPlayerService : IAudioPlayerService
         get => _playlistDetail;
         set
         {
-            if (_playlistDetail != null && (value == null || value.Id == _playlistDetail.Id)) return;
+            if (_playlistDetail != null &&
+                (value == null ||
+                 (value.Id == _playlistDetail.Id &&
+                  value.IsAlbum == _playlistDetail.IsAlbum))) return;
             _singleSongID = -1;
             _indexCurrentSongInPlaylist = -1;
             _indexPreviousSongInPlaylist = -1;
