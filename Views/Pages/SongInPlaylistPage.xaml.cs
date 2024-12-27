@@ -5,14 +5,14 @@ using maui_music_application.Services;
 
 namespace maui_music_application.Views.Pages;
 
-public partial class SongPage
+public partial class SongInPlaylistPage
 {
     private int _degree;
     private bool _playRandom;
     private IAudioPlayerService? AudioService { get; }
     private bool _isClick;
 
-    public SongPage(ResponsePlaylistDetail playlistDetail, int position = 0)
+    public SongInPlaylistPage(ResponsePlaylistDetail playlistDetail, int position = 0)
     {
         AudioService = ServiceHelper.GetService<IAudioPlayerService>();
         if (AudioService is null)
@@ -218,12 +218,13 @@ public partial class SongPage
     private void ShowMoreMenu_OnOnBack(object? sender, EventArgs e)
     {
         ShowMoreMenu.TranslateTo(0, DeviceDisplay.Current.MainDisplayInfo.Height, 500);
-        MusicChanged();
+        MusicChanged(false);
     }
 
-    private void MusicChanged()
+    private void MusicChanged(bool resetDegree = true)
     {
-        _degree = 0;
+        if (resetDegree)
+            _degree = 0;
         OnPropertyChanged(nameof(SongName));
         OnPropertyChanged(nameof(SingerName));
         OnPropertyChanged(nameof(SongThumbnail));

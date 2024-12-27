@@ -24,7 +24,8 @@ public class AudioPlayerService : IAudioPlayerService
     private MediaElement MediaElement { get; }
     private Layout? _content;
     private ResponsePlaylistDetail? _playlistDetail;
-    private bool _endPlayList = false;
+    private bool _endPlayList;
+    private long _singleSongID = -1;
 
     private readonly ISongService _api;
 
@@ -49,7 +50,7 @@ public class AudioPlayerService : IAudioPlayerService
         {
             if (!MediaElement.ShouldLoopPlayback)
             {
-                _endPlayList = _indexCurrentSongInPlaylist == Playlist.TotalSong - 1;
+                _endPlayList = _singleSongID != -1 || _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
                 Next();
             }
             else
@@ -66,6 +67,7 @@ public class AudioPlayerService : IAudioPlayerService
         set
         {
             if (_playlistDetail != null && (value == null || value.Id == _playlistDetail.Id)) return;
+            _singleSongID = -1;
             _indexCurrentSongInPlaylist = -1;
             _indexPreviousSongInPlaylist = -1;
             _playlistDetail = value;
@@ -76,6 +78,23 @@ public class AudioPlayerService : IAudioPlayerService
     public double Duration { get; set; }
     public MusicCard? CurrentMusicCard { get; set; }
     public Music? CurrentMusic { get; set; }
+
+    public void PlaySingleSong(long songId)
+    {
+        if (songId == _singleSongID && !_endPlayList) return;
+        _singleSongID = songId;
+        _api.GetMusic(songId).ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            CurrentMusic = task.Result;
+            CurrentMusicCard =
+                new MusicCard(CurrentMusic.Id, CurrentMusic.Title, CurrentMusic.Artist, CurrentMusic.Cover);
+            MediaElement.Source = CurrentMusic.Url;
+            MediaElement.MetadataTitle = CurrentMusic.Title;
+            MediaElement.MetadataArtist = CurrentMusic.Artist;
+            MediaElement.MetadataArtworkUrl = CurrentMusic.Cover;
+        }, TaskScheduler.FromCurrentSynchronizationContext());
+    }
 
     public void Play(int position)
     {
@@ -108,6 +127,12 @@ public class AudioPlayerService : IAudioPlayerService
     {
         if (_endPlayList)
         {
+            if (_singleSongID != -1)
+            {
+                PlaySingleSong(_singleSongID);
+                return;
+            }
+
             _indexCurrentSongInPlaylist = -1;
             Play(0);
             _endPlayList = false;

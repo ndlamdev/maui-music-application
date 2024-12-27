@@ -14,5 +14,6 @@ public static class InjectConfiguration
         builder.Services.AddSingleton<IAudioPlayerService, AudioPlayerService>();
         builder.Services.AddSingleton<IPlaylistService, PlaylistService>();
         builder.Services.AddSingleton<ISongService, SongService>();
+        builder.Services.AddSingleton<ITopService, TopService>();
     }
 }

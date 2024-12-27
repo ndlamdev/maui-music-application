@@ -18,9 +18,9 @@ public class AlbumAdapter(Album[] listData, INavigation navigation)
     {
         var view = new PlaylistCard
         {
-            Title = data.Title,
-            SubTitle = data.Singer,
-            Source = data.Thumbnail,
+            Title = data.Name,
+            SubTitle = data.Artist,
+            Source = data.Cover,
             Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
         };
         return view;

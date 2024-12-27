@@ -113,6 +113,9 @@
         <MauiXaml Update="Views\Pages\ResetPasswordPage.xaml">
             <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Pages\SingleSongPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -170,6 +173,10 @@
         <Compile Update="Views\Pages\ResetPasswordPage.xaml.cs">
             <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
             <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\SingleSongPage.xaml.cs">
+          <DependentUpon>SingleSongPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
 

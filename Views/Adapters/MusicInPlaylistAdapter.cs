@@ -38,7 +38,7 @@ public class MusicInPlaylistAdapter(
         {
             if (_isSelected) return;
             _isSelected = true;
-            await navigation.PushAsync(new SongPage(playlistDetail, position));
+            await navigation.PushAsync(new SongInPlaylistPage(playlistDetail, position));
             _isSelected = false;
         }
     }

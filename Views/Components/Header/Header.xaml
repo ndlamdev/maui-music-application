@@ -33,7 +33,8 @@
                 <buttons1:ButtonIcon
                     Icon="status.svg"
                     Spacing="0"
-                    SizeIcon="20" />
+                    SizeIcon="20" 
+                    Clicked="ButtonIcon_OnClicked"/>
                 <buttons1:ButtonIcon
                     Icon="bell.svg"
                     Spacing="0"

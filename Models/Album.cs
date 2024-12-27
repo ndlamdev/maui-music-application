@@ -6,17 +6,17 @@
 
 namespace maui_music_application.Models;
 
-public class Album(string id, string title, string singer, string thumbnail, string type = "", TimeSpan? timeCreate = null)
+public class Album(string id, string name, string artist, string cover, string type = "", DateTime? releaseDate = null)
 {
     public string Id { get; set; } = id;
 
-    public string Thumbnail { get; set; } = thumbnail;
+    public string Cover { get; set; } = cover;
 
-    public string Title { get; set; } = title;
+    public string Name { get; set; } = name;
 
-    public string Singer { get; set; } = singer;
+    public string Artist { get; set; } = artist;
 
     public string Type { get; set; } = type;
 
-    public TimeSpan TimeCreate { get; set; } = timeCreate ?? DateTime.Now.TimeOfDay;
+    public DateTime ReleaseDate { get; set; } = releaseDate ?? DateTime.Now;
 }

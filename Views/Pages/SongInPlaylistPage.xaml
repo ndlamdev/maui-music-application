@@ -2,12 +2,12 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.SongPage"
+             x:Class="maui_music_application.Views.Pages.SongInPlaylistPage"
              xmlns:pages="clr-namespace:maui_music_application.Views.Pages"
              xmlns:fragments="clr-namespace:maui_music_application.Views.Fragments"
              xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
-             x:DataType="pages:SongPage"
+             x:DataType="pages:SongInPlaylistPage"
              BackgroundColor="{StaticResource Background}">
     <Grid
         x:Name="RootView">
