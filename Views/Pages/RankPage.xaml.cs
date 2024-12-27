@@ -14,12 +14,12 @@ using maui_music_application.Views.Components.Popup;
 
 namespace maui_music_application.Views.Pages;
 
-public partial class TopPage
+public partial class RankPage
 {
     private bool _isClick;
     private VerticalStackLayout _currentPage;
 
-    public TopPage()
+    public RankPage()
     {
         InitializeComponent();
     }
@@ -64,19 +64,19 @@ public partial class TopPage
             var box = (BoxView)verticalStack.Children[1];
             if (v == verticalStack)
             {
-                // label.TextColorTo(Color.Parse("#39C0D4"));
+                label.TextColorTo(Color.Parse("#39C0D4"));
                 box.BackgroundColorTo(Color.Parse("#39C0D4"));
                 continue;
             }
 
-            // label.TextColorTo(Colors.White);
+            label.TextColorTo(Colors.White);
             box.BackgroundColorTo(Colors.Transparent);
         }
     }
 
     private void LoadTracks()
     {
-        var service = ServiceHelper.GetService<ITopService>();
+        var service = ServiceHelper.GetService<IRankService>();
         if (service == null) return;
         var popup = LoadingPopup.GetInstance();
         this.ShowPopup(popup);
@@ -97,7 +97,7 @@ public partial class TopPage
 
     private void LoadArtists()
     {
-        var service = ServiceHelper.GetService<ITopService>();
+        var service = ServiceHelper.GetService<IRankService>();
         if (service == null) return;
         var popup = LoadingPopup.GetInstance();
         this.ShowPopup(popup);
@@ -118,7 +118,7 @@ public partial class TopPage
 
     private void LoadAlbums()
     {
-        var service = ServiceHelper.GetService<ITopService>();
+        var service = ServiceHelper.GetService<IRankService>();
         if (service == null) return;
         var popup = LoadingPopup.GetInstance();
         this.ShowPopup(popup);

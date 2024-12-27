@@ -9,7 +9,7 @@ using maui_music_application.Services.Api;
 
 namespace maui_music_application.Services.impl;
 
-public class TopService(ITopPlayApi api) : ITopService
+public class RankService(IRankPlayApi api) : IRankService
 {
     public async Task<List<MusicCardInTop>> GetTracks()
     {

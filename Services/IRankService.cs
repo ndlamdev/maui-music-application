@@ -8,7 +8,7 @@ using maui_music_application.Models;
 
 namespace maui_music_application.Services;
 
-public interface ITopService
+public interface IRankService
 {
     Task<List<MusicCardInTop>> GetTracks();
     Task<List<Album>> GetAlbums();

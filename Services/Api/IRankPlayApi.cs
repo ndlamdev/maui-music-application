@@ -5,20 +5,19 @@
 // User: Lam Nguyen
 
 using maui_music_application.Dto;
-using maui_music_application.Helpers;
 using maui_music_application.Models;
 using Refit;
 
 namespace maui_music_application.Services.Api;
 
-public interface ITopPlayApi
+public interface IRankPlayApi
 {
-    [Get("/filter/song/popular")]
+    [Get("/rank/song/popular")]
     Task<APIResponse<ApiPaging<MusicCardInTop>>> GetTracks();
 
-    [Get("/filter/artist/popular")]
+    [Get("/rank/artist/popular")]
     Task<APIResponse<ApiPaging<Artist>>> GetArtist();
 
-    [Get("/filter/album/popular")]
+    [Get("/rank/album/popular")]
     Task<APIResponse<ApiPaging<Album>>> GetAlbums();
 }
