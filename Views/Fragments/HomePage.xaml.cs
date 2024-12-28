@@ -11,8 +11,10 @@ using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
+using maui_music_application.Views.Pages;
 using Microsoft.Extensions.Logging;
 using Exception = Java.Lang.Exception;
+using PlaylistDetail = maui_music_application.Models.PlaylistDetail;
 using TopMixes = maui_music_application.Models.TopMixes;
 
 namespace maui_music_application.Views.Fragments;
@@ -25,34 +27,36 @@ public partial class HomePage
     private IHomeService? _service;
     private readonly ILogger<HomePage> _logger;
 
-    public HomePage()
+    public HomePage(MainPage page)
     {
+        Page = page;
         InitializeComponent();
         BindingContext = this;
         Init();
     }
 
+    private MainPage Page { get; set; }
+
     private async Task GetPlaylists()
     {
-
         try
         {
-            List<ResponsePlaylistCard> response = await _service.GetPlayList();
-            if (response != null)
+            List<PlaylistCard> response = await _service.GetPlayList();
             {
                 List<PlaylistDetail> playlists = new List<PlaylistDetail>();
                 foreach (var item in response)
                 {
-                    playlists.Add(new PlaylistDetail(
-                        item.Id + "",
-                        item.Name,
-                        item.CoverUrl,
-                        null,
-                        TimeSpan.Zero.ToString()
-                    ));
+                    playlists.Add(new PlaylistDetail
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        CoverUrl = item.CoverUrl,
+                    });
                 }
+
                 _playlistDetails = playlists.ToArray();
             }
+
             Log.Info("Call Api Home Page", "GetPlaylists called {0} {1} ", this._playlistDetails.ToString(),
                 this._playlistDetails.Length);
         }
@@ -73,15 +77,18 @@ public partial class HomePage
                 List<TopMixes> topMixes = new List<TopMixes>();
                 foreach (var item in response)
                 {
-                    topMixes.Add(new TopMixes(
-                        item.Id,
-                        item.Name,
-                        item.Cover,
-                        item.ReleaseDate.TimeOfDay
-                    ));
+                    topMixes.Add(new TopMixes
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        CoverUrl = item.Cover,
+                        ReleaseDate = item.ReleaseDate
+                    });
                 }
-                this._topMixes = topMixes.ToArray();
+
+                _topMixes = topMixes.ToArray();
             }
+
             Log.Info("Call Api Home Page", "GetAlbum called {0} ", _topMixes);
         }
         catch (Exception e)
@@ -106,8 +113,10 @@ public partial class HomePage
                         item.Cover
                     ));
                 }
+
                 this._recentListen = recentListen.ToArray();
             }
+
             Log.Info("Call Api Home Page", "GetAlbum called {0} ", _topMixes);
         }
         catch (Exception e)
@@ -120,6 +129,8 @@ public partial class HomePage
 
     private async void Init()
     {
+        Header.Page = Page;
+
         _service = ServiceHelper.GetService<IHomeService>();
 
         await GetPlaylists();

@@ -4,7 +4,7 @@ namespace maui_music_application.Dto;
 
 public class ResponseAlbumCard
 {
-    public string Id { get; set; }
+    public long Id { get; set; }
     public string Name { get; set; }
     
     public string Artist { get; set; }

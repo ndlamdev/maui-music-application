@@ -4,10 +4,8 @@
 // Create at: 09:10:15 - 14/10/2024
 // User: Lam Nguyen
 
-using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
-using maui_music_application.Dto;
 using maui_music_application.Models;
 using Exception = Java.Lang.Exception;
 
@@ -23,9 +21,9 @@ public class AudioPlayerService : IAudioPlayerService
     private int _indexCurrentSongInPlaylist, _indexPreviousSongInPlaylist;
     private MediaElement MediaElement { get; }
     private Layout? _content;
-    private ResponsePlaylistDetail? _playlistDetail;
+    private PlaylistDetail? _playlistDetail;
     private bool _endPlayList;
-    private long _singleSongID = -1;
+    private long _singleSongId = -1;
 
     private readonly ISongService _api;
 
@@ -50,7 +48,7 @@ public class AudioPlayerService : IAudioPlayerService
         {
             if (!MediaElement.ShouldLoopPlayback)
             {
-                if (_singleSongID == -1)
+                if (_singleSongId == -1)
                 {
                     _endPlayList = _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
                     Next();
@@ -65,16 +63,13 @@ public class AudioPlayerService : IAudioPlayerService
         MediaElement.MediaFailed += (_, args) => MediaFailed?.Invoke(args);
     }
 
-    public ResponsePlaylistDetail? Playlist
+    public PlaylistDetail? Playlist
     {
         get => _playlistDetail;
         set
         {
-            if (_playlistDetail != null &&
-                (value == null ||
-                 (value.Id == _playlistDetail.Id &&
-                  value.IsAlbum == _playlistDetail.IsAlbum))) return;
-            _singleSongID = -1;
+            if (_playlistDetail != null && (value == null || value.Equals(_playlistDetail))) return;
+            _singleSongId = -1;
             _indexCurrentSongInPlaylist = -1;
             _indexPreviousSongInPlaylist = -1;
             _playlistDetail = value;
@@ -82,26 +77,17 @@ public class AudioPlayerService : IAudioPlayerService
     }
 
     public bool PlayRandom { get; set; }
+
     public double Duration { get; set; }
+
     public MusicCard? CurrentMusicCard { get; set; }
+
     public Music? CurrentMusic { get; set; }
 
     public void PlaySingleSong(long songId)
     {
-        if (songId == _singleSongID && !_endPlayList) return;
-        _singleSongID = songId;
-        _api.GetMusic(songId).ContinueWith(task =>
-        {
-            if (!task.IsCompleted) return;
-            CurrentMusic = task.Result;
-            CurrentMusicCard =
-                new MusicCard(CurrentMusic.Id, CurrentMusic.Title, CurrentMusic.Artist, CurrentMusic.Cover);
-            MediaElement.Source = CurrentMusic.Url;
-            MediaElement.MetadataTitle = CurrentMusic.Title;
-            MediaElement.MetadataArtist = CurrentMusic.Artist;
-            MediaElement.MetadataArtworkUrl = CurrentMusic.Cover;
-            _endPlayList = false;
-        }, TaskScheduler.FromCurrentSynchronizationContext());
+        _singleSongId = songId;
+        LoadSong(songId);
     }
 
     public void Play(int position)
@@ -113,21 +99,29 @@ public class AudioPlayerService : IAudioPlayerService
 
         _indexPreviousSongInPlaylist = _indexCurrentSongInPlaylist;
         _indexCurrentSongInPlaylist = position;
-        CurrentMusicCard = Playlist.Songs.Content.ElementAt(position);
-
-        MediaElement.MetadataTitle = SongName;
-        MediaElement.MetadataArtist = SingerName;
-        MediaElement.MetadataArtworkUrl = SongThumbnail;
-        LoadSong(CurrentMusicCard.Id);
+        LoadSong(Playlist.Songs.Content.ElementAt(position).Id);
     }
 
     private void LoadSong(long id)
     {
+        if (id == (CurrentMusicCard?.Id ?? -1) && !_endPlayList)
+        {
+            MediaElement.Play();
+            return;
+        }
+
         _api.GetMusic(id).ContinueWith(task =>
         {
             if (!task.IsCompleted) return;
             CurrentMusic = task.Result;
+            CurrentMusicCard =
+                new MusicCard(CurrentMusic.Id, CurrentMusic.Title, CurrentMusic.Artist, CurrentMusic.Cover);
             MediaElement.Source = CurrentMusic.Url;
+            MediaElement.MetadataTitle = CurrentMusic.Title;
+            MediaElement.MetadataArtist = CurrentMusic.Artist;
+            MediaElement.MetadataArtworkUrl = CurrentMusic.Cover;
+            MediaElement.Source = CurrentMusic.Url;
+            _endPlayList = false;
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
@@ -135,9 +129,9 @@ public class AudioPlayerService : IAudioPlayerService
     {
         if (_endPlayList)
         {
-            if (_singleSongID != -1)
+            if (_singleSongId != -1)
             {
-                PlaySingleSong(_singleSongID);
+                LoadSong(_singleSongId);
                 return;
             }
 

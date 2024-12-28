@@ -6,6 +6,7 @@
 
 using maui_music_application.Helpers;
 using maui_music_application.Services;
+using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Fragments;
 
@@ -97,6 +98,7 @@ public partial class SongPageShowMore
 
     private void OnAddToPlaylist(object? sender, EventArgs e)
     {
+        Navigation.PushAsync(new AddToPlaylistPage(SongId));
     }
 
     private void OnAddToQueue(object? sender, EventArgs e)

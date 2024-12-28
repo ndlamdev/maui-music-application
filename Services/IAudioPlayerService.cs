@@ -5,7 +5,6 @@
 // User: Lam Nguyen
 
 using CommunityToolkit.Maui.Core.Primitives;
-using maui_music_application.Dto;
 using maui_music_application.Models;
 
 namespace maui_music_application.Services;
@@ -31,7 +30,7 @@ public interface IAudioPlayerService
     string SongName { get; }
     string SongThumbnail { get; }
     string SingerName { get; }
-    ResponsePlaylistDetail? Playlist { get; set; }
+    PlaylistDetail? Playlist { get; set; }
     MusicCard? CurrentMusicCard { get; protected set; }
     Music? CurrentMusic { get; protected set; }
     void PlaySingleSong(long songId);

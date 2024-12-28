@@ -1,4 +1,5 @@
 using maui_music_application.Dto;
+using maui_music_application.Models;
 using Refit;
 
 namespace maui_music_application.Services.Api;
@@ -6,7 +7,7 @@ namespace maui_music_application.Services.Api;
 public interface IHomeApi
 {
     [Get("/home/playlist")]
-    Task<APIResponse<List<ResponsePlaylistCard>>> GetPlayList();
+    Task<APIResponse<List<PlaylistCard>>> GetPlayList();
 
     [Get("/home/mixes")]
     Task<APIResponse<List<ResponseAlbumCard>>> GetPopularAlbum();

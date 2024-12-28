@@ -1,5 +1,6 @@
 using Android.Util;
 using maui_music_application.Dto;
+using maui_music_application.Models;
 using maui_music_application.Services.Api;
 using Newtonsoft.Json;
 
@@ -7,14 +8,14 @@ namespace maui_music_application.Services.impl;
 
 public class HomeServiceImpl(IHomeApi homeApi) : IHomeService
 {
-    public async Task<List<ResponsePlaylistCard>> GetPlayList()
+    public async Task<List<PlaylistCard>> GetPlayList()
     {
         try
         {
-            APIResponse<List<ResponsePlaylistCard>> response = await homeApi.GetPlayList();
+            APIResponse<List<PlaylistCard>> response = await homeApi.GetPlayList();
             if (response.StatusCode == 200)
             {
-                List<ResponsePlaylistCard> cards = response.Data;
+                List<PlaylistCard> cards = response.Data;
                 return cards;
             }
             return null;

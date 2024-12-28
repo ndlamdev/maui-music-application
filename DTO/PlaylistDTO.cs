@@ -1,7 +1,4 @@
-﻿using maui_music_application.Helpers;
-using maui_music_application.Models;
-
-namespace maui_music_application.Dto;
+﻿namespace maui_music_application.Dto;
 
 public class RequestCreatePlaylist(
     string name,
@@ -19,20 +16,5 @@ public class ResponseCreatePlaylist(
     string description,
     bool isPublic) : RequestCreatePlaylist(name, description, isPublic)
 {
-    public string ID { get; set; } = id;
-}
-
-public class ResponsePlaylistCard
-{
-    public long Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public string CoverUrl { get; set; } = "folder_icon.png";
-    public int TotalSong { get; set; }
-    public bool IsAlbum { get; set; } = false;
-}
-
-public class ResponsePlaylistDetail : ResponsePlaylistCard
-{
-    public ApiPaging<MusicCard> Songs { get; set; }
+    public string Id { get; set; } = id;
 }

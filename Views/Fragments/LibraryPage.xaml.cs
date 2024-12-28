@@ -8,12 +8,14 @@ using Java.Lang;
 using maui_music_application.Data;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
 using maui_music_application.Views.Pages;
 using Exception = System.Exception;
+using PlaylistDetail = maui_music_application.Models.PlaylistDetail;
 
 namespace maui_music_application.Views.Fragments;
 
@@ -21,7 +23,7 @@ public partial class LibraryPage
 {
     private readonly ButtonBorder[] _buttons;
     private bool _isSelected;
-    private ApiPaging<ResponsePlaylistCard> _playlists = new();
+    private ApiPaging<PlaylistCard> _playlists = new();
 
     private enum SortStatus
     {
@@ -144,9 +146,6 @@ public partial class LibraryPage
         _sortStatus = _sortStatus != SortStatus.Asc ? SortStatus.Asc : SortStatus.Desc;
         if (Playlists.Selected || Albums.Selected)
         {
-            var data = _sortStatus is SortStatus.Null or SortStatus.Desc
-                ? RootGridLayout.GetData<PlaylistDetail>().OrderByDescending(music => music.TimeCreate).ToArray()
-                : RootGridLayout.GetData<PlaylistDetail>().OrderBy(music => music.TimeCreate).ToArray();
             // RootGridLayout.Adapter(new PlaylistCardAdapter(data, Navigation));
             return;
         }
@@ -171,8 +170,8 @@ public partial class LibraryPage
 
         {
             var data = _sortStatus is SortStatus.Null or SortStatus.Desc
-                ? RootGridLayout.GetData<PlaylistDetail>().OrderByDescending(music => music.Title).ToArray()
-                : RootGridLayout.GetData<PlaylistDetail>().OrderBy(music => music.Title).ToArray();
+                ? RootGridLayout.GetData<PlaylistDetail>().OrderByDescending(music => music.Name).ToArray()
+                : RootGridLayout.GetData<PlaylistDetail>().OrderBy(music => music.Name).ToArray();
             // RootGridLayout.Adapter(new PlaylistCardAdapter(data, Navigation));
         }
     }
@@ -204,6 +203,6 @@ public partial class LibraryPage
 
     private async void Favorites_OnClicked(object? sender, EventArgs e)
     {
-        await Navigation.PushAsync(new PlaylistMusicPage(-999), true);
+        await Navigation.PushAsync(new PlaylistMusicPage(TypePlaylist.Favorite), true);
     }
 }

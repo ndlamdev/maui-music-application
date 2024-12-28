@@ -6,8 +6,9 @@
 
 using CommunityToolkit.Maui.Views;
 using Java.Lang;
-using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
+using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Popup;
@@ -16,19 +17,25 @@ namespace maui_music_application.Views.Pages;
 
 public partial class PlaylistMusicPage
 {
-    private ResponsePlaylistDetail _playlistDetail = new();
+    private PlaylistDetail _playlistDetail = new();
     private readonly long _id;
-    private readonly bool _album;
+    private readonly TypePlaylist _type;
 
-    public PlaylistMusicPage(long dataId, bool album = false)
+    public PlaylistMusicPage(long dataId, TypePlaylist type = TypePlaylist.Playlist)
     {
         _id = dataId;
-        _album = album;
+        _type = type;
+        InitializeComponent();
+        BindingContext = this;
+    }
+    public PlaylistMusicPage(TypePlaylist type = TypePlaylist.Playlist)
+    {
+        _type = type;
         InitializeComponent();
         BindingContext = this;
     }
 
-    private void LoadPlaylist(ResponsePlaylistDetail playlistDetail, bool canRemove = true)
+    private void LoadPlaylist(PlaylistDetail playlistDetail, bool canRemove = true)
     {
         _playlistDetail = playlistDetail;
         playlistDetail.CoverUrl = string.IsNullOrWhiteSpace(playlistDetail.CoverUrl) ? "" : playlistDetail.CoverUrl;
@@ -36,7 +43,7 @@ public partial class PlaylistMusicPage
         OnPropertyChanged(nameof(PlayListName));
         OnPropertyChanged(nameof(PlayListType));
         GridLayoutMusic.Rows = _playlistDetail.TotalSong;
-        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistDetail, Navigation, this, canRemove));
+        GridLayoutMusic.Adapter(new MusicInPlaylistAdapter(_playlistDetail, Navigation, this, canRemove, _type));
     }
 
     public void RemoveSong(long id)
@@ -53,25 +60,42 @@ public partial class PlaylistMusicPage
             IsVisible = false
         });
 
-        if (_album)
+        switch (_type)
         {
-            var albumService = ServiceHelper.GetService<IAlbumService>();
-            if (albumService == null) throw new NullPointerException();
-            albumService.GetAlbumDetail(_id).ContinueWith(task =>
+            case TypePlaylist.Playlist:
             {
-                if (!task.IsCompleted) return;
-                LoadPlaylist(task.Result, false);
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-            return;
+                var playlistService = ServiceHelper.GetService<IPlaylistService>();
+                if (playlistService == null) throw new NullPointerException();
+                playlistService.GetPlaylistDetail(_id).ContinueWith(task =>
+                {
+                    if (!task.IsCompleted) return;
+                    LoadPlaylist(task.Result);
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+                break;
+            }
+            case TypePlaylist.Favorite:
+            {
+                var playlistService = ServiceHelper.GetService<IPlaylistService>();
+                if (playlistService == null) throw new NullPointerException();
+                playlistService.GetFavorite().ContinueWith(task =>
+                {
+                    if (!task.IsCompleted) return;
+                    LoadPlaylist(task.Result);
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+                break;
+            }
+            case TypePlaylist.Album:
+            {
+                var albumService = ServiceHelper.GetService<IAlbumService>();
+                if (albumService == null) throw new NullPointerException();
+                albumService.GetAlbumDetail(_id).ContinueWith(task =>
+                {
+                    if (!task.IsCompleted) return;
+                    LoadPlaylist(task.Result, false);
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+                break;
+            }
         }
-
-        var playlistService = ServiceHelper.GetService<IPlaylistService>();
-        if (playlistService == null) throw new NullPointerException();
-        playlistService.GetPlaylistDetail(_id).ContinueWith(task =>
-        {
-            if (!task.IsCompleted) return;
-            LoadPlaylist(task.Result.Data);
-        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public string PlayListThumbnail => _playlistDetail.CoverUrl;
@@ -88,7 +112,7 @@ public partial class PlaylistMusicPage
 
     private async void OnOption(object sender, TappedEventArgs e)
     {
-        if (_id == -999 || _album) return;
+        if (_type != TypePlaylist.Playlist) return;
         await OpacityEffect.RunOpacity((View)sender, 100);
         var contextMenuPopup = new ContextMenuPopup();
         contextMenuPopup.SetMenuItems(["Xóa playlist"],

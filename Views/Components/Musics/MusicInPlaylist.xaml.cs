@@ -7,6 +7,7 @@
 using CommunityToolkit.Maui.Views;
 using Java.Lang;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Services;
 using maui_music_application.Views.Components.Popup;
 using maui_music_application.Views.Pages;
@@ -58,9 +59,13 @@ public partial class MusicInPlaylist
         }
     }
 
-    public long SongID { get; set; }
-    public long PlaylistID { get; set; }
+    public long SongId { get; set; }
+
+    public long PlaylistId { get; set; }
+
     public bool CanRemove { get; set; }
+
+    public TypePlaylist Type { get; set; }
 
     public string SongThumbnail
     {
@@ -72,7 +77,7 @@ public partial class MusicInPlaylist
         }
     }
 
-    public Page Page { get; set; }
+    public Page Page { get; set; } = new();
 
     private async void ImageButton_OnClicked(object sender, TappedEventArgs e)
     {
@@ -81,11 +86,50 @@ public partial class MusicInPlaylist
         var contextMenuPopup = new ContextMenuPopup();
         contextMenuPopup.SetMenuItems(["Xóa khỏi playlist"],
         [
-            (_, _) => RemoveSongInPlaylist(contextMenuPopup)
+            (_, _) =>
+            {
+                switch (Type)
+                {
+                    case TypePlaylist.Playlist:
+                    {
+                        RemoveSongInPlaylist(contextMenuPopup);
+                        break;
+                    }
+                    case TypePlaylist.Favorite:
+                    {
+                        UnlikeSong(contextMenuPopup);
+                        break;
+                    }
+                }
+            }
         ]);
         contextMenuPopup.SetPoint(e.GetPosition(Page)?.X - 165 ?? 0,
             e.GetPosition(Page)?.Y + 10 ?? 0);
         Page.ShowPopup(contextMenuPopup);
+    }
+
+    private void UnlikeSong(ContextMenuPopup menu)
+    {
+        var service = ServiceHelper.GetService<ISongService>();
+        if (service == null) throw new NullPointerException();
+        var popupLoading = LoadingPopup.GetInstance();
+        Page.ShowPopup(popupLoading);
+        service.Like(true, SongId).ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                ShowToastErrorHelper.ShowToast<MusicInPlaylist>(task, popupLoading,
+                    "Unlike song failed: ");
+                return;
+            }
+
+            if (!task.IsCompleted) return;
+            popupLoading.Close();
+            menu.Close();
+            AndroidHelper.ShowToast(task.Result.Message);
+            if (Page is PlaylistMusicPage page)
+                page.RemoveSong(SongId);
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     private void RemoveSongInPlaylist(ContextMenuPopup menu)
@@ -94,7 +138,7 @@ public partial class MusicInPlaylist
         if (service == null) throw new NullPointerException();
         var popupLoading = LoadingPopup.GetInstance();
         Page.ShowPopup(popupLoading);
-        service.RemoveSongIntoPlayList(PlaylistID, SongID).ContinueWith(task =>
+        service.RemoveSongIntoPlayList(PlaylistId, SongId).ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
@@ -108,7 +152,7 @@ public partial class MusicInPlaylist
             menu.Close();
             AndroidHelper.ShowToast(task.Result.Message);
             if (Page is PlaylistMusicPage page)
-                page.RemoveSong(SongID);
+                page.RemoveSong(SongId);
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 }

@@ -6,7 +6,8 @@
 
 namespace maui_music_application.Models;
 
-public class TopMixes(string id, string title, string thumbnail, TimeSpan? timeCreate = null)
-    : PlaylistDetail(id, title, thumbnail, timeCreate: timeCreate)
+public class TopMixes
+    : PlaylistDetail
 {
+    public DateTime ReleaseDate { get; set; } = DateTime.Now;
 }

@@ -16,8 +16,8 @@ public class PlaylistMusicAdapter(PlaylistDetail[] listData) : GridLayoutAdapter
     {
         var view = new Components.Categories.PlaylistMusic
         {
-            Title = data.Title,
-            Source = data.Thumbnail,
+            Title = data.Name,
+            Source = data.CoverUrl,
             Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
         };
         return view;

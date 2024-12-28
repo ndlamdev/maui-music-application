@@ -19,16 +19,6 @@ public class DataDemoGridLayout
         new("Pop2", "Pop 2", "music_kpop.png"),
     ];
 
-    public static readonly PlaylistDetail[] Playlists =
-    [
-        new("Coffee & Jazz", "Coffee & Jazz", "music_kpop.png"),
-        new("RELEASED", "RELEASED", "music_kpop.png"),
-        new("Anything Goes", "Anything Goes", "music_kpop.png"),
-        new("Anime OSTs", "Anime OSTs", "music_kpop.png"),
-        new("Harry’s House", "Harry’s House", "music_kpop.png"),
-        new("Lo-Fi Beats", "Lo-Fi Beats", "music_kpop.png"),
-    ];
-
     public static readonly PlaylistDetail[] PlaylistLarges =
     [
         SongPageData.Playlist,
@@ -42,12 +32,6 @@ public class DataDemoGridLayout
         new("random?", "random?", []),
     ];
 
-    public static readonly TopMixes[] TopMixes =
-    [
-        new("Pop Mix", "Pop Mix", "music_kpop.png"),
-        new("Chill Mix", "Chill Mix", "music_kpop.png"),
-        new("Pop", "Pop", "music_kpop.png"),
-    ];
 
     public static readonly MusicCardInTop[] MusicInTops =
     [

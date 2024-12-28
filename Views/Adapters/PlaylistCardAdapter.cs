@@ -4,21 +4,24 @@
 // Create at: 07:09:21 - 23/09/2024
 // User: Lam Nguyen
 
-using maui_music_application.Dto;
-using maui_music_application.Views.Components.Categories;
 using maui_music_application.Views.Layouts;
 using maui_music_application.Views.Pages;
+using PlaylistCardView = maui_music_application.Views.Components.Categories.PlaylistCard;
+using PlaylistCardModel = maui_music_application.Models.PlaylistCard;
 
 namespace maui_music_application.Views.Adapters;
 
-public class PlaylistCardAdapter(ResponsePlaylistCard[] listData, INavigation navigation)
-    : GridLayoutAdapter<ResponsePlaylistCard>(listData)
+public class PlaylistCardAdapter(
+    PlaylistCardModel[] listData,
+    INavigation navigation,
+    Action<PlaylistCardModel>? action = null)
+    : GridLayoutAdapter<PlaylistCardModel>(listData)
 {
     private bool _isSelected;
 
-    public override IView LoadContentView(int _, ResponsePlaylistCard data)
+    public override IView LoadContentView(int _, PlaylistCardModel data)
     {
-        var view = new PlaylistCard
+        var view = new PlaylistCardView
         {
             Title = data.Name,
             SubTitle = $"{data.TotalSong} songs",
@@ -31,7 +34,12 @@ public class PlaylistCardAdapter(ResponsePlaylistCard[] listData, INavigation na
         {
             if (_isSelected) return;
             _isSelected = true;
-            await navigation.PushAsync(new PlaylistMusicPage(data.Id));
+            if (action != null)
+            {
+                action.Invoke(data);
+            }
+            else
+                await navigation.PushAsync(new PlaylistMusicPage(data.Id));
             _isSelected = false;
         }
     }

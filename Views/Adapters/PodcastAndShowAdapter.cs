@@ -11,6 +11,8 @@ using maui_music_application.Views.Layouts;
 
 namespace maui_music_application.Views.Adapters;
 
+using PlaylistCard = maui_music_application.Views.Components.Categories.PlaylistCard;
+
 public class PodcastAndShowAdapter(PodcastAndShow[] listData, INavigation navigation)
     : GridLayoutAdapter<PodcastAndShow>(listData)
 {
