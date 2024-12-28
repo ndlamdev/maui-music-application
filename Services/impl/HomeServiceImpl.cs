@@ -32,14 +32,14 @@ public class HomeServiceImpl(IHomeApi homeApi) : IHomeService
         }
     }
 
-    public async Task<List<ResponseAlbumCard>> GetAlbumPopular()
+    public async Task<List<Album>> GetAlbumPopular()
     {
         try
         {
-            APIResponse<List<ResponseAlbumCard>> response = await homeApi.GetPopularAlbum();
+            APIResponse<List<Album>> response = await homeApi.GetPopularAlbum();
             if (response.StatusCode == 200)
             {
-                List<ResponseAlbumCard> cards = response.Data;
+                List<Album> cards = response.Data;
                 return cards;
             }
             return null;
@@ -56,14 +56,14 @@ public class HomeServiceImpl(IHomeApi homeApi) : IHomeService
         }
     }
 
-    public async Task<List<ResponseSongCard>> GetRecentSong()
+    public async Task<List<MusicCard>> GetRecentSong()
     {
         try
         {
-            APIResponse<List<ResponseSongCard>> response = await homeApi.GetRecentSong();
+            APIResponse<List<MusicCard>> response = await homeApi.GetRecentSong();
             if (response.StatusCode == 200)
             {
-                List<ResponseSongCard> cards = response.Data;
+                List<MusicCard> cards = response.Data;
                 return cards;
             }
             return null;
