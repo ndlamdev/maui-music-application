@@ -11,7 +11,10 @@ using maui_music_application.Views.Pages;
 
 namespace maui_music_application.Views.Adapters;
 
-public class PlaylistCardAdapter(ResponsePlaylistCard[] listData, INavigation navigation)
+public class PlaylistCardAdapter(
+    ResponsePlaylistCard[] listData,
+    INavigation navigation,
+    Action<ResponsePlaylistCard>? action = null)
     : GridLayoutAdapter<ResponsePlaylistCard>(listData)
 {
     private bool _isSelected;
@@ -31,7 +34,12 @@ public class PlaylistCardAdapter(ResponsePlaylistCard[] listData, INavigation na
         {
             if (_isSelected) return;
             _isSelected = true;
-            await navigation.PushAsync(new PlaylistMusicPage(data.Id));
+            if (action != null)
+            {
+                action.Invoke(data);
+            }
+            else
+                await navigation.PushAsync(new PlaylistMusicPage(data.Id));
             _isSelected = false;
         }
     }

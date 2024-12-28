@@ -2,7 +2,9 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Components.Form.Search">
+             x:Class="maui_music_application.Views.Components.Form.Search"
+             xmlns:view="clr-namespace:maui_music_application.Views.Components.Form"
+             x:DataType="view:Search">
     <Border
         StrokeThickness="0">
         <Border.StrokeShape>
@@ -21,7 +23,8 @@
                 HeightRequest="25"
                 Margin="8, 0, 3, 0" />
             <Entry
-                Placeholder="Songs, Artists, Podcasts &amp; More"
+                x:Name="Entry"
+                Placeholder="{Binding Placeholder}"
                 PlaceholderColor="#8A9A9D"
                 FlexLayout.Grow="1"
                 FlexLayout.Basis="1"

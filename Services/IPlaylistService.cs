@@ -14,4 +14,8 @@ public interface IPlaylistService
     Task<APIResponse> RemovePlayList(long id);
     
     Task<APIResponse> RemoveSongIntoPlayList(long playlistId, long songId);
+    
+    Task<APIResponse> AddSongIntoPlayList(long playlistId, long songId);
+    
+    Task<ApiPaging<ResponsePlaylistCard>> GetPlaylistCardsNotHasSong(string name, long id, Pageable? pageable = null);
 }

@@ -12,6 +12,12 @@ public interface IPlaylistApi
     [Get("/playlist")]
     Task<APIResponse<ApiPaging<ResponsePlaylistCard>>> GetPlaylistCards([Query] Pageable request);
 
+    [Get("/playlist/add")]
+    Task<APIResponse<ApiPaging<ResponsePlaylistCard>>> GetPlaylistCardsNotHasSong(
+        [AliasAs("name")] string name,
+        [AliasAs("id")] long id,
+        [Query] Pageable request);
+
     [Get("/playlist/{id}")]
     Task<APIResponse<ResponsePlaylistDetail>> GetPlaylistDetail([AliasAs("id")] long playlistId,
         [Query] Pageable pageable);
@@ -20,5 +26,10 @@ public interface IPlaylistApi
     Task<APIResponse> RemovePlayList([AliasAs("id")] long id);
 
     [Put("/playlist/remove/{playlist-id}/{song-id}")]
-    Task<APIResponse> RemoveSongIntoPlayList([AliasAs("playlist-id")] long playlistID, [AliasAs("song-id")] long songID);
+    Task<APIResponse> RemoveSongIntoPlayList([AliasAs("playlist-id")] long playlistID,
+        [AliasAs("song-id")] long songID);
+    
+    [Put("/playlist/add/{playlist-id}/{song-id}")]
+    Task<APIResponse> AddSongIntoPlayList([AliasAs("playlist-id")] long playlistID,
+        [AliasAs("song-id")] long songID);
 }

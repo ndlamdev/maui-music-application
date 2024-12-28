@@ -41,35 +41,17 @@ public class ShowToastErrorHelper
         }
     }
 
-    public static void ShowToast<T, R>(Task<APIResponse<R>> task, Popup popup, string subject)
+    public static void ShowToast<T, TR>(Task<APIResponse<TR>> task, Popup popup, string subject)
     {
-        var exception = task.Exception.GetBaseException();
-        Log.Error(nameof(T), $"{subject}: " + exception);
-
-        if (exception is Refit.ApiException apiException)
-        {
-            var responseContent = apiException.Content;
-
-            try
-            {
-                popup.Close();
-                var errorResponse = JsonConvert.DeserializeObject<APIResponse>(responseContent);
-                AndroidHelper.ShowToast($"{subject}: {errorResponse?.Message ?? "Unknown error"}");
-            }
-            catch
-            {
-                popup.Close();
-                AndroidHelper.ShowToast($"{subject}: Invalid error response.");
-            }
-        }
-        else
-        {
-            popup.Close();
-            AndroidHelper.ShowToast($"{subject}: {exception.Message}");
-        }
+        ShowToast<T, APIResponse<TR>>(task, popup, subject);
     }
-    
-    public static void ShowToast<T, R>(Task<List<R>> task, Popup popup, string subject)
+
+    public static void ShowToast<T, TR>(Task<List<TR>> task, Popup popup, string subject)
+    {
+        ShowToast<T, List<TR>>(task, popup, subject);
+    }
+
+    public static void ShowToast<T, TR>(Task<TR> task, Popup popup, string subject)
     {
         var exception = task.Exception.GetBaseException();
         Log.Error(nameof(T), $"{subject}: " + exception);
@@ -123,7 +105,12 @@ public class ShowToastErrorHelper
         }
     }
 
-    public static void ShowToast<T, R>(Task<APIResponse<R>> task, string subject)
+    public static void ShowToast<T, TR>(Task<APIResponse<TR>> task, string subject)
+    {
+        ShowToast<T, APIResponse<TR>>(task, subject);
+    }
+
+    public static void ShowToast<T, TR>(Task<TR> task, string subject)
     {
         var exception = task.Exception.GetBaseException();
         Log.Error(nameof(T), $"{subject}: " + exception);

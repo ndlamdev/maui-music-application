@@ -34,4 +34,15 @@ public class PlaylistService(IPlaylistApi api) : IPlaylistService
     {
         return api.RemoveSongIntoPlayList(playlistId, songId);
     }
+    
+    public  Task<APIResponse> AddSongIntoPlayList(long playlistId, long songId)
+    {
+        return  api.AddSongIntoPlayList(playlistId, songId);
+    }
+
+    public async Task<ApiPaging<ResponsePlaylistCard>> GetPlaylistCardsNotHasSong(string name, long id, Pageable? pageable = null)
+    {
+        var response = await api.GetPlaylistCardsNotHasSong(name, id, pageable ?? new Pageable());
+        return response.Data;
+    }
 }
