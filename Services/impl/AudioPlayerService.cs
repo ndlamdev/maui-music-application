@@ -104,7 +104,12 @@ public class AudioPlayerService : IAudioPlayerService
 
     private void LoadSong(long id)
     {
-        if (id == (CurrentMusicCard?.Id ?? -1) && !_endPlayList) return;
+        if (id == (CurrentMusicCard?.Id ?? -1) && !_endPlayList)
+        {
+            MediaElement.Play();
+            return;
+        }
+
         _api.GetMusic(id).ContinueWith(task =>
         {
             if (!task.IsCompleted) return;
