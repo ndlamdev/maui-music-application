@@ -17,8 +17,8 @@ public class TopMixesAdapter(TopMixesModel[] listData) : GridLayoutAdapter<TopMi
     {
         var view = new TopMixesView
         {
-            Title = data.Title,
-            Source = data.Thumbnail,
+            Title = data.Name,
+            Source = data.CoverUrl,
             Clicked = () => { Log.Info("KindMusicAdapter", $"Action {data.Id}"); }
         };
         return view;

@@ -1,7 +1,6 @@
-using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
-using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Models;
 using maui_music_application.Services;
 
 namespace maui_music_application.Views.Pages;
@@ -13,7 +12,7 @@ public partial class SongInPlaylistPage
     private IAudioPlayerService? AudioService { get; }
     private bool _isClick;
 
-    public SongInPlaylistPage(ResponsePlaylistDetail playlistDetail, int position = 0)
+    public SongInPlaylistPage(PlaylistDetail playlistDetail, int position = 0)
     {
         AudioService = ServiceHelper.GetService<IAudioPlayerService>();
         if (AudioService is null)
@@ -58,7 +57,7 @@ public partial class SongInPlaylistPage
 
     public string SongThumbnail => AudioService?.SongThumbnail ?? string.Empty;
 
-    public long SongID => AudioService?.CurrentMusicCard?.Id ?? -1;
+    public long SongId => AudioService?.CurrentMusicCard?.Id ?? -1;
 
     private async void Option_OnTapped(object sender, TappedEventArgs e)
     {
@@ -82,7 +81,7 @@ public partial class SongInPlaylistPage
         var service = ServiceHelper.GetService<ISongService>();
         if (service == null || _isClick) return;
         _isClick = true;
-        service.Like(Like, SongID)
+        service.Like(Like, SongId)
             .ContinueWith(task =>
             {
                 if (task.IsFaulted)
@@ -124,14 +123,12 @@ public partial class SongInPlaylistPage
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
         AudioService?.Previous();
-        MusicChanged();
     }
 
     private async void Next_OnClicked(object sender, EventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
         AudioService?.Next();
-        MusicChanged();
     }
 
 
@@ -182,7 +179,7 @@ public partial class SongInPlaylistPage
         ShowMoreMenu.SongName = SongName;
         ShowMoreMenu.SingerName = SingerName;
         ShowMoreMenu.SongThumbnail = SongThumbnail;
-        ShowMoreMenu.SongId = SongID;
+        ShowMoreMenu.SongId = SongId;
         ShowMoreMenu.Like = Like;
         await ShowMoreMenu.TranslateTo(0, 0, 500);
     }

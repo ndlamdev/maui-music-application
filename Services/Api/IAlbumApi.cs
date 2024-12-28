@@ -6,6 +6,7 @@
 
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Models;
 using Refit;
 
 namespace maui_music_application.Services.Api;
@@ -13,6 +14,6 @@ namespace maui_music_application.Services.Api;
 public interface IAlbumApi
 {
     [Get("/album/{id}")]
-    Task<APIResponse<ResponsePlaylistDetail>> GetAlbumDetail([AliasAs("id")] long playlistId,
+    Task<APIResponse<PlaylistDetail>> GetAlbumDetail([AliasAs("id")] long playlistId,
         [Query] Pageable pageable);
 }

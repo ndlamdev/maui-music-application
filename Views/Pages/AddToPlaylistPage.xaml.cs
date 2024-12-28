@@ -4,12 +4,11 @@
 // Create at: 08:12:52 - 28/12/2024
 // User: Lam Nguyen
 
-using Android.Util;
 using CommunityToolkit.Maui.Views;
 using Java.Lang;
-using maui_music_application.Data;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Popup;
@@ -62,7 +61,7 @@ public partial class AddToPlaylistPage
         {
             if (task.IsFaulted)
             {
-                ShowToastErrorHelper.ShowToast<AddToPlaylistPage, ApiPaging<ResponsePlaylistCard>>(task, popup,
+                ShowToastErrorHelper.ShowToast<AddToPlaylistPage, ApiPaging<PlaylistCard>>(task, popup,
                     "Load playlist failed: ");
                 return;
             }
@@ -74,7 +73,7 @@ public partial class AddToPlaylistPage
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
-    private void LoadGridData(IPlaylistService service, ResponsePlaylistCard[] data)
+    private void LoadGridData(IPlaylistService service, PlaylistCard[] data)
     {
         GridLayoutPlaylist.Adapter(new PlaylistCardAdapter(
             data,
