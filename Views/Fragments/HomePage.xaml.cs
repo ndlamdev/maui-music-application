@@ -71,7 +71,7 @@ public partial class HomePage
     {
         try
         {
-            List<ResponseAlbumCard> response = await _service.GetAlbumPopular();
+            List<Album> response = await _service.GetAlbumPopular();
             if (response != null)
             {
                 List<TopMixes> topMixes = new List<TopMixes>();
@@ -81,7 +81,7 @@ public partial class HomePage
                     {
                         Id = item.Id,
                         Name = item.Name,
-                        CoverUrl = item.Cover,
+                        CoverUrl = item.CoverUrl,
                         ReleaseDate = item.ReleaseDate
                     });
                 }
@@ -102,14 +102,14 @@ public partial class HomePage
     {
         try
         {
-            List<ResponseSongCard> response = await _service.GetRecentSong();
+            List<MusicCard> response = await _service.GetRecentSong();
             if (response != null)
             {
                 List<RecentListen> recentListen = new List<RecentListen>();
                 foreach (var item in response)
                 {
                     recentListen.Add(new RecentListen(
-                        item.Id + "",
+                        item.Id,
                         item.Cover
                     ));
                 }
@@ -141,7 +141,7 @@ public partial class HomePage
         TopMixes.Adapter(new TopMixesAdapter(_topMixes));
 
         await GetRecentListen();
-        RecentListen.Adapter(new RecentListenAdapter(_recentListen));
+        RecentListen.Adapter(new RecentListenAdapter(_recentListen, Navigation));
 
         Log.Info("Call Api Home Page", "Init called");
     }

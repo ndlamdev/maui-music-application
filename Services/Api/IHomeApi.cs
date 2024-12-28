@@ -10,8 +10,8 @@ public interface IHomeApi
     Task<APIResponse<List<PlaylistCard>>> GetPlayList();
 
     [Get("/home/mixes")]
-    Task<APIResponse<List<ResponseAlbumCard>>> GetPopularAlbum();
+    Task<APIResponse<List<Album>>> GetPopularAlbum();
 
     [Get("/home/recent")]
-    Task<APIResponse<List<ResponseSongCard>>> GetRecentSong();
+    Task<APIResponse<List<MusicCard>>> GetRecentSong();
 }

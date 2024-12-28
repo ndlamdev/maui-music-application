@@ -7,7 +7,7 @@ public interface IHomeService
 {
     Task<List<PlaylistCard>> GetPlayList();
 
-    Task<List<ResponseAlbumCard>> GetAlbumPopular();
+    Task<List<Album>> GetAlbumPopular();
 
-    Task<List<ResponseSongCard>> GetRecentSong();
+    Task<List<MusicCard>> GetRecentSong();
 }

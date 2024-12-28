@@ -6,8 +6,8 @@
 
 namespace maui_music_application.Models;
 
-public class RecentListen(string id, string thumbnail)
+public class RecentListen(long id, string thumbnail)
 {
-    public string Id { get; set; } = id;
+    public long Id { get; set; } = id;
     public string Thumbnail { get; set; } = thumbnail;
 }

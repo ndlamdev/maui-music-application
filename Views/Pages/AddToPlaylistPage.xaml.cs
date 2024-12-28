@@ -4,6 +4,7 @@
 // Create at: 08:12:52 - 28/12/2024
 // User: Lam Nguyen
 
+using Android.Util;
 using CommunityToolkit.Maui.Views;
 using Java.Lang;
 using maui_music_application.Dto;
@@ -80,6 +81,7 @@ public partial class AddToPlaylistPage
             Navigation,
             pl =>
             {
+                Log.Info("Adding to the playlist", $"{pl.Id},  {_musicId}");
                 service.AddSongIntoPlayList(pl.Id, _musicId).ContinueWith(task =>
                 {
                     if (task.IsFaulted)

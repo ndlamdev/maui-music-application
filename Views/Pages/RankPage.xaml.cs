@@ -64,12 +64,12 @@ public partial class RankPage
             var box = (BoxView)verticalStack.Children[1];
             if (v == verticalStack)
             {
-                label.TextColorTo(Color.Parse("#39C0D4"));
+                // label.TextColorTo(Color.Parse("#39C0D4"));
                 box.BackgroundColorTo(Color.Parse("#39C0D4"));
                 continue;
             }
 
-            label.TextColorTo(Colors.White);
+            // label.TextColorTo(Colors.White);
             box.BackgroundColorTo(Colors.Transparent);
         }
     }
