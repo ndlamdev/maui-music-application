@@ -143,6 +143,9 @@
         <MauiXaml Update="Views\Pages\user\WelcomePage.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Views\Components\Musics\MusicCard.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -239,6 +242,10 @@
         </Compile>
         <Compile Update="Views\Pages\user\WelcomePage.xaml.cs">
           <DependentUpon>WelcomePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\Musics\MusicCard.xaml.cs">
+          <DependentUpon>MusicCard.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>

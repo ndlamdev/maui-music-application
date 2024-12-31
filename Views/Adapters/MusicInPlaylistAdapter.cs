@@ -9,6 +9,7 @@ using maui_music_application.Models;
 using maui_music_application.Views.Components.Musics;
 using maui_music_application.Views.Layouts;
 using maui_music_application.Views.Pages.User;
+using MusicCard = maui_music_application.Models.MusicCard;
 
 namespace maui_music_application.Views.Adapters;
 

@@ -12,7 +12,10 @@
             HorizontalOptions="Center"
             Padding="25, 50">
             <AbsoluteLayout>
-                <Image Source="arrow_left_white.svg" WidthRequest="25" HeightRequest="25">
+                <Image Source="arrow_left_white.svg"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       IsVisible="False">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="BackTapped" />
                     </Image.GestureRecognizers>
