@@ -5,13 +5,11 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Data;
-using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
-using maui_music_application.Views.Pages;
+using maui_music_application.Views.Pages.User;
 using Microsoft.Extensions.Logging;
 using Exception = Java.Lang.Exception;
 using PlaylistDetail = maui_music_application.Models.PlaylistDetail;

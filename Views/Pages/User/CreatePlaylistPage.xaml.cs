@@ -7,7 +7,7 @@
 using maui_music_application.Helpers;
 using maui_music_application.ViewModels;
 
-namespace maui_music_application.Views.Pages;
+namespace maui_music_application.Views.Pages.User;
 
 public partial class CreatePlaylistPage
 {

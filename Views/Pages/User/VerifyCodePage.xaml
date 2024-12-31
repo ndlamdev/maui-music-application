@@ -2,15 +2,14 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.ResetPasswordPage"
+             x:Class="maui_music_application.Views.Pages.User.VerifyCodePage"
              xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons"
              xmlns:form="clr-namespace:maui_music_application.Views.Components.Form"
-             xmlns:model="clr-namespace:maui_music_application.ViewModels"
-             x:DataType="model:ResetPasswordViewModel">
+             xmlns:viewModes="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="viewModes:VerifyCodeViewModel">
     <ScrollView
         VerticalScrollBarVisibility="Never"
-        Orientation="Vertical"
-        VerticalOptions="Center">
+        Orientation="Vertical">
         <VerticalStackLayout
             HorizontalOptions="Center"
             Padding="25, 50">
@@ -31,41 +30,31 @@
                 </FlexLayout>
             </AbsoluteLayout>
             <Label
-                Text="Create your account"
+                Text="Verify yor account"
                 FontSize="35"
                 Padding="0, 30" />
-            <VerticalStackLayout>
-                <form:Input
-                    IconLeft="lock.svg"
-                    Placeholder="Password"
-                    IsPassword="True"
-                    TextChanged="EntryPassword_OnTextChanged" />
-                <BoxView
-                    HeightRequest="20"
-                    IsVisible="{Binding [Password].HasError, Converter={StaticResource InverseBooleanConverter}}" />
-                <Label
-                    Text="{Binding [Password].ErrorMessage}"
-                    TextColor="Red"
-                    Padding="0,0,0,20"
-                    IsVisible="{Binding [Password].HasError}" />
-                <form:Input
-                    IconLeft="lock.svg"
-                    Placeholder="Confirm Password"
-                    IsPassword="True"
-                    TextChanged="EntryConfirmPassword_OnTextChanged" />
-                <BoxView
-                    HeightRequest="20"
-                    IsVisible="{Binding [ConfirmPassword].HasError, Converter={StaticResource InverseBooleanConverter}}" />
-                <Label
-                    Text="{Binding [ConfirmPassword].ErrorMessage}"
-                    TextColor="Red"
-                    Padding="0,0,0,20"
-                    IsVisible="{Binding [ConfirmPassword].HasError}" />
-            </VerticalStackLayout>
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween">
+                <form:Input x:Name="Code1" WidthRequest="52" FontSize="20" Placeholder="*"
+                            TextChanged="Code_OnTextChangeEvent" />
+                <form:Input x:Name="Code2" WidthRequest="52" FontSize="20" Placeholder="*"
+                            TextChanged="Code_OnTextChangeEvent" />
+                <form:Input x:Name="Code3" WidthRequest="52" FontSize="20" Placeholder="*"
+                            TextChanged="Code_OnTextChangeEvent" />
+                <form:Input x:Name="Code4" WidthRequest="52" FontSize="20" Placeholder="*"
+                            TextChanged="Code_OnTextChangeEvent" />
+                <form:Input x:Name="Code5" WidthRequest="52" FontSize="20" Placeholder="*"
+                            TextChanged="Code_OnTextChangeEvent" />
+                <form:Input x:Name="Code6" WidthRequest="52" FontSize="20" Placeholder="*"
+                            TextChanged="Code_OnTextChangeEvent" />
+            </FlexLayout>
+            <Label
+                Text="{Binding [CodeVerify].ErrorMessage}"
+                TextColor="Red"
+                Padding="0,0,0,20" />
             <button:ButtonBorderShadow
-                Text="Reset password"
-                Clicked="ResetPassword_OnClicked"
-                Margin="0, 35, 0, 0" />
+                Text="Verify"
+                Clicked="Verify_OnClicked"
+                Margin="0, 25, 0, 0" />
             <ContentView Padding="0, 35">
                 <AbsoluteLayout>
                     <Line
@@ -92,14 +81,15 @@
             </ContentView>
             <HorizontalStackLayout
                 VerticalOptions="Center"
-                HorizontalOptions="Center">
+                HorizontalOptions="Center"
+                Margin="0, 20, 0, 0">
                 <Label
-                    Text="Have an account? " />
+                    Text="Resend code? " />
                 <Label
-                    Text="Login"
+                    Text="Resend"
                     TextColor="{StaticResource Blue300}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SignInTapped" />
+                        <TapGestureRecognizer Tapped="ResendTapped" />
                     </Label.GestureRecognizers>
                 </Label>
             </HorizontalStackLayout>

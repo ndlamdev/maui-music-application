@@ -5,7 +5,7 @@
 // User: Lam Nguyen
 
 using maui_music_application.Views.Layouts;
-using maui_music_application.Views.Pages;
+using maui_music_application.Views.Pages.User;
 using PlaylistCardView = maui_music_application.Views.Components.Categories.PlaylistCard;
 using PlaylistCardModel = maui_music_application.Models.PlaylistCard;
 

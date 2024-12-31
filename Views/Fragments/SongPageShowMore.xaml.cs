@@ -6,7 +6,7 @@
 
 using maui_music_application.Helpers;
 using maui_music_application.Services;
-using maui_music_application.Views.Pages;
+using maui_music_application.Views.Pages.User;
 
 namespace maui_music_application.Views.Fragments;
 

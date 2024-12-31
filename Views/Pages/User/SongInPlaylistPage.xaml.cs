@@ -1,17 +1,18 @@
 using CommunityToolkit.Maui.Core.Primitives;
 using maui_music_application.Helpers;
+using maui_music_application.Models;
 using maui_music_application.Services;
 
-namespace maui_music_application.Views.Pages;
+namespace maui_music_application.Views.Pages.User;
 
-public partial class SingleSongPage
+public partial class SongInPlaylistPage
 {
     private int _degree;
     private bool _playRandom;
     private IAudioPlayerService? AudioService { get; }
     private bool _isClick;
 
-    public SingleSongPage(long songId = 0)
+    public SongInPlaylistPage(PlaylistDetail playlistDetail, int position = 0)
     {
         AudioService = ServiceHelper.GetService<IAudioPlayerService>();
         if (AudioService is null)
@@ -26,12 +27,13 @@ public partial class SingleSongPage
         SetIconButtonPlayPause();
         PlayRandom = AudioService.PlayRandom;
 
+        AudioService.Playlist = playlistDetail;
         AudioService.SetContent(RootView);
         AudioService.PositionChanged = OnPositionChanged;
         AudioService.StateChanged = OnStateChanged;
         AudioService.MediaFailed = OnMediaFailed;
         AudioService.MediaEnded = OnMediaEnded;
-        AudioService.PlaySingleSong(songId);
+        AudioService.Play(position);
         BindingContext = this;
     }
 
@@ -45,6 +47,8 @@ public partial class SingleSongPage
         });
     }
 
+    public string PlayListName => AudioService?.Playlist?.Name ?? string.Empty;
+
     public string SongName => AudioService?.SongName ?? string.Empty;
 
     public bool Like => AudioService?.CurrentMusic?.Like ?? false;
@@ -53,11 +57,17 @@ public partial class SingleSongPage
 
     public string SongThumbnail => AudioService?.SongThumbnail ?? string.Empty;
 
-    public long SongID => AudioService?.CurrentMusicCard?.Id ?? -1;
+    public long SongId => AudioService?.CurrentMusicCard?.Id ?? -1;
 
     private async void Option_OnTapped(object sender, TappedEventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
+    }
+
+    private async void Playlist_OnTapped(object sender, TappedEventArgs e)
+    {
+        await OpacityEffect.RunOpacity((View)sender, 100);
+        await Navigation.PopAsync();
     }
 
     private async void Share_OnTapped(object sender, EventArgs eventArgs)
@@ -71,7 +81,7 @@ public partial class SingleSongPage
         var service = ServiceHelper.GetService<ISongService>();
         if (service == null || _isClick) return;
         _isClick = true;
-        service.Like(Like, SongID)
+        service.Like(Like, SongId)
             .ContinueWith(task =>
             {
                 if (task.IsFaulted)
@@ -113,14 +123,12 @@ public partial class SingleSongPage
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
         AudioService?.Previous();
-        MusicChanged();
     }
 
     private async void Next_OnClicked(object sender, EventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender, 100);
         AudioService?.Next();
-        MusicChanged();
     }
 
 
@@ -142,7 +150,8 @@ public partial class SingleSongPage
     {
         SetIconButtonPlayPause();
         ShowMoreMenu.BindingContext ??= AudioService?.CurrentMusicCard;
-        MusicChanged();
+        if (AudioService.CurrentState() == MediaElementState.Opening)
+            MusicChanged();
     }
 
     private void OnMediaEnded()
@@ -170,7 +179,7 @@ public partial class SingleSongPage
         ShowMoreMenu.SongName = SongName;
         ShowMoreMenu.SingerName = SingerName;
         ShowMoreMenu.SongThumbnail = SongThumbnail;
-        ShowMoreMenu.SongId = SongID;
+        ShowMoreMenu.SongId = SongId;
         ShowMoreMenu.Like = Like;
         await ShowMoreMenu.TranslateTo(0, 0, 500);
     }
@@ -218,11 +227,5 @@ public partial class SingleSongPage
         OnPropertyChanged(nameof(SingerName));
         OnPropertyChanged(nameof(SongThumbnail));
         OnPropertyChanged(nameof(Like));
-    }
-
-    private async void OnBack(object? sender, TappedEventArgs e)
-    {
-        await OpacityEffect.RunOpacity((View)sender, 100);
-        await Navigation.PopAsync();
     }
 }

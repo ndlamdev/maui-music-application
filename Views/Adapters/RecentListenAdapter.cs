@@ -6,7 +6,7 @@
 
 using Android.Util;
 using maui_music_application.Views.Layouts;
-using maui_music_application.Views.Pages;
+using maui_music_application.Views.Pages.User;
 using RecentListenModel = maui_music_application.Models.RecentListen;
 using RecentListenView = maui_music_application.Views.Components.Categories.RecentListen;
 

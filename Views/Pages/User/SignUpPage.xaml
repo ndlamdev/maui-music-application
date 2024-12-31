@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.User.SignUpPage"
+             xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:form="clr-namespace:maui_music_application.Views.Components.Form"
+             xmlns:model="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="model:SignUpViewModel">
+    <ScrollView
+        VerticalScrollBarVisibility="Never"
+        Orientation="Vertical"
+        VerticalOptions="Center">
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            Padding="25, 50">
+            <AbsoluteLayout>
+                <Image Source="arrow_left_white.svg" WidthRequest="25" HeightRequest="25">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <FlexLayout
+                    JustifyContent="Center"
+                    AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                    AbsoluteLayout.LayoutBounds="0,0,1,200">
+                    <Image
+                        Source="musium.png"
+                        WidthRequest="200"
+                        HeightRequest="200" />
+                </FlexLayout>
+            </AbsoluteLayout>
+            <Label
+                Text="Create your account"
+                FontSize="35"
+                Padding="0, 30" />
+            <VerticalStackLayout>
+                <form:Input
+                    IconLeft="letter.svg"
+                    Placeholder="Email"
+                    TextChanged="EntryEmail_OnTextChanged" />
+                <BoxView
+                    HeightRequest="20"
+                    IsVisible="{Binding [Email].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+                <Label
+                    Text="{Binding [Email].ErrorMessage}"
+                    TextColor="Red"
+                    Padding="0,0,0,20"
+                    IsVisible="{Binding [Email].HasError}" />
+                <form:Input
+                    IconLeft="user.svg"
+                    Placeholder="Full name"
+                    TextChanged="EntryFullName_OnTextChanged" />
+                <BoxView
+                    HeightRequest="20"
+                    IsVisible="{Binding [FullName].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+                <Label
+                    Text="{Binding [FullName].ErrorMessage}"
+                    TextColor="Red"
+                    Padding="0,0,0,20"
+                    IsVisible="{Binding [FullName].HasError}" />
+                <FlexLayout Margin="0,0,0,20">
+                    <Border Style="{StaticResource Input}" FlexLayout.Basis="60%">
+                        <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="SpaceBetween">
+                            <Image
+                                Source="birthday.svg"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                Margin="0,0,5,0" />
+                            <DatePicker
+                                FlexLayout.Grow="1"
+                                MinimumDate="{Binding MinDate}"
+                                Date="{Binding Birthday}" />
+                        </FlexLayout>
+                    </Border>
+                    <BoxView WidthRequest="10" />
+                    <Border Style="{StaticResource Input}" FlexLayout.Basis="40%">
+                        <FlexLayout
+                            Direction="Row" AlignItems="Center" HorizontalOptions="Center">
+                            <Image
+                                Source="sex.svg"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                Margin="0,0,5,0" />
+                            <Picker x:Name="SexPicker"
+                                    Title="Select sex"
+                                    SelectedIndexChanged="SexPicker_OnSelectedIndexChanged">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Male</x:String>
+                                        <x:String>Female</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </FlexLayout>
+                    </Border>
+                </FlexLayout>
+                <form:Input
+                    IconLeft="phone.svg"
+                    Placeholder="Phone Number"
+                    Keyboard="Numeric"
+                    TextChanged="EntryPhoneNumber_OnTextChanged" />
+                <BoxView
+                    HeightRequest="20"
+                    IsVisible="{Binding [PhoneNumber].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+                <Label
+                    Text="{Binding [PhoneNumber].ErrorMessage}"
+                    TextColor="Red"
+                    Padding="0,0,0,20"
+                    IsVisible="{Binding [PhoneNumber].HasError}" />
+                <form:Input
+                    IconLeft="lock.svg"
+                    Placeholder="Password"
+                    IsPassword="True"
+                    TextChanged="EntryPassword_OnTextChanged" />
+                <BoxView
+                    HeightRequest="20"
+                    IsVisible="{Binding [Password].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+                <Label
+                    Text="{Binding [Password].ErrorMessage}"
+                    TextColor="Red"
+                    Padding="0,0,0,20"
+                    IsVisible="{Binding [Password].HasError}" />
+                <form:Input
+                    IconLeft="lock.svg"
+                    Placeholder="Confirm Password"
+                    IsPassword="True"
+                    TextChanged="EntryConfirmPassword_OnTextChanged" />
+                <BoxView
+                    HeightRequest="20"
+                    IsVisible="{Binding [ConfirmPassword].HasError, Converter={StaticResource InverseBooleanConverter}}" />
+                <Label
+                    Text="{Binding [ConfirmPassword].ErrorMessage}"
+                    TextColor="Red"
+                    Padding="0,0,0,20"
+                    IsVisible="{Binding [ConfirmPassword].HasError}" />
+            </VerticalStackLayout>
+            <button:ButtonBorderShadow
+                Text="Sign up"
+                Clicked="SignUp_OnClicked"
+                Margin="0, 35, 0, 0" />
+            <ContentView Padding="0, 35">
+                <AbsoluteLayout>
+                    <Line
+                        Y1="9"
+                        X2="150000"
+                        Y2="9"
+                        StrokeThickness="2"
+                        Stroke="{StaticResource White}"
+                        AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                        AbsoluteLayout.LayoutBounds="0,0,1,20" />
+                    <FlexLayout
+                        AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                        AbsoluteLayout.LayoutBounds="0,0,1,20"
+                        JustifyContent="Center"
+                        AlignItems="Center">
+                        <Label
+                            Text="Or"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            WidthRequest="50"
+                            BackgroundColor="{StaticResource PrimaryDark}" />
+                    </FlexLayout>
+                </AbsoluteLayout>
+            </ContentView>
+            <HorizontalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label
+                    Text="Have an account? " />
+                <Label
+                    Text="Login"
+                    TextColor="{StaticResource Blue300}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SignInTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

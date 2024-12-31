@@ -2,7 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.LoginPage"
+             x:Class="maui_music_application.Views.Pages.User.LoginPage"
              xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons">
     <ScrollView
         VerticalScrollBarVisibility="Never"

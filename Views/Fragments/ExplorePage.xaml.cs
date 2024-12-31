@@ -5,8 +5,6 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using Android.Webkit;
-using maui_music_application.Data;
 using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services;

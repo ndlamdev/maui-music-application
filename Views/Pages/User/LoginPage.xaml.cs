@@ -1,7 +1,7 @@
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
 
-namespace maui_music_application.Views.Pages;
+namespace maui_music_application.Views.Pages.User;
 
 public partial class LoginPage
 {

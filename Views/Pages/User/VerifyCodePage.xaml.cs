@@ -4,7 +4,7 @@ using maui_music_application.Models;
 using maui_music_application.ViewModels;
 using maui_music_application.Views.Components.Form;
 
-namespace maui_music_application.Views.Pages;
+namespace maui_music_application.Views.Pages.User;
 
 public partial class VerifyCodePage
 {

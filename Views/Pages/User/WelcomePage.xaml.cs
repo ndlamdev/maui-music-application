@@ -8,7 +8,7 @@ using maui_music_application.Attributes;
 using maui_music_application.Helpers;
 using maui_music_application.Services;
 
-namespace maui_music_application.Views.Pages;
+namespace maui_music_application.Views.Pages.User;
 
 public partial class WelcomePage
 {

@@ -13,7 +13,7 @@ using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Components.Buttons;
-using maui_music_application.Views.Pages;
+using maui_music_application.Views.Pages.User;
 using Exception = System.Exception;
 using PlaylistDetail = maui_music_application.Models.PlaylistDetail;
 
