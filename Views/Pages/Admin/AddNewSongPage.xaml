@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.Admin.AddNewSongPage"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons">
+    <ScrollView
+        VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout
+            Margin="20,20,20,0">
+            <FlexLayout
+                JustifyContent="SpaceBetween"
+                Margin="0,0,0,25">
+                <Frame
+                    CornerRadius="99999"
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                    <Image
+                        Source="arrow_left_white.svg"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_OnClicked" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+                <Label
+                    Text="Add new music"
+                    FontSize="20" />
+                <Frame
+                    CornerRadius="99999"
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    BackgroundColor="Transparent" />
+            </FlexLayout>
+
+            <VerticalStackLayout Spacing="20">
+                <VerticalStackLayout>
+                    <Entry Placeholder="Give your song a name"
+                           PlaceholderColor="{StaticResource Text2}"
+                           Margin="0, 0, 0, 3"
+                           FontSize="18" />  <!-- Text="{Binding Name, Mode=TwoWay}" -->
+                    <HorizontalStackLayout
+                        IsClippedToBounds="True">
+                        <Line
+                            X1="0"
+                            Y1="0"
+                            X2="99999"
+                            Y2="0"
+                            StrokeThickness="2"
+                            Stroke="{StaticResource Text2}"
+                            HeightRequest="2"
+                            WidthRequest="99999" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Border
+                        Stroke="{StaticResource Blue500}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnArtistTapped" />
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout
+                            Padding="10"
+                            Spacing="10"
+                            VerticalOptions="Center">
+                            <Image
+                                Source="earth.svg"
+                                WidthRequest="30"
+                                HeightRequest="30"
+                                Margin="0,0, 10,0" />
+
+                            <Picker
+                                x:Name="ArtistPicker"
+                                WidthRequest="70"
+                                VerticalOptions="Center"
+                                TextColor="{StaticResource Blue800}"
+                                TitleColor="{StaticResource Blue800}"
+                                FontSize="18"
+                                Title="Artist"
+                                SelectedIndexChanged="Picker_OnSelectedArtistChanged"
+                                SelectedIndex="0">
+                                <Picker.Shadow>
+                                    <Shadow>
+                                        <Shadow.Offset>
+                                            <Point X="0" Y="0" />
+                                        </Shadow.Offset>
+                                        <Shadow.Brush>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="{StaticResource Blue800}" />
+                                                <GradientStop Color="{StaticResource Blue600}" />
+                                            </LinearGradientBrush>
+                                        </Shadow.Brush>
+                                    </Shadow>
+                                </Picker.Shadow>
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Public</x:String>
+                                        <x:String>Private</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Image
+                                Source="triangle_down_blue.svg"
+                                WidthRequest="15"
+                                HeightRequest="15"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Border
+                        Stroke="{StaticResource Blue500}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnAlbumTapped" />
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout
+                            Padding="10"
+                            Spacing="10"
+                            VerticalOptions="Center">
+                            <Image
+                                Source="earth.svg"
+                                WidthRequest="30"
+                                HeightRequest="30"
+                                Margin="0,0, 10,0" />
+
+                            <Picker
+                                x:Name="AlbumPicker"
+                                WidthRequest="70"
+                                VerticalOptions="Center"
+                                TextColor="{StaticResource Blue800}"
+                                TitleColor="{StaticResource Blue800}"
+                                FontSize="18"
+                                Title="Album"
+                                SelectedIndexChanged="Picker_OnSelectedAlbumChanged"
+                                SelectedIndex="0">
+                                <Picker.Shadow>
+                                    <Shadow>
+                                        <Shadow.Offset>
+                                            <Point X="0" Y="0" />
+                                        </Shadow.Offset>
+                                        <Shadow.Brush>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="{StaticResource Blue800}" />
+                                                <GradientStop Color="{StaticResource Blue600}" />
+                                            </LinearGradientBrush>
+                                        </Shadow.Brush>
+                                    </Shadow>
+                                </Picker.Shadow>
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Public</x:String>
+                                        <x:String>Private</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Image
+                                Source="triangle_down_blue.svg"
+                                WidthRequest="15"
+                                HeightRequest="15"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Margin="0,30,0,0"
+                Spacing="30">
+                <Border
+                    Stroke="#D9D9D9"
+                    StrokeThickness="3"
+                    HeightRequest="180"
+                    WidthRequest="180"
+                    BackgroundColor="#131313">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="UploadSong_OnTapped" />
+                    </Border.GestureRecognizers>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout
+                        Spacing="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Image
+                            Source="upload_song.svg"
+                            Aspect="Fill"
+                            HeightRequest="100"
+                            WidthRequest="100" />
+                        <Label
+                            Text="Upload song"
+                            FontSize="23"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Stroke="#D9D9D9"
+                    StrokeThickness="3"
+                    HeightRequest="180"
+                    WidthRequest="180"
+                    BackgroundColor="#131313">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="UploadThumbnail_OnTapped" />
+                    </Border.GestureRecognizers>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout
+                        Spacing="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Image
+                            Source="upload.svg"
+                            Aspect="Fill"
+                            HeightRequest="100"
+                            WidthRequest="100" />
+                        <Label
+                            Text="Upload thumbnail"
+                            FontSize="23"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <FlexLayout
+                JustifyContent="SpaceBetween"
+                Margin="0, 30, 0, 0">
+                <Button
+                    Text="Cancel"
+                    TextColor="White"
+                    BackgroundColor="#2C2F30"
+                    CornerRadius="9999"
+                    WidthRequest="150"
+                    FontSize="17"
+                    Clicked="Cancel_OnClicked">
+                    <Button.Shadow>
+                        <Shadow>
+                            <Shadow.Radius>9998</Shadow.Radius>
+                            <Shadow.Brush>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#2C2F30" Offset="1" />
+                                    <GradientStop Color="#2C2F30" Offset="0" />
+                                </LinearGradientBrush>
+                            </Shadow.Brush>
+                        </Shadow>
+                    </Button.Shadow>
+                </Button>
+
+                <buttons:ButtonBorderShadow
+                    Text="Create"
+                    WidthRequest="150"
+                    FontSize="17"
+                    Clicked="Create_OnClicked" />
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

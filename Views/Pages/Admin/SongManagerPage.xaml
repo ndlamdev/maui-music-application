@@ -34,7 +34,8 @@
                     JustifyContent="End">
                     <buttons:ButtonBorderShadow
                         FlexLayout.Basis="40%"
-                        Text="Create" />
+                        Text="Create"
+                        Clicked="ButtonBorderShadow_OnClicked"/>
                 </FlexLayout>
 
                 <FlexLayout

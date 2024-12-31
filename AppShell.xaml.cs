@@ -27,7 +27,8 @@ public partial class AppShell
         Routing.RegisterRoute("CreatePlaylist", typeof(CreatePlaylistPage));
         Routing.RegisterRoute("Top", typeof(RankPage));
         Routing.RegisterRoute("AddToPlaylist", typeof(AddToPlaylistPage));
-        
+
         Routing.RegisterRoute("Admin/SongManager", typeof(SongManagerPage));
+        Routing.RegisterRoute("Admin/AddNewSong", typeof(AddNewSongPage));
     }
 }

@@ -30,11 +30,14 @@ public partial class SongManagerPage
         LoadSongs();
     }
 
+    private bool IsClicked { get; set; }
+
     public MusicCard? CurrentMusicWorking { get; set; }
 
     private void LoadSongs()
     {
-        GridLayoutPlaylist.Adapter(new MusicAdapter(DataDemoGridLayout.MusicInPlaylists, this, Navigation, LongPressed));
+        GridLayoutPlaylist.Adapter(new MusicAdapter(DataDemoGridLayout.MusicInPlaylists, this, Navigation,
+            LongPressed));
     }
 
     private void SongInfo_OnBack(object? sender, TappedEventArgs e)
@@ -49,5 +52,14 @@ public partial class SongManagerPage
         var service = ServiceHelper.GetService<ISongService>();
         if (service == null) return;
         SongInfo.TranslateTo(0, 0, 500);
+    }
+
+    private async void ButtonBorderShadow_OnClicked(object? sender, EventArgs e)
+    {
+        if (IsClicked) return;
+        IsClicked = true;
+        await OpacityEffect.RunOpacity((View?)sender, 100);
+        await Navigation.PushAsync(new AddNewSongPage());
+        IsClicked = false;
     }
 }
