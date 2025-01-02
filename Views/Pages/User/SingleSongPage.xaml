@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.User.SingleSongPage"
+             xmlns:pages="clr-namespace:maui_music_application.Views.Pages.User"
+             xmlns:fragments="clr-namespace:maui_music_application.Views.Fragments"
+             xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             x:DataType="pages:SingleSongPage"
+             BackgroundColor="{StaticResource Background}">
+    <Grid
+        x:Name="RootView">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollView
+            Grid.Row="0"
+            Grid.Column="0">
+            <VerticalStackLayout
+                Padding="25"
+                HorizontalOptions="Center">
+                <FlexLayout
+                    Direction="Row" JustifyContent="SpaceBetween"
+                    AlignItems="Center"
+                    HeightRequest="40">
+                    <Frame
+                        CornerRadius="99999"
+                        Padding="5"
+                        WidthRequest="40"
+                        HeightRequest="40">
+                        <Image
+                            Source="arrow_left_white.svg"
+                            WidthRequest="30"
+                            HeightRequest="30">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnBack" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                    <Image
+                        Source="option_vertical.svg"
+                        WidthRequest="35"
+                        HeightRequest="35">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Option_OnTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </FlexLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame HeightRequest="300"
+                           WidthRequest="300"
+                           CornerRadius="999999"
+                           Margin="0, 40, 0, 25"
+                           Padding="0">
+                        <Image
+                            x:Name="ImageSongThumbnail"
+                            Source="{Binding SongThumbnail}"
+                            Aspect="Fill" />
+                    </Frame>
+                    <Frame HeightRequest="50"
+                           WidthRequest="50"
+                           CornerRadius="999999"
+                           BackgroundColor="{StaticResource Background}"
+                           BorderColor="Black"
+                           Margin="0, 40, 0, 25"
+                           Padding="0" />
+                </Grid>
+                <Label
+                    Text="{Binding SongName}"
+                    FontSize="24"
+                    TextColor="White"
+                    FontFamily="MulishVariableFont" />
+                <FlexLayout
+                    Direction="Row"
+                    JustifyContent="SpaceBetween"
+                    AlignItems="Center"
+                    Margin="0,15,0,35">
+                    <Label
+                        Text="{Binding SingerName}"
+                        TextColor="{StaticResource Text2}" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Frame
+                            CornerRadius="99999"
+                            Padding="5"
+                            WidthRequest="30"
+                            HeightRequest="30">
+                            <Image
+                                Source="share.svg"
+                                WidthRequest="20"
+                                HeightRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Share_OnTapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Frame>
+                        <Frame
+                            CornerRadius="99999"
+                            Padding="5"
+                            WidthRequest="30"
+                            HeightRequest="30">
+                            <Image
+                                Source="heart_blue.svg"
+                                WidthRequest="20"
+                                HeightRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Heart_OnTapped" />
+                                </Image.GestureRecognizers>
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Like}" Value="False">
+                                        <Setter Property="Source" Value="heart_blue.svg" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Like}" Value="True">
+                                        <Setter Property="Source" Value="heart_fill_blue.svg" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </Frame>
+                    </HorizontalStackLayout>
+                </FlexLayout>
+                <musics:Process
+                    x:Name="Process"
+                    OnValueChanged="Process_OnValueChanged"
+                    OnValueChangeCompleted="Process_OnValueChangeCompleted" />
+                <FlexLayout JustifyContent="Center">
+                    <HorizontalStackLayout
+                        FlexLayout.Grow="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Frame
+                            CornerRadius="99999"
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            Padding="15"
+                            IsVisible="False">
+                            <Frame.Triggers>
+                                <DataTrigger
+                                    TargetType="Frame"
+                                    Binding="{Binding PlayRandom}"
+                                    Value="True">
+                                    <Setter Property="Background" Value="{StaticResource Blue500}" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    TargetType="Frame"
+                                    Binding="{Binding PlayRandom}"
+                                    Value="False">
+                                    <Setter Property="Background" Value="Black" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                            <Image
+                                Source="random.svg"
+                                WidthRequest="20"
+                                HeightRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Random_OnClicked" />
+                                </Image.GestureRecognizers>
+                                <Image.Triggers>
+                                    <DataTrigger
+                                        TargetType="Image"
+                                        Binding="{Binding PlayRandom}"
+                                        Value="True">
+                                        <Setter Property="Source" Value="random_white.svg" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        TargetType="Image"
+                                        Binding="{Binding PlayRandom}"
+                                        Value="False">
+                                        <Setter Property="Source" Value="random.svg" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </Frame>
+                    </HorizontalStackLayout>
+                    <ContentView
+                        WidthRequest="150"
+                        HeightRequest="70">
+                        <FlexLayout
+                            JustifyContent="SpaceBetween"
+                            AlignItems="Center">
+                            <Frame
+                                CornerRadius="99999"
+                                Padding="5"
+                                WidthRequest="35"
+                                HeightRequest="35">
+                                <Image
+                                    Source="previous_white.svg"
+                                    WidthRequest="25"
+                                    HeightRequest="25"
+                                    IsVisible="False">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Previous_OnClicked" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Frame>
+                            <buttons:ButtonIconCircle
+                                x:Name="PlayPauseMusic"
+                                Clicked="PlayPauseMusicClicked"
+                                Icon="play_white.svg"
+                                Spacing="0" />
+                            <Frame
+                                CornerRadius="99999"
+                                Padding="5"
+                                WidthRequest="35"
+                                HeightRequest="35">
+                                <Image
+                                    Source="next_white.svg"
+                                    WidthRequest="25"
+                                    HeightRequest="25"
+                                    IsVisible="False">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Next_OnClicked" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Frame>
+                        </FlexLayout>
+                    </ContentView>
+                    <HorizontalStackLayout
+                        FlexLayout.Grow="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Spacing="5">
+                        <Frame
+                            CornerRadius="99999"
+                            Padding="5"
+                            WidthRequest="30"
+                            HeightRequest="30">
+                            <Image
+                                Source="equalizer.svg"
+                                WidthRequest="20"
+                                HeightRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Equalizer_OnClicked" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Frame>
+                        <Frame
+                            CornerRadius="99999"
+                            Padding="5"
+                            WidthRequest="30"
+                            HeightRequest="30">
+                            <Image
+                                Source="add_white.svg"
+                                WidthRequest="20"
+                                HeightRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Add_OnClicked" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Frame>
+                    </HorizontalStackLayout>
+                </FlexLayout>
+                <HorizontalStackLayout
+                    Padding="25"
+                    HorizontalOptions="End">
+                    <Frame
+                        CornerRadius="99999"
+                        Padding="5"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image
+                            Source="download_white.svg"
+                            WidthRequest="20"
+                            HeightRequest="20">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Download_OnClicked" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <fragments:SongPageShowMore
+            Grid.Row="0"
+            Grid.Column="0"
+            x:Name="ShowMoreMenu"
+            OnBack="ShowMoreMenu_OnOnBack" />
+    </Grid>
+</ContentPage>

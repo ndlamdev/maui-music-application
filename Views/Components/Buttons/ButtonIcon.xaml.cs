@@ -11,6 +11,7 @@ namespace maui_music_application.Views.Components.Buttons;
 public partial class ButtonIcon
 {
     public event EventHandler? Clicked;
+    private string _title = string.Empty;
 
     public ButtonIcon()
     {
@@ -26,9 +27,16 @@ public partial class ButtonIcon
         }
     }
 
+    public static readonly BindableProperty TitleProperty =
+        BindableProperty.Create(nameof(Title), 
+            typeof(string),
+            typeof(ButtonIcon), 
+            string.Empty);
+
     public string Title
     {
-        set => Label.Text = value;
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
     }
 
     private async void Button_Clicked(object sender, EventArgs e)
@@ -41,10 +49,9 @@ public partial class ButtonIcon
     {
         set => Image.Source = value;
     }
-    
+
     public double Spacing
     {
         set => StackLayout.Spacing = value;
     }
-
 }

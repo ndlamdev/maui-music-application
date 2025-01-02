@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.User.LoginPage"
+             xmlns:button="clr-namespace:maui_music_application.Views.Components.Buttons">
+    <ScrollView
+        VerticalScrollBarVisibility="Never"
+        Orientation="Vertical"
+        VerticalOptions="Center">
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            Padding="25, 50">
+            <AbsoluteLayout>
+                <Image Source="arrow_left_white.svg"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       IsVisible="False">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <FlexLayout
+                    JustifyContent="Center"
+                    AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                    AbsoluteLayout.LayoutBounds="0,0,1,200">
+                    <Image
+                        Source="musium.png"
+                        WidthRequest="200"
+                        HeightRequest="200" />
+                </FlexLayout>
+            </AbsoluteLayout>
+            <Label
+                Text="Let’s get you in"
+                FontSize="35"
+                Padding="0, 30" />
+            <VerticalStackLayout Spacing="20">
+                <button:ButtonSign
+                    Title="Continue with Google"
+                    Icon="google_icon.svg"
+                    Clicked="LoginGoogle_OnClicked" />
+                <button:ButtonSign
+                    Title="Continue with Facebook"
+                    Icon="facebook_icon.svg"
+                    Clicked="LoginFacebook_OnClicked" />
+                <button:ButtonSign
+                    Title="Continue with Apple"
+                    Icon="apple_icon.svg"
+                    Clicked="LoginAppleID_OnClicked" />
+            </VerticalStackLayout>
+            <ContentView Padding="0, 35">
+                <AbsoluteLayout>
+                    <Line
+                        Y1="9"
+                        X2="150000"
+                        Y2="9"
+                        StrokeThickness="2"
+                        Stroke="{StaticResource White}"
+                        AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                        AbsoluteLayout.LayoutBounds="0,0,1,20" />
+                    <FlexLayout
+                        AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                        AbsoluteLayout.LayoutBounds="0,0,1,20"
+                        JustifyContent="Center"
+                        AlignItems="Center">
+                        <Label
+                            Text="Or"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            WidthRequest="50"
+                            BackgroundColor="{StaticResource PrimaryDark}" />
+                    </FlexLayout>
+                </AbsoluteLayout>
+            </ContentView>
+            <button:ButtonBorderShadow
+                Text="Log in with a password"
+                Clicked="LoginWithPassword_OnClicked" />
+            <HorizontalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="0, 20, 0, 0">
+                <Label
+                    Text="Don’t have an account? " />
+                <Label
+                    Text="Sign Up"
+                    TextColor="{StaticResource Blue300}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SignUpTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

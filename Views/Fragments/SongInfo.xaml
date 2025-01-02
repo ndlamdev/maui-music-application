@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Fragments.SongInfo"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:viewModel="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="viewModel:MusicInfoManager"
+             Background="{StaticResource Background }">
+    <Grid
+        Padding="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <FlexLayout
+            Grid.Row="0"
+            JustifyContent="Start"
+            Margin="0,0,0,25">
+            <Frame
+                CornerRadius="99999"
+                Padding="5"
+                WidthRequest="40"
+                HeightRequest="40">
+                <Image
+                    Source="arrow_left_white.svg"
+                    WidthRequest="30"
+                    HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Back_OnClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+        </FlexLayout>
+        
+        <ScrollView
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Never"
+            Orientation="Vertical">
+            <VerticalStackLayout>
+                <Frame
+                    CornerRadius="10"
+                    HeightRequest="250"
+                    WidthRequest="250"
+                    Margin="0,0,0,15">
+                    <Image
+                        Source="{Binding Cover}"
+                        Aspect="Fill"
+                        HeightRequest="250"
+                        WidthRequest="250" />
+                </Frame>
+
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,35"
+                    Spacing="5">
+                    <Label
+                        Text="{Binding Title}"
+                        FontSize="24"
+                        TextColor="White"
+                        FontFamily="MulishVariableFont"
+                        HorizontalOptions="Center" />
+                    <Label
+                        Text="{Binding Title}"
+                        TextColor="{StaticResource Text2}"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Spacing="20">
+                    <buttons:ButtonIcon
+                        Icon="add_music.png"
+                        Title="{Binding Artist}" />
+                    <buttons:ButtonIcon
+                        Icon="remove_white.svg"
+                        Title="{Binding View}" />
+                    <buttons:ButtonIcon
+                        Icon="tag_white.svg"
+                        Title="{Binding Genre}" />
+                    <buttons:ButtonIcon
+                        Icon="artist.png"
+                        Title="{Binding Duration}" />
+                    <buttons:ButtonIcon
+                        Icon="album_white.svg"
+                        Title="{Binding CreateAt}" />
+                    <buttons:ButtonIcon
+                        Icon="user_information.png"
+                        Title="{Binding UpdateAt}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentView>

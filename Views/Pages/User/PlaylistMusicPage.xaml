@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.User.PlaylistMusicPage"
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
+             xmlns:content="clr-namespace:maui_music_application.Views.Pages.User"
+             x:DataType="content:PlaylistMusicPage"
+             BackgroundColor="{StaticResource Background}">
+    <Grid
+        Padding="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <VerticalStackLayout>
+            <FlexLayout
+                AlignItems="Center"
+                JustifyContent="SpaceBetween"
+                Margin="0,0,0,25">
+                <Frame
+                    CornerRadius="99999"
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                    <Image
+                        Source="arrow_left_white.svg"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBack" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+                <Label
+                    Text="FROM “PLAYLISTS”"
+                    FontSize="20" />
+                <Frame
+                    CornerRadius="99999"
+                    Padding="5"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                    <Image
+                        x:Name="OptionButton"
+                        Source="option_vertical.svg"
+                        WidthRequest="30"
+                        HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnOption" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+            </FlexLayout>
+        </VerticalStackLayout>
+        <ScrollView
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout>
+                <Frame
+                    WidthRequest="250"
+                    HeightRequest="250"
+                    CornerRadius="15"
+                    Margin="0,0,0,25">
+                    <Image
+                        WidthRequest="250"
+                        HeightRequest="250"
+                        Source="{Binding PlayListThumbnail}"
+                        Aspect="AspectFill" />
+                </Frame>
+
+                <VerticalStackLayout
+                    Margin="0, 0, 0, 40"
+                    HorizontalOptions="Center"
+                    Spacing="5">
+                    <Label
+                        Text="{Binding PlayListName}"
+                        FontSize="24"
+                        FontFamily="MulishVariableFont"
+                        HorizontalTextAlignment="Center" />
+                    <Label
+                        Text="{Binding PlayListType}"
+                        TextColor="{StaticResource Text2}"
+                        HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <layouts:GridLayout
+                    x:Name="GridLayoutMusic"
+                    Columns="1"
+                    RowSpacing="10" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

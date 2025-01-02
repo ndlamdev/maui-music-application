@@ -7,7 +7,7 @@
 using maui_music_application.Helpers.Enum;
 using maui_music_application.Models;
 using maui_music_application.Views.Layouts;
-using maui_music_application.Views.Pages;
+using maui_music_application.Views.Pages.User;
 using PlaylistCard = maui_music_application.Views.Components.Categories.PlaylistCard;
 
 namespace maui_music_application.Views.Adapters;

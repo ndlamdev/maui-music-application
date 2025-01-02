@@ -5,9 +5,9 @@
 // User: Lam Nguyen
 
 using Android.Util;
-using maui_music_application.Models;
 using maui_music_application.Views.Components.Musics;
 using maui_music_application.Views.Layouts;
+using MusicCard = maui_music_application.Models.MusicCard;
 
 namespace maui_music_application.Views.Adapters;
 

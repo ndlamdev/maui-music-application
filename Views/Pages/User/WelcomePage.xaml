@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.User.WelcomePage"
+             xmlns:butons="clr-namespace:maui_music_application.Views.Components.Buttons">
+    <AbsoluteLayout BackgroundColor="{StaticResource Blue300}">
+        <Image Source="img_girl.png"
+               AbsoluteLayout.LayoutFlags="WidthProportional, YProportional"
+               AbsoluteLayout.LayoutBounds="0,0.3,1,450" 
+               />
+        <Border StrokeThickness="0"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+                AbsoluteLayout.LayoutBounds="0,1,1,350">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="25, 25, 0, 0" />
+            </Border.StrokeShape>
+            <FlexLayout
+                BackgroundColor="{StaticResource Background}"
+                Direction="Column"
+                JustifyContent="SpaceAround"
+                Padding="20,50">
+                <Label LineBreakMode="WordWrap"
+                       FontSize="24"
+                       FontFamily="CenturyGothic"
+                       HorizontalTextAlignment="Center"
+                       Margin="20, 0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="From the " />
+                            <Span Text="latest " TextColor="{StaticResource Blue300}" />
+                            <Span Text="to the " />
+                            <Span Text="greatest " TextColor="{StaticResource Blue300}" />
+                            <Span Text="hits, play your favorite tracks on " />
+                            <Span Text="musium " TextColor="{StaticResource Blue400}" FontFamily="CenturyGothicBold" />
+                            <Span Text="now!" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <VerticalStackLayout Margin="20, 0">
+                    <FlexLayout Direction="Row" Margin="0,0,0, 40" JustifyContent="Center">
+                        <Frame CornerRadius="99999"
+                               WidthRequest="60"
+                               HeightRequest="10"
+                               MinimumHeightRequest="0"
+                               BackgroundColor="{StaticResource Blue500}" />
+                        <Frame CornerRadius="99999"
+                               WidthRequest="60"
+                               HeightRequest="10"
+                               MinimumHeightRequest="0"
+                               TranslationX="-10"
+                               BackgroundColor="White" />
+                    </FlexLayout>
+                    <butons:ButtonBorderShadow Text="Get Started" FontSize="16" Clicked="ButtonBorderShadow_OnClicked" />
+                </VerticalStackLayout>
+            </FlexLayout>
+        </Border>
+    </AbsoluteLayout>
+</ContentPage>

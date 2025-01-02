@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="maui_music_application.Views.Components.Musics.MusicCard"
+             x:DataType="musics:MusicCard"
+             HeightRequest="50"
+             Margin="0,0,0,10">
+    <ContentView.Behaviors>
+        <toolkit:TouchBehavior LongPressCommand="{Binding LongPressCommand}" LongPressDuration="1000" />
+        <toolkit:TouchBehavior LongPressCompleted="TouchBehavior_OnLongPressCompleted" />
+    </ContentView.Behaviors>
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+    </ContentView.GestureRecognizers>
+    <FlexLayout
+        Direction="Row"
+        AlignItems="Center"
+        JustifyContent="SpaceBetween">
+        <HorizontalStackLayout
+            VerticalOptions="Start"
+            Spacing="10">
+            <Frame
+                WidthRequest="50"
+                HeightRequest="50"
+                CornerRadius="5">
+                <Image
+                    Source="{Binding SongThumbnail}"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    Aspect="Fill" />
+            </Frame>
+            <VerticalStackLayout
+                VerticalOptions="Center">
+                <Label
+                    Text="{Binding SongName}"
+                    FontSize="16"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+                <Label
+                    Text="{Binding SingerName}"
+                    FontSize="14"
+                    TextColor="{DynamicResource Text2}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        <ImageButton
+            WidthRequest="40"
+            HeightRequest="30"
+            Source="option_vertical.svg"
+             >
+            <ImageButton.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ImageButton_OnClicked"/>
+            </ImageButton.GestureRecognizers>
+        </ImageButton>
+    </FlexLayout>
+</ContentView>

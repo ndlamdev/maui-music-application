@@ -2,8 +2,8 @@
 
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:maui_music_application.Views.Pages"
+       xmlns:local="clr-namespace:maui_music_application.Views.Pages.Admin"
        x:Class="maui_music_application.AppShell">
 
-    <ShellContent Title="" ContentTemplate="{DataTemplate local:LaunchPage}" />
+    <ShellContent Title="" ContentTemplate="{DataTemplate local:SongManagerPage}" />
 </Shell>

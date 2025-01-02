@@ -86,18 +86,6 @@
         <MauiXaml Update="Views\Components\Musics\MusicInPlaylist.xaml">
             <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Pages\LoginWithPasswordPage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Views\Pages\SignUpPage.xaml">
-            <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Views\Pages\ForgetPasswordPage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
-        <MauiXaml Update="Views\Pages\VerifyCodePage.xaml">
-          <SubType>Designer</SubType>
-        </MauiXaml>
         <MauiXaml Update="Views\Components\Categories\Artist.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
@@ -110,10 +98,52 @@
         <MauiXaml Update="Views\Fragments\ExplorePage.xaml">
             <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Pages\ResetPasswordPage.xaml">
-            <SubType>Designer</SubType>
+        <MauiXaml Update="Views\Pages\user\AddToPlaylistPage.xaml">
+          <SubType>Designer</SubType>
         </MauiXaml>
-        <MauiXaml Update="Views\Pages\SingleSongPage.xaml">
+        <MauiXaml Update="Views\Pages\user\CreatePlaylistPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\ForgetPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\LaunchPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\LoginPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\LoginWithPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\MainPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\PlaylistMusicPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\RankPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\ResetPasswordPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\SignUpPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\SingleSongPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\SongInPlaylistPage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\VerifyCodePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Pages\user\WelcomePage.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\Components\Musics\MusicCard.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
@@ -123,24 +153,8 @@
             <DependentUpon>GridLayout.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\LoginWithPasswordPage.xaml.cs">
-            <DependentUpon>LoginWithPasswordPage.xaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
         <Compile Update="Platforms\Android\Platforms\Android\MyEntryRenderer.cs">
             <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
-        </Compile>
-        <Compile Update="Views\Pages\SignUpPage.xaml.cs">
-            <DependentUpon>SignUp.xaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
-            <DependentUpon>ForgetPassword.xaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Pages\VerifyCodePage.xaml.cs">
-            <DependentUpon>VerifyCodePage.xaml</DependentUpon>
-            <SubType>Code</SubType>
         </Compile>
         <Compile Update="Views\Components\Categories\Artist.xaml.cs">
             <DependentUpon>Artist.xaml</DependentUpon>
@@ -170,12 +184,68 @@
             <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\ResetPasswordPage.xaml.cs">
-            <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
-            <SubType>Code</SubType>
+        <Compile Update="Views\Pages\user\AddToPlaylistPage.xaml.cs">
+          <DependentUpon>AddToPlaylistPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Pages\SingleSongPage.xaml.cs">
+        <Compile Update="Views\Pages\user\CreatePlaylistPage.xaml.cs">
+          <DependentUpon>CreatePlaylistPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\ForgetPasswordPage.xaml.cs">
+          <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\LaunchPage.xaml.cs">
+          <DependentUpon>LaunchPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\LoginPage.xaml.cs">
+          <DependentUpon>LoginPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\LoginWithPasswordPage.xaml.cs">
+          <DependentUpon>LoginWithPasswordPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\MainPage.xaml.cs">
+          <DependentUpon>MainPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\PlaylistMusicPage.xaml.cs">
+          <DependentUpon>PlaylistMusicPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\RankPage.xaml.cs">
+          <DependentUpon>RankPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\ResetPasswordPage.xaml.cs">
+          <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\SignUpPage.xaml.cs">
+          <DependentUpon>SignUpPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\SingleSongPage.xaml.cs">
           <DependentUpon>SingleSongPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\SongInPlaylistPage.xaml.cs">
+          <DependentUpon>SongInPlaylistPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\VerifyCodePage.xaml.cs">
+          <DependentUpon>VerifyCodePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\user\WelcomePage.xaml.cs">
+          <DependentUpon>WelcomePage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\Musics\MusicCard.xaml.cs">
+          <DependentUpon>MusicCard.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
@@ -192,6 +262,5 @@
         <AdditionalFiles Include="Views\Components\Musics\MusicInTop.xaml" />
         <AdditionalFiles Include="Views\Components\Musics\Process.xaml" />
         <AdditionalFiles Include="Views\Components\Navigation\BottomNavigationItem.xaml" />
-        <AdditionalFiles Include="Views\Pages\MainPage.xaml" />
     </ItemGroup>
 </Project>

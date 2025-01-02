@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Pages.Admin.SongManagerPage"
+             xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:fragments="clr-namespace:maui_music_application.Views.Fragments">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="0"
+            Padding="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout
+                Margin="0,0,0,20">
+                <FlexLayout
+                    AlignItems="Center"
+                    JustifyContent="Center"
+                    Margin="0,0,0,25">
+                    <Label
+                        Text="Admin manager"
+                        FontSize="20" />
+                </FlexLayout>
+
+                <FlexLayout
+                    JustifyContent="End">
+                    <buttons:ButtonBorderShadow
+                        FlexLayout.Basis="40%"
+                        Text="Create"
+                        Clicked="ButtonBorderShadow_OnClicked"/>
+                </FlexLayout>
+
+                <FlexLayout
+                    Margin="0, 20">
+                    <BoxView
+                        BackgroundColor="{StaticResource Text2}"
+                        FlexLayout.Basis="100%"
+                        HeightRequest="1" />
+                </FlexLayout>
+            </VerticalStackLayout>
+
+            <ScrollView
+                Grid.Row="1"
+                VerticalScrollBarVisibility="Never">
+                <layouts:GridLayout
+                    x:Name="GridLayoutPlaylist"
+                    Columns="1"
+                    RowSpacing="10" />
+            </ScrollView>
+        </Grid>
+
+        <fragments:SongInfo
+            Grid.Row="0"
+            x:Name="SongInfo"
+            BackClicked="SongInfo_OnBack" />
+    </Grid>
+</ContentPage>
