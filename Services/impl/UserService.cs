@@ -3,6 +3,7 @@ using maui_music_application.Attributes;
 using maui_music_application.Configuration;
 using maui_music_application.Dto;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Models;
 using maui_music_application.Services.Api;
 using Newtonsoft.Json;
@@ -18,12 +19,7 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
             APIResponse<UserGetAccount> response = await authApi.GetAccount();
             Log.Info("UserService", "CheckIfUserHasAccount {0}", response.StatusCode);
             ResponseAuthentication.UserDto userDto = response.Data.User;
-            User user = new User(
-                userDto.Avatar == null ? AppConstraint.DefaultAvatar : userDto.Avatar,
-                response.Data.User.FullName,
-                response.Data.User.Email
-            );
-            Preferences.Set(AppConstraint.User, JsonConvert.SerializeObject(user));
+            await SetUserInfo(userDto);
         }
         catch (Exception ex)
         {
@@ -44,6 +40,7 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
             var response = await authApi.Login(new RequestLogin(username, password), tokenSource.Token);
             if (response.StatusCode != 200) throw new Exception();
             await tokenService.SaveAccessToken(response.Data.AccessToken);
+            await SetUserInfo(response.Data.User);
         }
         catch (Exception e)
         {
@@ -70,5 +67,22 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
     public Task<APIResponse> VerifyRegister(string email, CodeVerify code)
     {
         return authApi.VerifyRegister(email, code);
+    }
+
+    private async Task SetUserInfo(ResponseAuthentication.UserDto userDto)
+    {
+        User user = new User(
+            userDto.Avatar == null ? AppConstraint.DefaultAvatar : userDto.Avatar,
+            userDto.FullName,
+            userDto.Email,
+            userDto.Role
+        );
+        Preferences.Set(AppConstraint.User, JsonConvert.SerializeObject(user));
+    }
+
+    public async Task<Role> GetRole()
+    {
+        return JsonConvert.DeserializeObject<User>
+            (Preferences.Get(AppConstraint.User, string.Empty))!.Role;
     }
 }

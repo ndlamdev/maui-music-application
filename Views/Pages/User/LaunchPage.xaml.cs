@@ -99,16 +99,16 @@ public partial class LaunchPage
         {
             await userService.CheckIfUserHasAccount();
             await Navigation.PushAsync(new MainPage());
-            for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
-                Navigation.RemovePage(Navigation.NavigationStack[i]);
+            // for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
+            //     Navigation.RemovePage(Navigation.NavigationStack[i]);
         }
         catch (Exception ex)
         {
             // Call Api thất bại 
             Log.Info("LaunchPage", "Expired Token: {0} {1}", ex.Message, ex.StackTrace);
             await Navigation.PushAsync(new LoginPage());
-            for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
-                Navigation.RemovePage(Navigation.NavigationStack[i]);
+            // for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
+            //     Navigation.RemovePage(Navigation.NavigationStack[i]);
             AndroidHelper.ShowToast("Token hết hạn, vui lòng đăng nhập lại");
         }
     }

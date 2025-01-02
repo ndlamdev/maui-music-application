@@ -7,7 +7,7 @@
              xmlns:convert="clr-namespace:maui_music_application.Helpers.Converter"
              xmlns:avatar="clr-namespace:maui_music_application.Views.Components.Avatar"
              xmlns:logo="clr-namespace:maui_music_application.Views.Components.Logo"
-             xmlns:buttons1="clr-namespace:maui_music_application.Views.Components.Buttons">
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons">
 
     <!-- Binding with view models -->
     <ContentPage.BindingContext>
@@ -30,23 +30,23 @@
                 </StackLayout>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
-                <buttons1:ButtonIcon
+                <buttons:ButtonIcon
                     Icon="status.svg"
                     Spacing="0"
                     SizeIcon="20"
                     Clicked="Top_OnClicked" />
-                <buttons1:ButtonIcon
+                <buttons:ButtonIcon
                     Icon="bell.svg"
                     Spacing="0"
                     SizeIcon="20" />
-                <buttons1:ButtonIcon
+                <buttons:ButtonIcon
                     Icon="settings.svg"
                     Spacing="0"
                     SizeIcon="20">
-                    <buttons1:ButtonIcon.GestureRecognizers>
+                    <buttons:ButtonIcon.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Setting_OnClicked" />
-                    </buttons1:ButtonIcon.GestureRecognizers>
-                </buttons1:ButtonIcon>
+                    </buttons:ButtonIcon.GestureRecognizers>
+                </buttons:ButtonIcon>
             </HorizontalStackLayout>
         </FlexLayout>
 
