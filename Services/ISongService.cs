@@ -7,4 +7,6 @@ public interface ISongService
 {
     Task<Music> GetMusic(long id);
     Task<APIResponse> Like(bool currentStatus, long id);
+
+    Task<ApiPaging<MusicCard>> GetMusics(int page, int size);
 }

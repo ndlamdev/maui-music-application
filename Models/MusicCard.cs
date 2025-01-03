@@ -12,4 +12,9 @@ public class MusicCard(long id, string title, string artist, string cover)
     public string Title { get; set; } = title;
     public string Artist { get; set; } = artist;
     public string Cover { get; set; } = cover;
+
+    public override string ToString()
+    {
+        return $"Id = {Id}, Title = {Title}, Artist = {Artist}, Cover = {Cover}";
+    }
 }

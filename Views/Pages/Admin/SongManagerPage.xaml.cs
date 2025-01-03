@@ -4,18 +4,25 @@
 // Create at: 22:12:16 - 31/12/2024
 // User: Lam Nguyen
 
-using maui_music_application.Data;
+using Android.Util;
+using maui_music_application.Dto;
 using maui_music_application.Helpers;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
-using maui_music_application.Views.Components.Musics;
+using MusicCardView = maui_music_application.Views.Components.Musics.MusicCard;
+using MusicCardModel = maui_music_application.Models.MusicCard;
 
 namespace maui_music_application.Views.Pages.Admin;
 
 public partial class SongManagerPage
 {
+    ISongService _songService;
+    private const int DefaultPage = 1;
+    private const int SizePage = 10;
+
     public SongManagerPage()
     {
+        _songService = ServiceHelper.GetService<ISongService>();
         InitializeComponent();
         SongInfo.TranslationY = DeviceDisplay.Current.MainDisplayInfo.Height;
     }
@@ -32,12 +39,22 @@ public partial class SongManagerPage
 
     private bool IsClicked { get; set; }
 
-    public MusicCard? CurrentMusicWorking { get; set; }
+    public MusicCardView? CurrentMusicWorking { get; set; }
 
-    private void LoadSongs()
+    private async void LoadSongs()
     {
-        GridLayoutPlaylist.Adapter(new MusicAdapter(DataDemoGridLayout.MusicInPlaylists, this, Navigation,
-            LongPressed));
+        Log.Info("SongManagerPage", "Loading songs...");
+        try
+        {
+            ApiPaging<MusicCardModel> pageable = await GetSongs(DefaultPage, SizePage);
+            GridLayoutPlaylist.Adapter(new MusicAdapter(pageable.Content.ToArray(), this, Navigation,
+                LongPressed));
+        }
+        catch (Exception ex)
+        {
+            Log.Error("SongManagerPage", ex.Message);
+        }
+
     }
 
     private void SongInfo_OnBack(object? sender, TappedEventArgs e)
@@ -61,5 +78,23 @@ public partial class SongManagerPage
         await OpacityEffect.RunOpacity((View?)sender, 100);
         await Navigation.PushAsync(new AddNewSongPage());
         IsClicked = false;
+    }
+
+    private async Task<ApiPaging<MusicCardModel>> GetSongs(int page, int size)
+    {
+        if (page == 0)
+        {
+            return null;
+        }
+        try
+        {
+            ApiPaging<MusicCardModel> response = await _songService.GetMusics(page - 1, size);
+            return response;
+        }
+        catch (Exception ex)
+        {
+            Log.Error("SongManagerPage", ex.Message);
+            return null;
+        }
     }
 }

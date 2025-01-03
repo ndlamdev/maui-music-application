@@ -14,4 +14,7 @@ public interface ISongApi
 
     [Post("/song/unlike/{id}")]
     Task<APIResponse> Unlike([AliasAs("id")] long id);
+
+    [Get("/song/list")]
+    Task<APIResponse<ApiPaging<MusicCard>>> GetMusics([AliasAs("page")] int page, [AliasAs("size")] int size = 10);
 }

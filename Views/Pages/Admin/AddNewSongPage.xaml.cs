@@ -4,6 +4,7 @@
 // Create at: 01:01:32 - 01/01/2025
 // User: Lam Nguyen
 
+using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
 
@@ -43,7 +44,7 @@ public partial class AddNewSongPage
         ArtistPicker.Focus();
     }
 
-    [Todo("Handel action select album")]
+    [Todo("Handle action select album")]
     private void Picker_OnSelectedAlbumChanged(object? sender, EventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
@@ -56,13 +57,13 @@ public partial class AddNewSongPage
         AlbumPicker.Focus();
     }
 
-    [Todo("Handel action create new song")]
+    [Todo("Handle action create new song")]
     private void Create_OnClicked(object? sender, EventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
     }
 
-    [Todo("Handel action cancel create new song")]
+    [Todo("Handle action cancel create new song")]
     private async void Cancel_OnClicked(object? sender, EventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
@@ -73,15 +74,54 @@ public partial class AddNewSongPage
         IsClicked = false;
     }
 
-    [Todo("Handel action upload song file")]
-    private void UploadSong_OnTapped(object? sender, TappedEventArgs e)
+    [Todo("Handle action upload song file")]
+    private async void UploadSong_OnTapped(object? sender, TappedEventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
+
+        var result = await FilePicker.PickAsync(new PickOptions
+        {
+            PickerTitle = "Select a file",
+            FileTypes = FilePickerFileType.Videos // Example: Restrict to image files
+        });
+
+        if (result != null)
+        {
+            // Access the file metadata
+            string fileName = result.FileName;
+            string fullPath = result.FullPath; // Available only on supported platforms
+            Log.Info("AddNewSongPage", $"File name: {fileName}");
+            Log.Info("AddNewSongPage", $"Full path: {fullPath}");
+
+            // Read the file contents
+            using var stream = await result.OpenReadAsync();
+            // You can use the stream to process the file
+            Log.Info("AddNewSongPage", $"File size: {stream.Length} bytes");
+        }
     }
 
-    [Todo("Handel action upload thumbnail file")]
-    private void UploadThumbnail_OnTapped(object? sender, TappedEventArgs e)
+    [Todo("Handle action upload thumbnail file")]
+    private async void UploadThumbnail_OnTapped(object? sender, TappedEventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+
+        var result = await FilePicker.PickAsync(new PickOptions
+        {
+            PickerTitle = "Select a file",
+            FileTypes = FilePickerFileType.Images // Example: Restrict to image files
+        });
+
+        if (result != null)
+        {
+            // Access the file metadata
+            string fileName = result.FileName;
+            string fullPath = result.FullPath; // Available only on supported platforms
+            Log.Info("AddNewSongPage", $"File name: {fileName}");
+            Log.Info("AddNewSongPage", $"Full path: {fullPath}");
+
+            // Read the file contents
+            using var stream = await result.OpenReadAsync();
+            // You can use the stream to process the file
+            Log.Info("AddNewSongPage", $"File size: {stream.Length} bytes");
+        }
     }
 }
