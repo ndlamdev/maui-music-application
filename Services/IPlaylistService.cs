@@ -11,7 +11,7 @@ public interface IPlaylistService
     Task<ApiPaging<PlaylistCard>> GetPlaylistCards(Pageable? pageable = null);
 
     Task<PlaylistDetail> GetPlaylistDetail(long playlistId, Pageable? pageable = null);
-    
+
     Task<PlaylistDetail> GetFavorite(Pageable? pageable = null);
 
     Task<APIResponse> RemovePlayList(long id);

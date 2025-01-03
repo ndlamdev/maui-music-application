@@ -31,8 +31,10 @@ public class GenreServicesImpl(IGenreApi genreApi) : IGenreServices
                         item.Cover == null ? AppConstraint.DefaultCoverGenre : item.Cover
                     ));
                 }
+
                 return result;
             }
+
             return [];
         }
         catch (Exception e)

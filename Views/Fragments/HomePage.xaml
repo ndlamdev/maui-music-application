@@ -8,8 +8,8 @@
              Background="{DynamicResource BackgroundHeader}">
     <VerticalStackLayout
         Padding="20">
-        <header:Header 
-            x:Name="Header"/>
+        <header:Header
+            x:Name="Header" />
         <Label
             Text="Continue Listening"
             FontSize="20"

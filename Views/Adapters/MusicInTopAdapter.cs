@@ -13,7 +13,8 @@ namespace maui_music_application.Views.Adapters;
 
 using MusicInTopView = Components.Musics.MusicInTop;
 
-public class MusicInTopAdapter(MusicCardInTop[] listData, INavigation navigation) : GridLayoutAdapter<MusicCardInTop>(listData)
+public class MusicInTopAdapter(MusicCardInTop[] listData, INavigation navigation)
+    : GridLayoutAdapter<MusicCardInTop>(listData)
 {
     public override IView LoadContentView(int position, MusicCardInTop data)
     {
@@ -23,7 +24,7 @@ public class MusicInTopAdapter(MusicCardInTop[] listData, INavigation navigation
             Singer = data.Artist,
             Top = position + 1,
             Source = data.Cover,
-            Action = () => { navigation.PushAsync(new SingleSongPage(data.Id));  }
+            Action = () => { navigation.PushAsync(new SingleSongPage(data.Id)); }
         };
     }
 }

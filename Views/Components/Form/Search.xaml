@@ -29,7 +29,7 @@
                 FlexLayout.Grow="1"
                 FlexLayout.Basis="1"
                 TextColor="Black"
-                TextChanged="InputView_OnTextChanged"/>
+                TextChanged="InputView_OnTextChanged" />
         </FlexLayout>
     </Border>
 </ContentView>

@@ -56,7 +56,7 @@ public class DataDemoGridLayout
         new(7, "Dance Monkey 7", "Tones and VII", "music_kpop.png"),
         new(8, "Dance Monkey 8", "Tones and VIII", "music_kpop.png"),
     ];
-    
+
     public static readonly Artist[] Artists =
     [
         new(1, "music_kpop.png", "Conan Gray"),

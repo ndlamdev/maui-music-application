@@ -6,7 +6,9 @@
 
 namespace maui_music_application.Helpers.Enum;
 
-public  enum TypePlaylist
+public enum TypePlaylist
 {
-    Playlist, Album, Favorite
+    Playlist,
+    Album,
+    Favorite
 }

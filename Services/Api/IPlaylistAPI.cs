@@ -22,7 +22,7 @@ public interface IPlaylistApi
     [Get("/playlist/detail/{id}")]
     Task<APIResponse<PlaylistDetail>> GetPlaylistDetail([AliasAs("id")] long playlistId,
         [Query] Pageable pageable);
-    
+
     [Get("/playlist/favorite")]
     Task<APIResponse<PlaylistDetail>> GetFavorite([Query] Pageable pageable);
 
@@ -32,7 +32,7 @@ public interface IPlaylistApi
     [Put("/playlist/remove/{playlist-id}/{song-id}")]
     Task<APIResponse> RemoveSongIntoPlayList([AliasAs("playlist-id")] long playlistId,
         [AliasAs("song-id")] long songId);
-    
+
     [Put("/playlist/add/{playlist-id}/{song-id}")]
     Task<APIResponse> AddSongIntoPlayList([AliasAs("playlist-id")] long playlistId,
         [AliasAs("song-id")] long songId);

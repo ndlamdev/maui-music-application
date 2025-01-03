@@ -28,9 +28,9 @@ public partial class ButtonIcon
     }
 
     public static readonly BindableProperty TitleProperty =
-        BindableProperty.Create(nameof(Title), 
+        BindableProperty.Create(nameof(Title),
             typeof(string),
-            typeof(ButtonIcon), 
+            typeof(ButtonIcon),
             string.Empty);
 
     public string Title

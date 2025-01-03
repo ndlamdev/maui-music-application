@@ -26,7 +26,6 @@ public partial class ExplorePage
     /*Call request here!*/
     private async void OnContentViewLoaded(object sender, EventArgs e)
     {
-
     }
 
     private async Task GetCategories()
@@ -39,13 +38,11 @@ public partial class ExplorePage
             {
                 _categories = categories.ToArray();
             }
-
         }
         catch (Exception ex)
         {
             Log.Error("ExplorePage", $"{ex.Message}");
         }
-
     }
 
     private async void Init()

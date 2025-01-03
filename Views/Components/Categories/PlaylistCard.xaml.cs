@@ -24,7 +24,7 @@ public partial class PlaylistCard
     {
         set => Label.Text = value;
     }
-    
+
     public string SubTitle
     {
         set => SubLabel.Text = value;
@@ -37,9 +37,9 @@ public partial class PlaylistCard
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += async (_, _) =>
             {
-                value.Invoke();         
+                value.Invoke();
                 await OpacityEffect.RunOpacity(this, 100);
-            };                           
+            };
             Frame.GestureRecognizers.Add(tapGestureRecognizer);
             FrameImage.GestureRecognizers.Add(tapGestureRecognizer);
         }

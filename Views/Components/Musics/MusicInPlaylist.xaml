@@ -40,10 +40,9 @@
         <ImageButton
             WidthRequest="40"
             HeightRequest="30"
-            Source="option_vertical.svg"
-             >
+            Source="option_vertical.svg">
             <ImageButton.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ImageButton_OnClicked"/>
+                <TapGestureRecognizer Tapped="ImageButton_OnClicked" />
             </ImageButton.GestureRecognizers>
         </ImageButton>
     </FlexLayout>

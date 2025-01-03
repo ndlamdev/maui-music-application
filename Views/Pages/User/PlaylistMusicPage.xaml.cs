@@ -28,6 +28,7 @@ public partial class PlaylistMusicPage
         InitializeComponent();
         BindingContext = this;
     }
+
     public PlaylistMusicPage(TypePlaylist type = TypePlaylist.Playlist)
     {
         _type = type;

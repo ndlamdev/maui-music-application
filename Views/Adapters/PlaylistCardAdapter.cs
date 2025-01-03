@@ -40,6 +40,7 @@ public class PlaylistCardAdapter(
             }
             else
                 await navigation.PushAsync(new PlaylistMusicPage(data.Id));
+
             _isSelected = false;
         }
     }

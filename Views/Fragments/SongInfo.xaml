@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <FlexLayout
             Grid.Row="0"
             JustifyContent="Start"
@@ -33,7 +33,7 @@
                 </Image>
             </Frame>
         </FlexLayout>
-        
+
         <ScrollView
             Grid.Row="1"
             VerticalScrollBarVisibility="Never"

@@ -12,7 +12,7 @@ namespace maui_music_application.Views.Adapters;
 
 public class PlaylistMusicAdapter(PlaylistDetail[] listData) : GridLayoutAdapter<PlaylistDetail>(listData)
 {
-    public override IView LoadContentView(int _,PlaylistDetail data)
+    public override IView LoadContentView(int _, PlaylistDetail data)
     {
         var view = new Components.Categories.PlaylistMusic
         {

@@ -34,23 +34,24 @@ public partial class GridLayout
         switch (ScrollView.Orientation)
         {
             case ScrollOrientation.Horizontal:
-        {
-            var newColumn = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
-            AddColumnDefinitions(newColumn - Columns);
-            Columns = newColumn;
-            break;
-        }
+            {
+                var newColumn = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
+                AddColumnDefinitions(newColumn - Columns);
+                Columns = newColumn;
+                break;
+            }
             case ScrollOrientation.Vertical:
-        {
-            var newRows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
-            AddRowDefinitions(newRows - Rows);
-            Rows = newRows;
-            break;
-        }
+            {
+                var newRows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
+                AddRowDefinitions(newRows - Rows);
+                Rows = newRows;
+                break;
+            }
             case ScrollOrientation.Both:
             case ScrollOrientation.Neither:
             default: break;
-}
+        }
+
         LoadContentAdd(adapter);
     }
 

@@ -13,7 +13,7 @@ namespace maui_music_application.Views.Adapters;
 
 public class TopMixesAdapter(TopMixesModel[] listData) : GridLayoutAdapter<TopMixesModel>(listData)
 {
-    public override IView LoadContentView(int _,TopMixesModel data)
+    public override IView LoadContentView(int _, TopMixesModel data)
     {
         var view = new TopMixesView
         {
