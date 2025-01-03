@@ -11,20 +11,20 @@ public interface IPlaylistApi
     Task<APIResponse<ResponseCreatePlaylist>> CreatePlaylist([Body] RequestCreatePlaylist request);
 
     [Get("/playlist")]
-    Task<APIResponse<ApiPaging<PlaylistCard>>> GetPlaylistCards([Query] Pageable request);
+    Task<APIResponse<ApiPaging<PlaylistCard>>> GetPlaylistCards([Query] int page);
 
     [Get("/playlist/playlist-to-add-song")]
     Task<APIResponse<ApiPaging<PlaylistCard>>> GetPlaylistCardsNotHasSong(
         [AliasAs("name")] string name,
         [AliasAs("id")] long id,
-        [Query] Pageable request);
+        [Query] int page);
 
     [Get("/playlist/detail/{id}")]
     Task<APIResponse<PlaylistDetail>> GetPlaylistDetail([AliasAs("id")] long playlistId,
-        [Query] Pageable pageable);
+        [Query] int page);
 
     [Get("/playlist/favorite")]
-    Task<APIResponse<PlaylistDetail>> GetFavorite([Query] Pageable pageable);
+    Task<APIResponse<PlaylistDetail>> GetFavorite([Query] int page);
 
     [Delete("/playlist/{id}")]
     Task<APIResponse> RemovePlayList([AliasAs("id")] long id);

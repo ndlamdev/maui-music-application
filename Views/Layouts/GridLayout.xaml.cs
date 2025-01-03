@@ -11,14 +11,31 @@ public partial class GridLayout
 {
     private int _currentRow, _currentColumn;
     private object? _adapter;
+    private bool _loading;
+    private bool _removeDefinitionLoading;
+
+    private readonly Image _imageLoading = new()
+    {
+        Source = "loading.gif",
+        IsAnimationPlaying = true,
+        HorizontalOptions = LayoutOptions.Center,
+        VerticalOptions = LayoutOptions.Center,
+        HeightRequest = 50,
+        WidthRequest = 50,
+    };
 
     public GridLayout()
     {
         InitializeComponent();
+        _removeDefinitionLoading = true;
+        Grid.RowDefinitions.Add(new RowDefinition());
+        Grid.Add(_imageLoading);
     }
 
     public void Adapter<T>(GridLayoutAdapter<T> adapter)
     {
+        Grid.RowDefinitions.RemoveAt(Grid.RowDefinitions.Count - 1);
+        Grid.Remove(_imageLoading);
         if (Columns != -1) Rows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
         else Columns = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
         SetUpGrid(Columns, Rows);
@@ -55,6 +72,7 @@ public partial class GridLayout
         LoadContentAdd(adapter);
     }
 
+    public int Size { get; private set; }
 
     public int Columns { get; set; } = -1;
 
@@ -63,6 +81,7 @@ public partial class GridLayout
     private void LoadContent<T>(GridLayoutAdapter<T> layoutAdapter)
     {
         var data = layoutAdapter.ListData;
+        Size = data.Length;
         for (; _currentRow < Rows; _currentRow++)
         {
             for (var column = 0; column < Columns; column++)
@@ -80,6 +99,7 @@ public partial class GridLayout
     {
         var temp = _currentColumn == Columns - 1 ? -1 : _currentColumn + 1;
         var data = layoutAdapter.ListData;
+        Size = data.Length;
         for (; _currentRow < Rows; _currentRow++)
         {
             for (var column = temp != -1 ? temp : 0; column < Columns; column++)
@@ -91,6 +111,71 @@ public partial class GridLayout
                 var view = layoutAdapter.LoadContentView(index, data[index]);
                 Grid.Add(view, column, _currentRow);
             }
+        }
+    }
+
+    private void DisplayLoading()
+    {
+        if (_loading) return;
+        _loading = true;
+        _removeDefinitionLoading = false;
+        switch (ScrollView.Orientation)
+        {
+            case ScrollOrientation.Horizontal:
+            {
+                var newColumn = (int)Math.Ceiling((double)(Size + 1) / Rows);
+                AddColumnDefinitions(newColumn - Columns);
+                if (newColumn - Rows > 0)
+                {
+                    _removeDefinitionLoading = true;
+                    Grid.Add(_imageLoading, _currentColumn + 1, 0);
+                }
+                else
+                    Grid.Add(_imageLoading, _currentColumn, _currentRow == Rows ? 0 : _currentRow + 1);
+
+                break;
+            }
+            case ScrollOrientation.Vertical:
+            {
+                var newRows = (int)Math.Ceiling((double)(Size + 1) / Columns);
+                AddRowDefinitions(newRows - Rows);
+                if (newRows - Rows > 0)
+                {
+                    _removeDefinitionLoading = true;
+                    Grid.Add(_imageLoading, 0, _currentRow + 1);
+                }
+                else
+                    Grid.Add(_imageLoading, _currentColumn == Columns ? 0 : _currentColumn + 1, _currentRow);
+
+                break;
+            }
+            case ScrollOrientation.Both:
+            case ScrollOrientation.Neither:
+            default: break;
+        }
+    }
+
+    private void HiddenLoading()
+    {
+        _loading = false;
+        Grid.Remove(_imageLoading);
+        switch (ScrollView.Orientation)
+        {
+            case ScrollOrientation.Horizontal:
+            {
+                if (_removeDefinitionLoading)
+                    Grid.ColumnDefinitions.RemoveAt(Grid.ColumnDefinitions.Count - 1);
+                break;
+            }
+            case ScrollOrientation.Vertical:
+            {
+                if (_removeDefinitionLoading)
+                    Grid.RowDefinitions.RemoveAt(Grid.RowDefinitions.Count - 1);
+                break;
+            }
+            case ScrollOrientation.Both:
+            case ScrollOrientation.Neither:
+            default: break;
         }
     }
 
@@ -151,8 +236,19 @@ public partial class GridLayout
 
     public T[] GetData<T>()
     {
-        var a = DateTime.Now.TimeOfDay;
         return _adapter is not GridLayoutAdapter<T> adapter ? [] : adapter.ListData;
+    }
+
+    public bool IsLoading
+    {
+        get => _loading;
+        set
+        {
+            if (value)
+                DisplayLoading();
+            else
+                HiddenLoading();
+        }
     }
 }
 
