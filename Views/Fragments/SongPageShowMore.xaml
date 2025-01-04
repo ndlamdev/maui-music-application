@@ -130,7 +130,7 @@
                     <buttons:ButtonIcon
                         Icon="qr.svg"
                         Title="Generate QR Code"
-                        Clicked="OnGenerateQRCode" />
+                        Clicked="OnGenerateQrCode" />
                     <buttons:ButtonIcon
                         Icon="moon_white.svg"
                         Title="Sleep Timer"

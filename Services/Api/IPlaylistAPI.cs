@@ -19,6 +19,12 @@ public interface IPlaylistApi
         [AliasAs("id")] long id,
         [Query] int page);
 
+    [Get("/playlist/playlist-to-remove-song")]
+    Task<APIResponse<ApiPaging<PlaylistCard>>> GetPlaylistCardsHasSong(
+        [AliasAs("name")] string name,
+        [AliasAs("id")] long id,
+        [Query] int page);
+
     [Get("/playlist/detail/{id}")]
     Task<APIResponse<PlaylistDetail>> GetPlaylistDetail([AliasAs("id")] long playlistId,
         [Query] int page);

@@ -37,21 +37,28 @@
                 <Label
                     Text="{Binding SongName}"
                     FontSize="16"
+                    MaxLines="1"
                     TextColor="White"
                     FontAttributes="Bold" />
                 <Label
                     Text="{Binding SingerName}"
                     FontSize="14"
+                    MaxLines="1"
                     TextColor="{DynamicResource Text2}" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
-        <ImageButton
-            WidthRequest="40"
-            HeightRequest="30"
-            Source="option_vertical.svg">
-            <ImageButton.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ImageButton_OnClicked" />
-            </ImageButton.GestureRecognizers>
-        </ImageButton>
+        <HorizontalStackLayout
+            FlexLayout.Basis="15%"
+            HorizontalOptions="End">
+            <ImageButton
+                WidthRequest="50"
+                HeightRequest="50"
+                Padding="10"
+                Source="option_vertical.svg">
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ImageButton_OnClicked" />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+        </HorizontalStackLayout>
     </FlexLayout>
 </ContentView>

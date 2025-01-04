@@ -54,4 +54,11 @@ public class PlaylistService(IPlaylistApi api) : IPlaylistService
         var response = await api.GetPlaylistCardsNotHasSong(name, id, pageable?.Page ?? 0);
         return response.Data;
     }
+
+    public async Task<ApiPaging<PlaylistCard>> GetPlaylistCardsHasSong(string name, long id,
+        Pageable? pageable = null)
+    {
+        var response = await api.GetPlaylistCardsHasSong(name, id, pageable?.Page ?? 0);
+        return response.Data;
+    }
 }

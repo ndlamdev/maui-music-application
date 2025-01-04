@@ -21,4 +21,6 @@ public interface IPlaylistService
     Task<APIResponse> AddSongIntoPlayList(long playlistId, long songId);
 
     Task<ApiPaging<PlaylistCard>> GetPlaylistCardsNotHasSong(string name, long id, Pageable? pageable = null);
+
+    Task<ApiPaging<PlaylistCard>> GetPlaylistCardsHasSong(string name, long musicId, Pageable? pageable = null);
 }

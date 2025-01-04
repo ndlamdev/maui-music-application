@@ -19,7 +19,8 @@
                 <Image
                     x:Name="Image"
                     HeightRequest="55"
-                    WidthRequest="55" />
+                    WidthRequest="55"
+                    Aspect="Fill" />
             </Frame>
             <Label
                 x:Name="Label"

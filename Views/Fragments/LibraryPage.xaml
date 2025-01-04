@@ -74,7 +74,7 @@
         <buttons:ButtonIconCircle
             x:Name="ButtonHeart"
             Icon="heart_black.svg"
-            Title="Your Liked Songs"
+            Title="Liked Songs"
             Clicked="Favorites_OnClicked" />
         <!--Log out temp-->
         <buttons:ButtonIconCircle

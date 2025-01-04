@@ -67,7 +67,7 @@ public partial class SongPageShowMore
     private async void Back_OnClicked(object? sender, EventArgs e)
     {
         await OpacityEffect.RunOpacity((View)sender!, 100);
-        OnBack?.Invoke(sender, e);
+        BackEvent?.Invoke(sender, e);
     }
 
     private async void Heart_OnTapped(object? sender, EventArgs e)
@@ -76,7 +76,7 @@ public partial class SongPageShowMore
         var service = ServiceHelper.GetService<ISongService>();
         if (service == null || _isClick) return;
         _isClick = true;
-        service.Like(Like, SongId)
+        await service.Like(Like, SongId)
             .ContinueWith(task =>
             {
                 if (task.IsFaulted)
@@ -94,58 +94,83 @@ public partial class SongPageShowMore
             }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
-    public event EventHandler? OnBack;
+    public event EventHandler? BackEvent;
+    public event EventHandler? AddToPlaylistEvent;
+    public event EventHandler? AddToQueueEvent;
+    public event EventHandler? RemoveFromPlaylistEvent;
+    public event EventHandler? ModifyTagsEvent;
+    public event EventHandler? ViewArtistEvent;
+    public event EventHandler? ViewAlbumEvent;
+    public event EventHandler? ChowCreditsEvent;
+    public event EventHandler? DownloadEvent;
+    public event EventHandler? ShareEvent;
+    public event EventHandler? GenerateQrCodeEvent;
+    public event EventHandler? SleepTimerEvent;
+    public event EventHandler? HideSongEvent;
+    public event EventHandler? GoToSongRadioEvent;
 
     private void OnAddToPlaylist(object? sender, EventArgs e)
     {
-        Navigation.PushAsync(new AddToPlaylistPage(SongId));
+        AddToPlaylistEvent?.Invoke(sender, e);
     }
 
     private void OnAddToQueue(object? sender, EventArgs e)
     {
+        AddToQueueEvent?.Invoke(sender, e);
     }
 
     private void OnRemoveFromPlaylist(object? sender, EventArgs e)
     {
+        RemoveFromPlaylistEvent?.Invoke(sender, e);
     }
 
     private void OnModifyTags(object? sender, EventArgs e)
     {
+        ModifyTagsEvent?.Invoke(sender, e);
     }
 
     private void OnViewArtist(object? sender, EventArgs e)
     {
+        ViewArtistEvent?.Invoke(sender, e);
     }
 
     private void OnViewAlbum(object? sender, EventArgs e)
     {
+        ViewAlbumEvent?.Invoke(sender, e);
     }
 
     private void OnChowCredits(object? sender, EventArgs e)
     {
+        ChowCreditsEvent?.Invoke(sender, e);
     }
 
     private void OnDownload(object? sender, EventArgs e)
     {
+        DownloadEvent?.Invoke(sender, e);
     }
 
     private void OnShare(object? sender, EventArgs e)
     {
+        ShareEvent?.Invoke(sender, e);
     }
 
-    private void OnGenerateQRCode(object? sender, EventArgs e)
+    private void OnGenerateQrCode(object? sender, EventArgs e)
     {
+        GenerateQrCodeEvent?.Invoke(sender, e);
     }
 
     private void OnSleepTimer(object? sender, EventArgs e)
     {
+        SleepTimerEvent?.Invoke(sender, e);
     }
 
     private void OnHideSong(object? sender, EventArgs e)
     {
+        HideSongEvent?.Invoke(sender, e);
     }
 
     private void OnGoToSongRadio(object? sender, EventArgs e)
     {
+        GoToSongRadioEvent?.Invoke(sender, e);
     }
 }

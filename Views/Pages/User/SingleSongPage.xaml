@@ -80,6 +80,7 @@
                     Text="{Binding SongName}"
                     FontSize="24"
                     TextColor="White"
+                    MaxLines="1"
                     FontFamily="MulishVariableFont" />
                 <FlexLayout
                     Direction="Row"
@@ -284,6 +285,6 @@
             Grid.Row="0"
             Grid.Column="0"
             x:Name="ShowMoreMenu"
-            OnBack="ShowMoreMenu_OnOnBack" />
+            BackEvent="ShowMoreMenu_OnOnBack" />
     </Grid>
 </ContentPage>
