@@ -1,4 +1,5 @@
 using Android.Util;
+using maui_music_application.Services;
 using maui_music_application.Services.Api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -19,6 +20,8 @@ public static class HttpConfiguration
         builder.Services.AddRefitClient<IHomeApi>();
         builder.Services.AddRefitClient<IServerApi>();
         builder.Services.AddRefitClient<IGenreApi>();
+        builder.Services.AddRefitClient<IResourceApi>();
+        builder.Services.AddRefitClient<IAdminApi>();
     }
 
     private static void AddRefitClient<TInterface>(

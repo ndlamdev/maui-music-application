@@ -43,7 +43,7 @@ public partial class Header
         }
         else
         {
-            contextMenuPopup.SetMenuItems(["Admin", "Logout"],
+            contextMenuPopup.SetMenuItems(["Logout"],
             [
 
                 (_, _) => Logout()

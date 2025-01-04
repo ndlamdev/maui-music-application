@@ -17,4 +17,6 @@ public interface ISongApi
 
     [Get("/song/list")]
     Task<APIResponse<ApiPaging<MusicCard>>> GetMusics([AliasAs("page")] int page, [AliasAs("size")] int size = 10);
+
+  
 }

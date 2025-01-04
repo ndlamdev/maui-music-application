@@ -30,6 +30,12 @@ public static class MauiProgram
         builder.AddHttpClientConfig();
         builder.AddServices();
         FormHandler.RemoveBorders();
+
+        builder.Services.AddLogging(logging =>
+        {
+            logging.SetMinimumLevel(LogLevel.Information);
+        });
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

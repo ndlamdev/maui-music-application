@@ -25,8 +25,8 @@ public class SongService(ISongApi api) : ISongService
     {
         try
         {
-            APIResponse<ApiPaging<MusicCard>> reponse = await api.GetMusics(page, size);
-            return reponse.Data;
+            APIResponse<ApiPaging<MusicCard>> response = await api.GetMusics(page, size);
+            return response.Data;
         }
         catch (Exception e)
         {

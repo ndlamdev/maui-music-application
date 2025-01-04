@@ -7,13 +7,21 @@
 using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
+using maui_music_application.Services;
+using maui_music_application.ViewModels;
 
 namespace maui_music_application.Views.Pages.Admin;
 
 public partial class AddNewSongPage
 {
+    private IAdminService _service;
+    private readonly AddNewSongViewModel _viewModel;
+
     public AddNewSongPage()
     {
+        _service = ServiceHelper.GetService<IAdminService>();
+        _viewModel = new AddNewSongViewModel(true, Navigation);
+        BindingContext = _viewModel;
         InitializeComponent();
     }
 
@@ -24,6 +32,8 @@ public partial class AddNewSongPage
         {
             IsVisible = false
         });
+        // LoadDataArtistAsync();
+        // LoadDataAlbumPicker();
     }
 
     private bool IsClicked { get; set; }
@@ -33,9 +43,6 @@ public partial class AddNewSongPage
         Navigation.PopAsync();
     }
 
-    private void Picker_OnSelectedArtistChanged(object? sender, EventArgs e)
-    {
-    }
 
     private async void TapGestureRecognizer_OnArtistTapped(object? sender, TappedEventArgs e)
     {
@@ -44,11 +51,6 @@ public partial class AddNewSongPage
         ArtistPicker.Focus();
     }
 
-    [Todo("Handle action select album")]
-    private void Picker_OnSelectedAlbumChanged(object? sender, EventArgs e)
-    {
-        TodoAttribute.PrintTask<AddNewSongPage>();
-    }
 
     private async void TapGestureRecognizer_OnAlbumTapped(object? sender, TappedEventArgs e)
     {
@@ -57,11 +59,13 @@ public partial class AddNewSongPage
         AlbumPicker.Focus();
     }
 
-    [Todo("Handle action create new song")]
-    private void Create_OnClicked(object? sender, EventArgs e)
+    private async void TapGestureRecognizer_OnGenreTapped(object? sender, TappedEventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+        await OpacityEffect.RunOpacity((View?)sender, 100);
+        GenrePicker.Unfocus();
+        GenrePicker.Focus();
     }
+
 
     [Todo("Handle action cancel create new song")]
     private async void Cancel_OnClicked(object? sender, EventArgs e)
@@ -79,49 +83,29 @@ public partial class AddNewSongPage
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
 
-        var result = await FilePicker.PickAsync(new PickOptions
-        {
-            PickerTitle = "Select a file",
-            FileTypes = FilePickerFileType.Videos // Example: Restrict to image files
-        });
-
-        if (result != null)
-        {
-            // Access the file metadata
-            string fileName = result.FileName;
-            string fullPath = result.FullPath; // Available only on supported platforms
-            Log.Info("AddNewSongPage", $"File name: {fileName}");
-            Log.Info("AddNewSongPage", $"Full path: {fullPath}");
-
-            // Read the file contents
-            using var stream = await result.OpenReadAsync();
-            // You can use the stream to process the file
-            Log.Info("AddNewSongPage", $"File size: {stream.Length} bytes");
-        }
+        await _viewModel.PickSourceAsync();
     }
 
     [Todo("Handle action upload thumbnail file")]
     private async void UploadThumbnail_OnTapped(object? sender, TappedEventArgs e)
     {
+        TodoAttribute.PrintTask<AddNewSongPage>();
+        await _viewModel.PickThumbnailAsync();
+    }
 
-        var result = await FilePicker.PickAsync(new PickOptions
+    [Todo("Handle action create new song")]
+    private void Create_OnClicked(object? sender, EventArgs e)
+    {
+        TodoAttribute.PrintTask<AddNewSongPage>();
+
+        try
         {
-            PickerTitle = "Select a file",
-            FileTypes = FilePickerFileType.Images // Example: Restrict to image files
-        });
-
-        if (result != null)
+            Log.Info("AddNewSongPage", $"Creating new song");
+            _viewModel.OnSubmit(this);
+        }
+        catch (Exception ex)
         {
-            // Access the file metadata
-            string fileName = result.FileName;
-            string fullPath = result.FullPath; // Available only on supported platforms
-            Log.Info("AddNewSongPage", $"File name: {fileName}");
-            Log.Info("AddNewSongPage", $"Full path: {fullPath}");
-
-            // Read the file contents
-            using var stream = await result.OpenReadAsync();
-            // You can use the stream to process the file
-            Log.Info("AddNewSongPage", $"File size: {stream.Length} bytes");
+            Log.Error("AddNewSongPage", $"{ex.Message}");
         }
     }
 }
