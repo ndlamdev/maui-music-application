@@ -1,4 +1,5 @@
 using maui_music_application.Dto;
+using maui_music_application.Helpers;
 using maui_music_application.Models;
 using Refit;
 
@@ -22,7 +23,10 @@ public interface IAdminApi
 
     [Get("/admin/artist")]
     Task<APIResponse<List<string>>> GetAllArtist();
-    
+
     [Get("/admin/genre")]
     Task<APIResponse<List<string>>> GetAllGenre();
+
+    [Get("/admin")]
+    Task<APIResponse<ApiPaging<MusicCard>>> GetSongs(int  page);
 }

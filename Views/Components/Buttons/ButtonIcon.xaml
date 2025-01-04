@@ -20,7 +20,7 @@
         <Label
             Text="{Binding Title}"
             FontAttributes="Bold"
-            TextColor="White"
+            TextColor="{Binding TextColor}"
             VerticalOptions="Center" />
     </HorizontalStackLayout>
 </ContentView>

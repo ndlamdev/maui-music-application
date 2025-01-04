@@ -5,7 +5,6 @@
 // User: Lam Nguyen
 
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using Android.Util;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Attributes;
@@ -15,12 +14,11 @@ using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Components.Popup;
-using maui_music_application.Views.Pages.User;
 using Refit;
 
 namespace maui_music_application.ViewModels;
 
-public class AddNewSongViewModel : AObservableValidator
+public class EditSongViewModel : AObservableValidator
 {
     private readonly IAdminService _service = ServiceHelper.GetService<IAdminService>();
     private INavigation Navigation { get; set; }
@@ -30,19 +28,34 @@ public class AddNewSongViewModel : AObservableValidator
     private string _selectedArtist = string.Empty;
     private string _selectedAlbum = string.Empty;
     private string _selectedGenre = string.Empty;
-    private ImageSource _thumbnailPreview;
-    private ImageSource _sourcePreview;
+    private ImageSource? _thumbnailPreview;
+    private ImageSource? _sourcePreview;
     private const string DefaultUploadIcon = "upload_song.svg";
     private const string DefaultFileSuccessIcon = "check.svg";
-    public ObservableCollection<string> ListArtist { get; set; } = new ObservableCollection<string>();
-    public ObservableCollection<string> ListAlbum { get; set; } = new ObservableCollection<string>();
-    public ObservableCollection<string> ListGenre { get; set; } = new ObservableCollection<string>();
+    public ObservableCollection<string> ListArtist { get; set; } = new();
+    public ObservableCollection<string> ListAlbum { get; set; } = new();
+    public ObservableCollection<string> ListGenre { get; set; } = new();
+    private MusicCard? _music;
 
-    public AddNewSongViewModel(bool validateOnChanged, INavigation navigation) : base(validateOnChanged)
+    public EditSongViewModel(INavigation navigation) :
+        base(true)
     {
         Navigation = navigation;
         ThumbnailPreview = ImageSource.FromFile(DefaultUploadIcon);
         SourcePreview = ImageSource.FromFile(DefaultUploadIcon);
+        LoadDataAlbumAsync();
+        LoadDataArtistAsync();
+        LoadDataGenreAsync();
+    }
+
+    public EditSongViewModel(MusicCard music, INavigation navigation) : base(true)
+    {
+        Navigation = navigation;
+        _music = music;
+        ThumbnailPreview = _music.Cover;
+        Title = _music.Title;
+        SelectedArtist = _music.Artist;
+        SelectedGenre = _music.Genre;
         LoadDataAlbumAsync();
         LoadDataArtistAsync();
         LoadDataGenreAsync();
@@ -69,17 +82,13 @@ public class AddNewSongViewModel : AObservableValidator
         }
     }
 
-    [NotBlank(ErrorMessage = "Vui lòng chọn album")]
     public string SelectedAlbum
     {
         get => _selectedAlbum;
         set
         {
-            if (_selectedAlbum != value)
-            {
-                _selectedAlbum = value;
-                OnPropertyChanged();
-            }
+            _selectedAlbum = value;
+            OnPropertyChanged();
         }
     }
 
@@ -127,14 +136,18 @@ public class AddNewSongViewModel : AObservableValidator
     public void OnSubmit(Page page)
     {
         ValidateAllProperties();
-        Log.Info("AddNewSongViewModel", $"{_selectedArtist} {_selectedAlbum} {_title} {_fullPathSource} {_fullPathThumbnail}");
+        Log.Info("AddNewSongViewModel",
+            $"{_selectedArtist} {_selectedAlbum} {_title} {_fullPathSource} {_fullPathThumbnail}");
         if (HasErrors)
             return;
-        Command(page);
+        if (_music == null)
+            CreateSong(page);
+        else
+            UpateSong(page);
     }
 
     [Todo("Handle Create")]
-    private async void Command(Page page)
+    private async void CreateSong(Page page)
     {
         TodoAttribute.PrintTask<LoginWithPasswordViewModel>();
         var popup = LoadingPopup.GetInstance();
@@ -161,6 +174,48 @@ public class AddNewSongViewModel : AObservableValidator
             ClearData();
             AndroidHelper.ShowToast("Tạo bài hát thành công!");
             page.ShowPopup(popup);
+            await Navigation.PopAsync();
+        }
+        catch (Exception e)
+        {
+            Log.Error("AddNewSongViewModel", $"{e.Message} {e.StackTrace}");
+            AndroidHelper.ShowToast(e.Message);
+        }
+        finally
+        {
+            popup.Close();
+        }
+    }
+
+    [Todo("Handle update")]
+    private async void UpateSong(Page page)
+    {
+        TodoAttribute.PrintTask<LoginWithPasswordViewModel>();
+        var popup = LoadingPopup.GetInstance();
+        try
+        {
+            page.ShowPopup(popup);
+
+            var fileStreamSource = File.OpenRead(_fullPathSource);
+            var filePartSource = new StreamPart(fileStreamSource, fileStreamSource.Name, "audio/mpeg");
+
+            var fileStreamThumbnail = File.OpenRead(_fullPathThumbnail);
+            var filePartThumbnail = new StreamPart(fileStreamThumbnail, fileStreamThumbnail.Name);
+
+
+            await _service.CreateMusic(
+                new RequestCreateSong(
+                    title: _title,
+                    artist: _selectedArtist,
+                    album: _selectedAlbum,
+                    genre: _selectedGenre,
+                    fileThumbnail: filePartThumbnail,
+                    fileSource: filePartSource
+                ));
+            ClearData();
+            AndroidHelper.ShowToast("Tạo bài hát thành công!");
+            page.ShowPopup(popup);
+            await Navigation.PopAsync();
         }
         catch (Exception e)
         {
@@ -220,7 +275,6 @@ public class AddNewSongViewModel : AObservableValidator
         }
         else
         {
-
             foreach (var album in items)
             {
                 ListGenre.Add(album);
@@ -251,7 +305,6 @@ public class AddNewSongViewModel : AObservableValidator
             {
                 ThumbnailPreview = ImageSource.FromFile(DefaultUploadIcon);
             }
-
         }
         catch (Exception ex)
         {
@@ -289,7 +342,6 @@ public class AddNewSongViewModel : AObservableValidator
             {
                 SourcePreview = ImageSource.FromFile(DefaultUploadIcon);
             }
-
         }
         catch (Exception ex)
         {

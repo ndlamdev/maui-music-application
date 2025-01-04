@@ -29,6 +29,6 @@ public partial class AppShell
         Routing.RegisterRoute("EditSongIntoPlaylist", typeof(EditSongIntoPlaylistPage));
 
         Routing.RegisterRoute("Admin/SongManager", typeof(SongManagerPage));
-        Routing.RegisterRoute("Admin/AddNewSong", typeof(AddNewSongPage));
+        Routing.RegisterRoute("Admin/EditSong", typeof(EditSongPage));
     }
 }

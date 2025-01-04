@@ -6,105 +6,106 @@
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
              xmlns:layouts="clr-namespace:maui_music_application.Views.Layouts"
              Loaded="OnContentViewLoaded">
-    <ScrollView
-        VerticalScrollBarVisibility="Never">
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="25"
-            x:Name="MainLayout">
-            <FlexLayout
-                Direction="Row"
-                AlignItems="Center"
-                HeightRequest="50">
-                <HorizontalStackLayout
-                    Spacing="15"
-                    VerticalOptions="Center"
-                    FlexLayout.Grow="1">
-                    <Image
-                        Source="musium.png"
-                        WidthRequest="50"
-                        HeightRequest="50" />
-                    <Label
-                        Text="Search"
-                        TextColor="{StaticResource Blue500}"
-                        FontSize="27"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <Image
-                    Source="search.svg"
-                    WidthRequest="25"
-                    HeightRequest="25">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Search_OnTapped" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </FlexLayout>
-            <ScrollView
-                Orientation="Horizontal"
-                HorizontalScrollBarVisibility="Never">
-                <HorizontalStackLayout
-                    x:Name="ButtonHorizontalStackLayout"
-                    Spacing="10">
-                    <buttons:ButtonBorder
-                        x:Name="Playlists"
-                        Text="Playlists"
-                        Clicked="Playlists_OnClicked"
-                        Selected="True" />
-                    <buttons:ButtonBorder
-                        x:Name="Folders"
-                        Text="Folders"
-                        Clicked="Folders_OnClicked" />
-                    <buttons:ButtonBorder
-                        x:Name="Artists"
-                        Text="Artists"
-                        Clicked="Artists_OnClicked" />
-                    <buttons:ButtonBorder
-                        x:Name="Albums"
-                        Text="Albums"
-                        Clicked="Albums_OnClicked" />
-                    <buttons:ButtonBorder
-                        x:Name="Podcasts"
-                        Text="Podcasts &amp; Shows"
-                        Clicked="Podcasts_OnClicked" />
-                </HorizontalStackLayout>
-            </ScrollView>
-            <buttons:ButtonIconCircle
-                x:Name="ButtonAdd"
-                Icon="add.svg"
-                Title="Add New Playlist"
-                Clicked="ButtonAdd_OnClicked" />
-            <buttons:ButtonIconCircle
-                x:Name="ButtonHeart"
-                Icon="heart_black.svg"
-                Title="Liked Songs"
-                Clicked="Favorites_OnClicked" />
-            <!--Log out temp-->
-            <buttons:ButtonIconCircle
-                x:Name="ButtonLogout"
-                Icon="heart_black.svg"
-                Title="Logout"
-                Clicked="ButtonLogout_OnClicked" />
+    <!-- <ScrollView -->
+    <!--     VerticalScrollBarVisibility="Never" -->
+    <!--     Orientation="Vertical"> -->
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="25"
+        x:Name="MainLayout">
+        <FlexLayout
+            Direction="Row"
+            AlignItems="Center"
+            HeightRequest="50">
             <HorizontalStackLayout
-                Spacing="5"
-                VerticalOptions="Center">
-                <ImageButton
-                    Source="swap.svg"
-                    WidthRequest="35"
-                    HeightRequest="35"
-                    Padding="5"
-                    CornerRadius="999"
-                    Clicked="SortButton_OnClicked" />
+                Spacing="15"
+                VerticalOptions="Center"
+                FlexLayout.Grow="1">
+                <Image
+                    Source="musium.png"
+                    WidthRequest="50"
+                    HeightRequest="50" />
                 <Label
-                    x:Name="SwapButton"
-                    Text="Recently played"
-                    TextColor="#39C0D4"
-                    VerticalTextAlignment="Center" />
+                    Text="Search"
+                    TextColor="{StaticResource Blue500}"
+                    FontSize="27"
+                    VerticalOptions="Center" />
             </HorizontalStackLayout>
-            <layouts:GridLayout
-                x:Name="RootGridLayout"
-                RowSpacing="25"
-                Columns="1"
-                Orientation="Vertical" />
-        </VerticalStackLayout>
-    </ScrollView>
+            <Image
+                Source="search.svg"
+                WidthRequest="25"
+                HeightRequest="25">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Search_OnTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </FlexLayout>
+        <ScrollView
+            Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Never">
+            <HorizontalStackLayout
+                x:Name="ButtonHorizontalStackLayout"
+                Spacing="10">
+                <buttons:ButtonBorder
+                    x:Name="Playlists"
+                    Text="Playlists"
+                    Clicked="Playlists_OnClicked"
+                    Selected="True" />
+                <buttons:ButtonBorder
+                    x:Name="Folders"
+                    Text="Folders"
+                    Clicked="Folders_OnClicked" />
+                <buttons:ButtonBorder
+                    x:Name="Artists"
+                    Text="Artists"
+                    Clicked="Artists_OnClicked" />
+                <buttons:ButtonBorder
+                    x:Name="Albums"
+                    Text="Albums"
+                    Clicked="Albums_OnClicked" />
+                <buttons:ButtonBorder
+                    x:Name="Podcasts"
+                    Text="Podcasts &amp; Shows"
+                    Clicked="Podcasts_OnClicked" />
+            </HorizontalStackLayout>
+        </ScrollView>
+        <buttons:ButtonIconCircle
+            x:Name="ButtonAdd"
+            Icon="add.svg"
+            Title="Add New Playlist"
+            Clicked="ButtonAdd_OnClicked" />
+        <buttons:ButtonIconCircle
+            x:Name="ButtonHeart"
+            Icon="heart_black.svg"
+            Title="Liked Songs"
+            Clicked="Favorites_OnClicked" />
+        <!--Log out temp-->
+        <buttons:ButtonIconCircle
+            x:Name="ButtonLogout"
+            Icon="heart_black.svg"
+            Title="Logout"
+            Clicked="ButtonLogout_OnClicked" />
+        <HorizontalStackLayout
+            Spacing="5"
+            VerticalOptions="Center">
+            <ImageButton
+                Source="swap.svg"
+                WidthRequest="35"
+                HeightRequest="35"
+                Padding="5"
+                CornerRadius="999"
+                Clicked="SortButton_OnClicked" />
+            <Label
+                x:Name="SwapButton"
+                Text="Recently played"
+                TextColor="#39C0D4"
+                VerticalTextAlignment="Center" />
+        </HorizontalStackLayout>
+        <layouts:GridLayout
+            x:Name="RootGridLayout"
+            RowSpacing="25"
+            Columns="1"
+            Orientation="Vertical" />
+    </VerticalStackLayout>
+    <!-- </ScrollView> -->
 </ContentView>

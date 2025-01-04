@@ -31,11 +31,15 @@
                 </FlexLayout>
 
                 <FlexLayout
-                    JustifyContent="End">
+                    JustifyContent="SpaceAround">
+                    <buttons:ButtonBorderShadow
+                        FlexLayout.Basis="40%"
+                        Text="Logout"
+                        Clicked="Logout_OnClicked" />
                     <buttons:ButtonBorderShadow
                         FlexLayout.Basis="40%"
                         Text="Create"
-                        Clicked="ButtonBorderShadow_OnClicked" />
+                        Clicked="Create_OnClicked" />
                 </FlexLayout>
 
                 <FlexLayout
@@ -49,7 +53,8 @@
 
             <ScrollView
                 Grid.Row="1"
-                VerticalScrollBarVisibility="Never">
+                VerticalScrollBarVisibility="Never"
+                Scrolled="ScrollView_OnScrolled">
                 <layouts:GridLayout
                     x:Name="GridLayoutPlaylist"
                     Columns="1"

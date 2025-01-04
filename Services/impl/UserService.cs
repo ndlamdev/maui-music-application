@@ -2,7 +2,6 @@ using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Configuration;
 using maui_music_application.Dto;
-using maui_music_application.Helpers;
 using maui_music_application.Helpers.Enum;
 using maui_music_application.Models;
 using maui_music_application.Services.Api;
@@ -10,7 +9,8 @@ using Newtonsoft.Json;
 
 namespace maui_music_application.Services.impl;
 
-public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserService
+public class UserService(ITokenService tokenService, IAuthApi authApi, IAudioPlayerService audioPlayerService)
+    : IUserService
 {
     public async Task CheckIfUserHasAccount()
     {
@@ -58,10 +58,19 @@ public class UserService(ITokenService tokenService, IAuthApi authApi) : IUserSe
     public Task Logout()
     {
         TodoAttribute.PrintTask<UserService>();
-        var result = authApi.Logout();
-        tokenService.RemoveAccessToken();
-        tokenService.RemoveRefreshToken();
-        return result;
+        try
+        {
+            authApi.Logout();
+            tokenService.RemoveAccessToken();
+            tokenService.RemoveRefreshToken();
+        }
+        catch (Exception _)
+        {
+            // ignored
+        }
+
+        audioPlayerService.ClearData();
+        return Task.CompletedTask;
     }
 
     public Task<APIResponse> VerifyRegister(string email, CodeVerify code)

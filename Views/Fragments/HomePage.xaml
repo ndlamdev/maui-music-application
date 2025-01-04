@@ -9,7 +9,8 @@
    <ScrollView
        VerticalScrollBarVisibility="Never">
        <VerticalStackLayout
-           Padding="20">
+           Padding="20"
+           x:Name="MainLayout">
            <header:Header
                x:Name="Header" />
            <Label

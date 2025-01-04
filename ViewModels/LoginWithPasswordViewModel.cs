@@ -7,12 +7,16 @@
 using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Attributes;
+using maui_music_application.Configuration;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Helpers.Validation;
 using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Components.Popup;
+using maui_music_application.Views.Pages.Admin;
 using maui_music_application.Views.Pages.User;
+using Newtonsoft.Json;
 
 namespace maui_music_application.ViewModels;
 
@@ -64,7 +68,11 @@ public class LoginWithPasswordViewModel(INavigation navigation, bool validateOnC
             await _userService.Login(Email, Password);
             popup.Close();
             AndroidHelper.ShowToast("Login success");
-            await Navigation.PushAsync(new MainPage());
+            var user = JsonConvert.DeserializeObject<User>(Preferences.Get(AppConstraint.User, string.Empty));
+            if (user?.Role != Role.ADMIN)
+                await Navigation.PushAsync(new MainPage());
+            else
+                await Navigation.PushAsync(new SongManagerPage());
         }
         catch (Exception e)
         {

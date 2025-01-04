@@ -1,6 +1,7 @@
 using System.Net;
 using Android.Util;
 using maui_music_application.Dto;
+using maui_music_application.Helpers;
 using maui_music_application.Models;
 using maui_music_application.Services.Api;
 using Refit;
@@ -29,6 +30,7 @@ public class AdminServiceImpl(IAdminApi api) : IAdminService
             {
                 throw new Exception("Nhạc với tên bạn đặt đã tồn tại", e);
             }
+
             if (e.StatusCode == HttpStatusCode.InternalServerError)
             {
                 throw new Exception("Tạo bài hát không thành công! Máy chủ có vấn đề", e);
@@ -36,7 +38,6 @@ public class AdminServiceImpl(IAdminApi api) : IAdminService
         }
         catch (Exception e)
         {
-
             throw new Exception("Exception", e);
         }
     }
@@ -56,6 +57,12 @@ public class AdminServiceImpl(IAdminApi api) : IAdminService
     public async Task<List<string>> GetAllGenre()
     {
         APIResponse<List<string>> response = await api.GetAllGenre();
+        return response.Data;
+    }
+
+    public async Task<ApiPaging<MusicCard>> GetSongs(Pageable pageable)
+    {
+        var response = await api.GetSongs(pageable.Page);
         return response.Data;
     }
 }

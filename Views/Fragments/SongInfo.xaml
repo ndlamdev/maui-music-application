@@ -4,8 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Fragments.SongInfo"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
-             xmlns:viewModel="clr-namespace:maui_music_application.ViewModels"
-             x:DataType="viewModel:MusicInfoManager"
+             xmlns:viewModel="clr-namespace:maui_music_application.Views.Fragments"
+             x:DataType="viewModel:SongInfo"
              Background="{StaticResource Background }">
     <Grid
         Padding="25">
@@ -62,7 +62,7 @@
                         FontFamily="MulishVariableFont"
                         HorizontalOptions="Center" />
                     <Label
-                        Text="{Binding Title}"
+                        Text="{Binding Artist}"
                         TextColor="{StaticResource Text2}"
                         HorizontalOptions="Center" />
                 </VerticalStackLayout>
@@ -70,23 +70,29 @@
                 <VerticalStackLayout
                     Spacing="20">
                     <buttons:ButtonIcon
-                        Icon="add_music.png"
-                        Title="{Binding Artist}" />
+                        Icon="artist.png"
+                        x:Name="ArtistView" />
                     <buttons:ButtonIcon
-                        Icon="remove_white.svg"
-                        Title="{Binding View}" />
+                        Icon="eye_white.svg"
+                        x:Name="ViewsView" />
                     <buttons:ButtonIcon
                         Icon="tag_white.svg"
-                        Title="{Binding Genre}" />
+                        x:Name="GenreView" />
                     <buttons:ButtonIcon
-                        Icon="artist.png"
-                        Title="{Binding Duration}" />
+                        Icon="add_music.svg"
+                        x:Name="CreateAtView" />
                     <buttons:ButtonIcon
-                        Icon="album_white.svg"
-                        Title="{Binding CreateAt}" />
+                        Icon="upload_song.svg"
+                        x:Name="UpdateAtView" />
                     <buttons:ButtonIcon
-                        Icon="user_information.png"
-                        Title="{Binding UpdateAt}" />
+                        Icon="edit_white.svg"
+                        TextColor="Yellow"
+                        Title="Edit"
+                        Clicked="ButtonIcon_OnClicked"/>
+                    <buttons:ButtonIcon
+                        Icon="delete_white.svg"
+                        TextColor="Red"
+                        Title="Remove" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

@@ -6,9 +6,13 @@
 
 using Android.Util;
 using maui_music_application.Attributes;
+using maui_music_application.Configuration;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Services;
 using maui_music_application.Services.Api;
+using maui_music_application.Views.Pages.Admin;
+using Newtonsoft.Json;
 using Timer = System.Timers.Timer;
 
 namespace maui_music_application.Views.Pages.User;
@@ -98,7 +102,11 @@ public partial class LaunchPage
         try
         {
             await userService.CheckIfUserHasAccount();
-            await Navigation.PushAsync(new MainPage());
+            var user = JsonConvert.DeserializeObject<Models.User>(Preferences.Get(AppConstraint.User, string.Empty));
+            if (user?.Role != Role.ADMIN)
+                await Navigation.PushAsync(new MainPage());
+            else
+                await Navigation.PushAsync(new SongManagerPage());
             // for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
             //     Navigation.RemovePage(Navigation.NavigationStack[i]);
         }

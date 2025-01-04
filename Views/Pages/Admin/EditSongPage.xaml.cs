@@ -7,20 +7,25 @@
 using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
-using maui_music_application.Services;
+using maui_music_application.Models;
 using maui_music_application.ViewModels;
 
 namespace maui_music_application.Views.Pages.Admin;
 
-public partial class AddNewSongPage
+public partial class EditSongPage
 {
-    private IAdminService _service;
-    private readonly AddNewSongViewModel _viewModel;
+    private readonly EditSongViewModel _viewModel;
 
-    public AddNewSongPage()
+    public EditSongPage()
     {
-        _service = ServiceHelper.GetService<IAdminService>();
-        _viewModel = new AddNewSongViewModel(true, Navigation);
+        _viewModel = new EditSongViewModel(Navigation);
+        BindingContext = _viewModel;
+        InitializeComponent();
+    }
+
+    public EditSongPage(MusicCard musicCard)
+    {
+        _viewModel = new EditSongViewModel(musicCard, Navigation);
         BindingContext = _viewModel;
         InitializeComponent();
     }
@@ -32,15 +37,16 @@ public partial class AddNewSongPage
         {
             IsVisible = false
         });
-        // LoadDataArtistAsync();
-        // LoadDataAlbumPicker();
     }
 
     private bool IsClicked { get; set; }
 
     private void Back_OnClicked(object? sender, TappedEventArgs e)
     {
+        if (IsClicked) return;
+        IsClicked = true;
         Navigation.PopAsync();
+        IsClicked = false;
     }
 
 
@@ -49,14 +55,6 @@ public partial class AddNewSongPage
         await OpacityEffect.RunOpacity((View?)sender, 100);
         ArtistPicker.Unfocus();
         ArtistPicker.Focus();
-    }
-
-
-    private async void TapGestureRecognizer_OnAlbumTapped(object? sender, TappedEventArgs e)
-    {
-        await OpacityEffect.RunOpacity((View?)sender, 100);
-        AlbumPicker.Unfocus();
-        AlbumPicker.Focus();
     }
 
     private async void TapGestureRecognizer_OnGenreTapped(object? sender, TappedEventArgs e)
@@ -70,7 +68,7 @@ public partial class AddNewSongPage
     [Todo("Handle action cancel create new song")]
     private async void Cancel_OnClicked(object? sender, EventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+        TodoAttribute.PrintTask<EditSongPage>();
         if (IsClicked) return;
         IsClicked = true;
         await OpacityEffect.RunOpacity((View?)sender, 100);
@@ -81,7 +79,7 @@ public partial class AddNewSongPage
     [Todo("Handle action upload song file")]
     private async void UploadSong_OnTapped(object? sender, TappedEventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+        TodoAttribute.PrintTask<EditSongPage>();
 
         await _viewModel.PickSourceAsync();
     }
@@ -89,14 +87,14 @@ public partial class AddNewSongPage
     [Todo("Handle action upload thumbnail file")]
     private async void UploadThumbnail_OnTapped(object? sender, TappedEventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+        TodoAttribute.PrintTask<EditSongPage>();
         await _viewModel.PickThumbnailAsync();
     }
 
     [Todo("Handle action create new song")]
     private void Create_OnClicked(object? sender, EventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+        TodoAttribute.PrintTask<EditSongPage>();
 
         try
         {

@@ -11,12 +11,7 @@ namespace maui_music_application.Views.Components.Buttons;
 public partial class ButtonIcon
 {
     public event EventHandler? Clicked;
-
-    public static readonly BindableProperty TitleProperty =
-        BindableProperty.Create(nameof(Title),
-            typeof(string),
-            typeof(ButtonIcon),
-            string.Empty);
+    private Color _textColor = Colors.White;
 
     public static readonly BindableProperty TitleProperty =
         BindableProperty.Create(nameof(Title),
@@ -59,5 +54,15 @@ public partial class ButtonIcon
     public double Spacing
     {
         set => StackLayout.Spacing = value;
+    }
+
+    public Color TextColor
+    {
+        get => _textColor;
+        set
+        {
+            _textColor = value;
+            OnPropertyChanged();
+        }
     }
 }

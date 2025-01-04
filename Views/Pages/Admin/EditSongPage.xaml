@@ -2,10 +2,10 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="maui_music_application.Views.Pages.Admin.AddNewSongPage"
+             x:Class="maui_music_application.Views.Pages.Admin.EditSongPage"
              xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
              xmlns:viewModes="clr-namespace:maui_music_application.ViewModels"
-             x:DataType="viewModes:AddNewSongViewModel">
+             x:DataType="viewModes:EditSongViewModel">
 
     <ScrollView
         VerticalScrollBarVisibility="Never">
@@ -110,12 +110,6 @@
                                             </Shadow.Brush>
                                         </Shadow>
                                     </Picker.Shadow>
-                                    <!-- <Picker.ItemsSource> -->
-                                    <!--     <x:Array Type="{x:Type x:String}"> -->
-                                    <!--         <x:String>Public</x:String> -->
-                                    <!--         <x:String>Private</x:String> -->
-                                    <!--     </x:Array> -->
-                                    <!-- </Picker.ItemsSource> -->
                                 </Picker>
 
                                 <Image
@@ -191,73 +185,6 @@
                             TextColor="Red"
                             Padding="0,2,0,5"
                             IsVisible="{Binding [SelectedGenre].HasError}"
-                            LineBreakMode="WordWrap" />
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout>
-                    <VerticalStackLayout>
-                        <Border
-                            Stroke="{StaticResource Blue500}">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="5" />
-                            </Border.StrokeShape>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnAlbumTapped" />
-                            </Border.GestureRecognizers>
-                            <HorizontalStackLayout
-                                Padding="10"
-                                Spacing="10"
-                                VerticalOptions="Center">
-                                <Image
-                                    Source="earth.svg"
-                                    WidthRequest="30"
-                                    HeightRequest="30"
-                                    Margin="0,0, 10,0" />
-
-                                <Picker
-                                    x:Name="AlbumPicker"
-                                    WidthRequest="70"
-                                    VerticalOptions="Center"
-                                    TextColor="{StaticResource Blue800}"
-                                    TitleColor="{StaticResource Blue800}"
-                                    FontSize="18"
-                                    Title="Album"
-                                    ItemsSource="{Binding ListAlbum }"
-                                    SelectedItem="{Binding SelectedAlbum}">
-                                    <Picker.Shadow>
-                                        <Shadow>
-                                            <Shadow.Offset>
-                                                <Point X="0" Y="0" />
-                                            </Shadow.Offset>
-                                            <Shadow.Brush>
-                                                <LinearGradientBrush>
-                                                    <GradientStop Color="{StaticResource Blue800}" />
-                                                    <GradientStop Color="{StaticResource Blue600}" />
-                                                </LinearGradientBrush>
-                                            </Shadow.Brush>
-                                        </Shadow>
-                                    </Picker.Shadow>
-                                    <!-- <Picker.ItemsSource> -->
-                                    <!--     <x:Array Type="{x:Type x:String}"> -->
-                                    <!--         <x:String>Public</x:String> -->
-                                    <!--         <x:String>Private</x:String> -->
-                                    <!--     </x:Array> -->
-                                    <!-- </Picker.ItemsSource> -->
-                                </Picker>
-
-                                <Image
-                                    Source="triangle_down_blue.svg"
-                                    WidthRequest="15"
-                                    HeightRequest="15"
-                                    VerticalOptions="Center" />
-                            </HorizontalStackLayout>
-                        </Border>
-                        <Label
-                            Text="{Binding [SelectedAlbum].ErrorMessage}"
-                            TextColor="Red"
-                            Padding="0,2,0,5"
-                            IsVisible="{Binding [SelectedAlbum].HasError}"
                             LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>

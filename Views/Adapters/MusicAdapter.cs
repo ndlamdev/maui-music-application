@@ -17,7 +17,7 @@ public class MusicAdapter(
     MusicCard[] listData,
     SongManagerPage page,
     INavigation navigation,
-    Action longPress
+    Action<MusicCard>? longPress = null
 )
     : GridLayoutAdapter<MusicCard>(listData)
 {
@@ -33,7 +33,7 @@ public class MusicAdapter(
             SongThumbnail = data.Cover,
             Action = Action,
             Page = page,
-            LongPressCommand = new Command(async () => { longPress.Invoke(); }),
+            LongPressCommand = new Command(async () => { longPress?.Invoke(data); }),
             OnLongPressCompleted = card => page.CurrentMusicWorking = card
         };
 
