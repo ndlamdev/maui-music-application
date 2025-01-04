@@ -19,6 +19,7 @@ public static class HttpConfiguration
         builder.Services.AddRefitClient<IHomeApi>();
         builder.Services.AddRefitClient<IServerApi>();
         builder.Services.AddRefitClient<IGenreApi>();
+        builder.Services.AddRefitClient<IAdminApi>();
         builder.Services.AddRefitClient<ISearchApi>();
     }
 

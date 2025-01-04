@@ -4,15 +4,24 @@
 // Create at: 01:01:32 - 01/01/2025
 // User: Lam Nguyen
 
+using Android.Util;
 using maui_music_application.Attributes;
 using maui_music_application.Helpers;
+using maui_music_application.Services;
+using maui_music_application.ViewModels;
 
 namespace maui_music_application.Views.Pages.Admin;
 
 public partial class AddNewSongPage
 {
+    private IAdminService _service;
+    private readonly AddNewSongViewModel _viewModel;
+
     public AddNewSongPage()
     {
+        _service = ServiceHelper.GetService<IAdminService>();
+        _viewModel = new AddNewSongViewModel(true, Navigation);
+        BindingContext = _viewModel;
         InitializeComponent();
     }
 
@@ -23,6 +32,8 @@ public partial class AddNewSongPage
         {
             IsVisible = false
         });
+        // LoadDataArtistAsync();
+        // LoadDataAlbumPicker();
     }
 
     private bool IsClicked { get; set; }
@@ -32,9 +43,6 @@ public partial class AddNewSongPage
         Navigation.PopAsync();
     }
 
-    private void Picker_OnSelectedArtistChanged(object? sender, EventArgs e)
-    {
-    }
 
     private async void TapGestureRecognizer_OnArtistTapped(object? sender, TappedEventArgs e)
     {
@@ -43,11 +51,6 @@ public partial class AddNewSongPage
         ArtistPicker.Focus();
     }
 
-    [Todo("Handel action select album")]
-    private void Picker_OnSelectedAlbumChanged(object? sender, EventArgs e)
-    {
-        TodoAttribute.PrintTask<AddNewSongPage>();
-    }
 
     private async void TapGestureRecognizer_OnAlbumTapped(object? sender, TappedEventArgs e)
     {
@@ -56,13 +59,15 @@ public partial class AddNewSongPage
         AlbumPicker.Focus();
     }
 
-    [Todo("Handel action create new song")]
-    private void Create_OnClicked(object? sender, EventArgs e)
+    private async void TapGestureRecognizer_OnGenreTapped(object? sender, TappedEventArgs e)
     {
-        TodoAttribute.PrintTask<AddNewSongPage>();
+        await OpacityEffect.RunOpacity((View?)sender, 100);
+        GenrePicker.Unfocus();
+        GenrePicker.Focus();
     }
 
-    [Todo("Handel action cancel create new song")]
+
+    [Todo("Handle action cancel create new song")]
     private async void Cancel_OnClicked(object? sender, EventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
@@ -73,15 +78,34 @@ public partial class AddNewSongPage
         IsClicked = false;
     }
 
-    [Todo("Handel action upload song file")]
-    private void UploadSong_OnTapped(object? sender, TappedEventArgs e)
+    [Todo("Handle action upload song file")]
+    private async void UploadSong_OnTapped(object? sender, TappedEventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
+
+        await _viewModel.PickSourceAsync();
     }
 
-    [Todo("Handel action upload thumbnail file")]
-    private void UploadThumbnail_OnTapped(object? sender, TappedEventArgs e)
+    [Todo("Handle action upload thumbnail file")]
+    private async void UploadThumbnail_OnTapped(object? sender, TappedEventArgs e)
     {
         TodoAttribute.PrintTask<AddNewSongPage>();
+        await _viewModel.PickThumbnailAsync();
+    }
+
+    [Todo("Handle action create new song")]
+    private void Create_OnClicked(object? sender, EventArgs e)
+    {
+        TodoAttribute.PrintTask<AddNewSongPage>();
+
+        try
+        {
+            Log.Info("AddNewSongPage", $"Creating new song");
+            _viewModel.OnSubmit(this);
+        }
+        catch (Exception ex)
+        {
+            Log.Error("AddNewSongPage", $"{ex.Message}");
+        }
     }
 }

@@ -1,4 +1,5 @@
 using maui_music_application.Dto;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Models;
 
 namespace maui_music_application.Services;
@@ -10,4 +11,5 @@ public interface IUserService
     Task<APIResponse> Register(RequestRegister request);
     Task Logout();
     Task<APIResponse> VerifyRegister(string email, CodeVerify code);
+    Task<Role> GetRole();
 }

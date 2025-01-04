@@ -54,7 +54,7 @@ public class HeaderViewModel : INotifyPropertyChanged
     {
         try
         {
-            await _userService.CheckIfUserHasAccount();
+            // await _userService.CheckIfUserHasAccount();
             HasUser = true;
         }
         catch (Exception ex)

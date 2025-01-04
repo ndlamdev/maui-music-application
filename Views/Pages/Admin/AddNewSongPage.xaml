@@ -3,7 +3,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_music_application.Views.Pages.Admin.AddNewSongPage"
-             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons">
+             xmlns:buttons="clr-namespace:maui_music_application.Views.Components.Buttons"
+             xmlns:viewModes="clr-namespace:maui_music_application.ViewModels"
+             x:DataType="viewModes:AddNewSongViewModel">
+
     <ScrollView
         VerticalScrollBarVisibility="Never">
         <VerticalStackLayout
@@ -41,7 +44,8 @@
                     <Entry Placeholder="Give your song a name"
                            PlaceholderColor="{StaticResource Text2}"
                            Margin="0, 0, 0, 3"
-                           FontSize="18" />  <!-- Text="{Binding Name, Mode=TwoWay}" -->
+                           FontSize="18"
+                           Text="{Binding Title, Mode=TwoWay}" />
                     <HorizontalStackLayout
                         IsClippedToBounds="True">
                         <Line
@@ -54,185 +58,287 @@
                             HeightRequest="2"
                             WidthRequest="99999" />
                     </HorizontalStackLayout>
+                    <Label
+                        Text="{Binding [Title].ErrorMessage}"
+                        TextColor="Red"
+                        Padding="0,2,0,5"
+                        IsVisible="{Binding [Title].HasError}"
+                        LineBreakMode="WordWrap" />
                 </VerticalStackLayout>
 
-                <HorizontalStackLayout>
-                    <Border
-                        Stroke="{StaticResource Blue500}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="5" />
-                        </Border.StrokeShape>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnArtistTapped" />
-                        </Border.GestureRecognizers>
-                        <HorizontalStackLayout
-                            Padding="10"
-                            Spacing="10"
-                            VerticalOptions="Center">
-                            <Image
-                                Source="earth.svg"
-                                WidthRequest="30"
-                                HeightRequest="30"
-                                Margin="0,0, 10,0" />
+                <HorizontalStackLayout Spacing="10">
+                    <VerticalStackLayout>
+                        <Border
+                            Stroke="{StaticResource Blue500}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5" />
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnArtistTapped" />
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout
+                                Padding="10"
+                                Spacing="10"
+                                VerticalOptions="Center">
+                                <Image
+                                    Source="earth.svg"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    Margin="0,0, 10,0" />
 
-                            <Picker
-                                x:Name="ArtistPicker"
-                                WidthRequest="70"
-                                VerticalOptions="Center"
-                                TextColor="{StaticResource Blue800}"
-                                TitleColor="{StaticResource Blue800}"
-                                FontSize="18"
-                                Title="Artist"
-                                SelectedIndexChanged="Picker_OnSelectedArtistChanged"
-                                SelectedIndex="0">
-                                <Picker.Shadow>
-                                    <Shadow>
-                                        <Shadow.Offset>
-                                            <Point X="0" Y="0" />
-                                        </Shadow.Offset>
-                                        <Shadow.Brush>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="{StaticResource Blue800}" />
-                                                <GradientStop Color="{StaticResource Blue600}" />
-                                            </LinearGradientBrush>
-                                        </Shadow.Brush>
-                                    </Shadow>
-                                </Picker.Shadow>
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Public</x:String>
-                                        <x:String>Private</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
+                                <Picker
+                                    x:Name="ArtistPicker"
+                                    WidthRequest="70"
+                                    VerticalOptions="Center"
+                                    TextColor="{StaticResource Blue800}"
+                                    TitleColor="{StaticResource Blue800}"
+                                    FontSize="18"
+                                    Title="Artist"
+                                    ItemsSource="{Binding ListArtist }"
+                                    SelectedIndex="0"
+                                    SelectedItem="{Binding SelectedArtist}">
+                                    <Picker.Shadow>
+                                        <Shadow>
+                                            <Shadow.Offset>
+                                                <Point X="0" Y="0" />
+                                            </Shadow.Offset>
+                                            <Shadow.Brush>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="{StaticResource Blue800}" />
+                                                    <GradientStop Color="{StaticResource Blue600}" />
+                                                </LinearGradientBrush>
+                                            </Shadow.Brush>
+                                        </Shadow>
+                                    </Picker.Shadow>
+                                    <!-- <Picker.ItemsSource> -->
+                                    <!--     <x:Array Type="{x:Type x:String}"> -->
+                                    <!--         <x:String>Public</x:String> -->
+                                    <!--         <x:String>Private</x:String> -->
+                                    <!--     </x:Array> -->
+                                    <!-- </Picker.ItemsSource> -->
+                                </Picker>
 
-                            <Image
-                                Source="triangle_down_blue.svg"
-                                WidthRequest="15"
-                                HeightRequest="15"
-                                VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                    </Border>
+                                <Image
+                                    Source="triangle_down_blue.svg"
+                                    WidthRequest="15"
+                                    HeightRequest="15"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+                        <Label
+                            Text="{Binding [SelectedArtist].ErrorMessage}"
+                            TextColor="Red"
+                            Padding="0,2,0,5"
+                            IsVisible="{Binding [SelectedArtist].HasError}"
+                            LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Border
+                            Stroke="{StaticResource Blue500}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5" />
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnGenreTapped" />
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout
+                                Padding="10"
+                                Spacing="10"
+                                VerticalOptions="Center">
+                                <Image
+                                    Source="earth.svg"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    Margin="0,0, 10,0" />
+
+                                <Picker
+                                    x:Name="GenrePicker"
+                                    WidthRequest="70"
+                                    VerticalOptions="Center"
+                                    TextColor="{StaticResource Blue800}"
+                                    TitleColor="{StaticResource Blue800}"
+                                    FontSize="18"
+                                    Title="Genre"
+                                    ItemsSource="{Binding ListGenre }"
+                                    SelectedIndex="0"
+                                    SelectedItem="{Binding SelectedGenre}">
+                                    <Picker.Shadow>
+                                        <Shadow>
+                                            <Shadow.Offset>
+                                                <Point X="0" Y="0" />
+                                            </Shadow.Offset>
+                                            <Shadow.Brush>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="{StaticResource Blue800}" />
+                                                    <GradientStop Color="{StaticResource Blue600}" />
+                                                </LinearGradientBrush>
+                                            </Shadow.Brush>
+                                        </Shadow>
+                                    </Picker.Shadow>
+
+                                </Picker>
+
+                                <Image
+                                    Source="triangle_down_blue.svg"
+                                    WidthRequest="15"
+                                    HeightRequest="15"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+                        <Label
+                            Text="{Binding [SelectedGenre].ErrorMessage}"
+                            TextColor="Red"
+                            Padding="0,2,0,5"
+                            IsVisible="{Binding [SelectedGenre].HasError}"
+                            LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout>
-                    <Border
-                        Stroke="{StaticResource Blue500}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="5" />
-                        </Border.StrokeShape>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnAlbumTapped" />
-                        </Border.GestureRecognizers>
-                        <HorizontalStackLayout
-                            Padding="10"
-                            Spacing="10"
-                            VerticalOptions="Center">
-                            <Image
-                                Source="earth.svg"
-                                WidthRequest="30"
-                                HeightRequest="30"
-                                Margin="0,0, 10,0" />
+                    <VerticalStackLayout>
+                        <Border
+                            Stroke="{StaticResource Blue500}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5" />
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnAlbumTapped" />
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout
+                                Padding="10"
+                                Spacing="10"
+                                VerticalOptions="Center">
+                                <Image
+                                    Source="earth.svg"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    Margin="0,0, 10,0" />
 
-                            <Picker
-                                x:Name="AlbumPicker"
-                                WidthRequest="70"
-                                VerticalOptions="Center"
-                                TextColor="{StaticResource Blue800}"
-                                TitleColor="{StaticResource Blue800}"
-                                FontSize="18"
-                                Title="Album"
-                                SelectedIndexChanged="Picker_OnSelectedAlbumChanged"
-                                SelectedIndex="0">
-                                <Picker.Shadow>
-                                    <Shadow>
-                                        <Shadow.Offset>
-                                            <Point X="0" Y="0" />
-                                        </Shadow.Offset>
-                                        <Shadow.Brush>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="{StaticResource Blue800}" />
-                                                <GradientStop Color="{StaticResource Blue600}" />
-                                            </LinearGradientBrush>
-                                        </Shadow.Brush>
-                                    </Shadow>
-                                </Picker.Shadow>
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Public</x:String>
-                                        <x:String>Private</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
+                                <Picker
+                                    x:Name="AlbumPicker"
+                                    WidthRequest="70"
+                                    VerticalOptions="Center"
+                                    TextColor="{StaticResource Blue800}"
+                                    TitleColor="{StaticResource Blue800}"
+                                    FontSize="18"
+                                    Title="Album"
+                                    ItemsSource="{Binding ListAlbum }"
+                                    SelectedItem="{Binding SelectedAlbum}">
+                                    <Picker.Shadow>
+                                        <Shadow>
+                                            <Shadow.Offset>
+                                                <Point X="0" Y="0" />
+                                            </Shadow.Offset>
+                                            <Shadow.Brush>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="{StaticResource Blue800}" />
+                                                    <GradientStop Color="{StaticResource Blue600}" />
+                                                </LinearGradientBrush>
+                                            </Shadow.Brush>
+                                        </Shadow>
+                                    </Picker.Shadow>
+                                    <!-- <Picker.ItemsSource> -->
+                                    <!--     <x:Array Type="{x:Type x:String}"> -->
+                                    <!--         <x:String>Public</x:String> -->
+                                    <!--         <x:String>Private</x:String> -->
+                                    <!--     </x:Array> -->
+                                    <!-- </Picker.ItemsSource> -->
+                                </Picker>
 
-                            <Image
-                                Source="triangle_down_blue.svg"
-                                WidthRequest="15"
-                                HeightRequest="15"
-                                VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                    </Border>
+                                <Image
+                                    Source="triangle_down_blue.svg"
+                                    WidthRequest="15"
+                                    HeightRequest="15"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+                        <Label
+                            Text="{Binding [SelectedAlbum].ErrorMessage}"
+                            TextColor="Red"
+                            Padding="0,2,0,5"
+                            IsVisible="{Binding [SelectedAlbum].HasError}"
+                            LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <VerticalStackLayout
                 Margin="0,30,0,0"
                 Spacing="30">
-                <Border
-                    Stroke="#D9D9D9"
-                    StrokeThickness="3"
-                    HeightRequest="180"
-                    WidthRequest="180"
-                    BackgroundColor="#131313">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="UploadSong_OnTapped" />
-                    </Border.GestureRecognizers>
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="20" />
-                    </Border.StrokeShape>
-                    <VerticalStackLayout
-                        Spacing="10"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
-                        <Image
-                            Source="upload_song.svg"
-                            Aspect="Fill"
-                            HeightRequest="100"
-                            WidthRequest="100" />
-                        <Label
-                            Text="Upload song"
-                            FontSize="23"
-                            HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Border>
+                <VerticalStackLayout>
+                    <Border
+                        Stroke="#D9D9D9"
+                        StrokeThickness="3"
+                        HeightRequest="180"
+                        WidthRequest="180"
+                        BackgroundColor="#131313">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="UploadSong_OnTapped" />
+                        </Border.GestureRecognizers>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20" />
+                        </Border.StrokeShape>
+                        <VerticalStackLayout
+                            Spacing="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Image
+                                Source="{Binding SourcePreview}"
+                                Aspect="Fill"
+                                HeightRequest="100"
+                                WidthRequest="100" />
+                            <Label
+                                Text="Upload song"
+                                FontSize="23"
+                                HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding [FilePickerSource].ErrorMessage}"
+                        TextColor="Red"
+                        Padding="0,2,0,5"
+                        IsVisible="{Binding [FilePickerSource].HasError}"
+                        LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
 
-                <Border
-                    Stroke="#D9D9D9"
-                    StrokeThickness="3"
-                    HeightRequest="180"
-                    WidthRequest="180"
-                    BackgroundColor="#131313">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="UploadThumbnail_OnTapped" />
-                    </Border.GestureRecognizers>
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="20" />
-                    </Border.StrokeShape>
-                    <VerticalStackLayout
-                        Spacing="10"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
-                        <Image
-                            Source="upload.svg"
-                            Aspect="Fill"
-                            HeightRequest="100"
-                            WidthRequest="100" />
-                        <Label
-                            Text="Upload thumbnail"
-                            FontSize="23"
-                            HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Border>
+               <VerticalStackLayout>
+                   <Border
+                       Stroke="#D9D9D9"
+                       StrokeThickness="3"
+                       HeightRequest="180"
+                       WidthRequest="180"
+                       BackgroundColor="#131313">
+                       <Border.GestureRecognizers>
+                           <TapGestureRecognizer Tapped="UploadThumbnail_OnTapped" />
+                       </Border.GestureRecognizers>
+                       <Border.StrokeShape>
+                           <RoundRectangle CornerRadius="20" />
+                       </Border.StrokeShape>
+                       <VerticalStackLayout
+                           Spacing="10"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                           <Image
+                               Source="{Binding ThumbnailPreview}"
+                               Aspect="Fill"
+                               HeightRequest="100"
+                               WidthRequest="100" />
+                           <Label
+                               Text="Upload thumbnail"
+                               FontSize="23"
+                               HorizontalTextAlignment="Center" />
+                       </VerticalStackLayout>
+                   </Border>
+                   <Label
+                       HorizontalTextAlignment="Center"
+                       Text="{Binding [FilePickerThumbnail].ErrorMessage}"
+                       TextColor="Red"
+                       Padding="0,2,0,5"
+                       IsVisible="{Binding [FilePickerThumbnail].HasError}"
+                       LineBreakMode="WordWrap" />
+               </VerticalStackLayout>
             </VerticalStackLayout>
 
             <FlexLayout

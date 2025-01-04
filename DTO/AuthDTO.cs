@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using maui_music_application.Helpers.Enum;
 using Newtonsoft.Json;
 
 namespace maui_music_application.Dto;
@@ -15,18 +16,29 @@ public class RequestLogin
     }
 }
 
-public class ResponseAuthentication
+public class ResponseAuthentication(string accessToken, string refreshToken, ResponseAuthentication.UserDto user)
 {
-    public string AccessToken { get; set; }
-    public string RefreshToken { get; set; }
-    public UserDto User { get; set; }
+
+    public string AccessToken { get; set; } = accessToken;
+    public string RefreshToken { get; set; } = refreshToken;
+    public UserDto User { get; set; } = user;
 
     public class UserDto
     {
+        public UserDto(long id, string email, string fullName, string avatar, Role role)
+        {
+            Id = id;
+            Email = email;
+            FullName = fullName;
+            Avatar = avatar;
+            Role = role;
+        }
+
         public long Id { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
         public string Avatar { get; set; }
+        public Role Role { get; set; }
     }
 }
 

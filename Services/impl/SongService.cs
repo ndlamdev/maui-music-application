@@ -1,4 +1,5 @@
-﻿using Java.Lang;
+﻿using Android.Util;
+using Java.Lang;
 using maui_music_application.Dto;
 using maui_music_application.Models;
 using maui_music_application.Services.Api;
@@ -18,5 +19,19 @@ public class SongService(ISongApi api) : ISongService
     public Task<APIResponse> Like(bool currentStatus, long id)
     {
         return currentStatus ? api.Unlike(id) : api.Like(id);
+    }
+
+    public async Task<ApiPaging<MusicCard>> GetMusics(int page, int size)
+    {
+        try
+        {
+            APIResponse<ApiPaging<MusicCard>> response = await api.GetMusics(page, size);
+            return response.Data;
+        }
+        catch (Exception e)
+        {
+            Log.Error("SongService", $"{e.Message}");
+            throw;
+        }
     }
 }

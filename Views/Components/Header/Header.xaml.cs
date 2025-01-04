@@ -1,8 +1,11 @@
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Helpers;
+using maui_music_application.Helpers.Enum;
 using maui_music_application.Services;
 using maui_music_application.ViewModels;
 using maui_music_application.Views.Components.Popup;
+using maui_music_application.Views.Pages.User;
+using maui_music_application.Views.Pages.Admin;
 using maui_music_application.Views.Pages.User;
 
 namespace maui_music_application.Views.Components.Header;
@@ -26,12 +29,26 @@ public partial class Header
 
     private async void Setting_OnClicked(object? sender, TappedEventArgs e)
     {
+        IUserService userService = ServiceHelper.GetService<IUserService>();
         await OpacityEffect.RunOpacity((View)sender, 100);
         var contextMenuPopup = new ContextMenuPopup();
-        contextMenuPopup.SetMenuItems(["Logout"],
-        [
-            (_, _) => Logout(contextMenuPopup)
-        ]);
+        Role role = await userService.GetRole();
+        if (role != null & role == Role.ADMIN)
+        {
+            contextMenuPopup.SetMenuItems(["Admin", "Logout"],
+            [
+                (_, _) => NavAdmin(contextMenuPopup),
+                (_, _) => Logout(contextMenuPopup)
+            ]);
+        }
+        else
+        {
+            contextMenuPopup.SetMenuItems(["Logout"],
+            [
+
+                (_, _) => Logout(contextMenuPopup)
+            ]);
+        }
         contextMenuPopup.SetPoint(e.GetPosition(Page)?.X - 100 ?? 0, e.GetPosition(Page)?.Y + 10 ?? 0);
         Page.ShowPopup(contextMenuPopup);
     }
@@ -52,5 +69,11 @@ public partial class Header
         {
             AndroidHelper.ShowToast(exception.Message);
         }
+    }
+
+    private async void NavAdmin(ContextMenuPopup contextMenuPopup)
+    {
+        await Navigation.PushAsync(new SongManagerPage());
+        contextMenuPopup.Close();
     }
 }

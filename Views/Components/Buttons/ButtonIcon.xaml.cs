@@ -11,6 +11,7 @@ namespace maui_music_application.Views.Components.Buttons;
 public partial class ButtonIcon
 {
     public event EventHandler? Clicked;
+    private string _title = string.Empty;
 
     public static readonly BindableProperty TitleProperty =
         BindableProperty.Create(nameof(Title),
