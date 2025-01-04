@@ -67,9 +67,9 @@ public partial class EditSongIntoPlaylistPage
         Navigation.PushAsync(new CreatePlaylistPage());
     }
 
-    private void Search_OnOnTextChanged(object? sender, TextChangedEventArgs e)
+    private void Search_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        _debouncer.UseDebounced(() => { LoadPlaylist(e.NewTextValue); }, 750);
+        _debouncer.UseDebounced(() => LoadPlaylist(e.NewTextValue), 750);
     }
 
     private void LoadPlaylist(string name = "")

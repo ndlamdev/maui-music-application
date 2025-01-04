@@ -37,8 +37,8 @@ public partial class Search
 
     private void InputView_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        OnTextChanged?.Invoke(sender, e);
+        TextChanged?.Invoke(sender, e);
     }
 
-    public event EventHandler<TextChangedEventArgs>? OnTextChanged;
+    public event EventHandler<TextChangedEventArgs>? TextChanged;
 }

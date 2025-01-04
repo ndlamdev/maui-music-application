@@ -250,6 +250,15 @@ public partial class GridLayout
                 HiddenLoading();
         }
     }
+
+    public void Clear()
+    {
+        Grid.Children.Clear();
+        Grid.ColumnDefinitions.Clear();
+        Grid.RowDefinitions.Clear();
+        Grid.RowDefinitions.Add(new RowDefinition());
+        Grid.Add(_imageLoading);
+    }
 }
 
 public abstract class GridLayoutAdapter<T>(T[] listData)

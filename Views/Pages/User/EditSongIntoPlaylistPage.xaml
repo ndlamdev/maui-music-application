@@ -54,7 +54,7 @@
 
             <forms:Search
                 Placeholder="Find Playlist"
-                OnTextChanged="Search_OnOnTextChanged" />
+                TextChanged="Search_OnTextChanged" />
         </VerticalStackLayout>
         <ScrollView
             Grid.Row="1"

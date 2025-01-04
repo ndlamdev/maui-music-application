@@ -7,8 +7,8 @@
 
     <AbsoluteLayout
         BackgroundColor="{StaticResource Background}">
-        <ScrollView
-            VerticalScrollBarVisibility="Never"
+        <Frame
+            Padding="0"
             AbsoluteLayout.LayoutFlags="All"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             x:Name="Container"

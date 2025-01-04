@@ -20,8 +20,10 @@
         AlignItems="Center"
         JustifyContent="SpaceBetween">
         <HorizontalStackLayout
+            FlexLayout.Basis="85%"
             VerticalOptions="Start"
-            Spacing="10">
+            Spacing="10"
+            IsClippedToBounds="True">
             <Frame
                 WidthRequest="50"
                 HeightRequest="50"
