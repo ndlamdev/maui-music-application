@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_music_application.Views.Components.Musics.MusicPlaying"
+             xmlns:musics="clr-namespace:maui_music_application.Views.Components.Musics"
+             x:DataType="musics:MusicPlaying">
+    <Frame
+        Margin="10"
+        CornerRadius="10"
+        Padding="0"
+        BackgroundColor="{StaticResource Blue900}">
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+        </Frame.GestureRecognizers>
+        <FlexLayout
+            Direction="Row"
+            AlignItems="Center"
+            JustifyContent="SpaceBetween">
+            <HorizontalStackLayout
+                FlexLayout.Basis="85%"
+                VerticalOptions="Start"
+                Spacing="10"
+                IsClippedToBounds="True"
+                Padding="4,0,0,0">
+                <Frame
+                    WidthRequest="55"
+                    HeightRequest="55"
+                    CornerRadius="5">
+                    <Image
+                        Source="{Binding SongThumbnail}"
+                        WidthRequest="55"
+                        HeightRequest="55"
+                        Aspect="Fill" />
+                </Frame>
+                <VerticalStackLayout
+                    VerticalOptions="Center">
+                    <Label
+                        Text="{Binding SongName}"
+                        FontSize="16"
+                        MaxLines="1"
+                        TextColor="White"
+                        FontAttributes="Bold" />
+                    <Label
+                        Text="{Binding SingerName}"
+                        FontSize="14"
+                        MaxLines="1"
+                        TextColor="{DynamicResource Gray100}" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                FlexLayout.Basis="15%"
+                HorizontalOptions="End">
+                <ImageButton
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    Padding="10"
+                    x:Name="PlayPauseMusic">
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PlayPauseMusicClicked" />
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+            </HorizontalStackLayout>
+        </FlexLayout>
+    </Frame>
+</ContentView>

@@ -9,7 +9,7 @@
                 Orientation="Vertical"
                 Scrolled="OnScrollViewScrolled">
         <Frame Padding="0">
-            <Grid x:Name="Grid" />
+            <Grid x:Name="GridView" />
         </Frame>
     </ScrollView>
 </ContentView>
