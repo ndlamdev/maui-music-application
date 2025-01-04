@@ -10,6 +10,7 @@ public partial class MainPage
     private View? _currentView;
     private View[] _views = [];
     private int _currentFrame = 0;
+    private IAudioPlayerService? AudioService { get; set; }
 
     public MainPage()
     {
@@ -43,6 +44,7 @@ public partial class MainPage
             new LibraryPage()
         ];
         Container.Content = _views[0];
+        AudioService = ServiceHelper.GetService<IAudioPlayerService>();
     }
 
     private void Event()
@@ -51,6 +53,14 @@ public partial class MainPage
         {
             ChangePage(_views[index]);
             _currentFrame = index;
+        };
+        if (AudioService == null) return;
+        AudioService.StateChanged += _ =>
+        {
+            if (AudioService.CurrentMusic == null)
+                BottomNavigation.TranslationY = 20;
+            else
+                BottomNavigation.TranslationY = -50;
         };
     }
 

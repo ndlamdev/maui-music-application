@@ -10,7 +10,6 @@ using maui_music_application.Models;
 using maui_music_application.Services;
 using maui_music_application.Views.Adapters;
 using maui_music_application.Views.Pages.User;
-using Microsoft.Extensions.Logging;
 using Exception = Java.Lang.Exception;
 using PlaylistDetail = maui_music_application.Models.PlaylistDetail;
 using TopMixes = maui_music_application.Models.TopMixes;
@@ -23,7 +22,6 @@ public partial class HomePage
     private TopMixes[] _topMixes = [];
     private RecentListen[] _recentListen = [];
     private IHomeService? _service;
-    private readonly ILogger<HomePage> _logger;
 
     public HomePage(MainPage page)
     {
@@ -31,6 +29,13 @@ public partial class HomePage
         InitializeComponent();
         BindingContext = this;
         Init();
+        var service = ServiceHelper.GetService<IAudioPlayerService>();
+        if (service == null) return;
+        service.StateChanged += _ =>
+        {
+            if (service.CurrentMusic == null) return;
+            MainLayout.Margin = new Thickness(0, 0, 0, 40);
+        };
     }
 
     private MainPage Page { get; set; }
@@ -55,8 +60,8 @@ public partial class HomePage
                 _playlistDetails = playlists.ToArray();
             }
 
-            Log.Info("Call Api Home Page", "GetPlaylists called {0} {1} ", this._playlistDetails.ToString(),
-                this._playlistDetails.Length);
+            Log.Info("Call Api Home Page", "GetPlaylists called {0} {1} ", _playlistDetails.ToString(),
+                _playlistDetails.Length);
         }
         catch (Exception e)
         {
@@ -112,7 +117,7 @@ public partial class HomePage
                     ));
                 }
 
-                this._recentListen = recentListen.ToArray();
+                _recentListen = recentListen.ToArray();
             }
 
             Log.Info("Call Api Home Page", "GetAlbum called {0} ", _topMixes);

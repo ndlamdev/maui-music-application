@@ -28,15 +28,16 @@ public partial class GridLayout
     {
         InitializeComponent();
         _removeDefinitionLoading = true;
-        Grid.RowDefinitions.Add(new RowDefinition());
-        Grid.Add(_imageLoading);
+        GridView.RowDefinitions.Add(new RowDefinition());
+        GridView.Add(_imageLoading);
     }
 
     public void Adapter<T>(GridLayoutAdapter<T> adapter)
     {
-        Grid.RowDefinitions.RemoveAt(Grid.RowDefinitions.Count - 1);
-        Grid.Remove(_imageLoading);
-        if (Columns != -1) Rows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
+        GridView.RowDefinitions.RemoveAt(GridView.RowDefinitions.Count - 1);
+        GridView.Remove(_imageLoading);
+        if (ScrollView.Orientation == ScrollOrientation.Vertical)
+            Rows = (int)Math.Ceiling((double)adapter.ListData.Length / Columns);
         else Columns = (int)Math.Ceiling((double)adapter.ListData.Length / Rows);
         SetUpGrid(Columns, Rows);
         _adapter = adapter;
@@ -90,7 +91,7 @@ public partial class GridLayout
                 if (index >= data.Length) return;
                 _currentColumn = column;
                 var view = layoutAdapter.LoadContentView(index, data[index]);
-                Grid.Add(view, column, _currentRow);
+                GridView.Add(view, column, _currentRow);
             }
         }
     }
@@ -109,7 +110,7 @@ public partial class GridLayout
                 if (index >= data.Length) return;
                 _currentColumn = column;
                 var view = layoutAdapter.LoadContentView(index, data[index]);
-                Grid.Add(view, column, _currentRow);
+                GridView.Add(view, column, _currentRow);
             }
         }
     }
@@ -128,10 +129,10 @@ public partial class GridLayout
                 if (newColumn - Rows > 0)
                 {
                     _removeDefinitionLoading = true;
-                    Grid.Add(_imageLoading, _currentColumn + 1, 0);
+                    GridView.Add(_imageLoading, _currentColumn + 1, 0);
                 }
                 else
-                    Grid.Add(_imageLoading, _currentColumn, _currentRow == Rows ? 0 : _currentRow + 1);
+                    GridView.Add(_imageLoading, _currentColumn, _currentRow == Rows ? 0 : _currentRow + 1);
 
                 break;
             }
@@ -142,10 +143,10 @@ public partial class GridLayout
                 if (newRows - Rows > 0)
                 {
                     _removeDefinitionLoading = true;
-                    Grid.Add(_imageLoading, 0, _currentRow + 1);
+                    GridView.Add(_imageLoading, 0, _currentRow + 1);
                 }
                 else
-                    Grid.Add(_imageLoading, _currentColumn == Columns ? 0 : _currentColumn + 1, _currentRow);
+                    GridView.Add(_imageLoading, _currentColumn == Columns ? 0 : _currentColumn + 1, _currentRow);
 
                 break;
             }
@@ -158,19 +159,19 @@ public partial class GridLayout
     private void HiddenLoading()
     {
         _loading = false;
-        Grid.Remove(_imageLoading);
+        GridView.Remove(_imageLoading);
         switch (ScrollView.Orientation)
         {
             case ScrollOrientation.Horizontal:
             {
                 if (_removeDefinitionLoading)
-                    Grid.ColumnDefinitions.RemoveAt(Grid.ColumnDefinitions.Count - 1);
+                    GridView.ColumnDefinitions.RemoveAt(GridView.ColumnDefinitions.Count - 1);
                 break;
             }
             case ScrollOrientation.Vertical:
             {
                 if (_removeDefinitionLoading)
-                    Grid.RowDefinitions.RemoveAt(Grid.RowDefinitions.Count - 1);
+                    GridView.RowDefinitions.RemoveAt(GridView.RowDefinitions.Count - 1);
                 break;
             }
             case ScrollOrientation.Both:
@@ -181,9 +182,9 @@ public partial class GridLayout
 
     private void SetUpGrid(int columns, int rows)
     {
-        Grid.Children.Clear();
-        Grid.ColumnDefinitions.Clear();
-        Grid.RowDefinitions.Clear();
+        GridView.Children.Clear();
+        GridView.ColumnDefinitions.Clear();
+        GridView.RowDefinitions.Clear();
         AddColumnDefinitions(columns);
         AddRowDefinitions(rows);
         _currentColumn = 0;
@@ -194,7 +195,7 @@ public partial class GridLayout
     {
         for (var i = 0; i < columns; i++)
         {
-            Grid.ColumnDefinitions.Add(new ColumnDefinition());
+            GridView.ColumnDefinitions.Add(new ColumnDefinition());
         }
     }
 
@@ -202,18 +203,18 @@ public partial class GridLayout
     {
         for (var i = 0; i < rows; i++)
         {
-            Grid.RowDefinitions.Add(new RowDefinition());
+            GridView.RowDefinitions.Add(new RowDefinition());
         }
     }
 
     public int RowSpacing
     {
-        set => Grid.RowSpacing = value;
+        set => GridView.RowSpacing = value;
     }
 
     public int ColumnSpacing
     {
-        set => Grid.ColumnSpacing = value;
+        set => GridView.ColumnSpacing = value;
     }
 
     public ScrollOrientation Orientation
@@ -253,11 +254,11 @@ public partial class GridLayout
 
     public void Clear()
     {
-        Grid.Children.Clear();
-        Grid.ColumnDefinitions.Clear();
-        Grid.RowDefinitions.Clear();
-        Grid.RowDefinitions.Add(new RowDefinition());
-        Grid.Add(_imageLoading);
+        GridView.Children.Clear();
+        GridView.ColumnDefinitions.Clear();
+        GridView.RowDefinitions.Clear();
+        GridView.RowDefinitions.Add(new RowDefinition());
+        GridView.Add(_imageLoading);
     }
 }
 

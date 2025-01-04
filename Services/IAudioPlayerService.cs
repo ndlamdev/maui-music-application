@@ -35,4 +35,6 @@ public interface IAudioPlayerService
     Music? CurrentMusic { get; protected set; }
     void PlaySingleSong(long songId);
     bool IsSingleSong();
+    Page PagePlaying { get; set; }
+    int Position();
 }

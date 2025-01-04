@@ -22,12 +22,20 @@ public partial class ExplorePage
     private readonly Debouncer _debouncer = new();
     private string _keyword = "";
     private Pageable _currentPage = new();
+    private IAudioPlayerService? AudioService { get; set; }
 
 
     public ExplorePage()
     {
         InitializeComponent();
         Init();
+        AudioService = ServiceHelper.GetService<IAudioPlayerService>();
+        if (AudioService == null) return;
+        AudioService.StateChanged += _ =>
+        {
+            if (AudioService.CurrentMusic == null) return;
+            MainLayout.Margin = new Thickness(0, 0, 0, 40);
+        };
     }
 
     private async Task GetCategories()
@@ -82,7 +90,7 @@ public partial class ExplorePage
     private void ScrollView_OnScrolled(object? sender, ScrolledEventArgs e)
     {
         if (sender is not ScrollView scrollView) return;
-        if (SearchDisplay.IsLoading || IsLast ||
+        if (NotSearchDisplay.IsVisible || SearchDisplay.IsLoading || IsLast ||
             !(e.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 5)) return;
         SearchDisplay.IsLoading = true;
         LoadDataNextPage();

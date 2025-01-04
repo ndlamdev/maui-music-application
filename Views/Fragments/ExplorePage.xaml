@@ -10,56 +10,57 @@
         VerticalScrollBarVisibility="Never"
         Scrolled="ScrollView_OnScrolled">
         <VerticalStackLayout
-                Padding="20"
-                Margin="0,0,0,20">
-                <HorizontalStackLayout
-                    Spacing="15"
-                    VerticalOptions="Center"
-                    Margin="0,0,0, 30">
-                    <Image
-                        Source="musium.png"
-                        WidthRequest="50"
-                        Height="50" />
+            x:Name="MainLayout"
+            Padding="20"
+            Margin="0,0,0,20">
+            <HorizontalStackLayout
+                Spacing="15"
+                VerticalOptions="Center"
+                Margin="0,0,0, 30">
+                <Image
+                    Source="musium.png"
+                    WidthRequest="50"
+                    Height="50" />
+                <Label
+                    Text="Search"
+                    TextColor="{StaticResource Blue500}"
+                    FontSize="27"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <forms:Search
+                TextChanged="Search_OnTextChanged" />
+            <Grid>
+                <VerticalStackLayout
+                    x:Name="NotSearchDisplay"
+                    Grid.Row="0">
                     <Label
-                        Text="Search"
-                        TextColor="{StaticResource Blue500}"
-                        FontSize="27"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <forms:Search
-                    TextChanged="Search_OnTextChanged" />
-                <Grid>
-                    <VerticalStackLayout
-                        x:Name="NotSearchDisplay"
-                        Grid.Row="0">
-                        <Label
-                            Text="Your Top Genres"
-                            FontSize="20"
-                            HorizontalOptions="Fill"
-                            Margin="0, 30, 0, 15" />
-                        <layouts:GridLayout
-                            x:Name="KindMusic"
-                            Columns="2"
-                            ColumnSpacing="15"
-                            RowSpacing="15" />
-                        <Label
-                            Text="Browse All"
-                            FontSize="20"
-                            HorizontalOptions="Fill"
-                            Margin="0, 50, 0, 15" />
-                        <layouts:GridLayout
-                            x:Name="Browse"
-                            Columns="2"
-                            ColumnSpacing="15"
-                            RowSpacing="15" />
-                    </VerticalStackLayout>
+                        Text="Your Top Genres"
+                        FontSize="20"
+                        HorizontalOptions="Fill"
+                        Margin="0, 30, 0, 15" />
                     <layouts:GridLayout
-                        x:Name="SearchDisplay"
-                        Columns="1"
-                        RowSpacing="15"
-                        IsVisible="False"
-                        Margin="0, 30, 0, 0" />
-                </Grid>
-            </VerticalStackLayout>
+                        x:Name="KindMusic"
+                        Columns="2"
+                        ColumnSpacing="15"
+                        RowSpacing="15" />
+                    <Label
+                        Text="Browse All"
+                        FontSize="20"
+                        HorizontalOptions="Fill"
+                        Margin="0, 50, 0, 15" />
+                    <layouts:GridLayout
+                        x:Name="Browse"
+                        Columns="2"
+                        ColumnSpacing="15"
+                        RowSpacing="15" />
+                </VerticalStackLayout>
+                <layouts:GridLayout
+                    x:Name="SearchDisplay"
+                    Columns="1"
+                    RowSpacing="15"
+                    IsVisible="False"
+                    Margin="0, 30, 0, 0" />
+            </Grid>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentView>

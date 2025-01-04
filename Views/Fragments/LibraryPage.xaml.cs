@@ -24,6 +24,7 @@ public partial class LibraryPage
     private readonly ButtonBorder[] _buttons;
     private bool _isSelected;
     private ApiPaging<PlaylistCard> _playlists = new();
+    private Pageable _currentPage = new();
 
     private enum SortStatus
     {
@@ -58,8 +59,10 @@ public partial class LibraryPage
         service.GetPlaylistCards().ContinueWith(task =>
         {
             if (!task.IsCompleted) return;
+            _currentPage = new Pageable();
             var result = task.Result;
             _playlists = result;
+            IsLast = task.Result.Last;
             RootGridLayout.Adapter(new PlaylistCardAdapter(result.Content.ToArray(), Navigation));
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
@@ -76,7 +79,7 @@ public partial class LibraryPage
         }
     }
 
-    private async void Playlists_OnClicked(object? sender, EventArgs e)
+    private void Playlists_OnClicked(object? sender, EventArgs e)
     {
         SetBackgroundButtonSelected(sender);
         SetUpButtonAddAndHeart(sender);
@@ -118,7 +121,7 @@ public partial class LibraryPage
         {
             ButtonAdd.IsVisible = true;
             ButtonHeart.IsVisible = true;
-            ButtonAdd.Title = "Add New Playlist";
+            ButtonAdd.Title = "New Playlist";
             ButtonHeart.Title = "Liked Songs";
             SwapButton.Text = "Recently played";
             return;
@@ -204,5 +207,27 @@ public partial class LibraryPage
     private async void Favorites_OnClicked(object? sender, EventArgs e)
     {
         await Navigation.PushAsync(new PlaylistMusicPage(TypePlaylist.Favorite), true);
+    }
+
+    public bool IsLast { get; set; } = true;
+
+    private void ScrollView_OnScrolled(object? sender, ScrolledEventArgs e)
+    {
+        if (sender is not ScrollView scrollView) return;
+        if (RootGridLayout.IsLoading || IsLast ||
+            !(e.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 5)) return;
+        RootGridLayout.IsLoading = true;
+        var service = ServiceHelper.GetService<IPlaylistService>();
+        if (service == null) throw new NullPointerException();
+        _currentPage.Page += 1;
+        service.GetPlaylistCards(_currentPage).ContinueWith(task =>
+        {
+            if (!task.IsCompleted) return;
+            RootGridLayout.IsLoading = false;
+            IsLast = task.Result.Last;
+            var result = task.Result.Content;
+            _playlists.Content.AddRange(result);
+            RootGridLayout.AddElement(result.ToArray());
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 }

@@ -27,8 +27,9 @@ public partial class SingleSongPage
         PlayRandom = AudioService.PlayRandom;
 
         AudioService.SetContent(RootView);
+        AudioService.PagePlaying = this;
         AudioService.PositionChanged = OnPositionChanged;
-        AudioService.StateChanged = OnStateChanged;
+        AudioService.StateChanged += OnStateChanged;
         AudioService.MediaFailed = OnMediaFailed;
         AudioService.MediaEnded = OnMediaEnded;
         AudioService.PlaySingleSong(songId);

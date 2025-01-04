@@ -93,7 +93,14 @@ public class AudioPlayerService : IAudioPlayerService
 
     public bool IsSingleSong()
     {
-        return _singleSongId == -1;
+        return _singleSongId != -1;
+    }
+
+    public Page PagePlaying { get; set; }
+
+    public int Position()
+    {
+        return _indexCurrentSongInPlaylist;
     }
 
     public void Play(int position)
