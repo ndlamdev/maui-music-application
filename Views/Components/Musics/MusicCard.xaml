@@ -13,15 +13,17 @@
         <toolkit:TouchBehavior LongPressCompleted="TouchBehavior_OnLongPressCompleted" />
     </ContentView.Behaviors>
     <ContentView.GestureRecognizers>
-        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
     </ContentView.GestureRecognizers>
     <FlexLayout
         Direction="Row"
         AlignItems="Center"
         JustifyContent="SpaceBetween">
         <HorizontalStackLayout
+            FlexLayout.Basis="85%"
             VerticalOptions="Start"
-            Spacing="10">
+            Spacing="10"
+            IsClippedToBounds="True">
             <Frame
                 WidthRequest="50"
                 HeightRequest="50"
@@ -37,22 +39,28 @@
                 <Label
                     Text="{Binding SongName}"
                     FontSize="16"
+                    MaxLines="1"
                     TextColor="White"
                     FontAttributes="Bold" />
                 <Label
                     Text="{Binding SingerName}"
                     FontSize="14"
+                    MaxLines="1"
                     TextColor="{DynamicResource Text2}" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
-        <ImageButton
-            WidthRequest="40"
-            HeightRequest="30"
-            Source="option_vertical.svg"
-             >
-            <ImageButton.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ImageButton_OnClicked"/>
-            </ImageButton.GestureRecognizers>
-        </ImageButton>
+        <HorizontalStackLayout
+            FlexLayout.Basis="15%"
+            HorizontalOptions="End">
+            <ImageButton
+                WidthRequest="50"
+                HeightRequest="50"
+                Padding="10"
+                Source="option_vertical.svg">
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ImageButton_OnClicked" />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+        </HorizontalStackLayout>
     </FlexLayout>
 </ContentView>

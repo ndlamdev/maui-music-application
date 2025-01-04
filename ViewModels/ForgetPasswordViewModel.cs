@@ -40,7 +40,7 @@ public class ForgetPasswordViewModel(INavigation navigation, bool validateOnChan
     private void FindAccount()
     {
         TodoAttribute.PrintTask<ForgetPasswordViewModel>();
-    
+
         //if success => Navigation.PushAsync(new VerifyCodePage(code));
     }
 

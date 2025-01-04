@@ -1,14 +1,15 @@
 // Author: Lam Nguyen
 // Email: ndlam.dev@gmail.com
 // Phone number: +84 855354919
-// Create at: 13:12:36 - 28/12/2024
+// Create at: 13:01:28 - 04/01/2025
 // User: Lam Nguyen
 
 namespace maui_music_application.Helpers.Enum;
 
-public enum TypePlaylist
+public enum SearchTypeEntry
 {
-    Playlist,
+    All,
+    Artist,
     Album,
-    Favorite
+    Song,
 }

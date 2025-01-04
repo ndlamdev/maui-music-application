@@ -6,40 +6,43 @@
              xmlns:header="clr-namespace:maui_music_application.Views.Components.Header"
              x:Class="maui_music_application.Views.Fragments.HomePage"
              Background="{DynamicResource BackgroundHeader}">
-    <VerticalStackLayout
-        Padding="20">
-        <header:Header 
-            x:Name="Header"/>
-        <Label
-            Text="Continue Listening"
-            FontSize="20"
-            HorizontalOptions="Fill"
-            Margin="0, 30, 0, 15" />
-        <layouts:GridLayout
-            x:Name="PlaylistMusic"
-            Columns="2"
-            ColumnSpacing="15"
-            RowSpacing="15" />
-        <Label
-            Text="Your top mixes"
-            FontSize="20"
-            HorizontalOptions="Fill"
-            Margin="0, 30, 0, 15" />
-        <layouts:GridLayout
-            x:Name="TopMixes"
-            Rows="1"
-            Orientation="Horizontal"
-            ColumnSpacing="25" />
-        <Label
-            Text="Based on your recent listening"
-            FontSize="20"
-            HorizontalOptions="Fill"
-            Margin="0, 30, 0, 15" />
-        <layouts:GridLayout
-            x:Name="RecentListen"
-            Rows="1"
-            Orientation="Horizontal"
-            ColumnSpacing="25"
-            Padding="0, 0, 0, 20" />
-    </VerticalStackLayout>
+   <ScrollView
+       VerticalScrollBarVisibility="Never">
+       <VerticalStackLayout
+           Padding="20">
+           <header:Header
+               x:Name="Header" />
+           <Label
+               Text="Continue Listening"
+               FontSize="20"
+               HorizontalOptions="Fill"
+               Margin="0, 30, 0, 15" />
+           <layouts:GridLayout
+               x:Name="PlaylistMusic"
+               Columns="2"
+               ColumnSpacing="15"
+               RowSpacing="15" />
+           <Label
+               Text="Your top mixes"
+               FontSize="20"
+               HorizontalOptions="Fill"
+               Margin="0, 30, 0, 15" />
+           <layouts:GridLayout
+               x:Name="TopMixes"
+               Rows="1"
+               Orientation="Horizontal"
+               ColumnSpacing="25" />
+           <Label
+               Text="Based on your recent listening"
+               FontSize="20"
+               HorizontalOptions="Fill"
+               Margin="0, 30, 0, 15" />
+           <layouts:GridLayout
+               x:Name="RecentListen"
+               Rows="1"
+               Orientation="Horizontal"
+               ColumnSpacing="25"
+               Padding="0, 0, 0, 20" />
+       </VerticalStackLayout>
+   </ScrollView>
 </ContentView>

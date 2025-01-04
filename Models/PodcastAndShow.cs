@@ -6,7 +6,13 @@
 
 namespace maui_music_application.Models;
 
-public class PodcastAndShow(string id, string title, string author, string thumbnail, string type = "", TimeSpan? timeCreate = null)
+public class PodcastAndShow(
+    string id,
+    string title,
+    string author,
+    string thumbnail,
+    string type = "",
+    TimeSpan? timeCreate = null)
 {
     public string Id { get; set; } = id;
 

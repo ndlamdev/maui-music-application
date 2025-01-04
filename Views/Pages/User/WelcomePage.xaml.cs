@@ -30,6 +30,5 @@ public partial class WelcomePage
     [Todo("Handle button 'Get Started'")]
     private async void ButtonBorderShadow_OnClicked(object? sender, EventArgs e)
     {
-        
     }
 }

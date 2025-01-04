@@ -24,8 +24,8 @@ public class SongPageData
         {
             CurrentPage = 0,
             Size = 11,
-            IsFirst = true,
-            IsLast = true,
+            First = true,
+            Last = true,
             TotalItems = 11,
             TotalPages = 1,
             Content =

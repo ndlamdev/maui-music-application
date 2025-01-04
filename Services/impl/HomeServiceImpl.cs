@@ -18,6 +18,7 @@ public class HomeServiceImpl(IHomeApi homeApi) : IHomeService
                 List<PlaylistCard> cards = response.Data;
                 return cards;
             }
+
             return null;
         }
         catch (Refit.ApiException ex)
@@ -42,6 +43,7 @@ public class HomeServiceImpl(IHomeApi homeApi) : IHomeService
                 List<Album> cards = response.Data;
                 return cards;
             }
+
             return null;
         }
         catch (Refit.ApiException ex)
@@ -66,6 +68,7 @@ public class HomeServiceImpl(IHomeApi homeApi) : IHomeService
                 List<MusicCard> cards = response.Data;
                 return cards;
             }
+
             return null;
         }
         catch (Refit.ApiException ex)

@@ -13,9 +13,16 @@ public partial class ButtonIcon
     public event EventHandler? Clicked;
     private string _title = string.Empty;
 
+    public static readonly BindableProperty TitleProperty =
+        BindableProperty.Create(nameof(Title),
+            typeof(string),
+            typeof(ButtonIcon),
+            string.Empty);
+
     public ButtonIcon()
     {
         InitializeComponent();
+        BindingContext = this;
     }
 
     public double SizeIcon
@@ -26,12 +33,6 @@ public partial class ButtonIcon
             Image.HeightRequest = value;
         }
     }
-
-    public static readonly BindableProperty TitleProperty =
-        BindableProperty.Create(nameof(Title), 
-            typeof(string),
-            typeof(ButtonIcon), 
-            string.Empty);
 
     public string Title
     {

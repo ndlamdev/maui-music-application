@@ -32,7 +32,8 @@ public class PlaylistCard
 
     protected bool Equals(PlaylistCard other)
     {
-        return Id == other.Id && Name == other.Name && CoverUrl == other.CoverUrl && TotalSong == other.TotalSong && Type == other.Type;
+        return Id == other.Id && Name == other.Name && CoverUrl == other.CoverUrl && TotalSong == other.TotalSong &&
+               Type == other.Type;
     }
 
     public override int GetHashCode()

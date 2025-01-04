@@ -46,7 +46,6 @@ public class HeaderViewModel : INotifyPropertyChanged
 
     public HeaderViewModel()
     {
-
         _userService = ServiceHelper.GetService<IUserService>();
         _ = LoadDataAsync();
     }

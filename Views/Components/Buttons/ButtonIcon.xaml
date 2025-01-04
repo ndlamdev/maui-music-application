@@ -18,7 +18,6 @@
                WidthRequest="25"
                HeightRequest="25" />
         <Label
-            x:Name="Label"
             Text="{Binding Title}"
             FontAttributes="Bold"
             TextColor="White"

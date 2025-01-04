@@ -27,7 +27,7 @@
                 FlexLayout.Basis="1"
                 FontSize="{Binding FontSize}"
                 Keyboard="{Binding Keyboard}"
-                TextChanged="InputView_OnTextChanged"/>
+                TextChanged="InputView_OnTextChanged" />
             <Image
                 x:Name="ImageIconRight"
                 Source="{Binding IconRight}"

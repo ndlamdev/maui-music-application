@@ -17,7 +17,7 @@ namespace maui_music_application.Views.Pages.User;
 public partial class RankPage
 {
     private bool _isClick;
-    private VerticalStackLayout _currentPage;
+    private VerticalStackLayout? _currentPage;
 
     public RankPage()
     {

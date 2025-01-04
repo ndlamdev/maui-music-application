@@ -18,8 +18,8 @@ public class APIResponse
 public class ApiPaging<T>
 {
     public long TotalItems { get; set; }
-    public bool IsLast { get; set; }
-    public bool IsFirst { get; set; }
+    public bool Last { get; set; }
+    public bool First { get; set; }
     public long TotalPages { get; set; }
     public int CurrentPage { get; set; }
     public int Size { get; set; }

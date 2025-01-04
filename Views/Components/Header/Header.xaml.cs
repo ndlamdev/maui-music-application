@@ -1,10 +1,10 @@
-using Android.Util;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Helpers;
 using maui_music_application.Helpers.Enum;
 using maui_music_application.Services;
 using maui_music_application.ViewModels;
 using maui_music_application.Views.Components.Popup;
+using maui_music_application.Views.Pages.User;
 using maui_music_application.Views.Pages.Admin;
 using maui_music_application.Views.Pages.User;
 
@@ -37,8 +37,8 @@ public partial class Header
         {
             contextMenuPopup.SetMenuItems(["Admin", "Logout"],
             [
-                (_, _) => NavAdmin(),
-                (_, _) => Logout()
+                (_, _) => NavAdmin(contextMenuPopup),
+                (_, _) => Logout(contextMenuPopup)
             ]);
         }
         else
@@ -46,14 +46,14 @@ public partial class Header
             contextMenuPopup.SetMenuItems(["Logout"],
             [
 
-                (_, _) => Logout()
+                (_, _) => Logout(contextMenuPopup)
             ]);
         }
         contextMenuPopup.SetPoint(e.GetPosition(Page)?.X - 100 ?? 0, e.GetPosition(Page)?.Y + 10 ?? 0);
         Page.ShowPopup(contextMenuPopup);
     }
 
-    private async void Logout()
+    private async void Logout(ContextMenuPopup contextMenuPopup)
     {
         try
         {
@@ -62,6 +62,7 @@ public partial class Header
             _isSelected = true;
             await userService.Logout();
             await Navigation.PushAsync(new LoginPage(), true);
+            contextMenuPopup.Close();
             _isSelected = false;
         }
         catch (Exception exception)
@@ -70,8 +71,9 @@ public partial class Header
         }
     }
 
-    private async void NavAdmin()
+    private async void NavAdmin(ContextMenuPopup contextMenuPopup)
     {
         await Navigation.PushAsync(new SongManagerPage());
+        contextMenuPopup.Close();
     }
 }

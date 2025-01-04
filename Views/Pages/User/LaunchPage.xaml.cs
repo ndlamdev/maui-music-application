@@ -61,8 +61,8 @@ public partial class LaunchPage
         {
             Preferences.Set("FIRST_OPEN", true);
             await Navigation.PushAsync(new WelcomePage());
-            for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
-                Navigation.RemovePage(Navigation.NavigationStack[i]);
+            // for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
+            //     Navigation.RemovePage(Navigation.NavigationStack[i]);
             return;
         }
 
@@ -76,8 +76,8 @@ public partial class LaunchPage
         else
         {
             await Navigation.PushAsync(new LoginPage());
-            for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
-                Navigation.RemovePage(Navigation.NavigationStack[i]);
+            // for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
+            //     Navigation.RemovePage(Navigation.NavigationStack[i]);
             AndroidHelper.ShowToast("Server đang trong thời gian bảo trì, vui lòng truy cập app sau!");
         }
     }
@@ -88,8 +88,8 @@ public partial class LaunchPage
         if (userService is null)
         {
             await Navigation.PushAsync(new LoginPage());
-            for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
-                Navigation.RemovePage(Navigation.NavigationStack[i]);
+            // for (var i = 0; i < Navigation.NavigationStack.Count - 1; i++)
+            //     Navigation.RemovePage(Navigation.NavigationStack[i]);
             return;
         }
 

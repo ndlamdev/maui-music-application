@@ -10,5 +10,6 @@ namespace maui_music_application.Models;
 
 public class PlaylistDetail : PlaylistCard
 {
-    public ApiPaging<MusicCard> Songs { get; set; }
+    public ApiPaging<MusicCard> Songs { get; set; } = new();
+    public List<long> AllSongId { get; set; } = [];
 }

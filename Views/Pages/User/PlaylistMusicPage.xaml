@@ -54,7 +54,8 @@
         </VerticalStackLayout>
         <ScrollView
             Grid.Row="1"
-            VerticalScrollBarVisibility="Never">
+            VerticalScrollBarVisibility="Never"
+            Scrolled="ScrollView_OnScrolled">
             <VerticalStackLayout>
                 <Frame
                     WidthRequest="250"
