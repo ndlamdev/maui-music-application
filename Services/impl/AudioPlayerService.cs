@@ -4,6 +4,7 @@
 // Create at: 09:10:15 - 14/10/2024
 // User: Lam Nguyen
 
+using Android.Util;
 using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
 using maui_music_application.Models;
@@ -48,7 +49,7 @@ public class AudioPlayerService : IAudioPlayerService
         {
             if (!MediaElement.ShouldLoopPlayback)
             {
-                if (_singleSongId == -1)
+                if (IsSingleSong())
                 {
                     _endPlayList = _indexCurrentSongInPlaylist == (Playlist?.TotalSong ?? 0) - 1;
                     Next();
@@ -90,6 +91,11 @@ public class AudioPlayerService : IAudioPlayerService
         LoadSong(songId);
     }
 
+    public bool IsSingleSong()
+    {
+        return _singleSongId == -1;
+    }
+
     public void Play(int position)
     {
         if (Playlist == null) throw new Exception("List nhạc đang bị rỗng. Hãy set playlist nhạc trước!");
@@ -99,7 +105,7 @@ public class AudioPlayerService : IAudioPlayerService
 
         _indexPreviousSongInPlaylist = _indexCurrentSongInPlaylist;
         _indexCurrentSongInPlaylist = position;
-        LoadSong(Playlist.Songs.Content.ElementAt(position).Id);
+        LoadSong(Playlist.AllSongId.ElementAt(position));
     }
 
     private void LoadSong(long id)

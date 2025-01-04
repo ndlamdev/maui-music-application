@@ -17,9 +17,9 @@
                 FontFamily="CenturyGothic"
                 VerticalOptions="Center" />
             <Frame
-                   CornerRadius="5"
-                   Padding="0"
-                   x:Name="ImageView">
+                CornerRadius="5"
+                Padding="0"
+                x:Name="ImageView">
                 <Image
                     x:Name="Image"
                     WidthRequest="50"

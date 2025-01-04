@@ -119,7 +119,7 @@ public partial class LibraryPage
             ButtonAdd.IsVisible = true;
             ButtonHeart.IsVisible = true;
             ButtonAdd.Title = "Add New Playlist";
-            ButtonHeart.Title = "Your Liked Songs";
+            ButtonHeart.Title = "Liked Songs";
             SwapButton.Text = "Recently played";
             return;
         }

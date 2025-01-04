@@ -30,13 +30,13 @@ public partial class Header
         var contextMenuPopup = new ContextMenuPopup();
         contextMenuPopup.SetMenuItems(["Logout"],
         [
-            (_, _) => Logout()
+            (_, _) => Logout(contextMenuPopup)
         ]);
         contextMenuPopup.SetPoint(e.GetPosition(Page)?.X - 100 ?? 0, e.GetPosition(Page)?.Y + 10 ?? 0);
         Page.ShowPopup(contextMenuPopup);
     }
 
-    private async void Logout()
+    private async void Logout(ContextMenuPopup contextMenuPopup)
     {
         try
         {
@@ -45,6 +45,7 @@ public partial class Header
             _isSelected = true;
             await userService.Logout();
             await Navigation.PushAsync(new LoginPage(), true);
+            contextMenuPopup.Close();
             _isSelected = false;
         }
         catch (Exception exception)

@@ -18,5 +18,6 @@ public static class InjectConfiguration
         builder.Services.AddSingleton<IAlbumService, AlbumService>();
         builder.Services.AddSingleton<IHomeService, HomeServiceImpl>();
         builder.Services.AddSingleton<IGenreServices, GenreServicesImpl>();
+        builder.Services.AddSingleton<ISearchService, SearchServiceImpl>();
     }
 }

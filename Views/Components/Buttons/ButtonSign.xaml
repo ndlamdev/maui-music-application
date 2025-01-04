@@ -22,7 +22,7 @@
                 x:Name="Label"
                 Text="Continue with Google"
                 VerticalOptions="Center"
-                WidthRequest="{Binding WidthRequestText}"/>
+                WidthRequest="{Binding WidthRequestText}" />
         </HorizontalStackLayout>
     </Frame>
 </ContentView>

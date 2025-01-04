@@ -15,7 +15,7 @@ using KindMusicModel = Models.KindMusic;
 
 public class KindMusicAdapter(KindMusicModel[] listData) : GridLayoutAdapter<KindMusicModel>(listData)
 {
-    public override IView LoadContentView(int _,KindMusicModel data)
+    public override IView LoadContentView(int _, KindMusicModel data)
     {
         var view = new KindMusicView
         {

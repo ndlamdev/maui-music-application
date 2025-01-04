@@ -16,6 +16,7 @@
         <Image
             Source="{Binding Source}"
             WidthRequest="180"
-            Height="180" />
+            Height="180"
+            Aspect="Fill" />
     </Border>
 </ContentView>

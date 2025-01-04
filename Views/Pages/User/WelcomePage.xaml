@@ -7,8 +7,7 @@
     <AbsoluteLayout BackgroundColor="{StaticResource Blue300}">
         <Image Source="img_girl.png"
                AbsoluteLayout.LayoutFlags="WidthProportional, YProportional"
-               AbsoluteLayout.LayoutBounds="0,0.3,1,450" 
-               />
+               AbsoluteLayout.LayoutBounds="0,0.3,1,450" />
         <Border StrokeThickness="0"
                 AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
                 AbsoluteLayout.LayoutBounds="0,1,1,350">
